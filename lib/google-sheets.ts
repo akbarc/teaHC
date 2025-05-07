@@ -3,27 +3,22 @@ import { google } from "googleapis"
 // Function to get authenticated Google Sheets client
 export async function getGoogleSheetsClient() {
   try {
-    // Use the spreadsheet ID you provided
-    const SHEET_ID = process.env.GOOGLE_SHEET_ID || "12iOAkaGr7t5NSbBj3ZdcrT3g9qP1SorbH8iXTLnzF_E"
+    // Get the spreadsheet ID from environment variables
+    const SHEET_ID = process.env.GOOGLE_SHEET_ID
 
-    // Get the service account key from environment variables or use a fallback for development
-    let serviceAccountKey
-
-    if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
-      // Use the environment variable if available
-      serviceAccountKey = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY)
-    } else {
-      // Fallback for development (this should be removed in production)
-      console.warn(
-        "Using fallback service account key. Set GOOGLE_SERVICE_ACCOUNT_KEY environment variable in production.",
-      )
-      serviceAccountKey = {
-        type: "service_account",
-        project_id: "lively-fold-385723",
-        client_email: "sheets-service-account@lively-fold-385723.iam.gserviceaccount.com",
-        // Other fields are omitted for security
-      }
+    if (!SHEET_ID) {
+      throw new Error("GOOGLE_SHEET_ID environment variable is not set")
     }
+
+    // Get the service account key from environment variables
+    const serviceAccountKeyString = process.env.GOOGLE_SERVICE_ACCOUNT_KEY
+
+    if (!serviceAccountKeyString) {
+      throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY environment variable is not set")
+    }
+
+    // Parse the service account key
+    const serviceAccountKey = JSON.parse(serviceAccountKeyString)
 
     // Create a new auth client using the service account
     const auth = new google.auth.GoogleAuth({
@@ -52,7 +47,7 @@ export async function appendToGoogleSheet(values: any[][]) {
     // Append the data to the sheet
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
-      range: "Sheet1!A:K", // Adjust the range based on your sheet structure
+      range: "Reservations!A:K", // Use the Reservations sheet
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values,
@@ -70,10 +65,6 @@ export async function appendToGoogleSheet(values: any[][]) {
       console.error("Error message:", error.message)
       console.error("Error stack:", error.stack)
     }
-    // If it's a Google API error, it might have more details
-    if (error && typeof error === "object" && "errors" in error) {
-      console.error("Google API errors:", JSON.stringify(error.errors, null, 2))
-    }
     throw error
   }
 }
@@ -88,11 +79,11 @@ export async function ensureSheetExists() {
       spreadsheetId: sheetId,
     })
 
-    // Check if Sheet1 exists
-    const sheet1Exists = spreadsheet.data.sheets?.some((sheet) => sheet.properties?.title === "Sheet1")
+    // Check if Reservations sheet exists
+    const reservationsSheetExists = spreadsheet.data.sheets?.some((sheet) => sheet.properties?.title === "Reservations")
 
-    if (!sheet1Exists) {
-      // Create Sheet1 if it doesn't exist
+    if (!reservationsSheetExists) {
+      // Create Reservations sheet if it doesn't exist
       await sheets.spreadsheets.batchUpdate({
         spreadsheetId: sheetId,
         requestBody: {
@@ -100,7 +91,7 @@ export async function ensureSheetExists() {
             {
               addSheet: {
                 properties: {
-                  title: "Sheet1",
+                  title: "Reservations",
                 },
               },
             },
@@ -112,14 +103,14 @@ export async function ensureSheetExists() {
     // Add headers if the sheet is empty
     const values = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: "Sheet1!A1:K1",
+      range: "Reservations!A1:K1",
     })
 
     if (!values.data.values || values.data.values.length === 0) {
       // Add headers
       await sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
-        range: "Sheet1!A1:K1",
+        range: "Reservations!A1:K1",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
