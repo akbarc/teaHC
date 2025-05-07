@@ -1,9 +1,7 @@
 "use server"
 
 import { z } from "zod"
-import nodemailer from "nodemailer"
-import { appendToGoogleSheet, ensureSheetExists } from "@/lib/google-sheets"
-import { logReservation } from "@/lib/reservation-logger"
+import { appendToGoogleSheet } from "@/lib/google-sheets"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -72,62 +70,12 @@ export async function submitReservation(formData: FormData) {
       notes: validatedData.notes || "",
     }
 
-    // Log the reservation as a fallback
-    await logReservation(reservationRecord)
-
-    // Format the data for email
-    const emailContent = `
-New Reservation:
-
-Name: ${validatedData.fullName}
-Email: ${validatedData.email}
-Phone: ${validatedData.phone || "Not provided"}
-Address: ${validatedData.address}, ${validatedData.city}, ${validatedData.state} ${validatedData.zipCode}
-
-Products:
-- MOVE: ${validatedData.moveQuantity}
-- REPAIR: ${validatedData.repairQuantity}
-- RAPID: ${validatedData.rapidQuantity}
-- Bundle: ${validatedData.bundleQuantity}
-
-Total Cost: $${totalCost.toFixed(2)}
-
-Notes: ${validatedData.notes || "None"}
-`
-
-    // Send email as a backup
-    let emailSent = false
-    try {
-      // Create a transporter
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "tryteahc@gmail.com",
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      })
-
-      // Send the email
-      await transporter.sendMail({
-        from: "tryteahc@gmail.com",
-        to: "tryteahc@gmail.com",
-        subject: "New TeaHC Reservation",
-        text: emailContent,
-      })
-
-      console.log("Email sent successfully")
-      emailSent = true
-    } catch (emailError) {
-      console.error("Error sending email:", emailError)
-      // Continue even if email fails
-    }
+    // Log the reservation details to console (for debugging)
+    console.log("New reservation:", JSON.stringify(reservationRecord, null, 2))
 
     // Save to Google Sheets
     let sheetUpdated = false
     try {
-      // Ensure the sheet exists with headers
-      await ensureSheetExists()
-
       // Format data for Google Sheets
       const sheetData = [
         [
@@ -158,7 +106,6 @@ Notes: ${validatedData.notes || "None"}
       success: true,
       message: "Reservation submitted successfully! We'll contact you soon.",
       details: {
-        emailSent,
         sheetUpdated,
       },
     }

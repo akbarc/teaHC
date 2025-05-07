@@ -10,24 +10,18 @@ export async function getGoogleSheetsClient() {
       throw new Error("GOOGLE_SHEET_ID environment variable is not set")
     }
 
-    // Get the service account key from environment variables
-    const serviceAccountKeyString = process.env.GOOGLE_SERVICE_ACCOUNT_KEY
+    // Create a new auth client using API key
+    const API_KEY = process.env.GOOGLE_SERVICE_ACCOUNT_KEY
 
-    if (!serviceAccountKeyString) {
+    if (!API_KEY) {
       throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY environment variable is not set")
     }
 
-    // Parse the service account key
-    const serviceAccountKey = JSON.parse(serviceAccountKeyString)
-
-    // Create a new auth client using the service account
-    const auth = new google.auth.GoogleAuth({
-      credentials: serviceAccountKey,
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    // Create Google Sheets client with API key
+    const sheets = google.sheets({
+      version: "v4",
+      auth: API_KEY,
     })
-
-    // Create Google Sheets client
-    const sheets = google.sheets({ version: "v4", auth })
 
     return {
       sheets,
