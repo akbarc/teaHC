@@ -54,23 +54,53 @@ export async function submitReservation(formData: FormData) {
       validatedData.rapidQuantity * 26.99 +
       validatedData.bundleQuantity * 69.99
 
-    // Format data for Google Sheets
-    // Each item in the array represents a cell in the row
-    const sheetData = [
-      new Date().toISOString(), // Timestamp
-      validatedData.fullName,
-      validatedData.email,
-      validatedData.phone,
-      `${validatedData.address}, ${validatedData.city}, ${validatedData.state} ${validatedData.zipCode}`,
-      validatedData.moveQuantity,
-      validatedData.repairQuantity,
-      validatedData.rapidQuantity,
-      validatedData.bundleQuantity,
-      totalCost.toFixed(2),
-      validatedData.notes,
-    ]
+    // Replace the Google Sheets integration part with this simpler email notification
 
-    // Call our API route to append data to Google Sheet
+    // After validating the data, add this code:
+    try {
+      // Format the data for email
+      const emailContent = `
+    New Reservation:
+    
+    Name: ${validatedData.fullName}
+    Email: ${validatedData.email}
+    Phone: ${validatedData.phone || "Not provided"}
+    Address: ${validatedData.address}, ${validatedData.city}, ${validatedData.state} ${validatedData.zipCode}
+    
+    Products:
+    - MOVE: ${validatedData.moveQuantity}
+    - REPAIR: ${validatedData.repairQuantity}
+    - RAPID: ${validatedData.rapidQuantity}
+    - Bundle: ${validatedData.bundleQuantity}
+    
+    Total Cost: $${totalCost.toFixed(2)}
+    
+    Notes: ${validatedData.notes || "None"}
+  `
+
+      // Send the data to your email endpoint
+      const baseUrl =
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+
+      await fetch(`${baseUrl}/api/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: "tryteahc@gmail.com",
+          subject: "New TeaHC Reservation",
+          text: emailContent,
+        }),
+      })
+
+      // Continue with the rest of the function...
+    } catch (error) {
+      console.error("Error sending email notification:", error)
+      // Continue with the function even if email fails
+    }
+
     try {
       const baseUrl =
         process.env.NEXT_PUBLIC_BASE_URL ||
@@ -81,17 +111,65 @@ export async function submitReservation(formData: FormData) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: [sheetData] }),
+        body: JSON.stringify({ data: [validatedData] }),
       })
 
+      const responseData = await response.json()
+
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        console.error("Failed to append to Google Sheet:", errorData)
+        console.error("Failed to append to Google Sheet:", responseData)
+        throw new Error(`API error: ${responseData.message || "Unknown error"}`)
       }
+
+      console.log("Google Sheets response:", responseData)
     } catch (error) {
       console.error("Error calling append-to-sheet API:", error)
       // Continue with the function even if Google Sheets fails
       // This way the user still gets a success message
+    }
+
+    // Add this code after the Google Sheets API call (whether it succeeds or fails):
+
+    // Send an email notification as backup
+    try {
+      // Format the data for email
+      const emailContent = `
+New Reservation:
+
+Name: ${validatedData.fullName}
+Email: ${validatedData.email}
+Phone: ${validatedData.phone || "Not provided"}
+Address: ${validatedData.address}, ${validatedData.city}, ${validatedData.state} ${validatedData.zipCode}
+
+Products:
+- MOVE: ${validatedData.moveQuantity}
+- REPAIR: ${validatedData.repairQuantity}
+- RAPID: ${validatedData.rapidQuantity}
+- Bundle: ${validatedData.bundleQuantity}
+
+Total Cost: $${totalCost.toFixed(2)}
+
+Notes: ${validatedData.notes || "None"}
+`
+
+      const baseUrl =
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+
+      await fetch(`${baseUrl}/api/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: "tryteahc@gmail.com",
+          subject: "New TeaHC Reservation",
+          text: emailContent,
+        }),
+      })
+    } catch (emailError) {
+      console.error("Error sending backup email notification:", emailError)
+      // Continue even if email fails
     }
 
     return {

@@ -65,6 +65,15 @@ export async function appendToGoogleSheet(values: any[][]) {
     }
   } catch (error) {
     console.error("Error appending to Google Sheet:", error)
+    // Log more details about the error
+    if (error instanceof Error) {
+      console.error("Error message:", error.message)
+      console.error("Error stack:", error.stack)
+    }
+    // If it's a Google API error, it might have more details
+    if (error && typeof error === "object" && "errors" in error) {
+      console.error("Google API errors:", JSON.stringify(error.errors, null, 2))
+    }
     throw error
   }
 }

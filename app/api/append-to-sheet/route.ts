@@ -21,11 +21,25 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error("Error in append-to-sheet API route:", error)
+
+    // Add more detailed error logging
+    let errorMessage = "Unknown error"
+    let errorDetails = {}
+
+    if (error instanceof Error) {
+      errorMessage = error.message
+      errorDetails = {
+        name: error.name,
+        stack: error.stack,
+      }
+    }
+
     return NextResponse.json(
       {
         success: false,
         message: "Failed to append data to Google Sheet",
-        error: error instanceof Error ? error.message : String(error),
+        error: errorMessage,
+        details: errorDetails,
       },
       { status: 500 },
     )
