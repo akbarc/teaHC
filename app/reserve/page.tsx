@@ -53,7 +53,31 @@ export default function ReservePage() {
     })
 
     try {
+      // Submit using server action
       const result = await submitReservation(formData)
+
+      // Backup submission to API endpoint
+      try {
+        await fetch("/api/backup-reservation", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            ...formState,
+            totalCost:
+              formState.moveQuantity * 26.99 +
+              formState.repairQuantity * 26.99 +
+              formState.rapidQuantity * 26.99 +
+              formState.bundleQuantity * 69.99,
+          }),
+        })
+      } catch (backupError) {
+        console.error("Backup submission failed:", backupError)
+        // Continue even if backup fails
+      }
+
       setSubmissionResult(result)
 
       if (result.success) {

@@ -1,7 +1,7 @@
 "use server"
 
 import { z } from "zod"
-import { appendToGoogleSheet } from "@/lib/google-sheets"
+import { appendToSheet } from "@/lib/simple-sheets"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -42,13 +42,7 @@ export async function submitReservation(formData: FormData) {
     // Validate the data
     const validatedData = reservationSchema.parse(data)
 
-    // Calculate total items and cost
-    const totalItems =
-      validatedData.moveQuantity +
-      validatedData.repairQuantity +
-      validatedData.rapidQuantity +
-      validatedData.bundleQuantity * 3
-
+    // Calculate total cost
     const totalCost =
       validatedData.moveQuantity * 26.99 +
       validatedData.repairQuantity * 26.99 +
@@ -94,13 +88,22 @@ export async function submitReservation(formData: FormData) {
       ]
 
       // Append data to Google Sheet
-      const result = await appendToGoogleSheet(sheetData)
+      const result = await appendToSheet(sheetData)
       console.log("Google Sheets update result:", result)
-      sheetUpdated = true
+      sheetUpdated = result.success
     } catch (sheetError) {
       console.error("Error updating Google Sheet:", sheetError)
       // Continue even if Google Sheets fails
     }
+
+    // Create a backup of the reservation data in the logs
+    console.log(
+      "RESERVATION_BACKUP",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        data: reservationRecord,
+      }),
+    )
 
     return {
       success: true,
