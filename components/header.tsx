@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, Search, ShoppingCart, ChevronDown, X } from "lucide-react"
 import {
@@ -39,8 +40,8 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-amber-600">TeaHC</span>
+          <Link href="/" className="flex items-center">
+            <Image src="/teahc-logo.png" alt="TeaHC Logo" width={120} height={40} className="h-auto" priority />
           </Link>
         </div>
 
@@ -144,7 +145,7 @@ export function Header() {
             <ShoppingCart className="h-5 w-5" />
           </button>
 
-          <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 shadow-sm">
+          <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600 shadow-sm">
             <Link href="/reserve" className="font-medium">
               Reserve Now
             </Link>
