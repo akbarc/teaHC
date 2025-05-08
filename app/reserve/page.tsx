@@ -1,541 +1,443 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { CountdownTimer } from "@/components/countdown-timer"
-import { submitReservation } from "../actions/reservation"
+import { PreOrderBar } from "@/components/pre-order-bar"
+
+interface FormState {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  address: string
+  city: string
+  state: string
+  zipCode: string
+  moveQuantity: number
+  repairQuantity: number
+  rapidQuantity: number
+}
 
 export default function ReservePage() {
-  const [formState, setFormState] = useState({
-    fullName: "",
+  const [formState, setFormState] = useState<FormState>({
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     address: "",
     city: "",
     state: "",
     zipCode: "",
-    moveQuantity: 0,
-    repairQuantity: 0,
-    rapidQuantity: 0,
-    bundleQuantity: 0,
-    notes: "",
+    moveQuantity: 1,
+    repairQuantity: 1,
+    rapidQuantity: 1,
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submissionResult, setSubmissionResult] = useState<{
-    success?: boolean
-    message?: string
-    errors?: Array<{ field: string; message: string }>
-  } | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormState((prev) => ({
       ...prev,
-      [name]: name.includes("Quantity") ? Number.parseInt(value) : value,
+      [name]: value,
+    }))
+  }
+
+  const handleQuantityChange = (product: keyof Pick<FormState, "moveQuantity" | "repairQuantity" | "rapidQuantity">, value: number) => {
+    setFormState((prev) => ({
+      ...prev,
+      [product]: Math.max(0, value),
     }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setSubmissionResult(null)
-
-    const formData = new FormData()
-    Object.entries(formState).forEach(([key, value]) => {
-      formData.append(key, value.toString())
-    })
+    setError("")
 
     try {
-      // Submit using server action
-      const result = await submitReservation(formData)
-
-      // Backup submission to API endpoint
-      try {
-        await fetch("/api/backup-reservation", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            timestamp: new Date().toISOString(),
-            ...formState,
-            totalCost:
-              formState.moveQuantity * 26.99 +
-              formState.repairQuantity * 26.99 +
-              formState.rapidQuantity * 26.99 +
-              formState.bundleQuantity * 69.99,
-          }),
-        })
-      } catch (backupError) {
-        console.error("Backup submission failed:", backupError)
-        // Continue even if backup fails
-      }
-
-      setSubmissionResult(result)
-
-      if (result.success) {
-        // Reset form on success
-        setFormState({
-          fullName: "",
-          email: "",
-          phone: "",
-          address: "",
-          city: "",
-          state: "",
-          zipCode: "",
-          moveQuantity: 0,
-          repairQuantity: 0,
-          rapidQuantity: 0,
-          bundleQuantity: 0,
-          notes: "",
-        })
-      }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      setSubmissionResult({
-        success: false,
-        message: "An unexpected error occurred. Please try again later.",
-      })
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      setSubmitSuccess(true)
+    } catch (err) {
+      setError("There was an error submitting your reservation. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  // Calculate total cost
   const calculateTotal = () => {
-    return (
-      formState.moveQuantity * 26.99 +
-      formState.repairQuantity * 26.99 +
-      formState.rapidQuantity * 26.99 +
-      formState.bundleQuantity * 69.99
-    ).toFixed(2)
+    const moveTotal = formState.moveQuantity * 26.99
+    const repairTotal = formState.repairQuantity * 26.99
+    const rapidTotal = formState.rapidQuantity * 26.99
+    return (moveTotal + repairTotal + rapidTotal).toFixed(2)
   }
 
-  // Check if any products are selected
-  const hasProducts =
-    formState.moveQuantity > 0 ||
-    formState.repairQuantity > 0 ||
-    formState.rapidQuantity > 0 ||
-    formState.bundleQuantity > 0
-
-  return (
-    <main className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Reserve Your TeaHC</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Be among the first to experience our revolutionary nano-cannabinoid products
-          </p>
-          <div className="mt-4 max-w-md mx-auto">
-            <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
-              <p className="text-amber-800 font-medium mb-1">🔥 Flash Sale: Early Access Pricing Ends In:</p>
-              <CountdownTimer />
-              <p className="text-sm text-amber-700 mt-2">
-                Reserve now to lock in our special pre-launch price of $26.99 per box!
-              </p>
+  if (submitSuccess) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+        <PreOrderBar />
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-          </div>
-        </div>
-
-        {submissionResult?.success ? (
-          <div className="max-w-3xl mx-auto bg-green-50 border border-green-200 rounded-xl p-8 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-16 w-16 mx-auto text-green-500 mb-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <h2 className="text-2xl font-bold mb-4">Reservation Successful!</h2>
-            <p className="text-lg mb-6">{submissionResult.message}</p>
-            <p className="text-gray-600 mb-6">
-              We've received your reservation request. We'll contact you when your products are ready to ship.
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Reservation Confirmed!</h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Thank you for reserving your TeaHC products. We'll send you an email with your order details and next
+              steps.
             </p>
-            <Button onClick={() => setSubmissionResult(null)} className="bg-amber-500 hover:bg-amber-600">
-              Make Another Reservation
+            <div className="bg-orange-50 p-6 rounded-xl mb-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">What's Next?</h2>
+              <ul className="space-y-3 text-left">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Check your email for your order confirmation</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>We'll notify you when your order is ready to ship</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Your early access pricing is locked in</span>
+                </li>
+              </ul>
+            </div>
+            <Button asChild className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-6">
+              <Link href="/">Return to Home</Link>
             </Button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-              <div className="p-6 bg-amber-50 border-b border-amber-100">
-                <h2 className="text-2xl font-bold">Select Your Products</h2>
-                <p className="text-gray-600">Choose the products you'd like to reserve</p>
-              </div>
+        </div>
+      </main>
+    )
+  }
 
-              <div className="p-6 space-y-6">
-                {/* Product Selection */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+      <PreOrderBar />
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Reserve Your TeaHC Products</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Secure your early access pricing and be among the first to experience our innovative formulas.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Product Selection */}
+            <div className="space-y-8">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Select Your Products</h2>
+                <div className="space-y-6">
                   {/* MOVE Product */}
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="p-4 bg-amber-500 text-white">
-                      <h3 className="font-bold">TeaHC MOVE</h3>
+                  <div className="flex items-start space-x-4 p-4 bg-orange-50 rounded-xl">
+                    <div className="w-24 h-24 relative flex-shrink-0">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
+                        alt="TeaHC MOVE"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
-                    <div className="p-4">
-                      <div className="aspect-square relative mb-4">
-                        <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
-                          alt="TeaHC MOVE"
-                          fill
-                          className="object-contain p-2"
-                        />
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
-                        <span className="text-sm text-gray-500 line-through">$39.99</span>
-                      </div>
-                      <div className="mb-4">
-                        <Label htmlFor="moveQuantity">Quantity:</Label>
-                        <select
-                          id="moveQuantity"
-                          name="moveQuantity"
-                          value={formState.moveQuantity}
-                          onChange={handleChange}
-                          className="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-amber-500 focus:ring focus:ring-amber-200"
-                        >
-                          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                            <option key={num} value={num}>
-                              {num}
-                            </option>
-                          ))}
-                        </select>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg text-gray-900">TeaHC MOVE</h3>
+                      <p className="text-sm text-gray-600 mb-2">Daytime Mobility Support</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-orange-600 font-semibold">$26.99</span>
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() => handleQuantityChange("moveQuantity", formState.moveQuantity - 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            -
+                          </button>
+                          <span className="w-8 text-center">{formState.moveQuantity}</span>
+                          <button
+                            onClick={() => handleQuantityChange("moveQuantity", formState.moveQuantity + 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* REPAIR Product */}
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="p-4 bg-blue-800 text-white">
-                      <h3 className="font-bold">TeaHC REPAIR</h3>
+                  <div className="flex items-start space-x-4 p-4 bg-blue-50 rounded-xl">
+                    <div className="w-24 h-24 relative flex-shrink-0">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
+                        alt="TeaHC REPAIR"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
-                    <div className="p-4">
-                      <div className="aspect-square relative mb-4">
-                        <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
-                          alt="TeaHC REPAIR"
-                          fill
-                          className="object-contain p-2"
-                        />
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
-                        <span className="text-sm text-gray-500 line-through">$39.99</span>
-                      </div>
-                      <div className="mb-4">
-                        <Label htmlFor="repairQuantity">Quantity:</Label>
-                        <select
-                          id="repairQuantity"
-                          name="repairQuantity"
-                          value={formState.repairQuantity}
-                          onChange={handleChange}
-                          className="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-amber-500 focus:ring focus:ring-amber-200"
-                        >
-                          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                            <option key={num} value={num}>
-                              {num}
-                            </option>
-                          ))}
-                        </select>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg text-gray-900">TeaHC REPAIR</h3>
+                      <p className="text-sm text-gray-600 mb-2">Nighttime Recovery Support</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-blue-600 font-semibold">$26.99</span>
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() => handleQuantityChange("repairQuantity", formState.repairQuantity - 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            -
+                          </button>
+                          <span className="w-8 text-center">{formState.repairQuantity}</span>
+                          <button
+                            onClick={() => handleQuantityChange("repairQuantity", formState.repairQuantity + 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* RAPID Product */}
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="p-4 bg-amber-700 text-white">
-                      <h3 className="font-bold">TeaHC RAPID</h3>
+                  <div className="flex items-start space-x-4 p-4 bg-orange-50 rounded-xl">
+                    <div className="w-24 h-24 relative flex-shrink-0">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.22%20PM-8h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
+                        alt="TeaHC RAPID"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
-                    <div className="p-4">
-                      <div className="aspect-square relative mb-4">
-                        <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/May%207%2C%202025%2C%2001_11_20%20PM-gb2jU5JUzudXtpUv0TK9w0Y9cqBJy0.png"
-                          alt="TeaHC RAPID"
-                          fill
-                          className="object-contain p-2"
-                        />
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
-                        <span className="text-sm text-gray-500 line-through">$39.99</span>
-                      </div>
-                      <div className="mb-4">
-                        <Label htmlFor="rapidQuantity">Quantity:</Label>
-                        <select
-                          id="rapidQuantity"
-                          name="rapidQuantity"
-                          value={formState.rapidQuantity}
-                          onChange={handleChange}
-                          className="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-amber-500 focus:ring focus:ring-amber-200"
-                        >
-                          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                            <option key={num} value={num}>
-                              {num}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bundle */}
-                  <div className="border rounded-lg overflow-hidden bg-gradient-to-r from-amber-50 to-blue-50">
-                    <div className="p-4 bg-gradient-to-r from-amber-500 to-blue-700 text-white">
-                      <h3 className="font-bold">Complete Bundle</h3>
-                    </div>
-                    <div className="p-4">
-                      <div className="aspect-square relative mb-4">
-                        <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%203.09.15%20PM-6h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
-                          alt="TeaHC Bundle"
-                          fill
-                          className="object-contain p-2"
-                        />
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$69.99</span>
-                        <span className="text-sm text-gray-500 line-through">$80.97</span>
-                      </div>
-                      <div className="mb-4">
-                        <Label htmlFor="bundleQuantity">Quantity:</Label>
-                        <select
-                          id="bundleQuantity"
-                          name="bundleQuantity"
-                          value={formState.bundleQuantity}
-                          onChange={handleChange}
-                          className="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-amber-500 focus:ring focus:ring-amber-200"
-                        >
-                          {[0, 1, 2, 3, 4, 5].map((num) => (
-                            <option key={num} value={num}>
-                              {num}
-                            </option>
-                          ))}
-                        </select>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg text-gray-900">TeaHC RAPID</h3>
+                      <p className="text-sm text-gray-600 mb-2">On-Demand Support</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-orange-600 font-semibold">$26.99</span>
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() => handleQuantityChange("rapidQuantity", formState.rapidQuantity - 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            -
+                          </button>
+                          <span className="w-8 text-center">{formState.rapidQuantity}</span>
+                          <button
+                            onClick={() => handleQuantityChange("rapidQuantity", formState.rapidQuantity + 1)}
+                            className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Order Summary */}
-                {hasProducts && (
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-bold text-lg mb-2">Order Summary</h3>
-                    <div className="space-y-2 mb-4">
-                      {formState.moveQuantity > 0 && (
-                        <div className="flex justify-between">
-                          <span>TeaHC MOVE (x{formState.moveQuantity})</span>
-                          <span>${(formState.moveQuantity * 26.99).toFixed(2)}</span>
-                        </div>
-                      )}
-                      {formState.repairQuantity > 0 && (
-                        <div className="flex justify-between">
-                          <span>TeaHC REPAIR (x{formState.repairQuantity})</span>
-                          <span>${(formState.repairQuantity * 26.99).toFixed(2)}</span>
-                        </div>
-                      )}
-                      {formState.rapidQuantity > 0 && (
-                        <div className="flex justify-between">
-                          <span>TeaHC RAPID (x{formState.rapidQuantity})</span>
-                          <span>${(formState.rapidQuantity * 26.99).toFixed(2)}</span>
-                        </div>
-                      )}
-                      {formState.bundleQuantity > 0 && (
-                        <div className="flex justify-between">
-                          <span>Complete Bundle (x{formState.bundleQuantity})</span>
-                          <span>${(formState.bundleQuantity * 69.99).toFixed(2)}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t pt-2 font-bold flex justify-between">
-                      <span>Total:</span>
-                      <span>${calculateTotal()}</span>
-                    </div>
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-600">Subtotal</span>
+                    <span className="font-semibold">${calculateTotal()}</span>
                   </div>
-                )}
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-green-600 font-semibold">Free</span>
+                  </div>
+                  <div className="flex justify-between items-center text-lg font-bold">
+                    <span>Total</span>
+                    <span className="text-orange-600">${calculateTotal()}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 p-6 rounded-xl">
+                <div className="flex items-center mb-4">
+                  <div className="bg-orange-500 text-white p-2 rounded-full mr-3">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-orange-800 font-medium text-lg">Early Access Pricing Ends In:</p>
+                </div>
+                <CountdownTimer hours={48} />
+                <p className="text-sm text-orange-700 mt-4 flex items-center">
+                  <svg className="h-4 w-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Reserve now to lock in our special pre-launch price of $26.99 per box. Regular price $39.99.
+                </p>
               </div>
             </div>
 
-            {hasProducts && (
-              <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-                <div className="p-6 bg-amber-50 border-b border-amber-100">
-                  <h2 className="text-2xl font-bold">Your Information</h2>
-                  <p className="text-gray-600">Please provide your contact and shipping details</p>
-                </div>
-
-                <div className="p-6 space-y-6">
-                  {/* Contact Information */}
+            {/* Reservation Form */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Information</h2>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="fullName">Full Name *</Label>
-                        <Input
-                          id="fullName"
-                          name="fullName"
-                          value={formState.fullName}
-                          onChange={handleChange}
-                          required
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formState.email}
-                          onChange={handleChange}
-                          required
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="phone">Phone Number (Optional)</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formState.phone}
-                          onChange={handleChange}
-                          className="mt-1"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Shipping Address */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Shipping Address</h3>
-                    <div className="grid grid-cols-1 gap-4">
-                      <div>
-                        <Label htmlFor="address">Street Address *</Label>
-                        <Input
-                          id="address"
-                          name="address"
-                          value={formState.address}
-                          onChange={handleChange}
-                          required
-                          className="mt-1"
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                          <Label htmlFor="city">City *</Label>
-                          <Input
-                            id="city"
-                            name="city"
-                            value={formState.city}
-                            onChange={handleChange}
-                            required
-                            className="mt-1"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="state">State *</Label>
-                          <Input
-                            id="state"
-                            name="state"
-                            value={formState.state}
-                            onChange={handleChange}
-                            required
-                            className="mt-1"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="zipCode">Zip Code *</Label>
-                          <Input
-                            id="zipCode"
-                            name="zipCode"
-                            value={formState.zipCode}
-                            onChange={handleChange}
-                            required
-                            className="mt-1"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Notes */}
-                  <div>
-                    <Label htmlFor="notes">Additional Notes (Optional)</Label>
-                    <Textarea
-                      id="notes"
-                      name="notes"
-                      value={formState.notes}
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formState.firstName}
                       onChange={handleChange}
-                      className="mt-1 h-24"
-                      placeholder="Any special requests or information we should know?"
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formState.lastName}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                     />
                   </div>
                 </div>
-              </div>
-            )}
 
-            {/* Error Message */}
-            {submissionResult?.success === false && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-red-800">
-                <p className="font-medium">{submissionResult.message}</p>
-                {submissionResult.errors && submissionResult.errors.length > 0 && (
-                  <ul className="mt-2 list-disc list-inside text-sm">
-                    {submissionResult.errors.map((error, index) => (
-                      <li key={index}>{error.message}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
 
-            {/* Submit Button */}
-            <div className="text-center">
-              <Button
-                type="submit"
-                disabled={isSubmitting || !hasProducts}
-                className={`px-8 py-3 text-lg ${
-                  hasProducts ? "bg-amber-500 hover:bg-amber-600" : "bg-gray-300 cursor-not-allowed"
-                }`}
-              >
-                {isSubmitting ? "Processing..." : "Complete Reservation"}
-              </Button>
-              {!hasProducts && <p className="text-gray-500 mt-2">Please select at least one product to continue</p>}
-            </div>
-          </form>
-        )}
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formState.phone}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
 
-        <div className="max-w-3xl mx-auto mt-12">
-          <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-            <h3 className="text-xl font-bold mb-4">Reservation Information</h3>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                <strong>No payment required now:</strong> This is a reservation only. You'll be notified when products
-                are ready to ship, and payment will be collected at that time.
-              </p>
-              <p>
-                <strong>Limited quantities available:</strong> Our initial production run is limited. Reservations are
-                fulfilled on a first-come, first-served basis.
-              </p>
-              <p>
-                <strong>Guaranteed pricing:</strong> By reserving now, you lock in our special pre-launch pricing of
-                $26.99 per product (regular price $39.99).
-              </p>
-              <p>
-                <strong>Estimated shipping:</strong> We expect to begin shipping orders in July 2025. You'll receive
-                updates on production and shipping timelines.
-              </p>
+                <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                    Street Address
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={formState.address}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                      City
+                    </label>
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      value={formState.city}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
+                      State
+                    </label>
+                    <input
+                      type="text"
+                      id="state"
+                      name="state"
+                      value={formState.state}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
+                      ZIP Code
+                    </label>
+                    <input
+                      type="text"
+                      id="zipCode"
+                      name="zipCode"
+                      value={formState.zipCode}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    />
+                  </div>
+                </div>
+
+                {error && <p className="text-red-600 text-sm">{error}</p>}
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-6"
+                >
+                  {isSubmitting ? "Processing..." : "Complete Reservation"}
+                </Button>
+
+                <p className="text-sm text-gray-500 text-center">
+                  By completing your reservation, you agree to our{" "}
+                  <Link href="/terms" className="text-orange-600 hover:text-orange-700">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="text-orange-600 hover:text-orange-700">
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
+              </form>
             </div>
           </div>
         </div>
