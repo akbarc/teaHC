@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { addReservationToSheet } from "@/lib/google-sheets"
 
 export async function POST(request: Request) {
   try {
@@ -24,6 +25,14 @@ Notes: ${data.notes || "N/A"}
     // Log the reservation data
     console.log("BACKUP_RESERVATION:", formattedReservation)
     console.log("BACKUP_RESERVATION_JSON:", JSON.stringify(data))
+
+    // Try to add to Google Sheet as a backup
+    try {
+      await addReservationToSheet(data)
+    } catch (sheetError) {
+      console.error("Error adding backup reservation to Google Sheet:", sheetError)
+      // Continue even if sheet update fails
+    }
 
     return NextResponse.json({
       success: true,

@@ -1,6 +1,7 @@
 "use server"
 
 import { z } from "zod"
+import { addReservationToSheet } from "@/lib/google-sheets"
 import nodemailer from "nodemailer"
 
 // Define the form schema with Zod for validation
@@ -129,6 +130,16 @@ Notes: ${reservationRecord.notes}
     console.log("RESERVATION_DATA:", formattedReservation)
     console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
 
+    // Add the reservation to Google Sheet
+    let sheetUpdated = false
+    try {
+      sheetUpdated = await addReservationToSheet(reservationRecord)
+      console.log("Google Sheet updated:", sheetUpdated)
+    } catch (sheetError) {
+      console.error("Error updating Google Sheet:", sheetError)
+      // Continue even if sheet update fails
+    }
+
     // Try to send email notification
     let emailSent = false
     try {
@@ -156,6 +167,7 @@ Notes: ${reservationRecord.notes}
       success: true,
       message: "Reservation submitted successfully! We'll contact you soon.",
       details: {
+        sheetUpdated,
         emailSent,
       },
     }
