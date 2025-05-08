@@ -16,7 +16,18 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 space-y-6">
               <div className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-2">
-                Advanced Nano-Cannabinoid Technology
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  Advanced Nano-Cannabinoid Technology
+                </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
                 <span className="text-amber-500">Rediscover Comfort</span> and Freedom of Movement
@@ -26,30 +37,128 @@ export default function Home() {
                 approach to comfort and mobility when traditional methods fall short.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105"
+                >
                   <Link href="/reserve">Reserve Yours Now</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-amber-500 text-amber-500 hover:bg-amber-50"
+                >
                   <Link href="/science">See How It Works</Link>
                 </Button>
               </div>
-              <div className="pt-4 bg-amber-50 p-4 rounded-lg border border-amber-200">
-                <p className="text-amber-800 font-medium mb-1">🔥 Early Access Pricing Ends In:</p>
+              <div className="pt-4 bg-amber-50 p-4 rounded-lg border border-amber-200 shadow-sm">
+                <div className="flex items-center">
+                  <div className="bg-amber-500 text-white p-2 rounded-full mr-3">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-amber-800 font-medium">Early Access Pricing Ends In:</p>
+                </div>
                 <CountdownTimer hours={48} />
-                <p className="text-sm text-amber-700 mt-2">
+                <p className="text-sm text-amber-700 mt-2 flex items-center">
+                  <svg className="h-4 w-4 mr-1 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                   Reserve now to lock in our special pre-launch price of $26.99 per box. Regular price $39.99.
                 </p>
               </div>
             </div>
-            <div className="flex-1 relative bg-white p-8 rounded-2xl shadow-lg">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%203.09.15%20PM-6h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
-                alt="TeaHC Product Line featuring MOVE, REPAIR, and RAPID formulas"
-                width={600}
-                height={500}
-                className="object-contain"
-                priority
-              />
+            <div className="flex-1 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-100 to-amber-50 rounded-2xl transform rotate-3 scale-105"></div>
+              <div className="relative bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-[1.02]">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%203.09.15%20PM-6h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
+                  alt="TeaHC Product Line featuring MOVE, REPAIR, and RAPID formulas"
+                  width={600}
+                  height={500}
+                  className="object-contain"
+                  priority
+                />
+                <div className="absolute -bottom-4 -right-4 bg-amber-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
+                  Limited First Batch
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="py-8 bg-white border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <div className="bg-amber-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">100% Satisfaction</h3>
+              <p className="text-sm text-gray-500">Money-back guarantee</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-amber-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Lab Tested</h3>
+              <p className="text-sm text-gray-500">Third-party verified</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-amber-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Made in USA</h3>
+              <p className="text-sm text-gray-500">Quality manufacturing</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-amber-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Free Shipping</h3>
+              <p className="text-sm text-gray-500">On all orders</p>
             </div>
           </div>
         </div>
@@ -64,7 +173,12 @@ export default function Home() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="bg-white p-6 rounded-xl shadow-md relative">
+              <div className="absolute -top-4 -left-4 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+              </div>
               <div className="flex items-center mb-4 justify-center">
                 <div className="flex text-amber-500">
                   {[...Array(5)].map((_, i) => (
@@ -79,10 +193,26 @@ export default function Home() {
                 feel more comfortable within about 30 minutes. Now I can enjoy my morning walks again without the
                 constant worry about how I'll feel afterward."
               </p>
-              <div className="font-medium text-center">Sarah T. - Runner, 42</div>
+              <div className="flex items-center mt-6 pt-4 border-t border-gray-100">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-amber-700 font-bold">ST</span>
+                </div>
+                <div>
+                  <div className="font-medium">Sarah T.</div>
+                  <div className="text-sm text-gray-500">Runner, 42</div>
+                </div>
+                <div className="ml-auto bg-green-50 text-green-700 text-xs px-2 py-1 rounded-full">
+                  Verified Customer
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="bg-white p-6 rounded-xl shadow-md relative">
+              <div className="absolute -top-4 -left-4 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+              </div>
               <div className="flex items-center mb-4 justify-center">
                 <div className="flex text-amber-500">
                   {[...Array(5)].map((_, i) => (
@@ -97,10 +227,26 @@ export default function Home() {
                 and I've been waking up with less of the morning stiffness I used to experience. It's become an
                 essential part of my nighttime wellness routine."
               </p>
-              <div className="font-medium text-center">Michael R. - Fitness Coach, 38</div>
+              <div className="flex items-center mt-6 pt-4 border-t border-gray-100">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-blue-700 font-bold">MR</span>
+                </div>
+                <div>
+                  <div className="font-medium">Michael R.</div>
+                  <div className="text-sm text-gray-500">Fitness Coach, 38</div>
+                </div>
+                <div className="ml-auto bg-green-50 text-green-700 text-xs px-2 py-1 rounded-full">
+                  Verified Customer
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="bg-white p-6 rounded-xl shadow-md relative">
+              <div className="absolute -top-4 -left-4 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+              </div>
               <div className="flex items-center mb-4 justify-center">
                 <div className="flex text-amber-500">
                   {[...Array(5)].map((_, i) => (
@@ -115,12 +261,37 @@ export default function Home() {
                 my gym bag, and it's become my go-to when my shoulder feels uncomfortable during workouts. It typically
                 helps within about 20-30 minutes."
               </p>
-              <div className="font-medium text-center">Jennifer K. - Athlete, 29</div>
+              <div className="flex items-center mt-6 pt-4 border-t border-gray-100">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-amber-700 font-bold">JK</span>
+                </div>
+                <div>
+                  <div className="font-medium">Jennifer K.</div>
+                  <div className="text-sm text-gray-500">Athlete, 29</div>
+                </div>
+                <div className="ml-auto bg-green-50 text-green-700 text-xs px-2 py-1 rounded-full">
+                  Verified Customer
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="text-center mt-10">
-            <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600">
+            <div className="inline-flex items-center justify-center mb-6">
+              <div className="text-amber-500 flex">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="ml-2 text-gray-600">4.9/5 from 127 reviews</span>
+            </div>
+            <Button
+              asChild
+              size="lg"
+              className="bg-amber-500 hover:bg-amber-600 shadow-lg transition-transform hover:scale-105"
+            >
               <Link href="/reserve">Experience TeaHC</Link>
             </Button>
           </div>
@@ -450,54 +621,65 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">Join Our Community</h2>
+              <span className="inline-block px-3 py-1 bg-white text-amber-600 rounded-full text-sm font-medium mb-2">
+                Join Our Community
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold">Get 10% Off Your First Order</h2>
               <p className="text-xl">
                 Stay informed about our launch, receive wellness tips, and be the first to know about special offers.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Early access to new products</span>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Early access to new products</span>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Subscriber-only discounts</span>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Subscriber-only discounts</span>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Wellness tips and resources</span>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Wellness tips and resources</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
+            <div className="bg-white p-8 rounded-xl shadow-lg transform transition-transform hover:scale-[1.02]">
+              <div className="absolute -top-3 -right-3 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
+                Limited Time
+              </div>
               <EmailCapture
                 title="Get 10% Off Your First Order"
                 description="Sign up now and we'll send you a discount code for your first purchase."
                 buttonText="Get My Discount"
                 className="text-gray-800"
               />
+              <div className="mt-4 pt-4 border-t border-gray-100 text-center text-gray-500 text-sm">
+                <p>We respect your privacy. Unsubscribe at any time.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -601,19 +783,66 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-16 bg-amber-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience TeaHC?</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Join those who've discovered a new approach to comfort and mobility. Your journey begins here.
-          </p>
-          <div className="bg-white p-4 rounded-lg inline-block mb-8">
-            <p className="text-amber-800 font-medium mb-1">🔥 Early Access Pricing Ends In:</p>
-            <CountdownTimer />
-          </div>
-          <div>
-            <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-lg px-8 py-6">
-              <Link href="/reserve">Reserve Yours Now</Link>
-            </Button>
-            <p className="text-sm text-gray-500 mt-4">No payment required today. Limited quantities available.</p>
+          <div className="max-w-3xl mx-auto">
+            <span className="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-4">
+              Limited Time Offer
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience TeaHC?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Join those who've discovered a new approach to comfort and mobility. Your journey begins here.
+            </p>
+            <div className="bg-white p-6 rounded-lg shadow-md inline-block mb-8">
+              <div className="flex items-center justify-center mb-2">
+                <svg className="h-6 w-6 text-amber-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <p className="text-amber-800 font-medium">Early Access Pricing Ends In:</p>
+              </div>
+              <CountdownTimer />
+              <div className="mt-4 flex items-center justify-center text-sm text-gray-500">
+                <svg className="h-4 w-4 text-amber-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 000 16zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Only 127 spots remaining in our first production batch</span>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-amber-500 hover:bg-amber-600 text-lg px-8 py-6 shadow-lg transition-transform hover:scale-105"
+              >
+                <Link href="/reserve">Reserve Yours Now</Link>
+              </Button>
+              <p className="text-sm text-gray-500">No payment required today. Limited quantities available.</p>
+              <div className="flex items-center justify-center space-x-4 mt-4">
+                <svg className="h-5 w-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-gray-600">Secure reservation process</span>
+                <svg className="h-5 w-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-gray-600">30-day guarantee</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
