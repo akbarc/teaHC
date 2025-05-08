@@ -1,7 +1,7 @@
 "use server"
 
 import { z } from "zod"
-import { appendToSheet } from "@/lib/simple-sheets"
+import nodemailer from "nodemailer"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -20,6 +20,50 @@ const reservationSchema = z.object({
 })
 
 type ReservationData = z.infer<typeof reservationSchema>
+
+// Function to send email notification
+async function sendEmailNotification(reservationData: any) {
+  try {
+    // Create a formatted email body
+    const emailBody = `
+NEW RESERVATION:
+Timestamp: ${reservationData.timestamp}
+Name: ${reservationData.fullName}
+Email: ${reservationData.email}
+Phone: ${reservationData.phone || "N/A"}
+Address: ${reservationData.address}
+Products:
+  - MOVE: ${reservationData.moveQuantity}
+  - REPAIR: ${reservationData.repairQuantity}
+  - RAPID: ${reservationData.rapidQuantity}
+  - Bundle: ${reservationData.bundleQuantity}
+Total Cost: $${reservationData.totalCost.toFixed(2)}
+Notes: ${reservationData.notes || "N/A"}
+`.trim()
+
+    // Create a transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "tryteahc@gmail.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    })
+
+    // Send the email
+    await transporter.sendMail({
+      from: "tryteahc@gmail.com",
+      to: "tryteahc@gmail.com",
+      subject: `New TeaHC Reservation: ${reservationData.fullName}`,
+      text: emailBody,
+    })
+
+    return true
+  } catch (error) {
+    console.error("Error sending email notification:", error)
+    return false
+  }
+}
 
 export async function submitReservation(formData: FormData) {
   try {
@@ -64,52 +108,55 @@ export async function submitReservation(formData: FormData) {
       notes: validatedData.notes || "",
     }
 
-    // Log the reservation details to console (for debugging)
-    console.log("New reservation:", JSON.stringify(reservationRecord, null, 2))
+    // Create a formatted text version of the reservation for logging
+    const formattedReservation = `
+NEW RESERVATION:
+Timestamp: ${reservationRecord.timestamp}
+Name: ${reservationRecord.fullName}
+Email: ${reservationRecord.email}
+Phone: ${reservationRecord.phone}
+Address: ${reservationRecord.address}
+Products:
+  - MOVE: ${reservationRecord.moveQuantity}
+  - REPAIR: ${reservationRecord.repairQuantity}
+  - RAPID: ${reservationRecord.rapidQuantity}
+  - Bundle: ${reservationRecord.bundleQuantity}
+Total Cost: $${reservationRecord.totalCost.toFixed(2)}
+Notes: ${reservationRecord.notes}
+`.trim()
 
-    // Save to Google Sheets
-    let sheetUpdated = false
+    // Log the reservation details to console (for retrieval from Vercel logs)
+    console.log("RESERVATION_DATA:", formattedReservation)
+    console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
+
+    // Try to send email notification
+    let emailSent = false
     try {
-      // Format data for Google Sheets
-      const sheetData = [
-        [
-          reservationRecord.timestamp, // Timestamp
-          reservationRecord.fullName,
-          reservationRecord.email,
-          reservationRecord.phone,
-          reservationRecord.address,
-          reservationRecord.moveQuantity,
-          reservationRecord.repairQuantity,
-          reservationRecord.rapidQuantity,
-          reservationRecord.bundleQuantity,
-          reservationRecord.totalCost.toFixed(2),
-          reservationRecord.notes,
-        ],
-      ]
-
-      // Append data to Google Sheet
-      const result = await appendToSheet(sheetData)
-      console.log("Google Sheets update result:", result)
-      sheetUpdated = result.success
-    } catch (sheetError) {
-      console.error("Error updating Google Sheet:", sheetError)
-      // Continue even if Google Sheets fails
+      emailSent = await sendEmailNotification(reservationRecord)
+    } catch (emailError) {
+      console.error("Email sending error:", emailError)
+      // Continue even if email fails
     }
 
-    // Create a backup of the reservation data in the logs
-    console.log(
-      "RESERVATION_BACKUP",
-      JSON.stringify({
-        timestamp: new Date().toISOString(),
-        data: reservationRecord,
-      }),
-    )
+    // Try to send the reservation data to our backup API
+    try {
+      await fetch("/api/backup-reservation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservationRecord),
+      })
+    } catch (backupError) {
+      console.error("Error sending to backup API:", backupError)
+      // Continue even if backup fails
+    }
 
     return {
       success: true,
       message: "Reservation submitted successfully! We'll contact you soon.",
       details: {
-        sheetUpdated,
+        emailSent,
       },
     }
   } catch (error) {
