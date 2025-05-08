@@ -16,14 +16,14 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 space-y-6">
               <div className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-2">
-                Finally, Relief That Actually Works
+                Advanced Nano-Cannabinoid Technology
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                <span className="text-amber-500">Live Without Limits</span> - Reclaim Your Freedom
+                <span className="text-amber-500">Rediscover Comfort</span> and Freedom of Movement
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl">
-                I created TeaHC after years of struggling with inflammation. Now thousands are experiencing the freedom
-                of movement and comfort they thought was gone forever.
+                TeaHC's innovative formulas help support your body's natural inflammatory response, offering a new
+                approach to comfort and mobility when traditional methods fall short.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
@@ -34,11 +34,10 @@ export default function Home() {
                 </Button>
               </div>
               <div className="pt-4 bg-amber-50 p-4 rounded-lg border border-amber-200">
-                <p className="text-amber-800 font-medium mb-1">🔥 Flash Sale: Early Access Pricing Ends In:</p>
+                <p className="text-amber-800 font-medium mb-1">🔥 Early Access Pricing Ends In:</p>
                 <CountdownTimer hours={48} />
                 <p className="text-sm text-amber-700 mt-2">
-                  Reserve now to lock in our special pre-launch price of $26.99 per box. Price increases when the timer
-                  hits zero!
+                  Reserve now to lock in our special pre-launch price of $26.99 per box. Regular price $39.99.
                 </p>
               </div>
             </div>
@@ -59,216 +58,176 @@ export default function Home() {
       {/* Testimonials - MOVED HIGHER */}
       <section className="py-16 bg-amber-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Real People, Real Results</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">What People Are Saying</h2>
           <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            Don't just take our word for it. Here's what people like you are saying about TeaHC.
+            Hear from those who've experienced TeaHC's innovative approach to comfort and mobility.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-md relative">
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full overflow-hidden border-2 border-amber-500">
-                <Image
-                  src="/smiling-woman-portrait.png"
-                  alt="Sarah T."
-                  width={100}
-                  height={100}
-                  className="object-cover"
-                />
-              </div>
-              <div className="pt-6">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="flex text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
+            <div className="bg-white p-6 rounded-xl shadow-md">
+              <div className="flex items-center mb-4 justify-center">
+                <div className="flex text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <p className="text-gray-600 mb-4">
-                  "After my knee surgery, I thought I'd never run again. Within 20 minutes of trying TeaHC MOVE, I felt
-                  relief I hadn't experienced in years. Three months later, I'm back to my 5-mile morning runs!"
-                </p>
-                <div className="font-medium text-center">Sarah T. - Marathon Runner, 42</div>
               </div>
+              <p className="text-gray-600 mb-4">
+                "After my knee surgery, I struggled with discomfort that limited my activities. TeaHC MOVE helped me
+                feel more comfortable within about 30 minutes. Now I can enjoy my morning walks again without the
+                constant worry about how I'll feel afterward."
+              </p>
+              <div className="font-medium text-center">Sarah T. - Runner, 42</div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-md relative">
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full overflow-hidden border-2 border-amber-500">
-                <Image
-                  src="/middle-aged-man-portrait.png"
-                  alt="Michael R."
-                  width={100}
-                  height={100}
-                  className="object-cover"
-                />
-              </div>
-              <div className="pt-6">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="flex text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
+            <div className="bg-white p-6 rounded-xl shadow-md">
+              <div className="flex items-center mb-4 justify-center">
+                <div className="flex text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <p className="text-gray-600 mb-4">
-                  "As a fitness coach with chronic back pain, I've tried everything. TeaHC REPAIR has transformed my
-                  sleep. I wake up without the stiffness that used to take hours to work through. It's given me my
-                  mornings back."
-                </p>
-                <div className="font-medium text-center">Michael R. - Fitness Coach, 38</div>
               </div>
+              <p className="text-gray-600 mb-4">
+                "TeaHC REPAIR has made a noticeable difference in my evening routine. I feel more relaxed before bed,
+                and I've been waking up with less of the morning stiffness I used to experience. It's become an
+                essential part of my nighttime wellness routine."
+              </p>
+              <div className="font-medium text-center">Michael R. - Fitness Coach, 38</div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-md relative">
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full overflow-hidden border-2 border-amber-500">
-                <Image
-                  src="/woman-athlete-portrait.png"
-                  alt="Jennifer K."
-                  width={100}
-                  height={100}
-                  className="object-cover"
-                />
-              </div>
-              <div className="pt-6">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="flex text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
+            <div className="bg-white p-6 rounded-xl shadow-md">
+              <div className="flex items-center mb-4 justify-center">
+                <div className="flex text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <p className="text-gray-600 mb-4">
-                  "The RAPID shot is my secret weapon on competition days. When my shoulder flares up, one shot and I'm
-                  back in the game within minutes. Nothing else works this fast or this effectively. It's literally
-                  changed my career."
-                </p>
-                <div className="font-medium text-center">Jennifer K. - Professional Athlete, 29</div>
               </div>
+              <p className="text-gray-600 mb-4">
+                "The RAPID shot has been helpful for those unexpected moments when I need support quickly. I keep one in
+                my gym bag, and it's become my go-to when my shoulder feels uncomfortable during workouts. It typically
+                helps within about 20-30 minutes."
+              </p>
+              <div className="font-medium text-center">Jennifer K. - Athlete, 29</div>
             </div>
           </div>
 
           <div className="text-center mt-10">
             <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600">
-              <Link href="/reserve">Join Them Today</Link>
+              <Link href="/reserve">Experience TeaHC</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Founder's Story - NEW PERSONAL SECTION */}
+      {/* Origin Story - REVISED */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <div className="bg-amber-100 absolute -top-4 -left-4 w-full h-full rounded-xl"></div>
-              <div className="relative bg-white rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  src="/placeholder.svg?key=8hgqu"
-                  alt="TeaHC Founder's Journey"
-                  width={600}
-                  height={600}
-                  className="object-cover w-full h-full"
-                />
+              <div className="relative bg-white rounded-xl overflow-hidden shadow-lg p-8">
+                <h3 className="text-2xl font-bold mb-4">Our Story</h3>
+                <p className="text-lg text-gray-700 mb-4">
+                  TeaHC was born from a simple question: Could we create a more effective approach to supporting comfort
+                  and mobility?
+                </p>
+                <p className="text-lg text-gray-700 mb-4">
+                  After witnessing loved ones struggle with traditional options that either didn't work well enough or
+                  came with unwanted side effects, our team of scientists and wellness experts began exploring the
+                  potential of cannabinoids.
+                </p>
+                <p className="text-lg text-gray-700">
+                  Two years of research and development led to our breakthrough nano-emulsion technology that
+                  dramatically improves how these beneficial compounds interact with your body.
+                </p>
               </div>
             </div>
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">My Personal Journey</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">When Comfort Seems Out of Reach</h2>
               <p className="text-lg text-gray-700">
-                "After my car accident in 2018, I was told I'd never be pain-free again. The constant inflammation left
-                me unable to play with my kids or even sleep through the night."
+                We understand the frustration of waking up stiff and uncomfortable, of having to say "no" to activities
+                you love, of feeling like your body is working against you.
               </p>
               <p className="text-lg text-gray-700">
-                "When traditional medications caused more problems than they solved, I began researching alternatives.
-                Working with scientists and doctors, we discovered that specific cannabinoid combinations could target
-                inflammation in ways nothing else could."
+                That feeling of being limited by your own body can affect everything—your mood, your relationships, your
+                ability to enjoy life's simple pleasures.
               </p>
               <p className="text-lg text-gray-700">
-                "The first prototype of TeaHC gave me relief within minutes. That's when I knew I had to share this with
-                others suffering like I was."
+                TeaHC was created for those moments when you need an alternative approach—one that works with your
+                body's natural systems rather than masking symptoms or causing new problems.
               </p>
               <p className="text-lg text-gray-700 font-medium">
-                "Today, I'm pain-free and helping thousands reclaim their lives too. This isn't just a product for
-                me—it's a mission."
+                Our mission is to help you reclaim the comfort and freedom of movement that makes life worth living.
               </p>
-              <div className="pt-2">
-                <p className="font-bold text-amber-500">— James Wilson, TeaHC Founder</p>
-              </div>
               <Button asChild variant="outline" className="mt-4">
-                <Link href="/about">Read My Full Story</Link>
+                <Link href="/about">Learn More About Our Mission</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Real-Life Applications - NEW SECTION */}
+      {/* Real-Life Applications - REVISED */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">How TeaHC Fits Into Your Life</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">TeaHC In Your Daily Life</h2>
           <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            Real solutions for real-life challenges you face every day
+            Thoughtfully designed to complement your lifestyle and wellness routine
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
-              <div className="h-48 relative">
-                <Image src="/active-hiker.png" alt="Active Lifestyle" fill className="object-cover" />
-              </div>
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-3">For Active Days</h3>
                 <p className="text-gray-600 mb-4">
-                  Start your morning with TeaHC MOVE to support joint mobility and reduce inflammation throughout your
-                  active day. Whether you're hiking, playing with your kids, or just enjoying life, you'll move with
-                  more freedom and less discomfort.
+                  Start your morning with TeaHC MOVE to support joint mobility and comfort throughout your day. Whether
+                  you're gardening, taking a walk, or simply want to move with more ease, MOVE helps you stay engaged in
+                  the activities that matter.
                 </p>
-                <div className="flex items-center text-amber-500 font-medium">
-                  <span>Perfect for:</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">Weekend Warriors</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">Parents</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">Travelers</span>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">Morning Routine</span>
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">Daily Activities</span>
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">Gentle Exercise</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
-              <div className="h-48 relative">
-                <Image src="/peaceful-sleep.png" alt="Restful Sleep" fill className="object-cover" />
-              </div>
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-3">For Restful Nights</h3>
                 <p className="text-gray-600 mb-4">
-                  End your day with TeaHC REPAIR to support your body's natural recovery processes while you sleep. Wake
-                  up feeling refreshed and ready for the day, without the morning stiffness that used to slow you down.
+                  End your day with TeaHC REPAIR to support your body's natural recovery processes while you sleep. The
+                  calming formula helps you unwind and prepare for restorative rest, so you can wake feeling more
+                  refreshed and ready for the day ahead.
                 </p>
-                <div className="flex items-center text-blue-800 font-medium">
-                  <span>Perfect for:</span>
-                  <span className="ml-2 px-2 py-1 bg-blue-50 rounded-full text-sm">Light Sleepers</span>
-                  <span className="ml-2 px-2 py-1 bg-blue-50 rounded-full text-sm">Hard Workers</span>
-                  <span className="ml-2 px-2 py-1 bg-blue-50 rounded-full text-sm">Recovery</span>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  <span className="px-3 py-1 bg-blue-50 rounded-full text-sm text-blue-700">Evening Ritual</span>
+                  <span className="px-3 py-1 bg-blue-50 rounded-full text-sm text-blue-700">Nighttime Comfort</span>
+                  <span className="px-3 py-1 bg-blue-50 rounded-full text-sm text-blue-700">Relaxation</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
-              <div className="h-48 relative">
-                <Image src="/sudden-pain-relief.png" alt="Immediate Relief" fill className="object-cover" />
-              </div>
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-3">For Unexpected Moments</h3>
                 <p className="text-gray-600 mb-4">
-                  Keep TeaHC RAPID on hand for those moments when discomfort strikes without warning. Within minutes,
-                  you'll feel relief that lets you get back to what matters instead of being sidelined by pain.
+                  Keep TeaHC RAPID on hand for those times when you need support quickly. Whether after an intense
+                  workout or during a long day of activity, RAPID provides targeted comfort when and where you need it
+                  most.
                 </p>
-                <div className="flex items-center text-amber-700 font-medium">
-                  <span>Perfect for:</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">Athletes</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">Busy Professionals</span>
-                  <span className="ml-2 px-2 py-1 bg-amber-50 rounded-full text-sm">On-the-go</span>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">Post-Activity</span>
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">On-The-Go</span>
+                  <span className="px-3 py-1 bg-amber-50 rounded-full text-sm text-amber-700">Quick Support</span>
                 </div>
               </div>
             </div>
@@ -276,13 +235,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Anti-Inflammation Focus Section - SIMPLIFIED */}
+      {/* Key Benefits Section - REVISED */}
       <section className="py-16 bg-amber-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold">The Root Cause Approach</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">A Different Approach</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
-              We don't just mask symptoms - we target the underlying inflammation that's holding you back
+              TeaHC works with your body's natural systems to support comfort and mobility
             </p>
           </div>
 
@@ -304,10 +263,10 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Works With Your Body</h3>
+              <h3 className="text-xl font-semibold mb-2">Supports Natural Balance</h3>
               <p className="text-gray-600">
-                Instead of fighting your body's natural processes, TeaHC works with your endocannabinoid system to
-                restore balance and reduce excessive inflammation naturally.
+                TeaHC works with your endocannabinoid system, which helps regulate many bodily functions including
+                inflammatory response, to support your body's natural balance.
               </p>
             </div>
 
@@ -323,10 +282,10 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Fast-Acting Relief</h3>
+              <h3 className="text-xl font-semibold mb-2">Enhanced Absorption</h3>
               <p className="text-gray-600">
-                Our nano-technology delivers relief in minutes, not hours. You'll feel the difference with your first
-                dose, and the effects last longer than traditional options.
+                Our nano-technology helps improve absorption, allowing the active ingredients to be more readily
+                available to your body compared to standard formulations.
               </p>
             </div>
 
@@ -347,36 +306,36 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">No Harsh Side Effects</h3>
+              <h3 className="text-xl font-semibold mb-2">Gentle on Your System</h3>
               <p className="text-gray-600">
-                Unlike prescription medications, TeaHC provides relief without the stomach issues, drowsiness, or other
-                side effects that can disrupt your day.
+                Unlike some traditional approaches, TeaHC is designed to provide support without the stomach discomfort
+                or drowsiness that can come with other options.
               </p>
             </div>
           </div>
 
           <div className="text-center mt-10">
             <Button asChild className="bg-amber-500 hover:bg-amber-600">
-              <Link href="/reserve">Experience the Difference</Link>
+              <Link href="/science">Learn About Our Technology</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Product Showcase */}
+      {/* Product Showcase - REVISED */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Your Complete Solution</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Your Complete System</h2>
           <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            Each product is designed to work together as a system, providing 24-hour support for your active lifestyle
+            Each product is designed to work together, providing comprehensive support throughout your day
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* MOVE Product */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6 bg-amber-500 text-white">
                 <h3 className="text-2xl font-bold">TeaHC MOVE</h3>
-                <p className="text-white/80">Daytime Freedom & Mobility</p>
+                <p className="text-white/80">Daytime Mobility Support</p>
               </div>
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
@@ -388,18 +347,18 @@ export default function Home() {
                   />
                 </div>
                 <div className="bg-amber-50 p-3 rounded-lg mb-4">
-                  <h4 className="font-semibold text-sm mb-1">What You'll Feel:</h4>
+                  <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Improved joint mobility within 20 minutes</li>
-                    <li>• Reduced stiffness and discomfort</li>
-                    <li>• Sustained energy without jitters</li>
-                    <li>• Mental clarity and focus</li>
-                    <li>• Lasting relief for 4-6 hours</li>
+                    <li>• Supports joint mobility and flexibility</li>
+                    <li>• Helps maintain comfort during activity</li>
+                    <li>• Promotes balanced energy levels</li>
+                    <li>• Supports mental clarity</li>
+                    <li>• Convenient daytime formula</li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  "I take MOVE before my morning walk, and for the first time in years, I can keep up with my grandkids
-                  at the park." - Robert, 67
+                  "MOVE has become part of my morning routine. It helps me stay comfortable throughout my daily
+                  activities." - Robert, 67
                 </p>
                 <Button asChild className="w-full bg-amber-500 hover:bg-amber-600">
                   <Link href="/products">Learn More</Link>
@@ -408,10 +367,10 @@ export default function Home() {
             </div>
 
             {/* REPAIR Product */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6 bg-blue-800 text-white">
                 <h3 className="text-2xl font-bold">TeaHC REPAIR</h3>
-                <p className="text-white/80">Nighttime Recovery & Renewal</p>
+                <p className="text-white/80">Nighttime Recovery Support</p>
               </div>
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
@@ -423,18 +382,18 @@ export default function Home() {
                   />
                 </div>
                 <div className="bg-blue-50 p-3 rounded-lg mb-4">
-                  <h4 className="font-semibold text-sm mb-1">What You'll Feel:</h4>
+                  <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Deep relaxation without grogginess</li>
-                    <li>• Easier time falling asleep</li>
-                    <li>• Fewer nighttime disruptions</li>
-                    <li>• Reduced morning stiffness</li>
-                    <li>• Wake up feeling refreshed</li>
+                    <li>• Promotes relaxation and calm</li>
+                    <li>• Supports natural recovery processes</li>
+                    <li>• Helps maintain comfortable sleep</li>
+                    <li>• Reduces morning stiffness</li>
+                    <li>• Soothing nighttime formula</li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  "REPAIR has given me back my mornings. I used to need an hour just to loosen up enough to get out of
-                  bed." - Maria, 52
+                  "REPAIR has become an essential part of my evening routine. I wake up feeling more refreshed." -
+                  Maria, 52
                 </p>
                 <Button asChild className="w-full bg-blue-800 hover:bg-blue-900">
                   <Link href="/products">Learn More</Link>
@@ -443,10 +402,10 @@ export default function Home() {
             </div>
 
             {/* RAPID Product */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105">
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
               <div className="p-6 bg-amber-700 text-white">
                 <h3 className="text-2xl font-bold">TeaHC RAPID</h3>
-                <p className="text-white/80">On-Demand Instant Relief</p>
+                <p className="text-white/80">On-Demand Support</p>
               </div>
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
@@ -458,18 +417,18 @@ export default function Home() {
                   />
                 </div>
                 <div className="bg-amber-50 p-3 rounded-lg mb-4">
-                  <h4 className="font-semibold text-sm mb-1">What You'll Feel:</h4>
+                  <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Relief begins in just 10-15 minutes</li>
-                    <li>• Targeted comfort where you need it most</li>
-                    <li>• Mental clarity without sedation</li>
-                    <li>• Ability to return to activities quickly</li>
-                    <li>• Convenient on-the-go format</li>
+                    <li>• Provides support when you need it most</li>
+                    <li>• Targets specific areas of discomfort</li>
+                    <li>• Maintains mental clarity</li>
+                    <li>• Supports continued activity</li>
+                    <li>• Convenient portable format</li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  "I keep RAPID in my gym bag. When my shoulder acts up during a workout, I'm back in action in
-                  minutes." - Jason, 34
+                  "I keep RAPID in my gym bag for those times when I need extra support during or after workouts." -
+                  Jason, 34
                 </p>
                 <Button asChild className="w-full bg-amber-700 hover:bg-amber-800">
                   <Link href="/products">Learn More</Link>
@@ -486,15 +445,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Email Capture Section - NEW */}
+      {/* Email Capture Section - REVISED */}
       <section className="py-16 bg-gradient-to-r from-amber-500 to-amber-600 text-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold">Join Our Community</h2>
               <p className="text-xl">
-                Be the first to know about new products, special offers, and helpful tips for managing inflammation
-                naturally.
+                Stay informed about our launch, receive wellness tips, and be the first to know about special offers.
               </p>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
@@ -505,7 +463,7 @@ export default function Home() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span>Early access to new formulas</span>
+                  <span>Early access to new products</span>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -517,7 +475,7 @@ export default function Home() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span>Exclusive subscriber discounts</span>
+                  <span>Subscriber-only discounts</span>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -529,7 +487,7 @@ export default function Home() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span>Wellness tips from our experts</span>
+                  <span>Wellness tips and resources</span>
                 </div>
               </div>
             </div>
@@ -545,37 +503,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bioavailability Comparison - SIMPLIFIED */}
+      {/* Technology Comparison - REVISED */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="flex-1 bg-amber-50 p-6 rounded-xl">
-              <h3 className="text-xl font-semibold mb-4">Why TeaHC Works When Others Don't</h3>
+              <h3 className="text-xl font-semibold mb-4">The TeaHC Difference</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between border-b pb-2">
                   <span className="font-medium">Standard CBD Products:</span>
-                  <span className="text-red-600 font-bold">Takes 1-2 hours to work</span>
+                  <span className="text-gray-600 font-medium">Typically 1-2 hours to take effect</span>
                 </div>
                 <div className="flex items-center justify-between border-b pb-2">
                   <span className="font-medium">Over-the-counter options:</span>
-                  <span className="text-red-600 font-bold">Temporary relief at best</span>
+                  <span className="text-gray-600 font-medium">Often temporary support</span>
                 </div>
                 <div className="flex items-center justify-between border-b pb-2">
                   <span className="font-medium">TeaHC Nano-Technology:</span>
-                  <span className="text-green-600 font-bold">Relief in 15-30 minutes</span>
+                  <span className="text-green-600 font-medium">Typically 30-45 minutes to take effect</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="font-medium">TeaHC Targeted Formulas:</span>
-                  <span className="text-green-600 font-bold">Lasting relief for 4-6 hours</span>
+                  <span className="text-green-600 font-medium">Sustained support for 3-5 hours</span>
                 </div>
               </div>
             </div>
             <div className="flex-1 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">The TeaHC Difference</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">Advanced Delivery System</h2>
               <p className="text-lg text-gray-600">
-                Most products fail because they never reach the areas that need them most. Our nano-technology breaks
-                down active ingredients into particles so small they can actually reach their targets, delivering relief
-                where and when you need it.
+                Many wellness products are limited by poor absorption. Our nano-technology helps break down active
+                ingredients into smaller particles that can be more readily utilized by your body.
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
@@ -593,7 +550,7 @@ export default function Home() {
                     />
                   </svg>
                   <span>
-                    <strong>17x higher absorption:</strong> More of what you take actually reaches your system
+                    <strong>Enhanced absorption:</strong> More of the active ingredients reach their target
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -611,7 +568,7 @@ export default function Home() {
                     />
                   </svg>
                   <span>
-                    <strong>Faster onset:</strong> Feel relief in minutes instead of hours
+                    <strong>Quicker onset:</strong> Support begins sooner than with standard formulations
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -629,12 +586,12 @@ export default function Home() {
                     />
                   </svg>
                   <span>
-                    <strong>Consistent results:</strong> The same reliable relief every time you use it
+                    <strong>Consistent results:</strong> More reliable support with each use
                   </span>
                 </li>
               </ul>
               <Button asChild className="mt-4 bg-amber-500 hover:bg-amber-600">
-                <Link href="/reserve">Experience It Yourself</Link>
+                <Link href="/science">Explore Our Technology</Link>
               </Button>
             </div>
           </div>
@@ -644,12 +601,12 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-16 bg-amber-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Reclaim Your Freedom?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience TeaHC?</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Join thousands who've transformed their lives with TeaHC. Your journey to comfort and mobility starts here.
+            Join those who've discovered a new approach to comfort and mobility. Your journey begins here.
           </p>
           <div className="bg-white p-4 rounded-lg inline-block mb-8">
-            <p className="text-amber-800 font-medium mb-1">🔥 Flash Sale: Early Access Pricing Ends In:</p>
+            <p className="text-amber-800 font-medium mb-1">🔥 Early Access Pricing Ends In:</p>
             <CountdownTimer />
           </div>
           <div>

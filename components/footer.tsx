@@ -17,7 +17,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-gray-600">
-              Revolutionary nano-cannabinoid products for targeted relief and exceptional results.
+              Innovative nano-cannabinoid products designed to support comfort and mobility.
             </p>
           </div>
 
@@ -100,8 +100,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t mt-12 pt-8 text-center text-gray-500">
-          <p>&copy; {new Date().getFullYear()} TeaHC. All rights reserved.</p>
+        <div className="border-t mt-12 pt-8 text-center">
+          <div className="max-w-3xl mx-auto text-xs text-gray-500 mb-4">
+            <p className="mb-2">
+              <strong>FDA Disclaimer:</strong> These statements have not been evaluated by the Food and Drug
+              Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.
+            </p>
+            <p>
+              The efficacy of these products has not been confirmed by FDA-approved research. These products are not
+              intended to diagnose, treat, cure or prevent any disease. All information presented here is not meant as a
+              substitute for or alternative to information from healthcare practitioners. Please consult your healthcare
+              professional about potential interactions or other possible complications before using any product.
+            </p>
+          </div>
+          <p className="text-gray-500">&copy; {new Date().getFullYear()} TeaHC. All rights reserved.</p>
         </div>
       </div>
     </footer>
