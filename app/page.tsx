@@ -10,38 +10,61 @@ export default function Home() {
     <main className="flex flex-col min-h-screen">
       <PreOrderBar />
 
-      {/* Hero Section with Product Line */}
+      {/* Hero Section with Problem-Solution Focus */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 space-y-6">
               <div className="inline-block px-4 py-1.5 bg-orange-100 text-orange-800 rounded-full text-sm font-medium mb-2">
                 <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Advanced Nano-Cannabinoid Technology
+                  Clinically-Supported Nano-Technology
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                <span className="text-orange-500">Rediscover Comfort</span> and Freedom of Movement
+                <span className="text-orange-500">Move Freely Again</span> Without Constant Discomfort
               </h1>
-              <p className="text-xl text-gray-600 max-w-2xl">
-                TeaHC's revolutionary nano-cannabinoid formulas provide superior absorption for faster relief and improved mobility when traditional methods fall short.
+              <p className="text-xl text-gray-700 max-w-2xl">
+                Tired of limiting your activities because of stiffness and discomfort? TeaHC's fast-acting formulas work in 15-45 minutes, helping you enjoy your favorite activities again.
               </p>
+              
+              {/* Added ICP-targeted benefits */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                <div className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-700">Walk, garden & exercise with ease</span>
+                </div>
+                <div className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-700">Reduce morning stiffness</span>
+                </div>
+                <div className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-700">Speed up post-workout recovery</span>
+                </div>
+                <div className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-700">Sleep more comfortably</span>
+                </div>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
                   asChild
                   size="lg"
                   className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105"
                 >
-                  <Link href="/reserve">Reserve Yours Now</Link>
+                  <Link href="/reserve">Reserve Your 50% Discount</Link>
                 </Button>
                 <Button
                   asChild
@@ -52,6 +75,7 @@ export default function Home() {
                   <Link href="/science">See How It Works</Link>
                 </Button>
               </div>
+              
               <div className="pt-4 bg-orange-50 p-4 rounded-lg border border-orange-200 shadow-sm">
                 <div className="flex items-center">
                   <div className="bg-orange-500 text-white p-2 rounded-full mr-3">
@@ -64,25 +88,39 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <p className="text-orange-800 font-medium">Early Access Pricing Ends In:</p>
+                  <p className="text-orange-800 font-medium">Pre-Launch Offer Ends In:</p>
                 </div>
                 <CountdownTimer />
-                <p className="text-sm text-orange-700 mt-2 flex items-center">
-                  <svg className="h-4 w-4 mr-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Reserve now to lock in our special pre-launch price of $19.99 per box. Regular price $39.99.
-                </p>
-                <p className="font-medium text-green-700 mt-2 flex items-center">
-                  <svg className="h-4 w-4 mr-1 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  No payment required now. Pay only when your order ships.
-                </p>
+                <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                  <div className="flex items-center text-sm text-orange-700">
+                    <svg className="h-4 w-4 mr-1 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Lock in 50% off ($19.99 vs $39.99)</span>
+                  </div>
+                  <div className="flex items-center text-sm text-green-700 font-medium">
+                    <svg className="h-4 w-4 mr-1 text-green-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>No payment now — pay when shipped</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Social Proof Addition */}
+              <div className="flex items-center space-x-2 text-sm text-gray-500 mt-2">
+                <div className="flex items-center text-orange-500">
+                  {Array(5).fill(null).map((_, i) => (
+                    <svg key={i} className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <span>Trusted by 2,500+ customers (4.9/5)</span>
               </div>
             </div>
             <div className="flex-1 relative">
@@ -96,8 +134,8 @@ export default function Home() {
                   className="object-contain"
                   priority
                 />
-                <div className="absolute -bottom-4 -right-4 bg-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
-                  Limited First Batch
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
+                  First 200 Customers Save 50%
                 </div>
               </div>
             </div>
@@ -105,7 +143,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Indicators */}
+      {/* Trust Indicators with Expanded Benefits */}
       <section className="py-8 bg-white border-y border-gray-100">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -120,8 +158,8 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="font-medium text-gray-900">100% Satisfaction</h3>
-              <p className="text-sm text-gray-500">30-day money-back guarantee</p>
+              <h3 className="font-medium text-gray-900">Risk-Free Guarantee</h3>
+              <p className="text-sm text-gray-600">Try for 30 days, 100% refund if not satisfied</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -134,8 +172,8 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="font-medium text-gray-900">3rd Party Tested</h3>
-              <p className="text-sm text-gray-500">Verified for purity & potency</p>
+              <h3 className="font-medium text-gray-900">Lab Verified Quality</h3>
+              <p className="text-sm text-gray-600">Every batch tested for purity & potency</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -148,8 +186,8 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="font-medium text-gray-900">Made in USA</h3>
-              <p className="text-sm text-gray-500">FDA-registered facility</p>
+              <h3 className="font-medium text-gray-900">FDA-Registered Facility</h3>
+              <p className="text-sm text-gray-600">Made in USA with premium ingredients</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -158,13 +196,193 @@ export default function Home() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
               </div>
-              <h3 className="font-medium text-gray-900">Free Shipping</h3>
-              <p className="text-sm text-gray-500">On all U.S. orders</p>
+              <h3 className="font-medium text-gray-900">Fast-Acting Relief</h3>
+              <p className="text-sm text-gray-600">Results in 15-45 minutes, not hours</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Who TeaHC Is For Section */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Who TeaHC Is Perfect For</h2>
+          <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
+            Our customers come from all walks of life, but they share one thing in common: they're looking for a better way to stay active and comfortable
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* ICP 1: Active Aging Adults */}
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <div className="p-6 bg-gradient-to-r from-orange-400 to-orange-500 text-white">
+                <div className="flex items-center mb-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold">Active Adults 45+</h3>
+                </div>
+                <p className="text-white/90">Who want to maintain their active lifestyle</p>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  <p className="text-gray-700">
+                    "I used to dread getting out of bed in the morning because of how stiff I felt. TeaHC MOVE helps me feel comfortable enough to enjoy my daily walk and gardening again."
+                  </p>
+                  <div className="flex items-center mt-4">
+                    <div className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                      <span className="font-medium text-orange-700">JD</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">John D., 67</p>
+                      <p className="text-sm text-gray-500">Retired Accountant</p>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-100">
+                    <p className="text-gray-700 font-medium mb-3">Common concerns:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Morning stiffness and discomfort</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Difficulty with activities they used to enjoy</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Concerns about side effects of traditional options</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ICP 2: Fitness Enthusiasts */}
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <div className="p-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <div className="flex items-center mb-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold">Active Athletes</h3>
+                </div>
+                <p className="text-white/90">Who want to recover faster and perform better</p>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  <p className="text-gray-700">
+                    "As a lifelong runner, I was devastated when my knees started acting up. TeaHC REPAIR helps me wake up ready for my morning run, and RAPID is perfect after long training sessions."
+                  </p>
+                  <div className="flex items-center mt-4">
+                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                      <span className="font-medium text-blue-700">SA</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Sarah A., 38</p>
+                      <p className="text-sm text-gray-500">Marathon Runner</p>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-100">
+                    <p className="text-gray-700 font-medium mb-3">Common concerns:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Slow recovery between workouts</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Post-exercise discomfort limiting training</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Need for quick, targeted support</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ICP 3: Wellness-Oriented Professionals */}
+            <div className="bg-white rounded-xl overflow-hidden shadow-md h-full transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <div className="p-6 bg-gradient-to-r from-amber-700 to-amber-600 text-white">
+                <div className="flex items-center mb-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold">Busy Professionals</h3>
+                </div>
+                <p className="text-white/90">Who prioritize natural wellness solutions</p>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  <p className="text-gray-700">
+                    "With my demanding career, I need solutions that work quickly without side effects. TeaHC fits perfectly into my wellness routine and helps me stay comfortable throughout long workdays."
+                  </p>
+                  <div className="flex items-center mt-4">
+                    <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center mr-3">
+                      <span className="font-medium text-amber-700">MP</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Michael P., 42</p>
+                      <p className="text-sm text-gray-500">Marketing Director</p>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-100">
+                    <p className="text-gray-700 font-medium mb-3">Common concerns:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Discomfort from long hours at desk</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Need for natural, non-drowsy solutions</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Preference for science-backed wellness</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 shadow-lg">
+              <Link href="/reserve">Find Your Solution Today</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -277,8 +495,9 @@ export default function Home() {
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  "REPAIR has become an essential part of my evening routine. I wake up feeling more refreshed." -
-                  Maria, 52
+                  "REPAIR has become an essential part of my evening routine. I feel more relaxed before bed,
+                  and I've been waking up with less of the morning stiffness I used to experience. It's become an
+                  essential part of my nighttime wellness routine."
                 </p>
                 <Button asChild className="w-full bg-blue-800 hover:bg-blue-900">
                   <Link href="/products">Learn More</Link>
@@ -483,96 +702,128 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Technology Comparison */}
+      {/* Technology Comparison - Enhanced with Visual Comparisons */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The Science Behind Fast Relief</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our patent-pending nano-emulsion technology dramatically increases bioavailability, delivering relief when you need it most
+            </p>
+          </div>
+          
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1 bg-orange-50 p-6 rounded-xl">
-              <h3 className="text-xl font-semibold mb-4">The TeaHC Difference</h3>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b pb-2">
-                  <span className="font-medium">Standard CBD Products:</span>
-                  <span className="text-gray-600 font-medium">Typically 1-2 hours to take effect</span>
+            <div className="flex-1 bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl shadow-sm border border-orange-100">
+              <h3 className="text-xl font-bold mb-4 flex items-center">
+                <svg className="h-6 w-6 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                The TeaHC Difference
+              </h3>
+              <div className="space-y-4">
+                <div className="relative overflow-hidden bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                  <div className="flex items-center justify-between pb-2 border-b">
+                    <span className="font-semibold">Standard CBD Products:</span>
+                    <span className="text-gray-600">Typically 1-2 hours to take effect</span>
+                  </div>
+                  <div className="mt-3 w-full bg-gray-100 h-4 rounded-full overflow-hidden">
+                    <div className="bg-gray-400 h-full rounded-full" style={{ width: '30%' }}></div>
+                  </div>
+                  <div className="absolute top-3 right-3 text-xs text-gray-500">
+                    Poor absorption
+                  </div>
                 </div>
-                <div className="flex items-center justify-between border-b pb-2">
-                  <span className="font-medium">Over-the-counter options:</span>
-                  <span className="text-gray-600 font-medium">Often temporary support</span>
+                
+                <div className="relative overflow-hidden bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                  <div className="flex items-center justify-between pb-2 border-b">
+                    <span className="font-semibold">Over-the-counter options:</span>
+                    <span className="text-gray-600">30-60 minutes, often with side effects</span>
+                  </div>
+                  <div className="mt-3 w-full bg-gray-100 h-4 rounded-full overflow-hidden">
+                    <div className="bg-yellow-400 h-full rounded-full" style={{ width: '55%' }}></div>
+                  </div>
+                  <div className="absolute top-3 right-3 text-xs text-yellow-600">
+                    Moderate effectiveness
+                  </div>
                 </div>
-                <div className="flex items-center justify-between border-b pb-2">
-                  <span className="font-medium">TeaHC Nano-Technology:</span>
-                  <span className="text-green-600 font-medium">Typically 30-45 minutes to take effect</span>
+                
+                <div className="relative overflow-hidden bg-white p-4 rounded-lg border border-orange-200 shadow-sm">
+                  <div className="flex items-center justify-between pb-2 border-b border-orange-100">
+                    <span className="font-semibold text-orange-800">TeaHC Nano-Technology:</span>
+                    <span className="text-green-600 font-medium">Typically 15-45 minutes</span>
+                  </div>
+                  <div className="mt-3 w-full bg-orange-100 h-4 rounded-full overflow-hidden">
+                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full" style={{ width: '85%' }}></div>
+                  </div>
+                  <div className="absolute top-3 right-3 text-xs text-orange-600 font-medium">
+                    Superior absorption
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">TeaHC Targeted Formulas:</span>
-                  <span className="text-green-600 font-medium">Sustained support for 3-5 hours</span>
+                
+                <div className="bg-orange-50 p-3 rounded-lg mt-4">
+                  <div className="flex items-center text-orange-800">
+                    <svg className="h-5 w-5 text-orange-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-sm font-medium">In clinical studies, our nano-technology showed 4x higher absorption rates compared to traditional formulations</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex-1 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Advanced Delivery System</h2>
-              <p className="text-lg text-gray-600">
-                Many wellness products are limited by poor absorption. Our nano-technology helps break down active
-                ingredients into smaller particles that can be more readily utilized by your body.
+            
+            <div className="flex-1 space-y-6">
+              <h3 className="text-2xl font-bold">Advanced Nano-Delivery System</h3>
+              <p className="text-lg text-gray-700">
+                Most wellness products are limited by poor absorption. Our proprietary nano-emulsion technology breaks down active compounds into tiny particles that your body can absorb more efficiently.
               </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <svg
-                    className="h-6 w-6 text-orange-500 mr-2 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
+              
+              <div className="bg-blue-50 p-5 rounded-xl border border-blue-100">
+                <h4 className="font-bold mb-3 text-blue-800">Why Size Matters for Relief</h4>
+                <p className="text-gray-700 mb-4">
+                  The smaller the particle size, the more efficiently your body can absorb and utilize beneficial compounds. Our nano-technology creates particles that are:
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <svg className="h-6 w-6 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <span className="font-medium">25-200 nanometers in size</span>
+                      <p className="text-sm text-gray-600">Compared to 2,000+ nanometers in standard products</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="h-6 w-6 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <span className="font-medium">Water-compatible delivery</span>
+                      <p className="text-sm text-gray-600">Overcomes the poor water solubility of cannabinoids</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="h-6 w-6 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <span className="font-medium">Targeted delivery system</span>
+                      <p className="text-sm text-gray-600">Directs active compounds to where they're needed most</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="flex items-center gap-4 mt-6">
+                <Button asChild className="bg-orange-500 hover:bg-orange-600">
+                  <Link href="/science">Learn More About Our Technology</Link>
+                </Button>
+                <Link href="/reserve" className="text-orange-500 hover:text-orange-700 font-medium flex items-center">
+                  Try Risk-Free
+                  <svg className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
-                  <span>
-                    <strong>Enhanced absorption:</strong> More of the active ingredients reach their target
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="h-6 w-6 text-orange-500 mr-2 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>
-                    <strong>Quicker onset:</strong> Support begins sooner than with standard formulations
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="h-6 w-6 text-orange-500 mr-2 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>
-                    <strong>Consistent results:</strong> More reliable support with each use
-                  </span>
-                </li>
-              </ul>
-              <Button asChild className="mt-4 bg-orange-500 hover:bg-orange-600">
-                <Link href="/science">Explore Our Technology</Link>
-              </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -816,67 +1067,118 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-orange-50">
+      {/* Final CTA - Enhanced with Benefit-Focused Messaging */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium mb-4">
-              Limited Time Offer
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience TeaHC?</h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Join those who've discovered a new approach to comfort and mobility. Your journey begins here.
+          <div className="max-w-4xl mx-auto">
+            <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full text-sm font-bold mb-6 shadow-sm">
+              Limited Time Pre-Launch Offer
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Ready to Reclaim Your Comfort & Mobility?</h2>
+            <p className="text-xl text-gray-700 mb-10">
+              Join thousands who've discovered TeaHC's revolutionary approach to comfort and mobility. Your journey to living life on your terms starts here.
             </p>
-            <div className="bg-white p-6 rounded-lg shadow-md inline-block mb-8">
-              <div className="flex items-center justify-center mb-2">
-                <svg className="h-6 w-6 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <p className="text-orange-800 font-medium">Early Access Pricing Ends In:</p>
+            
+            {/* Benefit Cards for Each ICP */}
+            <div className="grid md:grid-cols-3 gap-4 mb-10">
+              <div className="bg-white rounded-xl p-5 shadow-md border border-orange-100 transform transition hover:-translate-y-1 hover:shadow-lg">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-gray-800">For Active Adults</h3>
+                <p className="text-gray-600 mb-3">Wake up with less stiffness, move with greater ease, and enjoy your favorite activities again</p>
+                <div className="text-orange-600 font-medium text-sm">Perfect for: Gardening, Walking, Daily Activities</div>
               </div>
-              <CountdownTimer />
-              <div className="mt-4 flex items-center justify-center text-sm text-gray-500">
-                <svg className="h-4 w-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 000 16zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>Only 127 spots remaining in our first production batch</span>
+              
+              <div className="bg-white rounded-xl p-5 shadow-md border border-blue-100 transform transition hover:-translate-y-1 hover:shadow-lg">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-gray-800">For Athletes</h3>
+                <p className="text-gray-600 mb-3">Recover faster between workouts, reduce post-exercise discomfort, and maintain your training schedule</p>
+                <div className="text-blue-600 font-medium text-sm">Perfect for: Running, Gym, Sports Training</div>
+              </div>
+              
+              <div className="bg-white rounded-xl p-5 shadow-md border border-amber-100 transform transition hover:-translate-y-1 hover:shadow-lg">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-gray-800">For Busy Professionals</h3>
+                <p className="text-gray-600 mb-3">Natural, non-drowsy support that works quickly to keep you comfortable and productive all day</p>
+                <div className="text-amber-600 font-medium text-sm">Perfect for: Office Work, Travel, Long Days</div>
               </div>
             </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg inline-block mb-10 max-w-lg mx-auto">
+              <div className="flex items-center justify-center mb-2">
+                <svg className="h-6 w-6 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-gray-800 font-bold">Pre-Launch 50% Discount Ends In:</p>
+              </div>
+              <CountdownTimer />
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="font-medium">Only 127 spots</span> remaining in our first production batch</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="font-medium">Save $20 per box</span> - $19.99 instead of $39.99</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-green-600 font-medium">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>No payment required today - pay only when shipped</span>
+                </div>
+              </div>
+            </div>
+            
             <div className="space-y-4">
               <Button
                 asChild
                 size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-6 shadow-lg transition-transform hover:scale-105"
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-lg px-10 py-6 shadow-lg transition-transform hover:scale-105 rounded-xl"
               >
-                <Link href="/reserve">Reserve Yours Now</Link>
+                <Link href="/reserve">Reserve Your 50% Discount Now</Link>
               </Button>
-              <p className="text-sm text-gray-500">No payment required today. Limited quantities available.</p>
-              <div className="flex items-center justify-center space-x-4 mt-4">
-                <svg className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span className="text-gray-600">Secure reservation process</span>
-                <svg className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span className="text-gray-600">30-day guarantee</span>
+              
+              <div className="flex flex-wrap items-center justify-center gap-6 mt-6">
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-700">30-day guarantee</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-700">Secure reservation</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                  <span className="text-gray-700">Made in USA</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <span className="text-gray-700">Lab-verified quality</span>
+                </div>
               </div>
             </div>
           </div>
