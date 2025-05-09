@@ -136,6 +136,9 @@ export default function ReservePage() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
             Be among the first to experience our revolutionary nano-cannabinoid products at exclusive pre-launch pricing
           </p>
+          <p className="text-lg text-amber-700 font-medium max-w-3xl mx-auto mb-4">
+            No payment required now - simply reserve and pay when your products ship!
+          </p>
           <div className="mt-4 max-w-lg mx-auto">
             <div className="bg-gradient-to-r from-amber-100 to-amber-50 p-6 rounded-lg border border-amber-200 shadow-sm">
               <div className="flex items-center justify-center mb-2">
@@ -196,7 +199,7 @@ export default function ReservePage() {
                   <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Payment will be collected when your order ships</span>
+                  <span>You'll have the opportunity to confirm and pay for your order before shipping</span>
                 </li>
               </ul>
             </div>
@@ -856,6 +859,14 @@ export default function ReservePage() {
                   Please select at least one product to continue
                 </p>
               )}
+              {hasProducts && (
+                <p className="text-amber-700 font-medium mt-3 flex items-center justify-center">
+                  <svg className="h-5 w-5 text-amber-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  No payment required now - pay only when your order ships
+                </p>
+              )}
             </div>
           </form>
         )}
@@ -877,7 +888,7 @@ export default function ReservePage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-800 mb-1">No Payment Required Now</h4>
-                  <p>This is a reservation only. Payment will be collected when your products are ready to ship.</p>
+                  <p>This is a reservation only. You'll be notified before shipping to confirm your order and make payment.</p>
                 </div>
               </div>
               
