@@ -76,7 +76,7 @@ export default function Home() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Reserve now to lock in our special pre-launch price of $26.99 per box. Regular price $39.99.
+                  Reserve now to lock in our special pre-launch price of $19.99 per box. Regular price $39.99.
                 </p>
               </div>
             </div>
@@ -247,7 +247,7 @@ export default function Home() {
             <div className="bg-white rounded-xl overflow-hidden shadow-md h-full transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <div className="p-6 bg-orange-700 text-white">
                 <h3 className="text-2xl font-bold">TeaHC RAPID</h3>
-                <p className="text-white/80">On-Demand Support</p>
+                <p className="text-white/80">10 Pack of 2oz Nano Shots</p>
               </div>
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">

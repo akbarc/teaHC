@@ -1,30 +1,82 @@
-# TeaHC website design
+# TeaHC Website
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A Next.js website for TeaHC, a cannabinoid-based wellness product company focused on comfort and mobility.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/akbarcs-projects/v0-tea-hc-website-design)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/Ue1LRQiVlvK)
+## Features
 
-## Overview
+- Modern, responsive design with Tailwind CSS
+- Product showcase and reservation system
+- Email notifications for new reservations
+- Supabase database integration for data storage
+- Admin dashboard for viewing and managing reservations
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## Technology Stack
+
+- [Next.js 15](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Supabase](https://supabase.io/) for data storage
+- [Nodemailer](https://nodemailer.com/) for email notifications
+- [shadcn/ui](https://ui.shadcn.com/) for UI components
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install --legacy-peer-deps
+```
+
+2. Create a `.env.local` file with the following variables:
+
+```
+EMAIL_PASSWORD=your_email_password
+```
+
+3. Run the development server:
+
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+## Database
+
+The application uses Supabase for data storage. Reservations are saved to the `reservations` table.
+
+### Supabase Setup
+
+For detailed instructions on setting up Supabase for this application, please see [SUPABASE_SETUP.md](SUPABASE_SETUP.md).
+
+In summary, you'll need to:
+
+1. Create a Supabase project
+2. Create a `reservations` table with the required schema
+3. Configure appropriate Row Level Security (RLS) policies
+4. Update the Supabase credentials in `lib/supabase.ts` if needed
+
+## Admin Dashboard
+
+Access the admin dashboard at `/admin` to:
+
+- View all reservations
+- Check Supabase connection status
+- Test the Supabase reservations table
+
+## Troubleshooting
+
+If you encounter issues with Supabase:
+
+1. Check your connection using the "Check Supabase Connection" endpoint
+2. Verify the `reservations` table exists and has the correct schema
+3. Review the Supabase console for any errors or policy issues
+4. See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) for detailed troubleshooting steps
 
 ## Deployment
 
-Your project is live at:
+This site is deployed on Vercel. Push to the main branch to trigger a new deployment.
 
-**[https://vercel.com/akbarcs-projects/v0-tea-hc-website-design](https://vercel.com/akbarcs-projects/v0-tea-hc-website-design)**
+## Contact
 
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/Ue1LRQiVlvK](https://v0.dev/chat/projects/Ue1LRQiVlvK)**
-
-## How It Works
-
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+For questions or support, contact [tryteahc@gmail.com](mailto:tryteahc@gmail.com).
