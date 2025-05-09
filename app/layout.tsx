@@ -6,9 +6,11 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ReservationBanner } from "@/components/reservation-banner"
-import { baseMetadata } from "./metadata"
 
 const inter = Inter({ subsets: ["latin"] })
+
+// Import metadata from the metadata file
+const { baseMetadata } = require("./metadata") as { baseMetadata: Metadata }
 
 export const metadata: Metadata = {
   ...baseMetadata,

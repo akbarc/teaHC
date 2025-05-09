@@ -19,7 +19,6 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['@radix-ui/react-avatar'],
   },
   poweredByHeader: false,

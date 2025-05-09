@@ -2,7 +2,11 @@ import { Metadata } from 'next'
 
 // Base metadata configuration for the entire site
 export const baseMetadata: Metadata = {
-  metadataBase: new URL('https://teahcwellness.com'),
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'https://teahcwellness.com'
+  ),
   title: {
     template: '%s | TeaHC Wellness',
     default: 'TeaHC Wellness | Revolutionary Nano-Cannabinoid Products',
