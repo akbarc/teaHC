@@ -771,7 +771,7 @@ export default function Home() {
                 <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-gray-400 h-full rounded-full" style={{ width: '30%' }}></div>
                 </div>
-                <div className="absolute top-0 right-0 text-sm text-gray-500 font-medium">
+                <div className="absolute top-0 right-28 text-sm text-gray-500 font-medium">
                   Poor absorption
                 </div>
               </div>
@@ -785,7 +785,7 @@ export default function Home() {
                 <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-yellow-400 h-full rounded-full" style={{ width: '55%' }}></div>
                 </div>
-                <div className="absolute top-0 right-0 text-sm text-yellow-600 font-medium">
+                <div className="absolute top-0 right-28 text-sm text-yellow-600 font-medium">
                   Moderate effectiveness
                 </div>
               </div>
@@ -799,7 +799,7 @@ export default function Home() {
                 <div className="w-full bg-orange-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full" style={{ width: '85%' }}></div>
                 </div>
-                <div className="absolute top-0 right-0 text-sm text-orange-600 font-medium">
+                <div className="absolute top-0 right-28 text-sm text-orange-600 font-medium">
                   Superior absorption
                 </div>
               </div>
