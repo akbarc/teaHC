@@ -2,14 +2,16 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useCallback, useMemo } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { CountdownTimer } from "@/components/countdown-timer"
+import { LoadingSpinner } from "@/components/ui/loading"
 import { submitReservation } from "../actions/reservation"
+import { formatPrice, calculateSavings, calculateDiscountPercentage } from "@/lib/utils"
 
 export default function ReservePage() {
   const [formState, setFormState] = useState({
@@ -108,14 +110,69 @@ export default function ReservePage() {
     }
   }
 
+  // Calculate total cost with memoization to prevent unnecessary recalculations
+  const { total, savings, discountPercentage, hasSavings } = useMemo(() => {
+    const regularPricePerItem = 39.99;
+    const regularPriceBundle = 59.97;
+    const discountPricePerItem = 19.99;
+    const discountPriceBundle = 47.98;
+    
+    const total = 
+      formState.moveQuantity * discountPricePerItem +
+      formState.repairQuantity * discountPricePerItem +
+      formState.rapidQuantity * discountPricePerItem +
+      formState.bundleQuantity * discountPriceBundle;
+      
+    const regularTotal = 
+      formState.moveQuantity * regularPricePerItem +
+      formState.repairQuantity * regularPricePerItem +
+      formState.rapidQuantity * regularPricePerItem +
+      formState.bundleQuantity * regularPriceBundle;
+      
+    const savings = regularTotal - total;
+    const discountPercentage = regularTotal > 0 ? 
+      Math.round((savings / regularTotal) * 100) : 0;
+      
+    return {
+      total: total.toFixed(2),
+      savings: savings.toFixed(2),
+      discountPercentage,
+      hasSavings: savings > 0
+    };
+  }, [
+    formState.moveQuantity, 
+    formState.repairQuantity, 
+    formState.rapidQuantity, 
+    formState.bundleQuantity
+  ]);
+
+  // Memoize product handlers to prevent re-renders
+  const incrementQuantity = useCallback((product: string) => {
+    setFormState(prev => {
+      const field = `${product}Quantity` as keyof typeof prev;
+      const currentValue = prev[field] as number;
+      const maxValue = product === 'bundle' ? 5 : 10;
+      return {
+        ...prev,
+        [field]: Math.min(maxValue, currentValue + 1)
+      };
+    });
+  }, []);
+
+  const decrementQuantity = useCallback((product: string) => {
+    setFormState(prev => {
+      const field = `${product}Quantity` as keyof typeof prev;
+      const currentValue = prev[field] as number;
+      return {
+        ...prev,
+        [field]: Math.max(0, currentValue - 1)
+      };
+    });
+  }, []);
+
   // Calculate total cost
   const calculateTotal = () => {
-    return (
-      formState.moveQuantity * 19.99 +
-      formState.repairQuantity * 19.99 +
-      formState.rapidQuantity * 19.99 +
-      formState.bundleQuantity * 47.98
-    ).toFixed(2)
+    return total;
   }
 
   // Check if any products are selected
@@ -268,7 +325,7 @@ export default function ReservePage() {
                         <div className="flex mt-1 border border-gray-200 rounded-md overflow-hidden">
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, moveQuantity: Math.max(0, prev.moveQuantity - 1)}))}
+                            onClick={() => decrementQuantity('move')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             -
@@ -288,7 +345,7 @@ export default function ReservePage() {
                           </select>
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, moveQuantity: Math.min(10, prev.moveQuantity + 1)}))}
+                            onClick={() => incrementQuantity('move')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             +
@@ -342,7 +399,7 @@ export default function ReservePage() {
                         <div className="flex mt-1 border border-gray-200 rounded-md overflow-hidden">
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, repairQuantity: Math.max(0, prev.repairQuantity - 1)}))}
+                            onClick={() => decrementQuantity('repair')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             -
@@ -362,7 +419,7 @@ export default function ReservePage() {
                           </select>
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, repairQuantity: Math.min(10, prev.repairQuantity + 1)}))}
+                            onClick={() => incrementQuantity('repair')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             +
@@ -419,7 +476,7 @@ export default function ReservePage() {
                         <div className="flex mt-1 border border-gray-200 rounded-md overflow-hidden">
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, rapidQuantity: Math.max(0, prev.rapidQuantity - 1)}))}
+                            onClick={() => decrementQuantity('rapid')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             -
@@ -439,7 +496,7 @@ export default function ReservePage() {
                           </select>
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, rapidQuantity: Math.min(10, prev.rapidQuantity + 1)}))}
+                            onClick={() => incrementQuantity('rapid')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             +
@@ -496,7 +553,7 @@ export default function ReservePage() {
                         <div className="flex mt-1 border border-gray-200 rounded-md overflow-hidden">
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, bundleQuantity: Math.max(0, prev.bundleQuantity - 1)}))}
+                            onClick={() => decrementQuantity('bundle')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             -
@@ -516,7 +573,7 @@ export default function ReservePage() {
                           </select>
                           <button 
                             type="button"
-                            onClick={() => setFormState(prev => ({...prev, bundleQuantity: Math.min(5, prev.bundleQuantity + 1)}))}
+                            onClick={() => incrementQuantity('bundle')}
                             className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium"
                           >
                             +
@@ -576,30 +633,22 @@ export default function ReservePage() {
                     </div>
                     
                     {/* Calculate savings */}
-                    {(() => {
-                      const standardPrice = (
-                        formState.moveQuantity * 39.99 +
-                        formState.repairQuantity * 39.99 +
-                        formState.rapidQuantity * 39.99 +
-                        formState.bundleQuantity * 59.97
-                      );
-                      const discountedPrice = parseFloat(calculateTotal());
-                      const savings = standardPrice - discountedPrice;
-                      
-                      return savings > 0 ? (
-                        <div className="bg-green-50 p-3 rounded-md border border-green-100 mb-4">
-                          <div className="flex justify-between items-center text-green-800">
-                            <span className="font-medium flex items-center">
-                              <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              Your Savings:
-                            </span>
-                            <span className="font-bold">${savings.toFixed(2)}</span>
-                          </div>
+                    {hasSavings ? (
+                      <div className="bg-green-50 p-3 rounded-md border border-green-100 mb-4">
+                        <div className="flex justify-between items-center text-green-800">
+                          <span className="font-medium flex items-center">
+                            <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Your Savings:
+                          </span>
+                          <span className="font-bold">${savings}</span>
                         </div>
-                      ) : null;
-                    })()}
+                        <div className="text-xs text-green-700 text-right mt-1">
+                          {discountPercentage}% off regular prices
+                        </div>
+                      </div>
+                    ) : null}
                     
                     <div className="border-t border-amber-300 pt-3 font-bold flex justify-between text-lg">
                       <span>Total:</span>
@@ -840,13 +889,7 @@ export default function ReservePage() {
                 }`}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Processing...
-                  </span>
+                  <LoadingSpinner text="Processing..." />
                 ) : (
                   "Complete Reservation"
                 )}
