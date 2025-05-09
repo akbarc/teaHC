@@ -33,8 +33,7 @@ export default function Home() {
                 <span className="text-orange-500">Rediscover Comfort</span> and Freedom of Movement
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl">
-                TeaHC's innovative formulas help support your body's natural inflammatory response, offering a new
-                approach to comfort and mobility when traditional methods fall short.
+                TeaHC's revolutionary nano-cannabinoid formulas provide superior absorption for faster relief and improved mobility when traditional methods fall short.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
@@ -67,7 +66,7 @@ export default function Home() {
                   </div>
                   <p className="text-orange-800 font-medium">Early Access Pricing Ends In:</p>
                 </div>
-                <CountdownTimer hours={48} />
+                <CountdownTimer />
                 <p className="text-sm text-orange-700 mt-2 flex items-center">
                   <svg className="h-4 w-4 mr-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -77,6 +76,12 @@ export default function Home() {
                     />
                   </svg>
                   Reserve now to lock in our special pre-launch price of $19.99 per box. Regular price $39.99.
+                </p>
+                <p className="font-medium text-green-700 mt-2 flex items-center">
+                  <svg className="h-4 w-4 mr-1 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  No payment required now. Pay only when your order ships.
                 </p>
               </div>
             </div>
@@ -116,7 +121,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="font-medium text-gray-900">100% Satisfaction</h3>
-              <p className="text-sm text-gray-500">Money-back guarantee</p>
+              <p className="text-sm text-gray-500">30-day money-back guarantee</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -129,8 +134,8 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="font-medium text-gray-900">Lab Tested</h3>
-              <p className="text-sm text-gray-500">Third-party verified</p>
+              <h3 className="font-medium text-gray-900">3rd Party Tested</h3>
+              <p className="text-sm text-gray-500">Verified for purity & potency</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -144,7 +149,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="font-medium text-gray-900">Made in USA</h3>
-              <p className="text-sm text-gray-500">Quality manufacturing</p>
+              <p className="text-sm text-gray-500">FDA-registered facility</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-orange-50 p-3 rounded-full mb-3">
@@ -158,7 +163,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="font-medium text-gray-900">Free Shipping</h3>
-              <p className="text-sm text-gray-500">On all orders</p>
+              <p className="text-sm text-gray-500">On all U.S. orders</p>
             </div>
           </div>
         </div>
@@ -191,11 +196,30 @@ export default function Home() {
                 <div className="bg-orange-50 p-3 rounded-lg mb-4">
                   <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Supports joint mobility and flexibility</li>
-                    <li>• Helps maintain comfort during activity</li>
-                    <li>• Promotes balanced energy levels</li>
-                    <li>• Supports mental clarity</li>
-                    <li>• Convenient daytime formula</li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-500 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Supports joint mobility and flexibility</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-500 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Helps maintain comfort during activity</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-500 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Promotes balanced energy levels</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-500 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Fast-acting (30-45 minutes)</span>
+                    </li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
@@ -226,11 +250,30 @@ export default function Home() {
                 <div className="bg-blue-50 p-3 rounded-lg mb-4">
                   <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Promotes relaxation and calm</li>
-                    <li>• Supports natural recovery processes</li>
-                    <li>• Helps maintain comfortable sleep</li>
-                    <li>• Reduces morning stiffness</li>
-                    <li>• Soothing nighttime formula</li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-blue-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Promotes relaxation and calm</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-blue-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Supports natural recovery processes</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-blue-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Helps maintain comfortable sleep</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-blue-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Reduces morning stiffness</span>
+                    </li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
@@ -261,11 +304,30 @@ export default function Home() {
                 <div className="bg-orange-50 p-3 rounded-lg mb-4">
                   <h4 className="font-semibold text-sm mb-1">Key Benefits:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Provides support when you need it most</li>
-                    <li>• Targets specific areas of discomfort</li>
-                    <li>• Maintains mental clarity</li>
-                    <li>• Supports continued activity</li>
-                    <li>• Convenient portable format</li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Ultra-fast acting (15-20 minutes)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Targets specific areas of discomfort</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Maintains mental clarity</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-4 w-4 text-orange-700 mr-1 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Convenient 2oz portable format</span>
+                    </li>
                   </ul>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">

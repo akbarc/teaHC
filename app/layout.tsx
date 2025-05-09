@@ -5,14 +5,13 @@ import "./globals.css"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ReservationBanner } from "@/components/reservation-banner"
+import { baseMetadata } from "./metadata"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "TeaHC - Revolutionary Nano-Cannabinoid Products",
-  description:
-    "Experience the power of TeaHC's clinically dosed formulas with enhanced bioavailability for faster, more effective relief.",
-    generator: 'v0.dev'
+  ...baseMetadata,
 }
 
 export default function RootLayout({
@@ -24,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <ReservationBanner />
           <Header />
           {children}
           <Footer />
