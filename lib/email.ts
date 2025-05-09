@@ -10,6 +10,12 @@ export async function sendEmail({
   text: string
 }): Promise<boolean> {
   try {
+    // Check if email password is configured
+    if (!process.env.EMAIL_PASSWORD) {
+      console.warn("EMAIL_PASSWORD environment variable is not set. Email sending is disabled.")
+      return false
+    }
+
     // Create a transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",

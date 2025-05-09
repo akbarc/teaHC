@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "env": {
+    "EMAIL_PASSWORD": "",
+    "GOOGLE_SHEET_ID": "12iOAkaGr7t5NSbBj3ZdcrT3g9qP1SorbH8iXTLnzF_E",
+    "GOOGLE_SERVICE_ACCOUNT_KEY": "4c90016e23a49dd48d1f1e5059fac17b15f47f14",
+    "SUPABASE_URL": "https://oximmrzfhtkdgfykrtjy.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94aW1tcnpmaHRrZGdmeWtydGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3NTU1NjMsImV4cCI6MjA2MjMzMTU2M30.ieWFaNGnwiSngyEYiwmg6JimpCe16OlnVZJhymljcKw"
+  },
+  "buildCommand": "next build",
+  "outputDirectory": ".next"
+} 

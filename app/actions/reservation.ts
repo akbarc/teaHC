@@ -25,6 +25,12 @@ type ReservationData = z.infer<typeof reservationSchema>
 // Function to send email notification
 async function sendEmailNotification(reservationData: any) {
   try {
+    // Check if email password is configured
+    if (!process.env.EMAIL_PASSWORD) {
+      console.warn("EMAIL_PASSWORD environment variable is not set. Email notification is disabled.")
+      return false
+    }
+
     // Create a formatted email body
     const emailBody = `
 NEW RESERVATION:
