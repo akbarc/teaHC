@@ -67,10 +67,10 @@ export default function ReservePage() {
             timestamp: new Date().toISOString(),
             ...formState,
             totalCost:
-              formState.moveQuantity * 26.99 +
-              formState.repairQuantity * 26.99 +
-              formState.rapidQuantity * 26.99 +
-              formState.bundleQuantity * 69.99,
+              formState.moveQuantity * 19.99 +
+              formState.repairQuantity * 19.99 +
+              formState.rapidQuantity * 19.99 +
+              formState.bundleQuantity * 47.98,
           }),
         })
       } catch (backupError) {
@@ -111,10 +111,10 @@ export default function ReservePage() {
   // Calculate total cost
   const calculateTotal = () => {
     return (
-      formState.moveQuantity * 26.99 +
-      formState.repairQuantity * 26.99 +
-      formState.rapidQuantity * 26.99 +
-      formState.bundleQuantity * 69.99
+      formState.moveQuantity * 19.99 +
+      formState.repairQuantity * 19.99 +
+      formState.rapidQuantity * 19.99 +
+      formState.bundleQuantity * 47.98
     ).toFixed(2)
   }
 
@@ -195,7 +195,7 @@ export default function ReservePage() {
                         />
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
+                        <span className="font-bold">$19.99</span>
                         <span className="text-sm text-gray-500 line-through">$39.99</span>
                       </div>
                       <div className="mb-4">
@@ -232,7 +232,7 @@ export default function ReservePage() {
                         />
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
+                        <span className="font-bold">$19.99</span>
                         <span className="text-sm text-gray-500 line-through">$39.99</span>
                       </div>
                       <div className="mb-4">
@@ -258,6 +258,7 @@ export default function ReservePage() {
                   <div className="border rounded-lg overflow-hidden">
                     <div className="p-4 bg-amber-700 text-white">
                       <h3 className="font-bold">TeaHC RAPID</h3>
+                      <p className="text-white/80">10 Pack of 2oz Nano Shots</p>
                     </div>
                     <div className="p-4">
                       <div className="aspect-square relative mb-4">
@@ -269,7 +270,7 @@ export default function ReservePage() {
                         />
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$26.99</span>
+                        <span className="font-bold">$19.99</span>
                         <span className="text-sm text-gray-500 line-through">$39.99</span>
                       </div>
                       <div className="mb-4">
@@ -306,8 +307,8 @@ export default function ReservePage() {
                         />
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold">$69.99</span>
-                        <span className="text-sm text-gray-500 line-through">$80.97</span>
+                        <span className="font-bold">$47.98</span>
+                        <span className="text-sm text-gray-500 line-through">$59.97</span>
                       </div>
                       <div className="mb-4">
                         <Label htmlFor="bundleQuantity">Quantity:</Label>
@@ -337,25 +338,25 @@ export default function ReservePage() {
                       {formState.moveQuantity > 0 && (
                         <div className="flex justify-between">
                           <span>TeaHC MOVE (x{formState.moveQuantity})</span>
-                          <span>${(formState.moveQuantity * 26.99).toFixed(2)}</span>
+                          <span>${(formState.moveQuantity * 19.99).toFixed(2)}</span>
                         </div>
                       )}
                       {formState.repairQuantity > 0 && (
                         <div className="flex justify-between">
                           <span>TeaHC REPAIR (x{formState.repairQuantity})</span>
-                          <span>${(formState.repairQuantity * 26.99).toFixed(2)}</span>
+                          <span>${(formState.repairQuantity * 19.99).toFixed(2)}</span>
                         </div>
                       )}
                       {formState.rapidQuantity > 0 && (
                         <div className="flex justify-between">
                           <span>TeaHC RAPID (x{formState.rapidQuantity})</span>
-                          <span>${(formState.rapidQuantity * 26.99).toFixed(2)}</span>
+                          <span>${(formState.rapidQuantity * 19.99).toFixed(2)}</span>
                         </div>
                       )}
                       {formState.bundleQuantity > 0 && (
                         <div className="flex justify-between">
                           <span>Complete Bundle (x{formState.bundleQuantity})</span>
-                          <span>${(formState.bundleQuantity * 69.99).toFixed(2)}</span>
+                          <span>${(formState.bundleQuantity * 47.98).toFixed(2)}</span>
                         </div>
                       )}
                     </div>

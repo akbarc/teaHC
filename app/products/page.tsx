@@ -67,6 +67,24 @@ export default function ProductsPage() {
                   <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Lab Tested</span>
                 </div>
 
+                <div className="mt-6 space-y-2">
+                  <div className="flex justify-between items-center p-2 bg-white shadow rounded">
+                    <span>Single Purchase</span>
+                    <div>
+                      <span className="font-bold text-lg">$19.99</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$39.99</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-2 bg-orange-50 shadow rounded border border-orange-200">
+                    <span className="font-medium">Complete System</span>
+                    <div>
+                      <span className="font-bold text-lg">$47.98</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$59.97</span>
+                    </div>
+                  </div>
+                </div>
+
                 <Button asChild size="lg" className="w-full bg-amber-500 hover:bg-amber-600">
                   <Link href="/reserve">Reserve Now</Link>
                 </Button>
@@ -286,6 +304,24 @@ export default function ProductsPage() {
                   <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Lab Tested</span>
                 </div>
 
+                <div className="mt-6 space-y-2">
+                  <div className="flex justify-between items-center p-2 bg-white shadow rounded">
+                    <span>Single Purchase</span>
+                    <div>
+                      <span className="font-bold text-lg">$19.99</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$39.99</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-2 bg-orange-50 shadow rounded border border-orange-200">
+                    <span className="font-medium">Complete System</span>
+                    <div>
+                      <span className="font-bold text-lg">$47.98</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$59.97</span>
+                    </div>
+                  </div>
+                </div>
+
                 <Button asChild size="lg" className="w-full bg-blue-800 hover:bg-blue-900">
                   <Link href="/reserve">Reserve Now</Link>
                 </Button>
@@ -497,7 +533,7 @@ export default function ProductsPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Quantity:</span>
-                    <span>2 fl oz (60 mL)</span>
+                    <span>10 2oz nano shots</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Suggested Use:</span>
@@ -511,6 +547,24 @@ export default function ProductsPage() {
                   <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Vegan</span>
                   <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Non-GMO</span>
                   <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Lab Tested</span>
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <div className="flex justify-between items-center p-2 bg-white shadow rounded">
+                    <span>Single Purchase</span>
+                    <div>
+                      <span className="font-bold text-lg">$19.99</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$39.99</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-2 bg-orange-50 shadow rounded border border-orange-200">
+                    <span className="font-medium">Complete System</span>
+                    <div>
+                      <span className="font-bold text-lg">$47.98</span>
+                      <span className="text-gray-500 text-sm line-through ml-2">$59.97</span>
+                    </div>
+                  </div>
                 </div>
 
                 <Button asChild size="lg" className="w-full bg-amber-700 hover:bg-amber-800">
@@ -756,7 +810,7 @@ export default function ProductsPage() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>TeaHC RAPID (2 fl oz)</span>
+                  <span>TeaHC RAPID (10 2oz nano shots)</span>
                 </li>
                 <li className="flex items-start">
                   <svg
@@ -767,7 +821,7 @@ export default function ProductsPage() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>$69.99 Bundle Price (Save $10.98)</span>
+                  <span>$47.98 Bundle Price (Save $11.99)</span>
                 </li>
               </ul>
               <Button asChild size="lg" className="w-full">

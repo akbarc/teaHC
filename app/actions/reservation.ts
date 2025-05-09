@@ -1,8 +1,8 @@
 "use server"
 
 import { z } from "zod"
-import { addReservationToSheet } from "@/lib/google-sheets"
 import nodemailer from "nodemailer"
+import { addReservationToSupabase, ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -68,6 +68,8 @@ Notes: ${reservationData.notes || "N/A"}
 
 export async function submitReservation(formData: FormData) {
   try {
+    console.log("⏳ Processing reservation submission...")
+    
     // Extract and validate form data
     const data: ReservationData = {
       fullName: formData.get("fullName") as string,
@@ -86,16 +88,17 @@ export async function submitReservation(formData: FormData) {
 
     // Validate the data
     const validatedData = reservationSchema.parse(data)
+    console.log("✅ Form data validated successfully")
 
     // Calculate total cost
     const totalCost =
-      validatedData.moveQuantity * 26.99 +
-      validatedData.repairQuantity * 26.99 +
-      validatedData.rapidQuantity * 26.99 +
-      validatedData.bundleQuantity * 69.99
+      validatedData.moveQuantity * 19.99 +
+      validatedData.repairQuantity * 19.99 +
+      validatedData.rapidQuantity * 19.99 +
+      validatedData.bundleQuantity * 47.98
 
     // Create a reservation record
-    const reservationRecord = {
+    const reservationRecord: SupabaseReservationData = {
       timestamp: new Date().toISOString(),
       fullName: validatedData.fullName,
       email: validatedData.email,
@@ -130,49 +133,94 @@ Notes: ${reservationRecord.notes}
     console.log("RESERVATION_DATA:", formattedReservation)
     console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
 
-    // Add the reservation to Google Sheet
-    let sheetUpdated = false
+    // Add the reservation to Supabase
+    let supabaseUpdated = false
+    let supabaseError: any = null
     try {
-      sheetUpdated = await addReservationToSheet(reservationRecord)
-      console.log("Google Sheet updated:", sheetUpdated)
-    } catch (sheetError) {
-      console.error("Error updating Google Sheet:", sheetError)
-      // Continue even if sheet update fails
+      console.log("⏳ Saving reservation to Supabase database...")
+      const supabaseResult = await addReservationToSupabase(reservationRecord)
+      supabaseUpdated = supabaseResult.success
+      
+      if (supabaseUpdated) {
+        console.log("✅ Supabase updated successfully")
+      } else {
+        // Only try to access error if success is false
+        supabaseError = 'Error saving to Supabase'
+        if ('error' in supabaseResult) {
+          supabaseError = supabaseResult.error
+        }
+        console.error("❌ Error updating Supabase:", supabaseError)
+      }
+    } catch (dbError) {
+      supabaseError = dbError
+      console.error("❌❌ Exception updating Supabase:", dbError)
+      // Continue even if Supabase update fails
     }
 
     // Try to send email notification
     let emailSent = false
     try {
+      console.log("⏳ Sending email notification...")
       emailSent = await sendEmailNotification(reservationRecord)
+      if (emailSent) {
+        console.log("✅ Email notification sent")
+      } else {
+        console.log("❌ Email notification failed")
+      }
     } catch (emailError) {
-      console.error("Email sending error:", emailError)
+      console.error("❌❌ Email sending error:", emailError)
       // Continue even if email fails
     }
 
     // Try to send the reservation data to our backup API
+    let backupSaved = false
     try {
-      await fetch("/api/backup-reservation", {
+      console.log("⏳ Sending to backup API...")
+      
+      // Use the full URL to avoid "Invalid URL" errors
+      // In a real deployment, we'd use environment variables for the domain
+      const domain = process.env.VERCEL_URL || 'http://localhost:3000'
+      const backupUrl = new URL('/api/backup-reservation', domain).toString()
+      
+      const backupResponse = await fetch(backupUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(reservationRecord),
       })
+      
+      const backupResult = await backupResponse.json()
+      backupSaved = backupResult.success
+      
+      if (backupSaved) {
+        console.log("✅ Backup API updated successfully")
+      } else {
+        console.error("❌ Backup API update failed:", backupResult)
+      }
     } catch (backupError) {
-      console.error("Error sending to backup API:", backupError)
+      console.error("❌❌ Error sending to backup API:", backupError)
       // Continue even if backup fails
     }
+
+    // Final status summary
+    console.log("📊 Reservation Submission Summary:")
+    console.log(`- Supabase: ${supabaseUpdated ? '✅ Success' : '❌ Failed'}`)
+    console.log(`- Email: ${emailSent ? '✅ Success' : '❌ Failed'}`)
+    console.log(`- Backup API: ${backupSaved ? '✅ Success' : '❌ Failed'}`)
 
     return {
       success: true,
       message: "Reservation submitted successfully! We'll contact you soon.",
       details: {
-        sheetUpdated,
+        supabaseUpdated,
+        supabaseError: supabaseError ? String(supabaseError) : null,
         emailSent,
+        backupSaved
       },
     }
   } catch (error) {
-    console.error("Reservation submission error:", error)
+    console.error("❌❌ Reservation submission error:", error)
 
     if (error instanceof z.ZodError) {
       // Return validation errors
@@ -186,6 +234,7 @@ Notes: ${reservationRecord.notes}
     return {
       success: false,
       message: "There was a problem submitting your reservation. Please try again later.",
+      error: error instanceof Error ? error.message : String(error)
     }
   }
 }
