@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .chart {
+            width: 800px;
+            height: 400px;
+            background: white;
+            position: relative;
+        }
+        .bar {
+            position: absolute;
+            bottom: 50px;
+            width: 100px;
+            background: #f97316;
+            border-radius: 4px 4px 0 0;
+        }
+        .bar.teahc {
+            left: 100px;
+            height: 250px;
+        }
+        .bar.standard {
+            left: 300px;
+            height: 50px;
+            background: #94a3b8;
+        }
+        .label {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            width: 100px;
+            font-size: 16px;
+            color: #1f2937;
+        }
+        .label.teahc {
+            left: 100px;
+        }
+        .label.standard {
+            left: 300px;
+        }
+        .value {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+            width: 100px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .value.teahc {
+            left: 100px;
+            color: #f97316;
+        }
+        .value.standard {
+            left: 300px;
+            color: #94a3b8;
+        }
+        .title {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart">
+        <div class="title">Absorption Comparison</div>
+        <div class="bar teahc"></div>
+        <div class="bar standard"></div>
+        <div class="label teahc">TeaHC</div>
+        <div class="label standard">Standard</div>
+        <div class="value teahc">17x</div>
+        <div class="value standard">1x</div>
+    </div>
+</body>
+</html> 
