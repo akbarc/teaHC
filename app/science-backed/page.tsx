@@ -90,17 +90,17 @@ export default function ScienceBackedPage() {
             {/* Scientific Visualization */}
             <div className="flex-1 relative w-full mt-6 md:mt-0">
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <h3 className="text-lg font-bold mb-4 text-center">Absorption Comparison</h3>
+                <h3 className="text-lg font-bold mb-4 text-center">Superior Absorption Technology</h3>
                 <div className="relative h-64">
                   <Image
-                    src="/absorption-chart.svg"
-                    alt="TeaHC vs Standard Supplement Absorption"
+                    src="/teahc-rapid-absorption.png"
+                    alt="TeaHC Nano-Technology Absorption Comparison"
                     fill
                     className="object-contain"
                   />
                 </div>
                 <div className="mt-4 text-sm text-gray-600 text-center">
-                  Our nano-emulsification technology creates particles as small as 15-50 nanometers, providing superior bioavailability compared to standard supplements
+                  Our proprietary formulation delivers up to 17x better curcumin intake to ease inflammation and joint pain
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function ScienceBackedPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold mb-2">Complete System</h3>
-              <p className="text-gray-600">Three specialized formulas (MOVE, REPAIR, RAPID) for 24-hour inflammation management and relief</p>
+              <p className="text-gray-600">Three specialized formulas (MOVE, REPAIR, RAPID) for 24-hour inflammation management</p>
             </div>
           </div>
 
@@ -189,6 +189,16 @@ export default function ScienceBackedPage() {
                     <h4 className="font-medium">Daytime Formula</h4>
                     <p className="text-sm text-gray-600">Nano CBD, THCV, CBG, and curcumin phytosomes for mobility and inflammation relief</p>
                   </div>
+                  <div className="ml-auto hidden sm:block">
+                    <div className="relative w-16 h-16">
+                      <Image 
+                        src="/teahc-move-cup.png" 
+                        alt="TeaHC MOVE Product" 
+                        fill 
+                        className="object-contain" 
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="flex items-center border-b border-gray-100 pb-3">
                   <div className="w-16 shrink-0 text-center">
@@ -197,6 +207,11 @@ export default function ScienceBackedPage() {
                   <div className="ml-4">
                     <h4 className="font-medium">Nighttime Formula</h4>
                     <p className="text-sm text-gray-600">Nano CBD, CBN, L-theanine, and magnesium for recovery and sleep support</p>
+                  </div>
+                  <div className="ml-auto hidden sm:block">
+                    <div className="relative w-16 h-16 bg-blue-50 rounded-md flex items-center justify-center">
+                      <span className="text-blue-800 text-xs font-medium">REPAIR</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center border-b border-gray-100 pb-3">
@@ -207,6 +222,16 @@ export default function ScienceBackedPage() {
                     <h4 className="font-medium">Fast-Acting Formula</h4>
                     <p className="text-sm text-gray-600">Concentrated liquid nano-shot for on-demand relief with maximum bioavailability</p>
                   </div>
+                  <div className="ml-auto hidden sm:block">
+                    <div className="relative w-16 h-16">
+                      <Image 
+                        src="/teahc-rapid-bottle.png" 
+                        alt="TeaHC RAPID Product" 
+                        fill 
+                        className="object-contain" 
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-16 shrink-0 text-center">
@@ -215,6 +240,29 @@ export default function ScienceBackedPage() {
                   <div className="ml-4">
                     <h4 className="font-medium">Complete Relief</h4>
                     <p className="text-sm text-gray-600">All three formulas working together for 24-hour multi-pathway inflammation management</p>
+                  </div>
+                  <div className="ml-auto hidden sm:block">
+                    <div className="flex space-x-1">
+                      <div className="relative w-10 h-10 -mr-4">
+                        <Image 
+                          src="/teahc-move-cup.png" 
+                          alt="TeaHC MOVE" 
+                          fill 
+                          className="object-contain" 
+                        />
+                      </div>
+                      <div className="relative w-10 h-10 bg-blue-50 rounded-md flex items-center justify-center z-10">
+                        <span className="text-blue-800 text-[10px] font-medium">REPAIR</span>
+                      </div>
+                      <div className="relative w-10 h-10 -ml-4">
+                        <Image 
+                          src="/teahc-rapid-bottle.png" 
+                          alt="TeaHC RAPID" 
+                          fill 
+                          className="object-contain" 
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -237,8 +285,8 @@ export default function ScienceBackedPage() {
                 </p>
                 <div className="relative rounded-xl overflow-hidden h-40 bg-gray-100">
                   <Image
-                    src="/nano-emulsification-diagram.png"
-                    alt="TeaHC Nano-emulsification Technology"
+                    src="/thermal-knee-scan.png"
+                    alt="TeaHC Anti-inflammatory Effect Visualization"
                     fill
                     className="object-contain"
                   />
@@ -724,11 +772,17 @@ export default function ScienceBackedPage() {
                     </ul>
                   </div>
                   <div className="flex items-center gap-4">
+                    <div className="relative h-24 w-24 md:h-32 md:w-32">
+                      <Image
+                        src="/teahc-rapid-bottle.png"
+                        alt="TeaHC System"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                     <div className="text-center">
                       <div className="text-sm text-gray-500">Regular Price</div>
                       <div className="text-xl font-bold text-gray-400 line-through">$119.99</div>
-                    </div>
-                    <div className="text-center">
                       <div className="text-sm text-orange-600 font-medium">Pre-Launch Price</div>
                       <div className="text-2xl font-bold text-orange-600">$47.98</div>
                       <div className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full inline-block">
@@ -777,10 +831,13 @@ export default function ScienceBackedPage() {
           <div className="max-w-4xl mx-auto bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 sm:p-8 shadow-lg">
             <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
               <div className="md:w-1/3 flex justify-center">
-                <div className="w-40 h-40 bg-white rounded-full shadow-md flex items-center justify-center p-4">
-                  <svg className="w-24 h-24 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+                <div className="w-40 h-40 rounded-xl overflow-hidden relative">
+                  <Image 
+                    src="/family-active-lifestyle.png" 
+                    alt="Active Lifestyle with TeaHC"
+                    fill
+                    className="object-cover" 
+                  />
                 </div>
               </div>
               <div className="md:w-2/3">
@@ -816,25 +873,37 @@ export default function ScienceBackedPage() {
 
       {/* Final CTA */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        <div className="container mx-auto px-4 text-center">
-          <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full text-xs sm:text-sm font-bold mb-4 shadow-sm">
-            Limited Time Offer
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
-            Ready to Experience the Science of Nano-Cannabinoids?
-          </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
-            Join thousands who've discovered the difference that superior absorption makes. Reserve your TeaHC System today and transform your wellness routine with our scientifically advanced formulas.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105 rounded-xl"
-          >
-            <Link href="/reserve">Reserve Your System Now</Link>
-          </Button>
-          <div className="mt-4 text-sm text-gray-600">
-            No payment required today. Limited time offer.
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+            <div className="text-center md:text-left">
+              <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full text-xs sm:text-sm font-bold mb-4 shadow-sm">
+                Limited Time Offer
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                Ready to Experience the Science of Nano-Cannabinoids?
+              </h2>
+              <p className="text-lg text-gray-700 mb-8">
+                Join thousands who've discovered the difference that superior absorption makes. Reserve your TeaHC System today and transform your wellness routine with our scientifically advanced formulas.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105 rounded-xl"
+              >
+                <Link href="/reserve">Reserve Your System Now</Link>
+              </Button>
+              <div className="mt-4 text-sm text-gray-600">
+                No payment required today. Limited time offer.
+              </div>
+            </div>
+            <div className="relative h-72 rounded-xl overflow-hidden shadow-xl">
+              <Image
+                src="/mom-child-teahc-move.png"
+                alt="Start your day with TeaHC MOVE"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
