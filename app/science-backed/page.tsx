@@ -93,7 +93,7 @@ export default function ScienceBackedPage() {
                 <h3 className="text-lg font-bold mb-4 text-center">Superior Absorption Technology</h3>
                 <div className="relative h-64">
                   <Image
-                    src="/product-images/teahc-rapid-absorption.png"
+                    src="/teahc-nanotechnology-bioavailability.png"
                     alt="TeaHC Nano-Technology Absorption Comparison"
                     fill
                     className="object-contain"
@@ -192,7 +192,7 @@ export default function ScienceBackedPage() {
                   <div className="ml-auto hidden sm:block">
                     <div className="relative w-16 h-16">
                       <Image 
-                        src="/product-images/teahc-move-cup.png" 
+                        src="/teahc-move-formula.png" 
                         alt="TeaHC MOVE Product" 
                         fill 
                         className="object-contain" 
@@ -225,7 +225,7 @@ export default function ScienceBackedPage() {
                   <div className="ml-auto hidden sm:block">
                     <div className="relative w-16 h-16">
                       <Image 
-                        src="/product-images/teahc-rapid-bottle.png" 
+                        src="/teahc-rapid-nano-shot.png" 
                         alt="TeaHC RAPID Product" 
                         fill 
                         className="object-contain" 
@@ -245,7 +245,7 @@ export default function ScienceBackedPage() {
                     <div className="flex space-x-1">
                       <div className="relative w-10 h-10 -mr-4">
                         <Image 
-                          src="/product-images/teahc-move-cup.png" 
+                          src="/teahc-move-formula.png" 
                           alt="TeaHC MOVE" 
                           fill 
                           className="object-contain" 
@@ -256,7 +256,7 @@ export default function ScienceBackedPage() {
                       </div>
                       <div className="relative w-10 h-10 -ml-4">
                         <Image 
-                          src="/product-images/teahc-rapid-bottle.png" 
+                          src="/teahc-rapid-nano-shot.png" 
                           alt="TeaHC RAPID" 
                           fill 
                           className="object-contain" 
@@ -285,8 +285,8 @@ export default function ScienceBackedPage() {
                 </p>
                 <div className="relative rounded-xl overflow-hidden h-40 bg-gray-100">
                   <Image
-                    src="/product-images/thermal-knee-scan.png"
-                    alt="TeaHC Anti-inflammatory Effect Visualization"
+                    src="/nano-emulsification-diagram.png"
+                    alt="TeaHC Nano-Emulsification Technology"
                     fill
                     className="object-contain"
                   />
@@ -774,7 +774,7 @@ export default function ScienceBackedPage() {
                   <div className="flex items-center gap-4">
                     <div className="relative h-24 w-24 md:h-32 md:w-32">
                       <Image
-                        src="/product-images/teahc-rapid-bottle.png"
+                        src="/teahc-product-line.png"
                         alt="TeaHC System"
                         fill
                         className="object-contain"
@@ -833,7 +833,7 @@ export default function ScienceBackedPage() {
               <div className="md:w-1/3 flex justify-center">
                 <div className="w-40 h-40 rounded-xl overflow-hidden relative">
                   <Image 
-                    src="/product-images/family-active-lifestyle.png" 
+                    src="/active-hiker.png" 
                     alt="Active Lifestyle with TeaHC"
                     fill
                     className="object-cover" 
@@ -898,7 +898,7 @@ export default function ScienceBackedPage() {
             </div>
             <div className="relative h-72 rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/product-images/mom-child-teahc-move.png"
+                src="/smiling-woman-portrait.png"
                 alt="Start your day with TeaHC MOVE"
                 fill
                 className="object-cover"

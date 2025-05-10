@@ -70,7 +70,7 @@ export default function DailyLivingPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative h-64 rounded-xl overflow-hidden">
                   <Image
-                    src="/senior-gardening.jpg"
+                    src="/active-hiker.png"
                     alt="Active senior gardening"
                     fill
                     className="object-cover"
@@ -78,7 +78,7 @@ export default function DailyLivingPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden">
                   <Image
-                    src="/senior-walking.jpg"
+                    src="/woman-athlete-portrait.png"
                     alt="Active senior walking"
                     fill
                     className="object-cover"
@@ -86,7 +86,7 @@ export default function DailyLivingPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden">
                   <Image
-                    src="/senior-grandkids.jpg"
+                    src="/smiling-woman-portrait.png"
                     alt="Senior playing with grandkids"
                     fill
                     className="object-cover"
@@ -94,7 +94,7 @@ export default function DailyLivingPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden">
                   <Image
-                    src="/senior-exercise.jpg"
+                    src="/active-hiker.png"
                     alt="Senior exercising"
                     fill
                     className="object-cover"
@@ -119,7 +119,7 @@ export default function DailyLivingPage() {
             <div className="bg-white rounded-xl overflow-hidden shadow-md">
               <div className="aspect-square relative">
                 <Image
-                  src="/move-product.jpg"
+                  src="/teahc-move-formula.png"
                   alt="TeaHC MOVE - Morning Mobility Support"
                   fill
                   className="object-cover"
@@ -149,7 +149,7 @@ export default function DailyLivingPage() {
             <div className="bg-white rounded-xl overflow-hidden shadow-md">
               <div className="aspect-square relative">
                 <Image
-                  src="/rapid-product.jpg"
+                  src="/teahc-rapid-nano-shot.png"
                   alt="TeaHC RAPID - Fast-Acting Relief"
                   fill
                   className="object-cover"
@@ -179,7 +179,7 @@ export default function DailyLivingPage() {
             <div className="bg-white rounded-xl overflow-hidden shadow-md">
               <div className="aspect-square relative">
                 <Image
-                  src="/repair-product.jpg"
+                  src="/repair-formula-diagram.png"
                   alt="TeaHC REPAIR - Nighttime Recovery"
                   fill
                   className="object-cover"
@@ -286,7 +286,7 @@ export default function DailyLivingPage() {
               </div>
               <div className="relative h-48 md:h-64 rounded-xl overflow-hidden">
                 <Image
-                  src="/morning-routine.jpg"
+                  src="/teahc-move-formula.png"
                   alt="Morning Routine with TeaHC"
                   fill
                   className="object-cover"
@@ -299,7 +299,7 @@ export default function DailyLivingPage() {
               <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-orange-500 z-10"></div>
               <div className="order-2 md:order-1 relative h-48 md:h-64 rounded-xl overflow-hidden mb-6 md:mb-0">
                 <Image
-                  src="/daytime-activities.jpg"
+                  src="/woman-athlete-portrait.png"
                   alt="Daytime Activities with TeaHC"
                   fill
                   className="object-cover"
@@ -384,7 +384,7 @@ export default function DailyLivingPage() {
               </div>
               <div className="relative h-48 md:h-64 rounded-xl overflow-hidden">
                 <Image
-                  src="/evening-routine.jpg"
+                  src="/peaceful-sleep.png"
                   alt="Evening Routine with TeaHC"
                   fill
                   className="object-cover"
@@ -548,7 +548,7 @@ export default function DailyLivingPage() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src="/laura-testimonial.jpg"
+                    src="/middle-aged-man-portrait.png"
                     alt="Laura - TeaHC Customer"
                     fill
                     className="object-cover"
@@ -590,7 +590,7 @@ export default function DailyLivingPage() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src="/robert-testimonial.jpg"
+                    src="/middle-aged-man-portrait.png"
                     alt="Robert - TeaHC Customer"
                     fill
                     className="object-cover"
@@ -632,7 +632,7 @@ export default function DailyLivingPage() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src="/susan-testimonial.jpg"
+                    src="/smiling-woman-portrait.png"
                     alt="Susan - TeaHC Customer"
                     fill
                     className="object-cover"
@@ -674,7 +674,7 @@ export default function DailyLivingPage() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src="/david-testimonial.jpg"
+                    src="/middle-aged-man-portrait.png"
                     alt="David - TeaHC Customer"
                     fill
                     className="object-cover"
