@@ -285,7 +285,7 @@ export default function ScienceBackedPage() {
                 </p>
                 <div className="relative rounded-xl overflow-hidden h-40 bg-gray-100">
                   <Image
-                    src="/nano-emulsification-diagram.png"
+                    src="/teahc-rapid-nano-shot.png"
                     alt="TeaHC Nano-Emulsification Technology"
                     fill
                     className="object-contain"

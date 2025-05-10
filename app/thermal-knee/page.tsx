@@ -266,7 +266,7 @@ export default function ThermalKneePage() {
               <div className="space-y-4">
                 <div className="relative rounded-xl overflow-hidden h-40 bg-gray-100">
                   <Image
-                    src="/nano-emulsification-diagram.png"
+                    src="/teahc-move-formula.png"
                     alt="Thermal imaging of knee wrap technology"
                     fill
                     className="object-contain"
@@ -799,7 +799,7 @@ export default function ThermalKneePage() {
               </p>
               <div className="h-32 relative mt-4 bg-gray-50 rounded-lg overflow-hidden">
                 <Image
-                  src="/nano-emulsification-diagram.png"
+                  src="/teahc-rapid-nano-shot.png"
                   alt="Secure the thermal knee wrap"
                   fill
                   className="object-contain"
