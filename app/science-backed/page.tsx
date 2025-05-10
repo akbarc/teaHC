@@ -3,189 +3,365 @@ import { Button } from "@/components/ui/button"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { PreOrderBar } from "@/components/pre-order-bar"
 import { EmailCapture } from "@/components/email-capture"
+import Image from 'next/image';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
+import { Beaker, Microscope, LineChart } from 'lucide-react';
+import { PreReservationForm } from '@/components/pre-reservation-form';
 
 export default function ScienceBackedPage() {
   return (
-    <main className="flex flex-col min-h-screen">
-      <PreOrderBar />
-
-      {/* Hero Section with Scientific Focus */}
-      <section className="relative py-8 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
-            <div className="flex-1 space-y-4 sm:space-y-6">
-              <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 bg-orange-100 text-orange-800 rounded-full text-xs sm:text-sm font-medium">
-                <span className="flex items-center">
-                  <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Advanced Nano-Technology
-                </span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                <span className="text-orange-500">Nano-Emulsified</span> Cannabinoids for Maximum Relief
+          <div className="flex justify-center mb-8">
+            <div className="flex space-x-6">
+              <span className="text-sm font-medium text-gray-600">Clinically Dosed</span>
+              <span className="text-sm font-medium text-gray-600">•</span>
+              <span className="text-sm font-medium text-gray-600">Science-Backed</span>
+              <span className="text-sm font-medium text-gray-600">•</span>
+              <span className="text-sm font-medium text-gray-600">Lab Verified</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                17x Better Absorption Than Standard Supplements
               </h1>
-              <p className="text-lg sm:text-xl text-gray-700 max-w-2xl">
-                Experience our clinically-formulated cannabinoid system with up to 17x better absorption, faster onset times, and targeted anti-inflammatory action.
+              <p className="text-xl text-gray-600">
+                Our breakthrough nano-technology delivers superior bioavailability for more effective inflammation control
               </p>
-              
-              {/* Trust Builders */}
-              <div className="flex flex-wrap gap-3 text-sm text-gray-600">
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Nano-Emulsified (15-50nm)
-                </span>
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Fast-Acting (15-30 min)
-                </span>
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Non-Psychoactive
-                </span>
-              </div>
-
-              {/* Social Proof */}
-              <div className="flex items-center text-sm text-gray-600">
-                <div className="flex -space-x-2">
-                  {[...Array(4)].map((_, i) => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-orange-100 flex items-center justify-center">
-                      <span className="text-orange-600 font-medium text-xs">JD</span>
-                    </div>
-                  ))}
-                </div>
-                <span className="ml-3 font-medium">573 people have already reserved their TeaHC system</span>
-              </div>
-
-              {/* Reservation Form */}
-              <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-orange-100">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">Sale Ends In:</div>
-                    <CountdownTimer />
+            </div>
+            <Card className="p-8 shadow-lg">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Reserve Your Scientific Advantage</h3>
+                  <div className="mt-2 inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                    50% OFF First 700 Customers
                   </div>
-                  <EmailCapture
-                    title="Reserve Your 50% Discount"
-                    description="Enter your email to secure your pre-launch discount"
-                    buttonText="Reserve Now"
-                    className="text-gray-800"
+                </div>
+                <PreReservationForm
+                  landingPage="science-backed"
+                  buttonText="Reserve Now - 50% Off"
+                  successMessage="Thank you for reserving your TeaHC system! We'll contact you soon with your discount code."
+                />
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p className="flex items-center">
+                    <span className="text-green-600 mr-2">✓</span>
+                    No payment until shipping
+                  </p>
+                  <p className="flex items-center">
+                    <span className="text-green-600 mr-2">✓</span>
+                    30-day guarantee
+                  </p>
+                </div>
+                <p className="text-center text-sm font-medium text-gray-700">
+                  573 scientists, doctors, and health enthusiasts have already reserved
+                </p>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* The Science of Superior Absorption */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <Card className="p-6">
+              <h3 className="text-xl font-bold mb-4">Why Most Supplements Fail</h3>
+              <p className="text-gray-600 mb-4">
+                90% of standard supplements are wasted
+              </p>
+              <div className="relative aspect-video">
+                <Image
+                  src="/landing-pages/science-backed/poor-absorption-diagram.jpg"
+                  alt="Poor absorption diagram"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            </Card>
+            <Card className="p-6">
+              <h3 className="text-xl font-bold mb-4">Nano-Emulsification Technology</h3>
+              <p className="text-gray-600 mb-4">
+                20-50 nanometer particles
+              </p>
+              <div className="relative aspect-video">
+                <Image
+                  src="/landing-pages/science-backed/nano-particle-diagram.jpg"
+                  alt="Nano-particle diagram"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            </Card>
+            <Card className="p-6">
+              <h3 className="text-xl font-bold mb-4">Maximum Bioavailability</h3>
+              <p className="text-gray-600 mb-4">
+                17x better absorption
+              </p>
+              <div className="relative aspect-video">
+                <Image
+                  src="/landing-pages/science-backed/absorption-pathway-illustration.jpg"
+                  alt="Absorption pathway illustration"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Clinical Evidence Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-orange-600 mb-2">Up to 17x</h3>
+                <p className="text-gray-600">Higher bioavailability</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-orange-600 mb-2">15-30 min</h3>
+                <p className="text-gray-600">vs 60+ minutes</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-orange-600 mb-2">Multi-pathway</h3>
+                <p className="text-gray-600">Inflammation targeting</p>
+              </div>
+            </div>
+            <div className="relative aspect-[16/9]">
+              <Image
+                src="/landing-pages/science-backed/absorption-rate-graph.jpg"
+                alt="Absorption rate graph"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <p className="text-sm text-gray-600 mt-4 text-center">
+              Based on comparative bioavailability studies of nano-emulsified compounds versus standard formulations
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Precision Formulation Details */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <Card className="p-6">
+              <div className="relative w-16 h-16 mx-auto mb-6">
+                <Image
+                  src="/landing-pages/science-backed/molecular-pathway-icon.png"
+                  alt="Molecular pathway icon"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">Multi-Pathway Approach</h3>
+              <p className="text-gray-600 text-center">
+                Targets inflammation through multiple biological pathways
+              </p>
+            </Card>
+            <Card className="p-6">
+              <div className="relative w-16 h-16 mx-auto mb-6">
+                <Image
+                  src="/landing-pages/science-backed/interlocking-molecules-icon.png"
+                  alt="Interlocking molecules icon"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">Synergistic Compounds</h3>
+              <p className="text-gray-600 text-center">
+                Ingredients selected for enhanced effectiveness
+              </p>
+            </Card>
+            <Card className="p-6">
+              <div className="relative w-16 h-16 mx-auto mb-6">
+                <Image
+                  src="/landing-pages/science-backed/measurement-beaker-icon.png"
+                  alt="Measurement beaker icon"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">Clinical Dosing</h3>
+              <p className="text-gray-600 text-center">
+                Precise amounts based on scientific research
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Expert Validation */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="relative aspect-square">
+                  <Image
+                    src="/landing-pages/science-backed/dr-harrison-portrait.jpg"
+                    alt="Dr. James Harrison"
+                    fill
+                    className="object-cover rounded-lg"
                   />
-                  <div className="flex items-center text-sm text-green-600">
-                    <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>No payment required until shipping</span>
+                </div>
+                <div className="space-y-6">
+                  <blockquote className="text-2xl font-medium text-gray-900">
+                    "The nano-emulsification technology used in TeaHC products represents a significant advancement in bioavailability. By dramatically reducing particle size, these formulations can achieve much higher absorption rates than conventional supplements."
+                  </blockquote>
+                  <div>
+                    <p className="text-xl font-medium">Dr. James Harrison</p>
+                    <p className="text-gray-600">Pharmaceutical Sciences</p>
+                  </div>
+                  <div className="flex space-x-4">
+                    <div className="relative w-12 h-12">
+                      <Image
+                        src="/landing-pages/science-backed/research-institution-1.png"
+                        alt="Research institution logo"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="relative w-12 h-12">
+                      <Image
+                        src="/landing-pages/science-backed/research-institution-2.png"
+                        alt="Research institution logo"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Scientific Visualization */}
-            <div className="flex-1 relative w-full mt-6 md:mt-0">
-              <div className="bg-white p-6 rounded-xl shadow-lg">
-                <h3 className="text-lg font-bold mb-4 text-center">Superior Absorption Technology</h3>
-                <div className="mt-4 text-sm text-gray-600 text-center">
-                  Our proprietary formulation delivers up to 17x better curcumin intake to ease inflammation and joint pain
-                </div>
-              </div>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Key Technology Points */}
-      <section className="py-12 sm:py-16 bg-white">
+      {/* Comparative Results Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Our Nano-Technology</h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Three key advantages of our nano-emulsification system
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {/* Superior Absorption */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md p-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Nano-Sized Particles</h3>
-              <p className="text-gray-600">Our proprietary technology reduces particle size to 15-50 nanometers for dramatically improved bioavailability</p>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-6">Standard Supplements</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                    Slow onset (60+ minutes)
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                    Poor absorption (10%)
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                    Inconsistent results
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                    Higher doses needed
+                  </li>
+                </ul>
+              </Card>
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-6">TeaHC Nano-Technology</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Fast onset (15-30 minutes)
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Superior absorption (up to 90%)
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Reliable results
+                  </li>
+                  <li className="flex items-center text-gray-600">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Efficient dosing
+                  </li>
+                </ul>
+              </Card>
             </div>
-
-            {/* Faster Results */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md p-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Multi-Pathway Formulas</h3>
-              <p className="text-gray-600">Synergistic blends of cannabinoids and botanical compounds target inflammation through multiple mechanisms</p>
-            </div>
-
-            {/* Targeted Relief */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-md p-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Complete System</h3>
-              <p className="text-gray-600">Three specialized formulas (MOVE, REPAIR, RAPID) for 24-hour inflammation management</p>
-            </div>
-          </div>
-
-          {/* Secondary CTA */}
-          <div className="mt-12 bg-orange-50 rounded-xl p-6 sm:p-8 max-w-2xl mx-auto">
-            <EmailCapture
-              title="Ready to Experience the Difference?"
-              description="Reserve your TeaHC system today and get 50% off"
-              buttonText="Reserve Now"
-              className="text-gray-800"
-            />
           </div>
         </div>
       </section>
 
-      {/* Scientific Evidence Section */}
-      <section className="py-12 sm:py-16 bg-gray-50">
+      {/* Scientific Reservation Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Backed by Science</h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Research-validated nano-emulsification technology with proven results
-          </p>
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Experience the Science of Superior Relief
+              </h2>
+              <p className="text-xl text-gray-600">
+                Join a growing community of science-minded individuals choosing TeaHC
+              </p>
+            </div>
+            <Card className="p-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Reserve Your Clinically-Advanced Formula</h3>
+                  <p className="text-2xl font-bold text-orange-600 mt-2">$19.99 pre-launch (Reg. $39.99)</p>
+                </div>
+                <PreReservationForm
+                  landingPage="science-backed"
+                  buttonText="Reserve Now"
+                  successMessage="Thank you for reserving your TeaHC system! We'll contact you soon with your discount code."
+                />
+                <p className="text-sm text-gray-600">
+                  Try our scientifically formulated system risk-free for 30 days
+                </p>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Clinical Study Results */}
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-4 flex items-center">
-                <svg className="w-6 h-6 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                Our Products and Formulations
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center border-b border-gray-100 pb-3">
-                  <div className="w-16 shrink-0 text-center">
-                    <span className="text-2xl font-bold text-orange-500">MOVE</span>
+      {/* Final Conversion Section */}
+      <section className="py-20 bg-orange-600 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <h2 className="text-3xl font-bold">
+              Limited Production - Reserve Today
+            </h2>
+            <p className="text-xl">
+              First batch limited to 700 units
+            </p>
+            <Card className="p-8 bg-white">
+              <div className="space-y-6">
+                <PreReservationForm
+                  landingPage="science-backed"
+                  buttonText="Reserve Now"
+                  successMessage="Thank you for reserving your TeaHC system! We'll contact you soon with your discount code."
+                />
+                <div className="flex justify-center space-x-8">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-gray-600">FDA registered</p>
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium">Daytime Formula</h4>
-                    <p className="text-sm text-gray-600">Nano CBD, THCV, CBG, and curcumin phytosomes for mobility and inflammation relief</p>
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-gray-600">GMP certified</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-gray-600">Third-party tested</p>
                   </div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 } 
