@@ -1,13 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { cn } from "@/lib/utils"
 
 interface CountdownTimerProps {
   targetDate?: string
   hours?: number
+  className?: string
 }
 
-export function CountdownTimer({ targetDate, hours = 48 }: CountdownTimerProps) {
+export function CountdownTimer({ targetDate, hours = 48, className }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [target, setTarget] = useState<number | null>(null)
 
@@ -78,26 +80,49 @@ export function CountdownTimer({ targetDate, hours = 48 }: CountdownTimerProps) 
     return () => clearInterval(timer)
   }, [target])
 
+  // Format numbers to always have two digits
+  const formatNumber = (num: number) => (num < 10 ? `0${num}` : num)
+
   return (
-    <div className="flex items-center justify-center gap-4">
-      <div className="text-center">
-        <div className="text-2xl font-bold">{timeLeft.days}</div>
-        <div className="text-xs text-gray-500">Days</div>
+    <div className={cn("flex items-center justify-center gap-1 sm:gap-2", className)}>
+      <TimeUnit value={timeLeft.days} label="Days" hideOnMobile={timeLeft.days === 0} />
+      {timeLeft.days > 0 && <div className="text-sm sm:text-lg font-bold">:</div>}
+      <TimeUnit value={timeLeft.hours} label="Hours" />
+      <div className="text-sm sm:text-lg font-bold">:</div>
+      <TimeUnit value={timeLeft.minutes} label="Min" />
+      <div className="text-sm sm:text-lg font-bold">:</div>
+      <TimeUnit value={timeLeft.seconds} label="Sec" />
+    </div>
+  )
+}
+
+interface TimeUnitProps {
+  value: number
+  label: string
+  hideOnMobile?: boolean
+}
+
+function TimeUnit({ value, label, hideOnMobile }: TimeUnitProps) {
+  if (hideOnMobile) {
+    return (
+      <div className="hidden sm:block">
+        <div className="bg-black/10 backdrop-blur-sm rounded-md px-2 py-1">
+          <div className="text-base sm:text-xl font-bold" aria-label={`${value} ${label}`}>
+            {value < 10 ? `0${value}` : value}
+          </div>
+          <div className="text-[10px] sm:text-xs font-medium">{label}</div>
+        </div>
       </div>
-      <div className="text-xl font-bold">:</div>
-      <div className="text-center">
-        <div className="text-2xl font-bold">{timeLeft.hours}</div>
-        <div className="text-xs text-gray-500">Hours</div>
-      </div>
-      <div className="text-xl font-bold">:</div>
-      <div className="text-center">
-        <div className="text-2xl font-bold">{timeLeft.minutes}</div>
-        <div className="text-xs text-gray-500">Minutes</div>
-      </div>
-      <div className="text-xl font-bold">:</div>
-      <div className="text-center">
-        <div className="text-2xl font-bold">{timeLeft.seconds}</div>
-        <div className="text-xs text-gray-500">Seconds</div>
+    )
+  }
+
+  return (
+    <div className="text-center">
+      <div className="bg-black/10 backdrop-blur-sm rounded-md px-2 py-1">
+        <div className="text-base sm:text-xl font-bold" aria-label={`${value} ${label}`}>
+          {value < 10 ? `0${value}` : value}
+        </div>
+        <div className="text-[10px] sm:text-xs font-medium">{label}</div>
       </div>
     </div>
   )
