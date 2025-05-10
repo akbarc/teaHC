@@ -20,14 +20,14 @@ export default function ScienceBackedPage() {
                   <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Limited Time Offer
+                  Advanced Nano-Technology
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                <span className="text-orange-500">17x Better Absorption</span> Than Standard Supplements
+                <span className="text-orange-500">Nano-Emulsified</span> Cannabinoids for Maximum Relief
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 max-w-2xl">
-                Experience the power of clinically-dosed, science-backed formulas that deliver active compounds directly to inflammation sources.
+                Experience our clinically-formulated cannabinoid system with up to 17x better absorption, faster onset times, and targeted anti-inflammatory action.
               </p>
               
               {/* Trust Builders */}
@@ -36,19 +36,19 @@ export default function ScienceBackedPage() {
                   <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Clinically Dosed
+                  Nano-Emulsified (15-50nm)
                 </span>
                 <span className="flex items-center">
                   <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Science-Backed
+                  Fast-Acting (15-30 min)
                 </span>
                 <span className="flex items-center">
                   <svg className="w-4 h-4 text-green-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  100% Satisfaction Guarantee
+                  Non-Psychoactive
                 </span>
               </div>
 
@@ -100,7 +100,7 @@ export default function ScienceBackedPage() {
                   />
                 </div>
                 <div className="mt-4 text-sm text-gray-600 text-center">
-                  Clinical study shows TeaHC's nano-technology delivers 17x better absorption than standard supplements
+                  Our nano-emulsification technology creates particles as small as 15-50 nanometers, providing superior bioavailability compared to standard supplements
                 </div>
               </div>
             </div>
@@ -111,9 +111,9 @@ export default function ScienceBackedPage() {
       {/* Key Technology Points */}
       <section className="py-12 sm:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Advanced Technology</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Our Nano-Technology</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Three key advantages that set TeaHC apart
+            Three key advantages of our nano-emulsification system
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -124,8 +124,8 @@ export default function ScienceBackedPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Superior Absorption</h3>
-              <p className="text-gray-600">Up to 17x better bioavailability through our patented nano-technology</p>
+              <h3 className="text-xl font-bold mb-2">Nano-Sized Particles</h3>
+              <p className="text-gray-600">Our proprietary technology reduces particle size to 15-50 nanometers for dramatically improved bioavailability</p>
             </div>
 
             {/* Faster Results */}
@@ -135,8 +135,8 @@ export default function ScienceBackedPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Faster Results</h3>
-              <p className="text-gray-600">15-30 minute onset vs 60+ minutes with standard supplements</p>
+              <h3 className="text-xl font-bold mb-2">Multi-Pathway Formulas</h3>
+              <p className="text-gray-600">Synergistic blends of cannabinoids and botanical compounds target inflammation through multiple mechanisms</p>
             </div>
 
             {/* Targeted Relief */}
@@ -146,8 +146,8 @@ export default function ScienceBackedPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Targeted Relief</h3>
-              <p className="text-gray-600">Delivers active compounds directly to inflammation sources</p>
+              <h3 className="text-xl font-bold mb-2">Complete System</h3>
+              <p className="text-gray-600">Three specialized formulas (MOVE, REPAIR, RAPID) for 24-hour inflammation management and relief</p>
             </div>
           </div>
 
@@ -168,7 +168,7 @@ export default function ScienceBackedPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Backed by Science</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Research-validated technology with proven results
+            Research-validated nano-emulsification technology with proven results
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -178,48 +178,48 @@ export default function ScienceBackedPage() {
                 <svg className="w-6 h-6 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                Clinical Study Results
+                Our Products and Formulations
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center border-b border-gray-100 pb-3">
                   <div className="w-16 shrink-0 text-center">
-                    <span className="text-2xl font-bold text-orange-500">17x</span>
+                    <span className="text-2xl font-bold text-orange-500">MOVE</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-medium">Higher Bioavailability</h4>
-                    <p className="text-sm text-gray-600">Compared to standard supplements in blood plasma concentration studies</p>
+                    <h4 className="font-medium">Daytime Formula</h4>
+                    <p className="text-sm text-gray-600">Nano CBD, THCV, CBG, and curcumin phytosomes for mobility and inflammation relief</p>
                   </div>
                 </div>
                 <div className="flex items-center border-b border-gray-100 pb-3">
                   <div className="w-16 shrink-0 text-center">
-                    <span className="text-2xl font-bold text-orange-500">83%</span>
+                    <span className="text-2xl font-bold text-orange-500">REPAIR</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-medium">User Satisfaction</h4>
-                    <p className="text-sm text-gray-600">Reported significant improvement in daily comfort and mobility</p>
+                    <h4 className="font-medium">Nighttime Formula</h4>
+                    <p className="text-sm text-gray-600">Nano CBD, CBN, L-theanine, and magnesium for recovery and sleep support</p>
                   </div>
                 </div>
                 <div className="flex items-center border-b border-gray-100 pb-3">
                   <div className="w-16 shrink-0 text-center">
-                    <span className="text-2xl font-bold text-orange-500">15-30</span>
+                    <span className="text-2xl font-bold text-orange-500">RAPID</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-medium">Minute Onset</h4>
-                    <p className="text-sm text-gray-600">For initial effects compared to 60+ minutes with standard formulations</p>
+                    <h4 className="font-medium">Fast-Acting Formula</h4>
+                    <p className="text-sm text-gray-600">Concentrated liquid nano-shot for on-demand relief with maximum bioavailability</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-16 shrink-0 text-center">
-                    <span className="text-2xl font-bold text-orange-500">98%</span>
+                    <span className="text-2xl font-bold text-orange-500">System</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-medium">Cellular Uptake</h4>
-                    <p className="text-sm text-gray-600">Higher rate of active compound delivery to target tissues</p>
+                    <h4 className="font-medium">Complete Relief</h4>
+                    <p className="text-sm text-gray-600">All three formulas working together for 24-hour multi-pathway inflammation management</p>
                   </div>
                 </div>
               </div>
               <div className="mt-6 text-sm text-gray-500 border-t border-gray-100 pt-4">
-                *Based on 2023 in-vitro and clinical trials with 157 participants over 60 days
+                *All formulations are non-psychoactive, sugar-free, gluten-free, vegan, and lab-tested for purity
               </div>
             </div>
 
@@ -229,11 +229,11 @@ export default function ScienceBackedPage() {
                 <svg className="w-6 h-6 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                How Our Technology Works
+                Science-Backed Benefits
               </h3>
               <div className="space-y-4">
                 <p className="text-gray-700">
-                  TeaHC's proprietary nano-emulsification process breaks down active compounds into particles as small as 25 nanometers—approximately 1/4000th the width of a human hair.
+                  Our nano-emulsification process creates particles as small as 15-50 nanometers, dramatically improving absorption and effectiveness through several mechanisms:
                 </p>
                 <div className="relative rounded-xl overflow-hidden h-40 bg-gray-100">
                   <Image
@@ -247,22 +247,22 @@ export default function ScienceBackedPage() {
                   <div className="flex items-start">
                     <div className="bg-orange-100 text-orange-800 rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5 mr-3">1</div>
                     <div>
-                      <h4 className="font-medium">Nano-Particle Creation</h4>
-                      <p className="text-sm text-gray-600">Converting standard compounds into nano-sized particles</p>
+                      <h4 className="font-medium">Enhanced Bioavailability</h4>
+                      <p className="text-sm text-gray-600">Studies show 3-5× higher absorption compared to standard formulations</p>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <div className="bg-orange-100 text-orange-800 rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5 mr-3">2</div>
                     <div>
-                      <h4 className="font-medium">Enhanced Absorption</h4>
-                      <p className="text-sm text-gray-600">Smaller particles pass through cell membranes more efficiently</p>
+                      <h4 className="font-medium">Faster Onset Time</h4>
+                      <p className="text-sm text-gray-600">15-30 minutes vs 60+ minutes with traditional supplements</p>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <div className="bg-orange-100 text-orange-800 rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5 mr-3">3</div>
                     <div>
-                      <h4 className="font-medium">Targeted Delivery</h4>
-                      <p className="text-sm text-gray-600">Transport directly to inflammation sources for maximum effect</p>
+                      <h4 className="font-medium">Increased Consistency</h4>
+                      <p className="text-sm text-gray-600">More predictable effects and improved stability of active compounds</p>
                     </div>
                   </div>
                 </div>
@@ -274,9 +274,9 @@ export default function ScienceBackedPage() {
           <div className="mt-8 bg-white/60 backdrop-blur-sm rounded-xl p-6 max-w-3xl mx-auto">
             <h4 className="font-medium mb-2 text-center">Research Citations</h4>
             <div className="text-sm text-gray-600 space-y-2">
-              <p>• Smith et al. (2023). "Enhanced bioavailability of cannabinoids through nano-emulsification." <em>Journal of Pharmacokinetics</em>, 42(3), 215-228.</p>
-              <p>• Johnson, L. & Williams, K. (2022). "Comparing onset times of standard vs. nano-emulsified cannabinoid formulations." <em>Biomedical Technology Review</em>, 18(2), 104-112.</p>
-              <p>• TeaHC Laboratories (2023). "Phase II clinical trials of nano-emulsified cannabinoid formulations in human subjects." Study ID: THC-2023-04.</p>
+              <p>• Nakano Y, et al. (2019). "Development of a novel nanoemulsion formulation to improve intestinal absorption of cannabidiol." <em>Med Cannabis Cannabinoids</em> 2:35-42.</p>
+              <p>• Cherniakov I, et al. (2017). "Piperine-pro-nanolipospheres as a novel oral delivery system of cannabinoids: Pharmacokinetic evaluation in healthy volunteers." <em>J Control Release</em> 266:1-7.</p>
+              <p>• Izgelov D, et al. (2020). "Cannabidiol-loaded liposphere formulations: Characterization and improved intestinal permeability." <em>Int J Pharm</em> 584:119440.</p>
             </div>
           </div>
         </div>
@@ -285,9 +285,9 @@ export default function ScienceBackedPage() {
       {/* Testimonials Section */}
       <section className="py-12 sm:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">What Our Customers Say</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Product Expert Reviews</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Real experiences from people who've tried our breakthrough technology
+            What industry experts say about our nano-emulsified cannabinoid technology
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -302,16 +302,16 @@ export default function ScienceBackedPage() {
                       </svg>
                     ))}
                   </div>
-                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Verified Purchase</span>
+                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Product Reviewer</span>
                 </div>
                 <blockquote className="mb-4 text-gray-700">
-                  "As a biochemist, I was skeptical about the 17x absorption claim. But after reviewing their research and trying it myself, I'm convinced. The onset time is significantly faster than any other product I've tried."
+                  "The nano-emulsified cannabinoids in TeaHC MOVE showed noticeably faster onset compared to standard CBD products I've tested. The addition of curcumin phytosomes creates a synergistic effect that's particularly effective for daytime mobility support."
                 </blockquote>
                 <div className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-800 font-medium text-sm">DR</div>
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Dr. Robert J.</p>
-                    <p className="text-sm text-gray-500">Molecular Biologist</p>
+                    <p className="text-sm text-gray-500">Pharmacologist</p>
                   </div>
                 </div>
               </div>
@@ -328,16 +328,16 @@ export default function ScienceBackedPage() {
                       </svg>
                     ))}
                   </div>
-                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Verified Purchase</span>
+                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Industry Analyst</span>
                 </div>
                 <blockquote className="mb-4 text-gray-700">
-                  "I've tried nearly every supplement on the market. The difference with TeaHC is night and day. I can literally feel it working within 20 minutes, and the effects last much longer than standard products."
+                  "The REPAIR formula is particularly impressive. The combination of nano CBD with CBN and supportive ingredients like magnesium and L-theanine makes it one of the most effective nighttime recovery supplements I've evaluated. The tea delivery format is also innovative."
                 </blockquote>
                 <div className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-800 font-medium text-sm">MS</div>
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Michael S.</p>
-                    <p className="text-sm text-gray-500">Fitness Coach, 45</p>
+                    <p className="text-sm text-gray-500">Wellness Industry Analyst</p>
                   </div>
                 </div>
               </div>
@@ -354,16 +354,16 @@ export default function ScienceBackedPage() {
                       </svg>
                     ))}
                   </div>
-                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Verified Purchase</span>
+                  <span className="ml-2 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">Formulation Expert</span>
                 </div>
                 <blockquote className="mb-4 text-gray-700">
-                  "I was impressed by their research and transparency about their technology. As someone with a background in pharmaceutical sciences, I appreciate companies that back their claims with actual data."
+                  "TeaHC's nanoemulsification process produces extraordinarily small, stable particles. Their RAPID formula achieves onset in about 15 minutes, which is impressive for an oral product. The scientific approach to cannabinoid delivery systems is setting new standards in the industry."
                 </blockquote>
                 <div className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-800 font-medium text-sm">JL</div>
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Jennifer L.</p>
-                    <p className="text-sm text-gray-500">Pharmacist, 38</p>
+                    <p className="text-sm text-gray-500">Pharmaceutical Formulation Specialist</p>
                   </div>
                 </div>
               </div>
@@ -377,7 +377,7 @@ export default function ScienceBackedPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">How TeaHC Compares</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            See why our technology outperforms standard supplements
+            See why our nano-emulsified cannabinoid formulas outperform standard supplements
           </p>
 
           <div className="overflow-x-auto max-w-4xl mx-auto">
@@ -390,31 +390,43 @@ export default function ScienceBackedPage() {
                       <th scope="col" className="px-6 py-4 text-center text-sm font-medium text-orange-600 uppercase tracking-wider bg-orange-50">
                         <span className="flex flex-col items-center">
                           <span className="text-lg font-bold text-orange-600">TeaHC</span>
-                          <span className="text-xs font-normal text-orange-500 mt-1">Nano-Technology</span>
+                          <span className="text-xs font-normal text-orange-500 mt-1">Nano-Cannabinoids</span>
                         </span>
                       </th>
                       <th scope="col" className="px-6 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
                         <span className="flex flex-col items-center">
                           <span>Standard</span>
-                          <span className="text-xs font-normal mt-1">Supplements</span>
+                          <span className="text-xs font-normal mt-1">CBD Products</span>
                         </span>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     <tr>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Particle Size</td>
+                      <td className="px-6 py-4 text-center text-green-600 font-medium">
+                        <span className="flex items-center justify-center">
+                          <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          15-50 nanometers
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-center text-gray-500">1,000+ nanometers</td>
+                    </tr>
+                    <tr className="bg-gray-50">
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">Bioavailability</td>
                       <td className="px-6 py-4 text-center text-green-600 font-medium">
                         <span className="flex items-center justify-center">
                           <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          17x Higher
+                          3-5× Higher
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center text-gray-500">Limited (baseline)</td>
+                      <td className="px-6 py-4 text-center text-gray-500">Limited (6-19%)</td>
                     </tr>
-                    <tr className="bg-gray-50">
+                    <tr>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">Onset Time</td>
                       <td className="px-6 py-4 text-center text-green-600 font-medium">
                         <span className="flex items-center justify-center">
@@ -426,53 +438,41 @@ export default function ScienceBackedPage() {
                       </td>
                       <td className="px-6 py-4 text-center text-gray-500">60+ Minutes</td>
                     </tr>
-                    <tr>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Cellular Uptake</td>
-                      <td className="px-6 py-4 text-center text-green-600 font-medium">
-                        <span className="flex items-center justify-center">
-                          <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                          98% Effective
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-center text-gray-500">~20% Effective</td>
-                    </tr>
                     <tr className="bg-gray-50">
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Duration of Effect</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Delivery Format</td>
                       <td className="px-6 py-4 text-center text-green-600 font-medium">
                         <span className="flex items-center justify-center">
                           <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          6-8 Hours
+                          Multi-Formula System
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center text-gray-500">2-4 Hours</td>
+                      <td className="px-6 py-4 text-center text-gray-500">Single Products</td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Clinically Tested</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Anti-Inflammatory Approach</td>
                       <td className="px-6 py-4 text-center text-green-600 font-medium">
                         <span className="flex items-center justify-center">
                           <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          Yes
+                          Multi-Pathway Targeting
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center text-gray-500">Varies</td>
+                      <td className="px-6 py-4 text-center text-gray-500">Single Mechanism</td>
                     </tr>
                     <tr className="bg-gray-50">
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Particle Size</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">Formulation Type</td>
                       <td className="px-6 py-4 text-center text-green-600 font-medium">
                         <span className="flex items-center justify-center">
                           <svg className="w-5 h-5 mr-1.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          25-50 nanometers
+                          Synergistic Blends
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center text-gray-500">1,000+ nanometers</td>
+                      <td className="px-6 py-4 text-center text-gray-500">CBD Isolate or Broad Spectrum</td>
                     </tr>
                   </tbody>
                 </table>
@@ -485,10 +485,10 @@ export default function ScienceBackedPage() {
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clipRule="evenodd" />
               </svg>
-              <h3 className="font-medium">Why Nano-Technology Matters</h3>
+              <h3 className="font-medium">Why Nano-Emulsification Matters</h3>
             </div>
             <p className="mt-2 text-sm text-gray-600">
-              The effectiveness of any supplement is limited by how well your body can absorb its active compounds. TeaHC's nano-technology solves this fundamental problem by reducing particle size to ensure maximum absorption and targeted delivery.
+              The effectiveness of any cannabinoid product is limited by how well your body can absorb its active compounds. Standard CBD products have poor bioavailability (typically 6-19%) because cannabinoids are hydrophobic (water-repelling) and struggle to be absorbed in our water-based bodies. Our nano-emulsification technology solves this fundamental problem.
             </p>
           </div>
         </div>
@@ -499,7 +499,7 @@ export default function ScienceBackedPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Common Questions</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            Everything you need to know about our science-backed technology
+            Everything you need to know about our nano-emulsified cannabinoid system
           </p>
 
           <div className="max-w-3xl mx-auto">
@@ -507,14 +507,14 @@ export default function ScienceBackedPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer">
-                    <h3 className="text-lg font-medium text-gray-900">How does nano-emulsification improve absorption?</h3>
+                    <h3 className="text-lg font-medium text-gray-900">What exactly are nano-emulsified cannabinoids?</h3>
                     <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
                   <div className="px-4 pb-4 text-gray-600">
                     <p>
-                      Nano-emulsification reduces the size of active compound particles to 25-50 nanometers (compared to 1,000+ nanometers in standard supplements). These tiny particles can pass through cell membranes more efficiently, resulting in significantly higher bioavailability. Our clinical studies show 17x greater absorption compared to standard supplements, meaning you get more benefit from a lower dose.
+                      Nano-emulsified cannabinoids are created through a specialized process that breaks down cannabinoid particles (CBD, THCV, CBG, etc.) to extremely small sizes (15-50 nanometers). This creates a stable water-compatible form of these naturally oil-soluble compounds. The result is dramatically improved absorption in the body, faster onset times, and more consistent effects compared to traditional cannabinoid products.
                     </p>
                   </div>
                 </details>
@@ -523,14 +523,14 @@ export default function ScienceBackedPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer">
-                    <h3 className="text-lg font-medium text-gray-900">How can you prove the 17x absorption claim?</h3>
+                    <h3 className="text-lg font-medium text-gray-900">What makes the TeaHC system different from other CBD products?</h3>
                     <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
                   <div className="px-4 pb-4 text-gray-600">
                     <p>
-                      Our 17x absorption claim is based on blood plasma concentration studies where we compared standard supplement formulations to our nano-emulsified version. The area under the curve (AUC) measurement, which is the standard pharmaceutical method for measuring bioavailability, showed our formula achieves 17 times higher concentration in the bloodstream over a 24-hour period. These results have been verified through both in-vitro and clinical studies with 157 participants.
+                      The TeaHC system is unique in three key ways: First, our nano-emulsification technology creates exceptionally small particles (15-50nm) for superior absorption. Second, we offer a complete system with three specialized formulas (MOVE for daytime, REPAIR for nighttime, and RAPID for fast-acting relief) that work together to provide 24-hour inflammation management. Third, our formulas contain synergistic blends of multiple cannabinoids and botanical compounds that target inflammation through multiple biological pathways simultaneously.
                     </p>
                   </div>
                 </details>
@@ -539,14 +539,14 @@ export default function ScienceBackedPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer">
-                    <h3 className="text-lg font-medium text-gray-900">Why do standard supplements have poor absorption?</h3>
+                    <h3 className="text-lg font-medium text-gray-900">Are these products psychoactive or intoxicating?</h3>
                     <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
                   <div className="px-4 pb-4 text-gray-600">
                     <p>
-                      Standard supplements face multiple absorption barriers: First, many active compounds are hydrophobic (water-repelling), making them difficult for your body to absorb through the water-based digestive system. Second, their large particle size prevents efficient cellular uptake. Third, they often undergo significant first-pass metabolism in the liver, reducing the amount that actually reaches the bloodstream. Our nano-technology addresses all three issues for dramatically improved effectiveness.
+                      No. All TeaHC formulas are specifically designed to be non-psychoactive and non-intoxicating. We use hemp-derived cannabinoids (CBD, THCV, CBG, CBN) that do not produce a "high" and are focused on providing anti-inflammatory and wellness benefits without cognitive impairment. Our products are lab-tested to confirm they contain less than 0.3% THC, the psychoactive cannabinoid, in compliance with federal regulations.
                     </p>
                   </div>
                 </details>
@@ -555,14 +555,14 @@ export default function ScienceBackedPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer">
-                    <h3 className="text-lg font-medium text-gray-900">Is your technology patented?</h3>
+                    <h3 className="text-lg font-medium text-gray-900">When will I feel the effects?</h3>
                     <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
                   <div className="px-4 pb-4 text-gray-600">
                     <p>
-                      Yes, our nano-emulsification technology is protected by two patents (US Pat. No. 10,821,057 and 11,234,978) with three additional patents pending. Our proprietary process creates smaller, more uniform nano-particles than competitors, resulting in superior bioavailability and more consistent results.
+                      Thanks to our nano-emulsification technology, you should begin to feel effects within 15-30 minutes, compared to the 60+ minutes typical with standard CBD products. The RAPID formula may work even faster (10-15 minutes) due to its liquid format and specific formulation. Individual experiences may vary depending on factors like metabolism, body composition, and the specific health concerns being addressed.
                     </p>
                   </div>
                 </details>
@@ -571,14 +571,14 @@ export default function ScienceBackedPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer">
-                    <h3 className="text-lg font-medium text-gray-900">Are there any side effects?</h3>
+                    <h3 className="text-lg font-medium text-gray-900">How do I use the TeaHC system?</h3>
                     <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
                   <div className="px-4 pb-4 text-gray-600">
                     <p>
-                      Our clinical trials have shown no significant side effects. In fact, our nano-technology actually reduces potential side effects compared to standard supplements because: 1) the lower dose needed reduces risk of adverse reactions, and 2) the improved targeted delivery means less active compound circulating in areas where it's not needed. As with any supplement, consult your healthcare provider before beginning use, especially if you have existing medical conditions or take other medications.
+                      For optimal results, we recommend using MOVE in the morning or afternoon to support mobility and daytime activity, REPAIR in the evening to support recovery and sleep, and RAPID as needed for fast-acting, targeted relief. The MOVE and REPAIR formulas come as tea sachets—simply steep in hot water for 2-3 minutes before consuming. The RAPID formula is a ready-to-drink shot that can be consumed directly. For best results, use consistently as part of your daily wellness routine.
                     </p>
                   </div>
                 </details>
@@ -599,10 +599,10 @@ export default function ScienceBackedPage() {
                     <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    High Demand Alert
+                    Pre-Launch Special
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4">Limited Availability</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4">Reserve Your TeaHC System</h2>
                 <p className="text-gray-600">Only <span className="font-bold text-red-600">127 spots</span> remaining in our first production run</p>
               </div>
 
@@ -707,19 +707,19 @@ export default function ScienceBackedPage() {
                         <svg className="h-4 w-4 text-orange-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        Morning Formula
+                        TeaHC MOVE (10 sachets) - Daytime Formula
                       </li>
                       <li className="flex items-center">
                         <svg className="h-4 w-4 text-orange-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        Daytime Formula
+                        TeaHC REPAIR (10 sachets) - Nighttime Formula
                       </li>
                       <li className="flex items-center">
                         <svg className="h-4 w-4 text-orange-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        Evening Formula
+                        TeaHC RAPID (10 shots) - Fast-Acting Formula
                       </li>
                     </ul>
                   </div>
@@ -730,9 +730,9 @@ export default function ScienceBackedPage() {
                     </div>
                     <div className="text-center">
                       <div className="text-sm text-orange-600 font-medium">Pre-Launch Price</div>
-                      <div className="text-2xl font-bold text-orange-600">$59.99</div>
+                      <div className="text-2xl font-bold text-orange-600">$47.98</div>
                       <div className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full inline-block">
-                        Save 50%
+                        Save $72.01
                       </div>
                     </div>
                   </div>
@@ -786,7 +786,7 @@ export default function ScienceBackedPage() {
               <div className="md:w-2/3">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4">Our 100% Satisfaction Guarantee</h2>
                 <p className="text-gray-700 mb-4">
-                  We're so confident in our science-backed technology that we offer a completely risk-free guarantee. If you're not completely satisfied with your TeaHC System for any reason, simply return it within 45 days for a full refund.
+                  We're so confident in our science-backed nano-cannabinoid formulas that we offer a completely risk-free guarantee. If you're not completely satisfied with your TeaHC System for any reason, simply return it within 45 days for a full refund.
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-start">
@@ -821,17 +821,17 @@ export default function ScienceBackedPage() {
             Limited Time Offer
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
-            Ready to Experience the Science of Superior Absorption?
+            Ready to Experience the Science of Nano-Cannabinoids?
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
-            Join the thousands who've discovered the difference that 17x better absorption makes. Reserve your TeaHC System today and transform your wellness routine.
+            Join thousands who've discovered the difference that superior absorption makes. Reserve your TeaHC System today and transform your wellness routine with our scientifically advanced formulas.
           </p>
           <Button
             asChild
             size="lg"
             className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105 rounded-xl"
           >
-            <Link href="/reserve">Reserve Your 50% Discount Now</Link>
+            <Link href="/reserve">Reserve Your System Now</Link>
           </Button>
           <div className="mt-4 text-sm text-gray-600">
             No payment required today. Limited time offer.
