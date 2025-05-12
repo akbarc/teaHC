@@ -162,6 +162,38 @@ Notes: ${reservationRecord.notes}
         // Continue anyway
       }
       
+      // STEP 1.5: Use our special fix endpoint
+      try {
+        console.log("Using fix-reservation endpoint...")
+        
+        const fixResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/fix-reservation`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(reservationRecord)
+        })
+        
+        const fixResult = await fixResponse.json()
+        
+        if (fixResult.success) {
+          console.log("✅ Fix endpoint worked:", fixResult)
+          supabaseUpdated = true
+          return {
+            success: true,
+            message: "Reservation submitted successfully! We'll contact you soon.",
+            details: {
+              supabaseUpdated: true,
+              supabaseError: null,
+              data: fixResult.data,
+              method: "fix-endpoint"
+            }
+          }
+        } else {
+          console.error("❌ Fix endpoint failed:", fixResult)
+        }
+      } catch (fixError) {
+        console.error("❌ Exception using fix endpoint:", fixError)
+      }
+      
       // STEP 2: Use direct Supabase insertion
       console.log("Method 1: Direct insert to reservations table...")
       
