@@ -23,7 +23,14 @@ export async function GET() {
     const testData = {
       email: testEmail,
       timestamp: new Date().toISOString(),
-      fullName: 'Direct Test User'
+      fullName: 'Direct Test User',
+      address: '123 Test St, Test City, TS 12345',
+      phone: '555-1234',
+      moveQuantity: 0,
+      repairQuantity: 0,
+      rapidQuantity: 0,
+      bundleQuantity: 0,
+      totalCost: 0
     }
     
     console.log('Sending test data:', testData)

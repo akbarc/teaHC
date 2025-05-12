@@ -75,7 +75,15 @@ export async function POST(req: NextRequest) {
       // Try with only critical fields
       const minimalData = {
         email: data.email,
-        timestamp: data.timestamp || new Date().toISOString()
+        timestamp: data.timestamp || new Date().toISOString(),
+        address: data.address || 'Address not provided',
+        fullName: data.fullName || 'Customer',
+        phone: data.phone || 'No phone',
+        moveQuantity: 0,
+        repairQuantity: 0,
+        rapidQuantity: 0,
+        bundleQuantity: 0,
+        totalCost: 0
       }
       
       console.log('Trying minimal data:', minimalData)
