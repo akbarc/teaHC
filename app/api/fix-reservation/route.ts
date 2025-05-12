@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 
 export async function POST(req: NextRequest) {
   try {
     console.log('🛠️ Fix Reservation System Test')
+    
+    // Create a fresh client
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || 'https://oximmrzfhtkdgfykrtjy.supabase.co'
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94aW1tcnpmaHRrZGdmeWtydGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3NTU1NjMsImV4cCI6MjA2MjMzMTU2M30.ieWFaNGnwiSngyEYiwmg6JimpCe16OlnVZJhymljcKw'
+    
+    console.log('Using Supabase URL:', supabaseUrl)
+    console.log('Key available:', !!supabaseKey)
+    
+    const supabase = createClient(supabaseUrl, supabaseKey)
     
     // Get data from request or use test data
     let data
@@ -53,6 +62,8 @@ export async function POST(req: NextRequest) {
     console.log('Clean data being sent:', cleanData)
     
     // Direct insert using Supabase client
+    console.log('⚠️ IMPORTANT - Attempting insert with data:', JSON.stringify(cleanData))
+    
     const { data: insertData, error: insertError } = await supabase
       .from('reservations')
       .insert([cleanData])
@@ -64,7 +75,7 @@ export async function POST(req: NextRequest) {
       // Try with only critical fields
       const minimalData = {
         email: data.email,
-        timestamp: data.timestamp
+        timestamp: data.timestamp || new Date().toISOString()
       }
       
       console.log('Trying minimal data:', minimalData)
@@ -75,6 +86,20 @@ export async function POST(req: NextRequest) {
         .select()
       
       if (minError) {
+        // Get RLS settings to help diagnose the issue
+        let rlsInfo = null
+        try {
+          const { data: rlsData, error: rlsError } = await supabase
+            .from('reservations')
+            .select('*')
+            .limit(1)
+          
+          rlsInfo = {
+            canSelect: !rlsError,
+            selectError: rlsError ? rlsError.message : null
+          }
+        } catch (e) {}
+        
         return NextResponse.json({
           success: false,
           message: 'All insert attempts failed',
@@ -82,7 +107,12 @@ export async function POST(req: NextRequest) {
             original: insertError,
             minimal: minError
           },
-          tableColumns: existingColumns
+          tableColumns: existingColumns,
+          supabaseInfo: {
+            url: supabaseUrl,
+            keyAvailable: !!supabaseKey,
+            rls: rlsInfo
+          }
         }, { status: 500 })
       }
       
