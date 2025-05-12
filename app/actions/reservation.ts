@@ -4,6 +4,7 @@ import { z } from "zod"
 import nodemailer from "nodemailer"
 import { updateSubscriberReservation } from "@/lib/subscriber-service"
 import { addReservationToSupabase, ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
+import { supabase } from "@/lib/supabase"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -140,61 +141,107 @@ Notes: ${reservationRecord.notes}
     console.log("RESERVATION_DATA:", formattedReservation)
     console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
 
-    // Add the reservation to both Supabase tables for maximum reliability
+    // Add the reservation to Supabase with improved diagnostics
     let supabaseUpdated = false
     let supabaseError: any = null
     
     try {
-      console.log("⏳ Saving reservation to Supabase databases...")
+      console.log("⏳ Saving reservation to Supabase...")
       
-      // Method 1: Try adding to the reservations table directly
-      console.log("Method 1: Using addReservationToSupabase...")
-      const directResult = await addReservationToSupabase(reservationRecord)
+      // STEP 1: Log the reservation data for debugging
+      try {
+        const logResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/log-reservation`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(reservationRecord)
+        })
+        
+        console.log("📝 Reservation logged for debugging")
+      } catch (logError) {
+        console.error("⚠️ Could not log reservation data:", logError)
+        // Continue anyway
+      }
       
-      if (directResult.success) {
-        console.log("✅ Direct reservations table update successful")
+      // STEP 2: Use direct Supabase insertion
+      console.log("Method 1: Direct insert to reservations table...")
+      
+      // Show exactly what we're sending to Supabase
+      console.log("Data being sent:", JSON.stringify(reservationRecord, null, 2))
+      
+      const { data: directData, error: directError } = await supabase
+        .from('reservations')
+        .insert([reservationRecord])
+        .select()
+      
+      if (!directError) {
+        console.log("✅ Direct insertion successful:", directData)
+        supabaseUpdated = true
+        return {
+          success: true,
+          message: "Reservation submitted successfully! We'll contact you soon.",
+          details: {
+            supabaseUpdated: true,
+            supabaseError: null,
+            data: directData
+          }
+        }
+      }
+      
+      // STEP 3: If direct insert failed, log the error and try fallback
+      console.error("❌ Direct insertion failed:", directError)
+      supabaseError = directError
+      
+      // STEP 4: As a fallback, try the subscriber service
+      console.log("Method 2: Using subscriber service as fallback...")
+      
+      // Convert to the format needed by updateSubscriberReservation
+      const subscriberReservation = {
+        email: reservationRecord.email,
+        products: {
+          moveQuantity: reservationRecord.moveQuantity,
+          repairQuantity: reservationRecord.repairQuantity,
+          rapidQuantity: reservationRecord.rapidQuantity,
+          bundleQuantity: reservationRecord.bundleQuantity,
+        },
+        shipping: {
+          fullName: reservationRecord.fullName,
+          phone: reservationRecord.phone,
+          address: reservationRecord.address,
+        },
+        totalCost: reservationRecord.totalCost,
+        reservedAt: reservationRecord.timestamp,
+        notes: reservationRecord.notes,
+      }
+      
+      const backupResult = await updateSubscriberReservation(
+        reservationRecord.email, 
+        subscriberReservation
+      )
+      
+      if (backupResult.success) {
+        console.log("✅ Fallback method successful")
         supabaseUpdated = true
       } else {
-        // Check if error exists in the result
-        const errorMessage = 'error' in directResult 
-          ? directResult.error 
-          : 'Unknown error with reservations table';
-        console.error("❌ Direct reservations table update failed:", errorMessage)
+        console.error("❌ Fallback method failed")
         
-        // Method 2: Try using the subscriber service as backup
-        console.log("Method 2: Using updateSubscriberReservation as backup...")
+        // Last resort: try a minimal direct insertion with just email
+        console.log("Method 3: Trying minimal insertion...")
         
-        // Convert to the format needed by updateSubscriberReservation
-        const subscriberReservation = {
-          email: reservationRecord.email,
-          products: {
-            moveQuantity: reservationRecord.moveQuantity,
-            repairQuantity: reservationRecord.repairQuantity,
-            rapidQuantity: reservationRecord.rapidQuantity,
-            bundleQuantity: reservationRecord.bundleQuantity,
-          },
-          shipping: {
-            fullName: reservationRecord.fullName,
-            phone: reservationRecord.phone,
-            address: reservationRecord.address,
-          },
-          totalCost: reservationRecord.totalCost,
-          reservedAt: reservationRecord.timestamp,
-          notes: reservationRecord.notes,
-        }
+        const { data: minimalData, error: minimalError } = await supabase
+          .from('reservations')
+          .insert([{
+            email: reservationRecord.email,
+            timestamp: reservationRecord.timestamp,
+            fullName: reservationRecord.fullName
+          }])
+          .select()
         
-        const backupResult = await updateSubscriberReservation(
-          reservationRecord.email, 
-          subscriberReservation
-        )
-        
-        supabaseUpdated = backupResult.success
-        
-        if (supabaseUpdated) {
-          console.log("✅ Backup method successful")
+        if (!minimalError) {
+          console.log("✅ Minimal insertion successful")
+          supabaseUpdated = true
         } else {
-          supabaseError = 'Both direct and backup methods failed'
-          console.error("❌ Backup method also failed")
+          console.error("❌ All methods failed:", minimalError)
+          supabaseError = minimalError
         }
       }
     } catch (dbError) {
