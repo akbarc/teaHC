@@ -12,10 +12,10 @@
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "installCommand": "pnpm install --no-frozen-lockfile"
+        "installCommand": "npm install"
       }
     }
   ],
-  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm build",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": ".next"
 } 
