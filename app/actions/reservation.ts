@@ -2,7 +2,8 @@
 
 import { z } from "zod"
 import nodemailer from "nodemailer"
-import { addReservationToSupabase, ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
+import { updateSubscriberReservation } from "@/lib/subscriber-service"
+import { ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -139,12 +140,35 @@ Notes: ${reservationRecord.notes}
     console.log("RESERVATION_DATA:", formattedReservation)
     console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
 
-    // Add the reservation to Supabase
+    // Add the reservation to Supabase using subscriber service
     let supabaseUpdated = false
     let supabaseError: any = null
     try {
       console.log("⏳ Saving reservation to Supabase database...")
-      const supabaseResult = await addReservationToSupabase(reservationRecord)
+      // Convert to the format needed by updateSubscriberReservation
+      const subscriberReservation = {
+        email: reservationRecord.email,
+        products: {
+          moveQuantity: reservationRecord.moveQuantity,
+          repairQuantity: reservationRecord.repairQuantity,
+          rapidQuantity: reservationRecord.rapidQuantity,
+          bundleQuantity: reservationRecord.bundleQuantity,
+        },
+        shipping: {
+          fullName: reservationRecord.fullName,
+          phone: reservationRecord.phone,
+          address: reservationRecord.address,
+        },
+        totalCost: reservationRecord.totalCost,
+        reservedAt: reservationRecord.timestamp,
+        notes: reservationRecord.notes,
+      }
+      
+      const supabaseResult = await updateSubscriberReservation(
+        reservationRecord.email, 
+        subscriberReservation
+      )
+      
       supabaseUpdated = supabaseResult.success
       
       if (supabaseUpdated) {

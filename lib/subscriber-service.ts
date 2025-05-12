@@ -138,6 +138,40 @@ export async function updateSubscriberReservation(email: string, reservationData
   try {
     console.log('🔵 Updating subscriber reservation...', { email })
 
+    // First try to use the pre-reservations table directly
+    try {
+      console.log('Attempting to insert into teahc-pre-reservations table...')
+      
+      const { data: insertData, error: insertError } = await supabase
+        .from('teahc-pre-reservations')
+        .insert([
+          {
+            timestamp: reservationData.reservedAt,
+            fullName: reservationData.shipping.fullName,
+            email: email,
+            phone: reservationData.shipping.phone || '',
+            address: reservationData.shipping.address,
+            moveQuantity: reservationData.products.moveQuantity || 0,
+            repairQuantity: reservationData.products.repairQuantity || 0,
+            rapidQuantity: reservationData.products.rapidQuantity || 0,
+            bundleQuantity: reservationData.products.bundleQuantity || 0,
+            totalCost: reservationData.totalCost
+          }
+        ])
+        .select()
+      
+      if (insertError) {
+        console.error('❌ Error inserting into teahc-pre-reservations:', insertError)
+      } else {
+        console.log('✅ Successfully inserted into teahc-pre-reservations:', insertData)
+        return { success: true, data: insertData }
+      }
+    } catch (preReservationError) {
+      console.error('❌ Exception with teahc-pre-reservations table:', preReservationError)
+      // Continue with the fallback subscribers table approach
+    }
+
+    // Fallback to subscribers table if the teahc-pre-reservations approach failed
     // Check if the subscribers table exists
     const { error: tableCheck } = await supabase
       .from('subscribers')
