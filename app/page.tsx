@@ -1112,7 +1112,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg transform transition-transform hover:scale-[1.02]">
+            <div className="bg-white p-8 rounded-xl shadow-lg transform transition-transform hover:scale-[1.02] relative">
               <div className="absolute -top-3 -right-3 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Limited Time
               </div>
