@@ -73,14 +73,61 @@ export default function Step4Confirm({
       // Prepare data for the API
       const reservationData = {
         email,
+        timestamp: new Date().toISOString(),
+        fullName: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
+        phone: shippingDetails.phone,
+        address: formatAddress(),
+        moveQuantity: productSelections.moveQuantity,
+        repairQuantity: productSelections.repairQuantity,
+        rapidQuantity: productSelections.rapidQuantity,
+        bundleQuantity: productSelections.bundleQuantity,
+        totalCost,
+        notes: ""
+      }
+      
+      console.log('Sending reservation data:', reservationData)
+      
+      // First try our direct API endpoint
+      try {
+        const baseUrl = window.location.origin // Gets http://localhost:3000 or https://yourdomain.com
+        const fixEndpoint = `${baseUrl}/api/fix-reservation`
+        
+        console.log(`Using fix endpoint: ${fixEndpoint}`)
+        
+        const response = await fetch(fixEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(reservationData)
+        })
+        
+        const result = await response.json()
+        console.log('Fix endpoint result:', result)
+        
+        if (result.success) {
+          console.log('✅ Direct reservation saved successfully!')
+          setSuccess(true)
+          onConfirmation()
+          return
+        } else {
+          console.warn('Direct save failed, falling back to subscriber service')
+        }
+      } catch (fixError) {
+        console.error('Error using fix endpoint:', fixError)
+        // Continue to fallback method
+      }
+      
+      // Update the subscriber record to mark reservation as completed and save reservation details
+      const subscriberData = {
+        email,
         products: productSelections,
         shipping: shippingDetails,
         totalCost,
         reservedAt: new Date().toISOString()
       }
       
-      // Update the subscriber record to mark reservation as completed and save reservation details
-      const result = await updateSubscriberReservation(email, reservationData)
+      const result = await updateSubscriberReservation(email, subscriberData)
 
       // Log the result for debugging
       console.log('Reservation result:', result)
