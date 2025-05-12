@@ -810,152 +810,191 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Technology Comparison - Redesigned to match image */}
-      <section className="py-16 bg-gray-50">
+      {/* Direct Comparison Section - Completely Redesigned */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">The TeaHC Difference</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our advanced nano-emulsion technology dramatically increases bioavailability, delivering relief when you need it most
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-            <div className="space-y-8">
-              {/* Standard CBD Products */}
-              <div className="relative">
-                <div className="flex items-center justify-between pb-2 mb-1">
-                  <span className="font-bold text-lg text-gray-800">Standard CBD Products:</span>
-                  <span className="font-medium text-gray-600">Typically 1-2 hours to take effect</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Why TeaHC Outperforms Traditional Supplements</h2>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Our advanced nano-technology delivers active ingredients more efficiently than traditional formulations
+          </p>
+
+          {/* Visual Comparison Cards */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Traditional Supplements Card */}
+              <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200">
+                <div className="bg-gray-100 p-6">
+                  <h3 className="text-2xl font-bold text-gray-800 text-center">Traditional Supplements</h3>
                 </div>
-                <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
-                  <div className="bg-gray-400 h-full rounded-full" style={{ width: '30%' }}></div>
-                </div>
-                <div className="absolute top-0 right-0 pr-2 text-sm text-gray-500 font-medium">
-                  Poor absorption
+                <div className="p-6 space-y-6">
+                  <div className="relative h-48 mb-4">
+                    <Image
+                      src="/product-images/standard-absorption.png"
+                      alt="Standard supplement absorption visualization"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center border-b border-gray-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Absorption:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-red-500 font-medium">Only 10% of active ingredients reach target</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center border-b border-gray-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Onset Time:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-gray-700">45-60 minutes or longer</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center border-b border-gray-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Precision:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-gray-700">Limited targeting ability</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Value:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-red-500 font-medium">90% wasted ingredients</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-red-50 p-4 rounded-lg mt-4">
+                    <p className="text-gray-700 text-sm">
+                      <span className="font-semibold text-red-600">The Problem:</span> Standard supplements use large particles that can't efficiently pass through cell membranes, resulting in poor absorption and wasted product.
+                    </p>
+                  </div>
                 </div>
               </div>
               
-              {/* Over-the-counter options */}
-              <div className="relative">
-                <div className="flex items-center justify-between pb-2 mb-1">
-                  <span className="font-bold text-lg text-gray-800">Over-the-counter options:</span>
-                  <span className="font-medium text-gray-600">30-60 minutes, often with side effects</span>
+              {/* TeaHC Nano-Formula Card */}
+              <div className="bg-white rounded-xl overflow-hidden shadow-md border border-orange-200 transform transition duration-300 hover:shadow-lg">
+                <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 border-b-4 border-orange-600">
+                  <h3 className="text-2xl font-bold text-white text-center">TeaHC Nano-Formula</h3>
                 </div>
-                <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
-                  <div className="bg-yellow-400 h-full rounded-full" style={{ width: '55%' }}></div>
-                </div>
-                <div className="absolute top-0 right-0 pr-2 text-sm text-yellow-600 font-medium">
-                  Moderate effectiveness
-                </div>
-              </div>
-              
-              {/* TeaHC Nano-Technology */}
-              <div className="relative">
-                <div className="flex items-center justify-between pb-2 mb-1">
-                  <span className="font-bold text-lg text-orange-800">TeaHC Nano-Technology:</span>
-                  <span className="font-medium text-green-600">Typically 15-45 minutes</span>
-                </div>
-                <div className="w-full bg-orange-100 h-6 rounded-full overflow-hidden">
-                  <div className="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full" style={{ width: '85%' }}></div>
-                </div>
-                <div className="absolute top-0 right-0 pr-2 text-sm text-orange-600 font-medium">
-                  Superior absorption
-                </div>
-              </div>
-              
-              <div className="bg-orange-50 p-4 rounded-lg mt-6 border border-orange-100">
-                <div className="flex items-center text-orange-800">
-                  <svg className="h-6 w-6 text-orange-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="font-medium">In clinical studies, our nano-technology showed 4x higher absorption rates compared to traditional formulations</span>
+                <div className="p-6 space-y-6">
+                  <div className="relative h-48 mb-4">
+                    <Image
+                      src="/product-images/nano-absorption.png"
+                      alt="TeaHC nano-emulsion absorption visualization"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center border-b border-orange-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Absorption:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-green-600 font-bold">90% of active ingredients reach target</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center border-b border-orange-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Onset Time:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-green-600 font-bold">As little as 15 minutes</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center border-b border-orange-100 pb-3">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Precision:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-gray-700">Precise targeted delivery</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className="w-32 flex-shrink-0">
+                        <span className="font-semibold text-gray-700">Value:</span>
+                      </div>
+                      <div className="flex-grow">
+                        <span className="text-green-600 font-bold">Maximum benefit from every dose</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-green-50 p-4 rounded-lg mt-4">
+                    <p className="text-gray-700 text-sm">
+                      <span className="font-semibold text-green-600">The Solution:</span> Our nano-emulsion technology breaks ingredients down to 25-200nm particles that easily pass through cell membranes for 17× better bioavailability.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Key Differentiators */}
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-center mb-8">The 17× Difference in Action</h3>
             
-            <div className="grid md:grid-cols-2 gap-8 mt-12">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold">Advanced Nano-Delivery System</h3>
-                <p className="text-gray-700">
-                  Most wellness products are limited by poor absorption. Our nano-emulsion technology breaks down active compounds into tiny particles that your body can absorb more efficiently.
-                </p>
-                
-                <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-orange-100">
-                  <h4 className="font-bold text-orange-800 mb-2">Key Benefits of Nano-Technology</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>Faster onset of effects (15-45 minutes)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>Higher bioavailability for better results</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>More consistent, reliable outcomes</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>Water-compatible for better delivery</span>
-                    </li>
-                  </ul>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div className="bg-orange-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
+                <h4 className="font-bold text-gray-900 mb-2">Faster Relief</h4>
+                <p className="text-gray-600">Feel the difference in as little as 15 minutes, not hours</p>
               </div>
               
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold">Why Size Matters</h3>
-                <p className="text-gray-700">
-                  The smaller the particle size, the more efficiently your body can absorb and utilize beneficial compounds. Our nano-technology creates particles that are:
-                </p>
-                
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <div>
-                        <span className="font-medium">25-200 nanometers in size</span>
-                        <p className="text-sm text-gray-600">Compared to 2,000+ nanometers in standard products</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <div>
-                        <span className="font-medium">Enhanced cell membrane penetration</span>
-                        <p className="text-sm text-gray-600">Allows active compounds to reach target tissues more effectively</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <div>
-                        <span className="font-medium">Improved stability</span>
-                        <p className="text-sm text-gray-600">Protects active ingredients from degradation for consistent potency</p>
-                      </div>
-                    </li>
-                  </ul>
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div className="bg-orange-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
                 </div>
-                
-                <div className="flex items-center gap-4 mt-4">
-                  <Button asChild className="bg-orange-500 hover:bg-orange-600">
-                    <Link href="/science">Learn More About Our Technology</Link>
-                  </Button>
-                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Superior Targeting</h4>
+                <p className="text-gray-600">Nano-particles deliver active ingredients directly where needed</p>
               </div>
+              
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div className="bg-orange-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Proven Results</h4>
+                <p className="text-gray-600">Lab-verified 17× higher bioavailability vs. standard supplements</p>
+              </div>
+            </div>
+            
+            {/* CTA */}
+            <div className="mt-12 text-center">
+              <p className="text-lg text-gray-700 mb-6">
+                Experience the difference that 17× better absorption makes in your daily life
+              </p>
+              <a
+                href="/reserve"
+                className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 shadow-md hover:shadow-xl transition-all duration-200"
+              >
+                Reserve Your System Now
+                <svg className="ml-3 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -1016,119 +1055,6 @@ export default function Home() {
                   <span className="px-3 py-1 bg-orange-50 rounded-full text-sm text-orange-700">Quick Support</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Direct Comparison Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Why TeaHC Outperforms Traditional Supplements</h2>
-          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-            Don't settle for supplements that don't deliver. Here's how TeaHC's nano-technology makes the difference.
-          </p>
-
-          {/* Comparison Table */}
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {/* Header */}
-              <div className="md:col-span-1 bg-gray-50 p-4 rounded-t-lg">
-                <h3 className="font-bold text-gray-800">Comparison</h3>
-              </div>
-              <div className="bg-gray-100 rounded-t-lg p-4 text-center">
-                <h3 className="font-bold text-gray-700">Traditional Supplements</h3>
-              </div>
-              <div className="bg-orange-50 rounded-t-lg p-4 text-center border-t-4 border-orange-500">
-                <h3 className="font-bold text-orange-600">TeaHC Nano-Formula</h3>
-              </div>
-
-              {/* Comparison Rows */}
-              {[
-                {
-                  feature: "Absorption Rate",
-                  traditional: "10%",
-                  teaHC: "90%",
-                  highlight: true
-                },
-                {
-                  feature: "Time to Effect",
-                  traditional: "45-60 minutes",
-                  teaHC: "15 minutes",
-                  highlight: true
-                },
-                {
-                  feature: "Targeted Delivery",
-                  traditional: "Limited",
-                  teaHC: "Precise",
-                  highlight: false
-                },
-                {
-                  feature: "Bioavailability",
-                  traditional: "Low",
-                  teaHC: "17× Higher",
-                  highlight: true
-                },
-                {
-                  feature: "Consistency",
-                  traditional: "Variable",
-                  teaHC: "Lab-Verified",
-                  highlight: false
-                },
-                {
-                  feature: "Value for Money",
-                  traditional: "90% Wasted",
-                  teaHC: "Maximum Benefit",
-                  highlight: true
-                }
-              ].map((row, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gray-50 p-4 font-medium">
-                    {row.feature}
-                  </div>
-                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-                    <span className={row.highlight ? "text-red-500 font-medium" : "text-gray-700"}>
-                      {row.traditional}
-                    </span>
-                  </div>
-                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-orange-50'} border-l-4 border-orange-500`}>
-                    <span className={row.highlight ? "text-green-600 font-bold" : "text-gray-900 font-medium"}>
-                      {row.teaHC}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Key Takeaway */}
-            <div className="bg-orange-50 rounded-lg p-6 mt-8 border border-orange-100">
-              <div className="flex items-start">
-                <div className="flex-shrink-0">
-                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <h4 className="text-lg font-medium text-gray-900">The Bottom Line</h4>
-                  <p className="mt-2 text-gray-700">
-                    With TeaHC's nano-technology, you're getting 17× more active ingredients where they need to be, 
-                    faster than traditional supplements. That means real results, not wasted money.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-12">
-              <a
-                href="/reserve"
-                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10 shadow-md hover:shadow-lg transition-all duration-200"
-              >
-                Experience the 17× Difference
-                <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
             </div>
           </div>
         </div>
