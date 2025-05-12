@@ -83,7 +83,7 @@ export default function Home() {
               {/* Left: Thermal Visualization */}
               <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-lg">
                 <Image
-                  src="/thermal-knee-scan.png"
+                  src="/product-images/thermal-knee-scan.png"
                   alt="Thermal visualization of TeaHC's targeted relief"
                   width={400}
                   height={400}
@@ -99,7 +99,7 @@ export default function Home() {
               {/* Right: Product Trio */}
               <div className="relative bg-white rounded-xl p-4 shadow-lg">
                 <Image
-                  src="/product_trio.png"
+                  src="/product-images/product-trio.png"
                   alt="TeaHC Product Line featuring MOVE, REPAIR, and RAPID formulas"
                   width={400}
                   height={400}
@@ -126,7 +126,7 @@ export default function Home() {
             <div className="bg-gray-50 rounded-xl p-6 text-center">
               <div className="relative h-64 mb-6">
                 <Image
-                  src="/standard-absorption.png"
+                  src="/product-images/standard-absorption.png"
                   alt="Standard supplement absorption visualization"
                   fill
                   className="object-contain"
@@ -146,7 +146,7 @@ export default function Home() {
             <div className="bg-orange-50 rounded-xl p-6 text-center">
               <div className="relative h-64 mb-6">
                 <Image
-                  src="/nano-absorption.png"
+                  src="/product-images/nano-absorption.png"
                   alt="TeaHC nano-emulsion absorption visualization"
                   fill
                   className="object-contain"
@@ -1378,7 +1378,7 @@ export default function Home() {
               <div className="bg-white rounded-xl p-6 shadow-lg">
                 <div className="relative h-80 mb-6">
                   <Image
-                    src="/wasted-supplements.png"
+                    src="/product-images/wasted-supplements.png"
                     alt="Visualization of wasted supplement absorption"
                     fill
                     className="object-contain"
@@ -1472,7 +1472,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
+                    src="/product-images/move-formula.png"
                     alt="TeaHC MOVE Formula"
                     fill
                     className="object-contain"
@@ -1508,7 +1508,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.41%20PM-NE7LO3yAuw5DJdwWq1guL2j7YN5cjZ.png"
+                    src="/product-images/rapid-formula.png"
                     alt="TeaHC RAPID Formula"
                     fill
                     className="object-contain"
@@ -1544,7 +1544,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
+                    src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR Formula"
                     fill
                     className="object-contain"
@@ -2126,7 +2126,7 @@ export default function Home() {
               <div className="bg-white rounded-xl p-6 shadow-lg">
                 <div className="relative h-80 mb-6">
                   <Image
-                    src="/wasted-supplements.png"
+                    src="/product-images/wasted-supplements.png"
                     alt="Visualization of wasted supplement absorption"
                     fill
                     className="object-contain"
@@ -2220,7 +2220,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
+                    src="/product-images/move-formula.png"
                     alt="TeaHC MOVE Formula"
                     fill
                     className="object-contain"
@@ -2256,7 +2256,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.41%20PM-NE7LO3yAuw5DJdwWq1guL2j7YN5cjZ.png"
+                    src="/product-images/rapid-formula.png"
                     alt="TeaHC RAPID Formula"
                     fill
                     className="object-contain"
@@ -2292,7 +2292,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
+                    src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR Formula"
                     fill
                     className="object-contain"
