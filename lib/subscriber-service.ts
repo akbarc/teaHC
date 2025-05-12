@@ -157,6 +157,20 @@ export async function updateSubscriberReservation(email: string, reservationData
       }
     }
 
+    // First, check what columns exist in the table
+    const { data: columnCheckData, error: columnCheckError } = await supabase
+      .from('subscribers')
+      .select('*')
+      .limit(1)
+    
+    // Extract column names if we have data, otherwise assume none of our special columns exist
+    const existingColumns = columnCheckData && columnCheckData.length > 0 
+      ? Object.keys(columnCheckData[0]) 
+      : []
+    
+    const hasMetadataColumn = existingColumns.includes('metadata')
+    const hasReservationCompletedColumn = existingColumns.includes('reservation_completed')
+    
     // Check if the subscriber exists
     const { data: existingSubscriber, error: checkError } = await supabase
       .from('subscribers')
@@ -175,20 +189,33 @@ export async function updateSubscriberReservation(email: string, reservationData
       }
     }
 
+    // Prepare data object based on available columns
+    const dataToUpsert: any = {
+      email: email
+    }
+    
+    // Only include these fields if they exist in the table
+    if (hasMetadataColumn) {
+      dataToUpsert.metadata = JSON.stringify({
+        reservation: reservationData
+      })
+    }
+    
+    if (hasReservationCompletedColumn) {
+      dataToUpsert.reservation_completed = true
+    }
+    
+    // Always include source if not already set
+    if (!existingSubscriber || !existingSubscriber.source) {
+      dataToUpsert.source = 'reservation'
+    }
+
     if (!existingSubscriber) {
       console.log('⚠️ Subscriber does not exist, creating new record')
       // Insert the new subscriber with reservation details
       const { error: insertError } = await supabase
         .from('subscribers')
-        .insert([
-          {
-            email: email,
-            reservation_completed: true,
-            metadata: {
-              reservation: reservationData
-            }
-          },
-        ])
+        .insert([dataToUpsert])
 
       if (insertError) {
         console.error('❌ Error adding subscriber with reservation:', insertError)
@@ -204,13 +231,7 @@ export async function updateSubscriberReservation(email: string, reservationData
       // Update the existing subscriber
       const { error: updateError } = await supabase
         .from('subscribers')
-        .update({
-          reservation_completed: true,
-          metadata: {
-            ...existingSubscriber.metadata,
-            reservation: reservationData
-          }
-        })
+        .update(dataToUpsert)
         .eq('email', email)
 
       if (updateError) {
