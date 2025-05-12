@@ -8,6 +8,14 @@ export interface SubscriberData {
   user_agent?: string
 }
 
+export interface ReservationData {
+  email: string
+  products: any
+  shipping: any
+  totalCost: number
+  reservedAt: string
+}
+
 /**
  * Add an email subscriber to the Supabase 'subscribers' table
  */
@@ -28,41 +36,83 @@ export async function addSubscriberToSupabase(subscriber: SubscriberData) {
       console.error('❌ Supabase subscribers table check failed:', tableCheck)
       console.log('This may be normal if the table does not exist yet.')
       // Return an error indicating the table needs to be created
-      return { error: 'subscribers table does not exist', needsSetup: true }
-    }
-    
-    // Add timestamp
-    const subscriberWithTimestamp = {
-      ...subscriber,
-      created_at: new Date().toISOString()
+      return { 
+        error: 'Subscribers table does not exist',
+        needsSetup: true
+      }
     }
 
-    // Log the exact data being sent to Supabase
-    console.log('📦 Data being sent to Supabase:', JSON.stringify(subscriberWithTimestamp, null, 2))
-
-    const { data, error } = await supabase
+    // Check if the subscriber already exists
+    const { data: existingSubscriber } = await supabase
       .from('subscribers')
-      .insert([subscriberWithTimestamp])
-      .select()
+      .select('*')
+      .eq('email', subscriber.email)
+      .maybeSingle()
 
-    if (error) {
-      console.error('❌ Error inserting subscriber to Supabase:', error)
-      return { error }
+    if (existingSubscriber) {
+      console.log('⚠️ Subscriber already exists:', existingSubscriber)
+      // Update the existing subscriber
+      const { error: updateError } = await supabase
+        .from('subscribers')
+        .update({
+          source: subscriber.source || existingSubscriber.source,
+          user_agent: subscriber.user_agent || existingSubscriber.user_agent,
+        })
+        .eq('email', subscriber.email)
+
+      if (updateError) {
+        console.error('❌ Error updating subscriber:', updateError)
+        return { error: updateError.message }
+      }
+
+      return { success: true, message: 'Subscriber updated' }
     }
 
-    console.log('✅ Successfully inserted subscriber to Supabase:', data)
-    return { data }
+    // Insert the new subscriber
+    const { error: insertError } = await supabase
+      .from('subscribers')
+      .insert([
+        {
+          email: subscriber.email,
+          source: subscriber.source,
+          name: subscriber.name,
+          ip_address: subscriber.ip_address,
+          user_agent: subscriber.user_agent,
+        },
+      ])
+
+    if (insertError) {
+      console.error('❌ Error adding subscriber:', insertError)
+      return { error: insertError.message }
+    }
+
+    console.log('✅ Subscriber added successfully!')
+    return { success: true }
   } catch (error) {
-    console.error('❌❌ Exception adding subscriber to Supabase:', error)
-    return { error }
+    console.error('❌ Exception in addSubscriberToSupabase:', error)
+    return { error: error instanceof Error ? error.message : String(error) }
   }
 }
 
 /**
- * Check if a subscriber email already exists
+ * Check if a subscriber with the given email already exists
  */
 export async function checkSubscriberExists(email: string) {
   try {
+    // Check if the subscribers table exists
+    const { error: tableCheck } = await supabase
+      .from('subscribers')
+      .select('*')
+      .limit(1)
+
+    if (tableCheck) {
+      return { 
+        error: 'Subscribers table does not exist',
+        exists: false
+      }
+    }
+
+    // Check if the subscriber exists
     const { data, error } = await supabase
       .from('subscribers')
       .select('email')
@@ -70,53 +120,137 @@ export async function checkSubscriberExists(email: string) {
       .maybeSingle()
 
     if (error) {
-      console.error('❌ Error checking if subscriber exists:', error)
-      return { error }
+      console.error('❌ Error checking subscriber:', error)
+      return { error: error.message, exists: false }
     }
 
-    return { exists: !!data, data }
+    return { exists: !!data }
   } catch (error) {
-    console.error('❌❌ Exception checking if subscriber exists:', error)
-    return { error, exists: false }
+    console.error('❌ Exception in checkSubscriberExists:', error)
+    return { error: error instanceof Error ? error.message : String(error), exists: false }
   }
 }
 
 /**
- * Setup the subscribers table if it doesn't exist
- * This function can be called from an admin panel or setup script
+ * Update a subscriber's reservation status and details
  */
-export async function setupSubscribersTable() {
+export async function updateSubscriberReservation(email: string, reservationData: ReservationData) {
   try {
-    // This requires RLS policies to be configured properly in Supabase
-    // Typically, table creation would be done through the Supabase dashboard
-    // This is just a fallback
+    console.log('🔵 Updating subscriber reservation...', { email })
 
-    // Check for table first
-    const { error: checkError } = await supabase
+    // Check if the subscribers table exists
+    const { error: tableCheck } = await supabase
       .from('subscribers')
       .select('*')
       .limit(1)
 
-    // If no error, table exists
-    if (!checkError) {
-      return { message: 'Table already exists' }
-    }
-
-    // Create table (requires proper permissions)
-    // In most cases, manually creating the table in Supabase dashboard is preferred
-    const { error } = await supabase.rpc('create_subscribers_table')
-
-    if (error) {
-      console.error('❌ Failed to create subscribers table:', error)
+    if (tableCheck) {
+      console.error('❌ Supabase subscribers table check failed:', tableCheck)
       return { 
-        error,
-        message: 'Failed to create subscribers table. Please create it manually in Supabase dashboard.'
+        error: 'Subscribers table does not exist',
+        needsSetup: true
       }
     }
 
-    return { message: 'Successfully created subscribers table' }
+    // Check if the subscriber exists
+    const { data: existingSubscriber, error: checkError } = await supabase
+      .from('subscribers')
+      .select('*')
+      .eq('email', email)
+      .maybeSingle()
+
+    if (checkError) {
+      console.error('❌ Error checking subscriber:', checkError)
+      return { error: checkError.message }
+    }
+
+    if (!existingSubscriber) {
+      console.log('⚠️ Subscriber does not exist, creating new record')
+      // Insert the new subscriber with reservation details
+      const { error: insertError } = await supabase
+        .from('subscribers')
+        .insert([
+          {
+            email: email,
+            reservation_completed: true,
+            metadata: {
+              reservation: reservationData
+            }
+          },
+        ])
+
+      if (insertError) {
+        console.error('❌ Error adding subscriber with reservation:', insertError)
+        return { error: insertError.message }
+      }
+    } else {
+      // Update the existing subscriber
+      const { error: updateError } = await supabase
+        .from('subscribers')
+        .update({
+          reservation_completed: true,
+          metadata: {
+            ...existingSubscriber.metadata,
+            reservation: reservationData
+          }
+        })
+        .eq('email', email)
+
+      if (updateError) {
+        console.error('❌ Error updating subscriber reservation:', updateError)
+        return { error: updateError.message }
+      }
+    }
+
+    console.log('✅ Subscriber reservation updated successfully!')
+    return { success: true }
   } catch (error) {
-    console.error('❌❌ Exception setting up subscribers table:', error)
-    return { error }
+    console.error('❌ Exception in updateSubscriberReservation:', error)
+    return { error: error instanceof Error ? error.message : String(error) }
+  }
+}
+
+/**
+ * Setup the subscribers table in Supabase
+ * This should only be called from a secure admin endpoint
+ */
+export async function setupSubscribersTable() {
+  try {
+    console.log('🔵 Setting up subscribers table...')
+    
+    // Check if the table already exists
+    const { error: tableCheckError } = await supabase
+      .from('subscribers')
+      .select('*')
+      .limit(1)
+    
+    if (!tableCheckError) {
+      console.log('✅ Subscribers table already exists')
+      return { 
+        success: true, 
+        message: 'Table already exists' 
+      }
+    }
+    
+    // Create the table using RPC (would typically be done through migrations or SQL)
+    // This is a simplified example - in production you should use proper migrations
+    const { error } = await supabase.rpc('setup_subscribers_table')
+    
+    if (error) {
+      console.error('❌ Error setting up subscribers table:', error)
+      return { 
+        error: error.message,
+        message: 'Failed to create table. Please run the SQL script manually.'
+      }
+    }
+    
+    console.log('✅ Subscribers table created successfully!')
+    return { success: true }
+  } catch (error) {
+    console.error('❌ Exception in setupSubscribersTable:', error)
+    return { 
+      error: error instanceof Error ? error.message : String(error),
+      message: 'Exception occurred. Please run the SQL script manually.'
+    }
   }
 } 
