@@ -106,7 +106,7 @@ export default function Home() {
                   className="object-contain"
                   priority
                 />
-                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
+                <div className="absolute bottom-4 right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
                   Complete System: 30-Day Supply
                 </div>
               </div>
@@ -475,7 +475,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
+                    src="/product-images/move-formula.png"
                     alt="TeaHC MOVE - Mobility and Inflammation Relief Formula"
                     fill
                     className="object-contain p-4"
@@ -529,7 +529,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
+                    src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR - Nighttime Recovery and Inflammation Support Formula"
                     fill
                     className="object-contain p-4"
@@ -584,7 +584,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/May%207%2C%202025%2C%2001_11_20%20PM-gb2jU5JUzudXtpUv0TK9w0Y9cqBJy0.png"
+                    src="/product-images/rapid-formula.png"
                     alt="TeaHC RAPID - Fast-Acting Anti-Inflammatory Nano Shot"
                     fill
                     className="object-contain p-4"
@@ -831,7 +831,7 @@ export default function Home() {
                 <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-gray-400 h-full rounded-full" style={{ width: '30%' }}></div>
                 </div>
-                <div className="absolute top-0 right-24 pr-2 text-sm text-gray-500 font-medium">
+                <div className="absolute top-0 right-28 pr-2 text-sm text-gray-500 font-medium">
                   Poor absorption
                 </div>
               </div>
@@ -845,7 +845,7 @@ export default function Home() {
                 <div className="w-full bg-gray-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-yellow-400 h-full rounded-full" style={{ width: '55%' }}></div>
                 </div>
-                <div className="absolute top-0 right-24 pr-2 text-sm text-yellow-600 font-medium">
+                <div className="absolute top-0 right-28 pr-2 text-sm text-yellow-600 font-medium">
                   Moderate effectiveness
                 </div>
               </div>
@@ -859,7 +859,7 @@ export default function Home() {
                 <div className="w-full bg-orange-100 h-6 rounded-full overflow-hidden">
                   <div className="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full" style={{ width: '85%' }}></div>
                 </div>
-                <div className="absolute top-0 right-24 pr-2 text-sm text-orange-600 font-medium">
+                <div className="absolute top-0 right-28 pr-2 text-sm text-orange-600 font-medium">
                   Superior absorption
                 </div>
               </div>
@@ -1579,8 +1579,8 @@ export default function Home() {
           {/* System Price Display */}
           <div className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-8 text-center text-white">
             <div className="flex items-center justify-center space-x-4 mb-4">
-              <span className="text-2xl line-through opacity-75">$179.99</span>
-              <span className="text-4xl font-bold">$89.99</span>
+              <span className="text-2xl line-through opacity-75">$59.97</span>
+              <span className="text-4xl font-bold">$47.98</span>
             </div>
             <p className="text-lg mb-6">Complete System: 30-Day Supply of All Three Formulas</p>
             <Button
@@ -1591,70 +1591,6 @@ export default function Home() {
               <Link href="/reserve">SECURE YOUR COMPLETE SYSTEM</Link>
             </Button>
             <p className="text-sm text-white/90 mt-4">243 People Have Already Reserved</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Indicators with Expanded Benefits */}
-      <section className="py-8 bg-white border-y border-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <div className="bg-orange-50 p-3 rounded-full mb-3">
-                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-medium text-gray-900">Risk-Free Guarantee</h3>
-              <p className="text-sm text-gray-600">Try for 30 days, 100% refund if not satisfied</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-orange-50 p-3 rounded-full mb-3">
-                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-medium text-gray-900">Lab Verified Quality</h3>
-              <p className="text-sm text-gray-600">Every batch tested for purity & potency</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-orange-50 p-3 rounded-full mb-3">
-                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-medium text-gray-900">FDA-Registered Facility</h3>
-              <p className="text-sm text-gray-600">Made in USA with premium ingredients</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-orange-50 p-3 rounded-full mb-3">
-                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-medium text-gray-900">Fast-Acting Relief</h3>
-              <p className="text-sm text-gray-600">Results in 15-45 minutes, not hours</p>
-            </div>
           </div>
         </div>
       </section>
@@ -2327,8 +2263,8 @@ export default function Home() {
           {/* System Price Display */}
           <div className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-8 text-center text-white">
             <div className="flex items-center justify-center space-x-4 mb-4">
-              <span className="text-2xl line-through opacity-75">$179.99</span>
-              <span className="text-4xl font-bold">$89.99</span>
+              <span className="text-2xl line-through opacity-75">$59.97</span>
+              <span className="text-4xl font-bold">$47.98</span>
             </div>
             <p className="text-lg mb-6">Complete System: 30-Day Supply of All Three Formulas</p>
             <Button
@@ -2513,117 +2449,6 @@ export default function Home() {
             <p className="text-xl text-gray-700">
               Join <span className="font-bold text-orange-500">2,400+</span> people who've discovered TeaHC's revolutionary approach
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Direct Comparison Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Why TeaHC Outperforms Traditional Supplements</h2>
-          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-            Don't settle for supplements that don't deliver. Here's how TeaHC's nano-technology makes the difference.
-          </p>
-
-          {/* Comparison Table */}
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {/* Header */}
-              <div className="md:col-span-1"></div>
-              <div className="bg-gray-100 rounded-t-lg p-4 text-center">
-                <h3 className="font-bold text-gray-500">Traditional Supplements</h3>
-              </div>
-              <div className="bg-orange-50 rounded-t-lg p-4 text-center border-t-4 border-orange-500">
-                <h3 className="font-bold text-orange-600">TeaHC Nano-Formula</h3>
-              </div>
-
-              {/* Comparison Rows */}
-              {[
-                {
-                  feature: "Absorption Rate",
-                  traditional: "10%",
-                  teaHC: "90%",
-                  highlight: true
-                },
-                {
-                  feature: "Time to Effect",
-                  traditional: "45-60 minutes",
-                  teaHC: "15 minutes",
-                  highlight: true
-                },
-                {
-                  feature: "Targeted Delivery",
-                  traditional: "Limited",
-                  teaHC: "Precise",
-                  highlight: false
-                },
-                {
-                  feature: "Bioavailability",
-                  traditional: "Low",
-                  teaHC: "17× Higher",
-                  highlight: true
-                },
-                {
-                  feature: "Consistency",
-                  traditional: "Variable",
-                  teaHC: "Lab-Verified",
-                  highlight: false
-                },
-                {
-                  feature: "Value for Money",
-                  traditional: "90% Wasted",
-                  teaHC: "Maximum Benefit",
-                  highlight: true
-                }
-              ].map((row, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gray-50 p-4 font-medium">
-                    {row.feature}
-                  </div>
-                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-                    <span className={row.highlight ? "text-red-500 font-medium" : "text-gray-600"}>
-                      {row.traditional}
-                    </span>
-                  </div>
-                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-orange-50'} border-l-4 border-orange-500`}>
-                    <span className={row.highlight ? "text-green-600 font-medium" : "text-gray-900"}>
-                      {row.teaHC}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Key Takeaway */}
-            <div className="bg-orange-50 rounded-lg p-6 mt-8 border border-orange-100">
-              <div className="flex items-start">
-                <div className="flex-shrink-0">
-                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <h4 className="text-lg font-medium text-gray-900">The Bottom Line</h4>
-                  <p className="mt-2 text-gray-600">
-                    With TeaHC's nano-technology, you're getting 17× more active ingredients where they need to be, 
-                    faster than traditional supplements. That means real results, not wasted money.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-12">
-              <a
-                href="/reserve"
-                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10"
-              >
-                Experience the 17× Difference
-                <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
       </section>

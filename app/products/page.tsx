@@ -26,7 +26,7 @@ export default function ProductsPage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="bg-white p-8 rounded-xl shadow-md">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.36%20PM-XBaNZDmhr6evYOpKU6cIueASqrlgp4.png"
+                  src="/product-images/move-formula.png"
                   alt="TeaHC MOVE - Mobility and Inflammation Relief Formula"
                   width={400}
                   height={400}
@@ -264,7 +264,7 @@ export default function ProductsPage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="bg-white p-8 rounded-xl shadow-md">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.29%20PM-rWPKTVqK3SvROr879dEKKfD6xqCLrB.png"
+                  src="/product-images/repair-formula.png"
                   alt="TeaHC REPAIR - Nighttime Recovery and Inflammation Support Formula"
                   width={400}
                   height={400}
@@ -508,7 +508,7 @@ export default function ProductsPage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="bg-white p-8 rounded-xl shadow-md">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%202.54.41%20PM-NE7LO3yAuw5DJdwWq1guL2j7YN5cjZ.png"
+                  src="/product-images/rapid-formula.png"
                   alt="TeaHC RAPID - Fast-Acting Anti-Inflammatory Nano Shot"
                   width={400}
                   height={400}
@@ -753,7 +753,7 @@ export default function ProductsPage() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="bg-white p-6 rounded-xl shadow-md">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%203.09.15%20PM-6h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
+                src="/product-images/product-trio.png"
                 alt="TeaHC Complete Bundle - All Three Products"
                 width={500}
                 height={400}
