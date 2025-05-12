@@ -29,6 +29,7 @@ export default function Home() {
                   placeholder="Enter your email to secure discount"
                   buttonText="RESERVE YOUR 50% DISCOUNT"
                   privacyText="We respect your privacy. No spam."
+                  source="homepage_hero"
                 />
                 <p className="text-sm text-gray-500 mt-2 text-center">
                   Limited Pre-Launch Offer • No Payment Today • Ships June 2025
@@ -1120,6 +1121,7 @@ export default function Home() {
                 description="Sign up now and we'll send you a discount code for your first purchase."
                 buttonText="Get My Discount"
                 className="text-gray-800"
+                source="homepage_footer"
               />
               <div className="mt-4 pt-4 border-t border-gray-100 text-center text-gray-500 text-sm">
                 <p>We respect your privacy. Unsubscribe at any time.</p>
@@ -1168,12 +1170,12 @@ export default function Home() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Pre-Launch Special Offer</h3>
                   <p className="text-gray-600 mb-4">
                     Be among the first to experience TeaHC's revolutionary nano-technology.
-                    Reserve your Complete System now and save 40%.
+                    Reserve your Complete System now and save 20%.
                   </p>
                   <div className="flex items-center space-x-4">
-                    <span className="text-3xl font-bold text-orange-600">$149</span>
-                    <span className="text-xl text-gray-500 line-through">$249</span>
-                    <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">40% OFF</span>
+                    <span className="text-3xl font-bold text-orange-600">$47.98</span>
+                    <span className="text-xl text-gray-500 line-through">$59.97</span>
+                    <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">20% OFF</span>
                   </div>
                 </div>
                 <div className="flex-shrink-0">

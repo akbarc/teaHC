@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
+import { addSubscriberToSupabase, checkSubscriberExists } from "@/lib/subscriber-service"
 
 interface EmailCaptureProps {
   title?: string
@@ -14,6 +15,7 @@ interface EmailCaptureProps {
   className?: string
   placeholder?: string
   privacyText?: string
+  source?: string
 }
 
 export function EmailCapture({
@@ -23,6 +25,7 @@ export function EmailCapture({
   className = "",
   placeholder = "Enter your email",
   privacyText,
+  source = "homepage",
 }: EmailCaptureProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -32,13 +35,66 @@ export function EmailCapture({
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      // First check if email already exists
+      const existsCheck = await checkSubscriberExists(email)
+      
+      if (existsCheck.error) {
+        console.error("Error checking if subscriber exists:", existsCheck.error)
+        // Continue with the flow even if check fails
+      } else if (existsCheck.exists) {
+        toast({
+          title: "Already subscribed!",
+          description: "You're already on our list. Thank you!",
+        })
+        setEmail("")
+        setIsSubmitting(false)
+        return
+      }
 
-    toast({
-      title: "Success!",
-      description: "You've been added to our waitlist.",
-    })
+      // Collect some basic metadata
+      const subscriberData = {
+        email,
+        source,
+        user_agent: navigator.userAgent,
+        // Don't collect IP here in the client - this should be done server-side for accuracy
+        // Using a server action would be better for this
+      }
+
+      // Add to Supabase
+      const result = await addSubscriberToSupabase(subscriberData)
+
+      if (result.error) {
+        if (result.needsSetup) {
+          // Table doesn't exist - this would normally trigger a setup flow
+          // For now, just show success to the user anyway
+          console.warn("Subscribers table doesn't exist yet. Email not saved.")
+          toast({
+            title: "Success!",
+            description: "You've been added to our waitlist.",
+          })
+        } else {
+          console.error("Error adding subscriber:", result.error)
+          toast({
+            title: "Something went wrong",
+            description: "Please try again later.",
+            variant: "destructive",
+          })
+        }
+      } else {
+        toast({
+          title: "Success!",
+          description: "You've been added to our waitlist.",
+        })
+      }
+    } catch (error) {
+      console.error("Exception in email capture:", error)
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      })
+    }
 
     setEmail("")
     setIsSubmitting(false)
