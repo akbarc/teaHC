@@ -42,12 +42,36 @@ export default function Step1Email({ onEmailSubmit }: Step1EmailProps) {
           user_agent: navigator.userAgent,
         }
 
-        // Add to Supabase
+        // FIRST ATTEMPT: Try the traditional way
         const result = await addSubscriberToSupabase(subscriberData)
 
-        if (result.error && !result.needsSetup) {
-          console.error("Error adding subscriber:", result.error)
-          // Continue anyway - we don't want to block the reservation flow
+        if (result.error || result.needsSetup) {
+          console.error("Error adding subscriber:", result.error || "Table needs setup")
+          
+          // SECOND ATTEMPT: Try the direct API endpoint
+          try {
+            const baseUrl = window.location.origin
+            const addSubscriberEndpoint = `${baseUrl}/api/add-subscriber`
+            
+            console.log(`Using direct API endpoint: ${addSubscriberEndpoint}`)
+            
+            const response = await fetch(addSubscriberEndpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email,
+                source: "reservation_step1",
+              })
+            })
+            
+            const apiResult = await response.json()
+            console.log('Direct API result:', apiResult)
+          } catch (apiError) {
+            console.error('Error using direct API:', apiError)
+            // Continue anyway - we don't want to block the reservation flow
+          }
         }
       }
 

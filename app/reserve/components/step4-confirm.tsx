@@ -70,7 +70,34 @@ export default function Step4Confirm({
     setError(null)
     
     try {
-      // Prepare data for the API
+      // STEP 1: Add the email to the subscribers table first
+      try {
+        console.log('Adding email to subscribers table...')
+        
+        // Use fetch to call the addSubscriber endpoint
+        const baseUrl = window.location.origin
+        const addSubscriberEndpoint = `${baseUrl}/api/add-subscriber`
+        
+        const subscriberResponse = await fetch(addSubscriberEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            source: 'reservation-form',
+            name: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
+          })
+        })
+        
+        const subscriberResult = await subscriberResponse.json()
+        console.log('Subscriber result:', subscriberResult)
+      } catch (subscriberError) {
+        console.error('Error adding subscriber:', subscriberError)
+        // Continue anyway - we want to save the reservation even if subscriber insert fails
+      }
+      
+      // STEP 2: Prepare data for the reservation
       const reservationData = {
         email,
         timestamp: new Date().toISOString(),
@@ -87,9 +114,9 @@ export default function Step4Confirm({
       
       console.log('Sending reservation data:', reservationData)
       
-      // First try our direct API endpoint
+      // STEP 3: Try our direct API endpoint
       try {
-        const baseUrl = window.location.origin // Gets http://localhost:3000 or https://yourdomain.com
+        const baseUrl = window.location.origin
         const fixEndpoint = `${baseUrl}/api/fix-reservation`
         
         console.log(`Using fix endpoint: ${fixEndpoint}`)
