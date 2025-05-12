@@ -12,6 +12,8 @@ interface EmailCaptureProps {
   description?: string
   buttonText?: string
   className?: string
+  placeholder?: string
+  privacyText?: string
 }
 
 export function EmailCapture({
@@ -19,6 +21,8 @@ export function EmailCapture({
   description = "Be the first to know when we launch.",
   buttonText = "Join",
   className = "",
+  placeholder = "Enter your email",
+  privacyText,
 }: EmailCaptureProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -47,7 +51,7 @@ export function EmailCapture({
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
         <Input
           type="email"
-          placeholder="Enter your email"
+          placeholder={placeholder}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -57,6 +61,7 @@ export function EmailCapture({
           {isSubmitting ? "Joining..." : buttonText}
         </Button>
       </form>
+      {privacyText && <p className="text-xs text-gray-500 mt-2">{privacyText}</p>}
     </div>
   )
 }

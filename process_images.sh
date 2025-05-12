@@ -18,10 +18,4 @@ echo "Processed mom-child-teahc-move.png"
 cp ~/Downloads/family-active-lifestyle.png public/product-images/family-active-lifestyle.png
 echo "Processed family-active-lifestyle.png"
 
-# For any missing images, we'll create placeholder images
-if [ ! -f public/product-images/thermal-knee-scan.png ]; then
-  cp public/nano-emulsification-diagram.png public/product-images/thermal-knee-scan.png
-  echo "Created placeholder for thermal-knee-scan.png"
-fi
-
 echo "All images processed successfully!" 

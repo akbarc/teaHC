@@ -10,123 +10,205 @@ export default function Home() {
     <main className="flex flex-col min-h-screen">
       <PreOrderBar />
 
-      {/* Hero Section with Problem-Solution Focus */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+      {/* Hero Section */}
+      <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            {/* Left Column: Headline and Form */}
             <div className="flex-1 space-y-6">
-              <div className="inline-block px-4 py-1.5 bg-orange-100 text-orange-800 rounded-full text-sm font-medium mb-2">
-                <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Clinically-Supported Nano-Technology
-                </span>
-              </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                <span className="text-orange-500">Move Freely Again</span> Without Constant Discomfort
+                Experience Relief With <span className="text-orange-500">17× Better Absorption</span> Technology
               </h1>
               <p className="text-xl text-gray-700 max-w-2xl">
-                Tired of limiting your activities because of stiffness and discomfort? TeaHC's fast-acting formulas work in 15-45 minutes, helping you enjoy your favorite activities again.
+                TeaHC's proprietary nano-emulsion delivers comfort in as little as 15 minutes while standard supplements are still dissolving
               </p>
-              
-              {/* Added ICP-targeted benefits */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                <div className="flex items-start">
-                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Walk, garden & exercise with ease</span>
-                </div>
-                <div className="flex items-start">
-                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Reduce morning stiffness</span>
-                </div>
-                <div className="flex items-start">
-                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Speed up post-workout recovery</span>
-                </div>
-                <div className="flex items-start">
-                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700">Sleep more comfortably</span>
-                </div>
+
+              {/* Email Capture Form */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <EmailCapture 
+                  placeholder="Enter your email to secure discount"
+                  buttonText="RESERVE YOUR 50% DISCOUNT"
+                  privacyText="We respect your privacy. No spam."
+                />
+                <p className="text-sm text-gray-500 mt-2 text-center">
+                  Limited Pre-Launch Offer • No Payment Today • Ships June 2025
+                </p>
               </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg shadow-lg transition-transform hover:scale-105"
-                >
-                  <Link href="/reserve">Reserve Your 50% Discount</Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-orange-500 text-orange-500 hover:bg-orange-50"
-                >
-                  <Link href="/science">See How It Works</Link>
-                </Button>
-              </div>
-              
-              <div className="pt-4 bg-orange-50 p-4 rounded-lg border border-orange-200 shadow-sm">
-                <div className="flex items-center">
-                  <div className="bg-orange-500 text-white p-2 rounded-full mr-3">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
+
+              {/* Trust Elements */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                <div className="flex items-center space-x-2">
+                  <div className="bg-orange-50 p-2 rounded-full">
+                    <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <p className="text-orange-800 font-medium">Pre-Launch Offer Ends In:</p>
+                  <span className="text-sm font-medium">17× Better Absorption</span>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <div className="bg-orange-50 p-2 rounded-full">
+                    <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium">FDA-Registered Facility</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="bg-orange-50 p-2 rounded-full">
+                    <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium">30-Day Guarantee</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="bg-orange-50 p-2 rounded-full">
+                    <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium">Lab Verified</span>
+                </div>
+              </div>
+
+              {/* Countdown Timer */}
+              <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                <p className="text-orange-800 font-medium mb-2">Pre-Launch Discount Ends In:</p>
                 <CountdownTimer />
-                <div className="flex flex-col sm:flex-row gap-2 mt-2">
-                  <div className="flex items-center text-sm text-orange-700">
-                    <svg className="h-4 w-4 mr-1 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>Lock in 50% off ($19.99 vs $39.99)</span>
-                  </div>
-                  <div className="flex items-center text-sm text-green-700 font-medium">
-                    <svg className="h-4 w-4 mr-1 text-green-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>No payment now — pay when shipped</span>
-                  </div>
-                </div>
               </div>
             </div>
-            <div className="flex-1 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-100 to-orange-50 rounded-2xl transform rotate-3 scale-105"></div>
-              <div className="relative bg-white p-8 rounded-2xl shadow-lg transform transition-transform hover:scale-[1.02]">
+
+            {/* Right Column: Split Design */}
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Left: Thermal Visualization */}
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-lg">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-07%20at%203.09.15%20PM-6h3WfOWBo8AUSJ6cxYXYpKhiTlFrCg.png"
+                  src="/product-images/thermal-knee-scan.png"
+                  alt="Thermal visualization of TeaHC's targeted relief"
+                  width={400}
+                  height={400}
+                  className="object-contain"
+                  priority
+                />
+                <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
+                  <p className="text-sm font-medium text-gray-900">Targeted Relief Visualization</p>
+                  <p className="text-xs text-gray-600">Heat map shows rapid absorption and targeted delivery</p>
+                </div>
+              </div>
+
+              {/* Right: Product Trio */}
+              <div className="relative bg-white rounded-xl p-4 shadow-lg">
+                <Image
+                  src="/product-images/product-trio.png"
                   alt="TeaHC Product Line featuring MOVE, REPAIR, and RAPID formulas"
-                  width={600}
-                  height={500}
+                  width={400}
+                  height={400}
                   className="object-contain"
                   priority
                 />
                 <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
-                  First 200 Customers Save 50%
+                  Complete System: 30-Day Supply
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scientific Visualization Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">The Science of 17× Better Absorption</h2>
+          
+          {/* Side-by-Side Comparison */}
+          <div className="grid md:grid-cols-2 gap-8 items-center mt-12">
+            {/* Left: Standard Supplement */}
+            <div className="bg-gray-50 rounded-xl p-6 text-center">
+              <div className="relative h-64 mb-6">
+                <Image
+                  src="/product-images/standard-absorption.png"
+                  alt="Standard supplement absorption visualization"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Standard Supplements</h3>
+              <p className="text-gray-600 mb-4">Poor bioavailability means most active ingredients never reach their target</p>
+              <div className="flex items-center justify-center space-x-2 text-red-500">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span className="font-medium">~10% Bioavailability</span>
+              </div>
+            </div>
+
+            {/* Right: TeaHC Nano-Formula */}
+            <div className="bg-orange-50 rounded-xl p-6 text-center">
+              <div className="relative h-64 mb-6">
+                <Image
+                  src="/product-images/nano-absorption.png"
+                  alt="TeaHC nano-emulsion absorption visualization"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">TeaHC Nano-Formula</h3>
+              <p className="text-gray-600 mb-4">Advanced nano-emulsion technology delivers active ingredients directly to target areas</p>
+              <div className="flex items-center justify-center space-x-2 text-green-500">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="font-medium">~90% Bioavailability</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Key Scientific Points */}
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+              <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Nano-Sized Particles (20-50nm)</h3>
+              <p className="text-gray-600">Our proprietary nano-emulsion technology creates microscopic particles that are easily absorbed by your body</p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+              <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Enhanced Cell Membrane Penetration</h3>
+              <p className="text-gray-600">Nano-sized particles easily pass through cell membranes, delivering active ingredients where they're needed most</p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+              <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Fast-Acting Relief (15-45min)</h3>
+              <p className="text-gray-600">Experience the difference with rapid absorption and targeted delivery, working in as little as 15 minutes</p>
+            </div>
+          </div>
+
+          {/* Scientific Authority Statement */}
+          <div className="mt-12 text-center">
+            <p className="text-lg text-gray-700 italic">
+              "Developed by pharmaceutical scientists using advanced nano-emulsion technology"
+            </p>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="mt-6 border-orange-500 text-orange-500 hover:bg-orange-50"
+            >
+              <Link href="/science">See How It Works</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -939,63 +1021,185 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Section - NEW */}
+      {/* Direct Comparison Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Why TeaHC Outperforms Traditional Supplements</h2>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Don't settle for supplements that don't deliver. Here's how TeaHC's nano-technology makes the difference.
+          </p>
+
+          {/* Comparison Table */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              {/* Header */}
+              <div className="md:col-span-1"></div>
+              <div className="bg-gray-100 rounded-t-lg p-4 text-center">
+                <h3 className="font-bold text-gray-500">Traditional Supplements</h3>
+              </div>
+              <div className="bg-orange-50 rounded-t-lg p-4 text-center border-t-4 border-orange-500">
+                <h3 className="font-bold text-orange-600">TeaHC Nano-Formula</h3>
+              </div>
+
+              {/* Comparison Rows */}
+              {[
+                {
+                  feature: "Absorption Rate",
+                  traditional: "10%",
+                  teaHC: "90%",
+                  highlight: true
+                },
+                {
+                  feature: "Time to Effect",
+                  traditional: "45-60 minutes",
+                  teaHC: "15 minutes",
+                  highlight: true
+                },
+                {
+                  feature: "Targeted Delivery",
+                  traditional: "Limited",
+                  teaHC: "Precise",
+                  highlight: false
+                },
+                {
+                  feature: "Bioavailability",
+                  traditional: "Low",
+                  teaHC: "17× Higher",
+                  highlight: true
+                },
+                {
+                  feature: "Consistency",
+                  traditional: "Variable",
+                  teaHC: "Lab-Verified",
+                  highlight: false
+                },
+                {
+                  feature: "Value for Money",
+                  traditional: "90% Wasted",
+                  teaHC: "Maximum Benefit",
+                  highlight: true
+                }
+              ].map((row, index) => (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-gray-50 p-4 font-medium">
+                    {row.feature}
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <span className={row.highlight ? "text-red-500 font-medium" : "text-gray-600"}>
+                      {row.traditional}
+                    </span>
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-orange-50'} border-l-4 border-orange-500`}>
+                    <span className={row.highlight ? "text-green-600 font-medium" : "text-gray-900"}>
+                      {row.teaHC}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Key Takeaway */}
+            <div className="bg-orange-50 rounded-lg p-6 mt-8 border border-orange-100">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-medium text-gray-900">The Bottom Line</h4>
+                  <p className="mt-2 text-gray-600">
+                    With TeaHC's nano-technology, you're getting 17× more active ingredients where they need to be, 
+                    faster than traditional supplements. That means real results, not wasted money.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <a
+                href="/reserve"
+                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10"
+              >
+                Experience the 17× Difference
+                <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            Everything you need to know about TeaHC products
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Everything you need to know about TeaHC's revolutionary nano-technology and how it can help you.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">How quickly will I notice results?</h3>
-              <p className="text-gray-600">
-                Most customers report feeling the effects of TeaHC MOVE and REPAIR within 30-45 minutes. The RAPID
-                formula is designed to work even faster, with many users noticing support in as little as 15-20 minutes.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                question: "How does TeaHC's nano-technology work?",
+                answer: "TeaHC uses a proprietary nano-emulsification process that breaks down active ingredients into microscopic particles (less than 100 nanometers). This allows for 17× better absorption compared to traditional supplements, as these tiny particles can easily pass through cell membranes and reach their target areas more effectively."
+              },
+              {
+                question: "How quickly will I feel the effects?",
+                answer: "Most customers report feeling the effects within 15 minutes of taking TeaHC, compared to 45-60 minutes with traditional supplements. This rapid onset is due to our nano-technology, which allows the active ingredients to be absorbed and utilized by your body much more efficiently."
+              },
+              {
+                question: "Is TeaHC safe to use?",
+                answer: "Yes, TeaHC is manufactured in an FDA-registered facility and undergoes rigorous third-party testing. Our nano-technology is a physical process that doesn't alter the chemical structure of our ingredients, making it completely safe. We use only natural, high-quality ingredients that are carefully selected for their efficacy and safety."
+              },
+              {
+                question: "How does the Complete System work together?",
+                answer: "The Complete System is designed to provide 24/7 support: MOVE for morning mobility, RAPID for fast-acting relief during the day, and REPAIR for nighttime recovery. Each formula is optimized for its specific time of use, working together to provide comprehensive support throughout your day."
+              },
+              {
+                question: "What if TeaHC doesn't work for me?",
+                answer: "We're so confident in TeaHC's effectiveness that we offer a 30-day satisfaction guarantee. If you're not completely satisfied with your results, simply return the unused portion within 30 days for a full refund. No questions asked."
+              },
+              {
+                question: "How is TeaHC different from other supplements?",
+                answer: "TeaHC's key differentiator is our nano-technology, which provides 17× better absorption than traditional supplements. This means you get more active ingredients where they need to be, faster. Additionally, our Complete System approach ensures you have the right support at the right time, whether it's morning mobility, daytime relief, or nighttime recovery."
+              }
+            ].map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-100">
+                <details className="group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer">
+                    <h3 className="text-lg font-medium text-gray-900">{faq.question}</h3>
+                    <svg
+                      className="h-6 w-6 text-gray-400 group-open:transform group-open:rotate-180 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6">
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </div>
+                </details>
+              </div>
+            ))}
+          </div>
 
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">Will TeaHC products make me feel "high"?</h3>
-              <p className="text-gray-600">
-                No. TeaHC products contain legal hemp-derived cannabinoids that are specifically formulated to provide
-                comfort and mobility support without psychoactive effects. You'll remain clear-headed and focused.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">How do I know which formula is right for me?</h3>
-              <p className="text-gray-600">
-                MOVE is ideal for daytime use and active lifestyles. REPAIR is perfect for evening use and recovery.
-                RAPID is designed for on-demand support when you need it most. Many customers benefit from using all
-                three as a complete system.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">What if TeaHC doesn't work for me?</h3>
-              <p className="text-gray-600">
-                We offer a 30-day satisfaction guarantee. If you're not completely satisfied with your purchase, simply
-                contact us for a full refund. We want you to experience the benefits of TeaHC with zero risk.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">Are TeaHC products third-party tested?</h3>
-              <p className="text-gray-600">
-                Yes. All TeaHC products undergo rigorous third-party testing for potency, purity, and safety. We publish
-                all lab results on our website for complete transparency.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-semibold mb-2">How often should I take TeaHC products?</h3>
-              <p className="text-gray-600">
-                Most customers take MOVE in the morning, REPAIR in the evening, and keep RAPID on hand for when they
-                need additional support. Each product can be used daily as part of your wellness routine.
-              </p>
-            </div>
+          {/* FAQ CTA */}
+          <div className="text-center mt-12">
+            <p className="text-lg text-gray-600 mb-4">Still have questions?</p>
+            <a
+              href="/contact"
+              className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+            >
+              Contact Our Team
+              <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -1069,119 +1273,1356 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA - Enhanced with Benefit-Focused Messaging */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-4xl mx-auto">
-            <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full text-sm font-bold mb-6 shadow-sm">
-              Limited Time Pre-Launch Offer
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Ready to Reclaim Your Comfort & Mobility?</h2>
-            <p className="text-xl text-gray-700 mb-10">
-              Join thousands who've discovered TeaHC's revolutionary approach to comfort and mobility. Your journey to living life on your terms starts here.
+      {/* Final Conversion Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-orange-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the 17× Difference?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Join thousands of people who've discovered the power of TeaHC's nano-technology.
+              Reserve your Complete System today and start your journey to better mobility.
             </p>
-            
-            {/* Benefit Cards for Each ICP */}
-            <div className="grid md:grid-cols-3 gap-4 mb-10">
-              <div className="bg-white rounded-xl p-5 shadow-md border border-orange-100 transform transition hover:-translate-y-1 hover:shadow-lg">
-                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-gray-800">For Active Adults</h3>
-                <p className="text-gray-600 mb-3">Wake up with less stiffness, move with greater ease, and enjoy your favorite activities again</p>
-                <div className="text-orange-600 font-medium text-sm">Perfect for: Gardening, Walking, Daily Activities</div>
-              </div>
-              
-              <div className="bg-white rounded-xl p-5 shadow-md border border-blue-100 transform transition hover:-translate-y-1 hover:shadow-lg">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-gray-800">For Athletes</h3>
-                <p className="text-gray-600 mb-3">Recover faster between workouts, reduce post-exercise discomfort, and maintain your training schedule</p>
-                <div className="text-blue-600 font-medium text-sm">Perfect for: Running, Gym, Sports Training</div>
-              </div>
-              
-              <div className="bg-white rounded-xl p-5 shadow-md border border-amber-100 transform transition hover:-translate-y-1 hover:shadow-lg">
-                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-gray-800">For Busy Professionals</h3>
-                <p className="text-gray-600 mb-3">Natural, non-drowsy support that works quickly to keep you comfortable and productive all day</p>
-                <div className="text-amber-600 font-medium text-sm">Perfect for: Office Work, Travel, Long Days</div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-lg inline-block mb-10 max-w-lg mx-auto">
-              <div className="flex items-center justify-center mb-2">
-                <svg className="h-6 w-6 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center gap-6 mb-12">
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p className="text-gray-800 font-bold">Pre-Launch 50% Discount Ends In:</p>
+                <span className="text-gray-700">FDA-Registered Facility</span>
               </div>
-              <CountdownTimer />
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center justify-center text-sm text-gray-600">
-                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span><span className="font-medium">Only 127 spots</span> remaining in our first production batch</span>
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-700">30-Day Guarantee</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-700">Lab-Verified Results</span>
+              </div>
+            </div>
+
+            {/* Pre-launch Offer */}
+            <div className="bg-white rounded-xl p-8 shadow-lg border border-orange-100 mb-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Pre-Launch Special Offer</h3>
+                  <p className="text-gray-600 mb-4">
+                    Be among the first to experience TeaHC's revolutionary nano-technology.
+                    Reserve your Complete System now and save 40%.
+                  </p>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-3xl font-bold text-orange-600">$149</span>
+                    <span className="text-xl text-gray-500 line-through">$249</span>
+                    <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">40% OFF</span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-center text-sm text-gray-600">
-                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span><span className="font-medium">Save $20 per box</span> - $19.99 instead of $39.99</span>
-                </div>
-                <div className="flex items-center justify-center text-sm text-green-600 font-medium">
-                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>No payment required today - pay only when shipped</span>
+                <div className="flex-shrink-0">
+                  <a href="/reserve" className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 shadow-lg hover:shadow-xl transition-all duration-200">
+                    Reserve Your System
+                    <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
-            
-            <div className="space-y-4">
+
+            {/* Final Trust Elements */}
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Fast Shipping</h4>
+                <p className="text-gray-600">Free shipping on all orders. Get your system in 2-3 business days.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Secure Checkout</h4>
+                <p className="text-gray-600">Your information is protected with bank-level security.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Easy Returns</h4>
+                <p className="text-gray-600">30-day satisfaction guarantee. No questions asked.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem-Solution Bridge */}
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Stop Wasting Money On Supplements Your Body Can't Absorb
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+            {/* Problem Visualization */}
+            <div className="relative">
+              <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="relative h-80 mb-6">
+                  <Image
+                    src="/product-images/wasted-supplements.png"
+                    alt="Visualization of wasted supplement absorption"
+                    fill
+                    className="object-contain"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-red-500/90 text-white px-6 py-3 rounded-lg transform -rotate-12">
+                      <span className="text-2xl font-bold">90% Wasted</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold mb-2">Standard Supplements</h3>
+                  <p className="text-gray-600">Most active ingredients never reach their target due to poor absorption</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Solution Statement */}
+            <div className="space-y-6">
+              <div className="bg-orange-50 rounded-xl p-6 border border-orange-100">
+                <h3 className="text-xl font-semibold mb-4">TeaHC's nano-emulsified formula delivers active ingredients directly where you need them most</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Feel relief in as little as 15 minutes, not hours</p>
+                      <p className="text-sm text-gray-600 mt-1">Our nano-emulsion technology ensures rapid absorption and fast-acting results</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Targeted delivery to specific areas of discomfort</p>
+                      <p className="text-sm text-gray-600 mt-1">Nano-sized particles reach their intended destination with precision</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">No more wasting money on poorly absorbed supplements</p>
+                      <p className="text-sm text-gray-600 mt-1">17× better absorption means you get the full value of every dose</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Customer Pain Point Callout */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                <p className="text-lg text-gray-700 italic text-center">
+                  "If you've tried other supplements without success, the problem isn't you—it's poor absorption."
+                </p>
+              </div>
+
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-lg px-10 py-6 shadow-lg transition-transform hover:scale-105 rounded-xl"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
               >
-                <Link href="/reserve">Reserve Your 50% Discount Now</Link>
+                <Link href="/reserve">Experience the 17× Difference</Link>
               </Button>
-              
-              <div className="flex flex-wrap items-center justify-center gap-6 mt-6">
-                <div className="flex items-center">
-                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-700">30-day guarantee</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Complete System Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Your Complete 24/7 Anti-Inflammatory System
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* MOVE Formula */}
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/move-formula.png"
+                    alt="TeaHC MOVE Formula"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <div className="flex items-center">
-                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-700">Secure reservation</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                  </svg>
-                  <span className="text-gray-700">Made in USA</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="h-5 w-5 text-orange-500 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                  <span className="text-gray-700">Lab-verified quality</span>
+                <h3 className="text-xl font-bold mb-2">MOVE Formula</h3>
+                <p className="text-gray-700 mb-4">Morning Mobility Support</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Enhanced with nano-technology</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Begin your day with comfort</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Take within 30 minutes of waking</span>
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* RAPID Formula */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/rapid-formula.png"
+                    alt="TeaHC RAPID Formula"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-2">RAPID Formula</h3>
+                <p className="text-gray-700 mb-4">Fast-Acting Relief When You Need It</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>15-minute activation time</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Keep with you for unexpected moments</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Use as needed for quick support</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* REPAIR Formula */}
+            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/repair-formula.png"
+                    alt="TeaHC REPAIR Formula"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-2">REPAIR Formula</h3>
+                <p className="text-gray-700 mb-4">Nighttime Recovery Support</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Enhanced with sleep support</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Wake up with less stiffness</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Take 30-60 minutes before bed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* System Price Display */}
+          <div className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-8 text-center text-white">
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <span className="text-2xl line-through opacity-75">$179.99</span>
+              <span className="text-4xl font-bold">$89.99</span>
+            </div>
+            <p className="text-lg mb-6">Complete System: 30-Day Supply of All Three Formulas</p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-orange-600 hover:bg-orange-50"
+            >
+              <Link href="/reserve">SECURE YOUR COMPLETE SYSTEM</Link>
+            </Button>
+            <p className="text-sm text-white/90 mt-4">243 People Have Already Reserved</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators with Expanded Benefits */}
+      <section className="py-8 bg-white border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Risk-Free Guarantee</h3>
+              <p className="text-sm text-gray-600">Try for 30 days, 100% refund if not satisfied</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Lab Verified Quality</h3>
+              <p className="text-sm text-gray-600">Every batch tested for purity & potency</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">FDA-Registered Facility</h3>
+              <p className="text-sm text-gray-600">Made in USA with premium ingredients</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Fast-Acting Relief</h3>
+              <p className="text-sm text-gray-600">Results in 15-45 minutes, not hours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Real People, Real Results</h2>
+
+          {/* Featured Testimonial */}
+          <div className="max-w-3xl mx-auto mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex -space-x-2">
+                <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center">
+                  <span className="text-xl font-bold text-orange-600">JD</span>
+                </div>
+              </div>
+            </div>
+            <blockquote className="text-2xl text-gray-700 text-center italic mb-6">
+              "At 67, I never thought I'd race my grandson again. TeaHC gave me back those moments."
+            </blockquote>
+            <div className="text-center">
+              <p className="font-medium text-gray-900">John D.</p>
+              <p className="text-sm text-gray-600">Retired Accountant, 67</p>
+              <div className="inline-flex items-center mt-2 px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm">
+                <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Verified Customer
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Testimonials */}
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">MS</span>
+                </div>
+                <div>
+                  <p className="font-medium">Mary S.</p>
+                  <p className="text-sm text-gray-600">Yoga Instructor, 52</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "The morning stiffness that used to take hours to work through is now gone within minutes of taking MOVE."
+              </p>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">RJ</span>
+                </div>
+                <div>
+                  <p className="font-medium">Robert J.</p>
+                  <p className="text-sm text-gray-600">Construction Worker, 45</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "RAPID is a game-changer. When I feel that afternoon ache coming on, I take it and within 15 minutes I'm back to work."
+              </p>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">EL</span>
+                </div>
+                <div>
+                  <p className="font-medium">Elizabeth L.</p>
+                  <p className="text-sm text-gray-600">Retired Teacher, 71</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "REPAIR has transformed my sleep quality. I wake up feeling refreshed and ready to enjoy my day."
+              </p>
+            </div>
+          </div>
+
+          {/* Social Proof Counter */}
+          <div className="mt-12 text-center">
+            <p className="text-xl text-gray-700">
+              Join <span className="font-bold text-orange-500">2,400+</span> people who've discovered TeaHC's revolutionary approach
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Direct Comparison Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Why TeaHC Outperforms Traditional Supplements</h2>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Don't settle for supplements that don't deliver. Here's how TeaHC's nano-technology makes the difference.
+          </p>
+
+          {/* Comparison Table */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              {/* Header */}
+              <div className="md:col-span-1"></div>
+              <div className="bg-gray-100 rounded-t-lg p-4 text-center">
+                <h3 className="font-bold text-gray-500">Traditional Supplements</h3>
+              </div>
+              <div className="bg-orange-50 rounded-t-lg p-4 text-center border-t-4 border-orange-500">
+                <h3 className="font-bold text-orange-600">TeaHC Nano-Formula</h3>
+              </div>
+
+              {/* Comparison Rows */}
+              {[
+                {
+                  feature: "Absorption Rate",
+                  traditional: "10%",
+                  teaHC: "90%",
+                  highlight: true
+                },
+                {
+                  feature: "Time to Effect",
+                  traditional: "45-60 minutes",
+                  teaHC: "15 minutes",
+                  highlight: true
+                },
+                {
+                  feature: "Targeted Delivery",
+                  traditional: "Limited",
+                  teaHC: "Precise",
+                  highlight: false
+                },
+                {
+                  feature: "Bioavailability",
+                  traditional: "Low",
+                  teaHC: "17× Higher",
+                  highlight: true
+                },
+                {
+                  feature: "Consistency",
+                  traditional: "Variable",
+                  teaHC: "Lab-Verified",
+                  highlight: false
+                },
+                {
+                  feature: "Value for Money",
+                  traditional: "90% Wasted",
+                  teaHC: "Maximum Benefit",
+                  highlight: true
+                }
+              ].map((row, index) => (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-gray-50 p-4 font-medium">
+                    {row.feature}
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <span className={row.highlight ? "text-red-500 font-medium" : "text-gray-600"}>
+                      {row.traditional}
+                    </span>
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-orange-50'} border-l-4 border-orange-500`}>
+                    <span className={row.highlight ? "text-green-600 font-medium" : "text-gray-900"}>
+                      {row.teaHC}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Key Takeaway */}
+            <div className="bg-orange-50 rounded-lg p-6 mt-8 border border-orange-100">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-medium text-gray-900">The Bottom Line</h4>
+                  <p className="mt-2 text-gray-600">
+                    With TeaHC's nano-technology, you're getting 17× more active ingredients where they need to be, 
+                    faster than traditional supplements. That means real results, not wasted money.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <a
+                href="/reserve"
+                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10"
+              >
+                Experience the 17× Difference
+                <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Frequently Asked Questions</h2>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Everything you need to know about TeaHC's revolutionary nano-technology and how it can help you.
+          </p>
+
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                question: "How does TeaHC's nano-technology work?",
+                answer: "TeaHC uses a proprietary nano-emulsification process that breaks down active ingredients into microscopic particles (less than 100 nanometers). This allows for 17× better absorption compared to traditional supplements, as these tiny particles can easily pass through cell membranes and reach their target areas more effectively."
+              },
+              {
+                question: "How quickly will I feel the effects?",
+                answer: "Most customers report feeling the effects within 15 minutes of taking TeaHC, compared to 45-60 minutes with traditional supplements. This rapid onset is due to our nano-technology, which allows the active ingredients to be absorbed and utilized by your body much more efficiently."
+              },
+              {
+                question: "Is TeaHC safe to use?",
+                answer: "Yes, TeaHC is manufactured in an FDA-registered facility and undergoes rigorous third-party testing. Our nano-technology is a physical process that doesn't alter the chemical structure of our ingredients, making it completely safe. We use only natural, high-quality ingredients that are carefully selected for their efficacy and safety."
+              },
+              {
+                question: "How does the Complete System work together?",
+                answer: "The Complete System is designed to provide 24/7 support: MOVE for morning mobility, RAPID for fast-acting relief during the day, and REPAIR for nighttime recovery. Each formula is optimized for its specific time of use, working together to provide comprehensive support throughout your day."
+              },
+              {
+                question: "What if TeaHC doesn't work for me?",
+                answer: "We're so confident in TeaHC's effectiveness that we offer a 30-day satisfaction guarantee. If you're not completely satisfied with your results, simply return the unused portion within 30 days for a full refund. No questions asked."
+              },
+              {
+                question: "How is TeaHC different from other supplements?",
+                answer: "TeaHC's key differentiator is our nano-technology, which provides 17× better absorption than traditional supplements. This means you get more active ingredients where they need to be, faster. Additionally, our Complete System approach ensures you have the right support at the right time, whether it's morning mobility, daytime relief, or nighttime recovery."
+              }
+            ].map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-100">
+                <details className="group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer">
+                    <h3 className="text-lg font-medium text-gray-900">{faq.question}</h3>
+                    <svg
+                      className="h-6 w-6 text-gray-400 group-open:transform group-open:rotate-180 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6">
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </div>
+                </details>
+              </div>
+            ))}
+          </div>
+
+          {/* FAQ CTA */}
+          <div className="text-center mt-12">
+            <p className="text-lg text-gray-600 mb-4">Still have questions?</p>
+            <a
+              href="/contact"
+              className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+            >
+              Contact Our Team
+              <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Email Capture Section */}
+      <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-6">
+              <span className="inline-block px-3 py-1 bg-white text-orange-600 rounded-full text-sm font-medium mb-2">
+                Join Our Community
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold">Get 10% Off Your First Order</h2>
+              <p className="text-xl">
+                Stay informed about our launch, receive wellness tips, and be the first to know about special offers.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Early access to new products</span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Subscriber-only discounts</span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <svg className="h-6 w-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Wellness tips and resources</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg transform transition-transform hover:scale-[1.02]">
+              <div className="absolute -top-3 -right-3 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                Limited Time
+              </div>
+              <EmailCapture
+                title="Get 10% Off Your First Order"
+                description="Sign up now and we'll send you a discount code for your first purchase."
+                buttonText="Get My Discount"
+                className="text-gray-800"
+              />
+              <div className="mt-4 pt-4 border-t border-gray-100 text-center text-gray-500 text-sm">
+                <p>We respect your privacy. Unsubscribe at any time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Conversion Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-orange-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the 17× Difference?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Join thousands of people who've discovered the power of TeaHC's nano-technology.
+              Reserve your Complete System today and start your journey to better mobility.
+            </p>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center gap-6 mb-12">
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-700">FDA-Registered Facility</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-700">30-Day Guarantee</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-700">Lab-Verified Results</span>
+              </div>
+            </div>
+
+            {/* Pre-launch Offer */}
+            <div className="bg-white rounded-xl p-8 shadow-lg border border-orange-100 mb-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Pre-Launch Special Offer</h3>
+                  <p className="text-gray-600 mb-4">
+                    Be among the first to experience TeaHC's revolutionary nano-technology.
+                    Reserve your Complete System now and save 40%.
+                  </p>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-3xl font-bold text-orange-600">$149</span>
+                    <span className="text-xl text-gray-500 line-through">$249</span>
+                    <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">40% OFF</span>
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <a href="/reserve" className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 shadow-lg hover:shadow-xl transition-all duration-200">
+                    Reserve Your System
+                    <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Final Trust Elements */}
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Fast Shipping</h4>
+                <p className="text-gray-600">Free shipping on all orders. Get your system in 2-3 business days.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Secure Checkout</h4>
+                <p className="text-gray-600">Your information is protected with bank-level security.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 mb-2">Easy Returns</h4>
+                <p className="text-gray-600">30-day satisfaction guarantee. No questions asked.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem-Solution Bridge */}
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Stop Wasting Money On Supplements Your Body Can't Absorb
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+            {/* Problem Visualization */}
+            <div className="relative">
+              <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="relative h-80 mb-6">
+                  <Image
+                    src="/product-images/wasted-supplements.png"
+                    alt="Visualization of wasted supplement absorption"
+                    fill
+                    className="object-contain"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-red-500/90 text-white px-6 py-3 rounded-lg transform -rotate-12">
+                      <span className="text-2xl font-bold">90% Wasted</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold mb-2">Standard Supplements</h3>
+                  <p className="text-gray-600">Most active ingredients never reach their target due to poor absorption</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Solution Statement */}
+            <div className="space-y-6">
+              <div className="bg-orange-50 rounded-xl p-6 border border-orange-100">
+                <h3 className="text-xl font-semibold mb-4">TeaHC's nano-emulsified formula delivers active ingredients directly where you need them most</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Feel relief in as little as 15 minutes, not hours</p>
+                      <p className="text-sm text-gray-600 mt-1">Our nano-emulsion technology ensures rapid absorption and fast-acting results</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Targeted delivery to specific areas of discomfort</p>
+                      <p className="text-sm text-gray-600 mt-1">Nano-sized particles reach their intended destination with precision</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-orange-500 text-white p-2 rounded-full flex-shrink-0">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">No more wasting money on poorly absorbed supplements</p>
+                      <p className="text-sm text-gray-600 mt-1">17× better absorption means you get the full value of every dose</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Customer Pain Point Callout */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                <p className="text-lg text-gray-700 italic text-center">
+                  "If you've tried other supplements without success, the problem isn't you—it's poor absorption."
+                </p>
+              </div>
+
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+              >
+                <Link href="/reserve">Experience the 17× Difference</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Complete System Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Your Complete 24/7 Anti-Inflammatory System
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* MOVE Formula */}
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/move-formula.png"
+                    alt="TeaHC MOVE Formula"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-2">MOVE Formula</h3>
+                <p className="text-gray-700 mb-4">Morning Mobility Support</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Enhanced with nano-technology</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Begin your day with comfort</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Take within 30 minutes of waking</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* RAPID Formula */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/rapid-formula.png"
+                    alt="TeaHC RAPID Formula"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-2">RAPID Formula</h3>
+                <p className="text-gray-700 mb-4">Fast-Acting Relief When You Need It</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>15-minute activation time</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Keep with you for unexpected moments</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Use as needed for quick support</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* REPAIR Formula */}
+            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl overflow-hidden">
+              <div className="p-6">
+                <div className="relative h-48 mb-6">
+                  <Image
+                    src="/product-images/repair-formula.png"
+                    alt="TeaHC REPAIR Formula"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-2">REPAIR Formula</h3>
+                <p className="text-gray-700 mb-4">Nighttime Recovery Support</p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Enhanced with sleep support</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Wake up with less stiffness</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Take 30-60 minutes before bed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* System Price Display */}
+          <div className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-8 text-center text-white">
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <span className="text-2xl line-through opacity-75">$179.99</span>
+              <span className="text-4xl font-bold">$89.99</span>
+            </div>
+            <p className="text-lg mb-6">Complete System: 30-Day Supply of All Three Formulas</p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-orange-600 hover:bg-orange-50"
+            >
+              <Link href="/reserve">SECURE YOUR COMPLETE SYSTEM</Link>
+            </Button>
+            <p className="text-sm text-white/90 mt-4">243 People Have Already Reserved</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators with Expanded Benefits */}
+      <section className="py-8 bg-white border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Risk-Free Guarantee</h3>
+              <p className="text-sm text-gray-600">Try for 30 days, 100% refund if not satisfied</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Lab Verified Quality</h3>
+              <p className="text-sm text-gray-600">Every batch tested for purity & potency</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">FDA-Registered Facility</h3>
+              <p className="text-sm text-gray-600">Made in USA with premium ingredients</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-orange-50 p-3 rounded-full mb-3">
+                <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-medium text-gray-900">Fast-Acting Relief</h3>
+              <p className="text-sm text-gray-600">Results in 15-45 minutes, not hours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Real People, Real Results</h2>
+
+          {/* Featured Testimonial */}
+          <div className="max-w-3xl mx-auto mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex -space-x-2">
+                <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center">
+                  <span className="text-xl font-bold text-orange-600">JD</span>
+                </div>
+              </div>
+            </div>
+            <blockquote className="text-2xl text-gray-700 text-center italic mb-6">
+              "At 67, I never thought I'd race my grandson again. TeaHC gave me back those moments."
+            </blockquote>
+            <div className="text-center">
+              <p className="font-medium text-gray-900">John D.</p>
+              <p className="text-sm text-gray-600">Retired Accountant, 67</p>
+              <div className="inline-flex items-center mt-2 px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm">
+                <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Verified Customer
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Testimonials */}
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">MS</span>
+                </div>
+                <div>
+                  <p className="font-medium">Mary S.</p>
+                  <p className="text-sm text-gray-600">Yoga Instructor, 52</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "The morning stiffness that used to take hours to work through is now gone within minutes of taking MOVE."
+              </p>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">RJ</span>
+                </div>
+                <div>
+                  <p className="font-medium">Robert J.</p>
+                  <p className="text-sm text-gray-600">Construction Worker, 45</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "RAPID is a game-changer. When I feel that afternoon ache coming on, I take it and within 15 minutes I'm back to work."
+              </p>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                  <span className="text-lg font-bold text-orange-600">EL</span>
+                </div>
+                <div>
+                  <p className="font-medium">Elizabeth L.</p>
+                  <p className="text-sm text-gray-600">Retired Teacher, 71</p>
+                </div>
+              </div>
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-5 w-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">
+                "REPAIR has transformed my sleep quality. I wake up feeling refreshed and ready to enjoy my day."
+              </p>
+            </div>
+          </div>
+
+          {/* Social Proof Counter */}
+          <div className="mt-12 text-center">
+            <p className="text-xl text-gray-700">
+              Join <span className="font-bold text-orange-500">2,400+</span> people who've discovered TeaHC's revolutionary approach
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Direct Comparison Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Why TeaHC Outperforms Traditional Supplements</h2>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Don't settle for supplements that don't deliver. Here's how TeaHC's nano-technology makes the difference.
+          </p>
+
+          {/* Comparison Table */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              {/* Header */}
+              <div className="md:col-span-1"></div>
+              <div className="bg-gray-100 rounded-t-lg p-4 text-center">
+                <h3 className="font-bold text-gray-500">Traditional Supplements</h3>
+              </div>
+              <div className="bg-orange-50 rounded-t-lg p-4 text-center border-t-4 border-orange-500">
+                <h3 className="font-bold text-orange-600">TeaHC Nano-Formula</h3>
+              </div>
+
+              {/* Comparison Rows */}
+              {[
+                {
+                  feature: "Absorption Rate",
+                  traditional: "10%",
+                  teaHC: "90%",
+                  highlight: true
+                },
+                {
+                  feature: "Time to Effect",
+                  traditional: "45-60 minutes",
+                  teaHC: "15 minutes",
+                  highlight: true
+                },
+                {
+                  feature: "Targeted Delivery",
+                  traditional: "Limited",
+                  teaHC: "Precise",
+                  highlight: false
+                },
+                {
+                  feature: "Bioavailability",
+                  traditional: "Low",
+                  teaHC: "17× Higher",
+                  highlight: true
+                },
+                {
+                  feature: "Consistency",
+                  traditional: "Variable",
+                  teaHC: "Lab-Verified",
+                  highlight: false
+                },
+                {
+                  feature: "Value for Money",
+                  traditional: "90% Wasted",
+                  teaHC: "Maximum Benefit",
+                  highlight: true
+                }
+              ].map((row, index) => (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-gray-50 p-4 font-medium">
+                    {row.feature}
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <span className={row.highlight ? "text-red-500 font-medium" : "text-gray-600"}>
+                      {row.traditional}
+                    </span>
+                  </div>
+                  <div className={`p-4 text-center ${index % 2 === 0 ? 'bg-white' : 'bg-orange-50'} border-l-4 border-orange-500`}>
+                    <span className={row.highlight ? "text-green-600 font-medium" : "text-gray-900"}>
+                      {row.teaHC}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Key Takeaway */}
+            <div className="bg-orange-50 rounded-lg p-6 mt-8 border border-orange-100">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-medium text-gray-900">The Bottom Line</h4>
+                  <p className="mt-2 text-gray-600">
+                    With TeaHC's nano-technology, you're getting 17× more active ingredients where they need to be, 
+                    faster than traditional supplements. That means real results, not wasted money.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <a
+                href="/reserve"
+                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10"
+              >
+                Experience the 17× Difference
+                <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
