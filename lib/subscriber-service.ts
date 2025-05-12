@@ -14,6 +14,7 @@ export interface ReservationData {
   shipping: any
   totalCost: number
   reservedAt: string
+  notes?: string
 }
 
 /**
@@ -138,12 +139,12 @@ export async function updateSubscriberReservation(email: string, reservationData
   try {
     console.log('🔵 Updating subscriber reservation...', { email })
 
-    // First try to use the pre-reservations table directly
+    // First try to use the reservations table directly
     try {
-      console.log('Attempting to insert into teahc-pre-reservations table...')
+      console.log('Attempting to insert into reservations table...')
       
       const { data: insertData, error: insertError } = await supabase
-        .from('teahc-pre-reservations')
+        .from('reservations')
         .insert([
           {
             timestamp: reservationData.reservedAt,
@@ -155,23 +156,24 @@ export async function updateSubscriberReservation(email: string, reservationData
             repairQuantity: reservationData.products.repairQuantity || 0,
             rapidQuantity: reservationData.products.rapidQuantity || 0,
             bundleQuantity: reservationData.products.bundleQuantity || 0,
-            totalCost: reservationData.totalCost
+            totalCost: reservationData.totalCost,
+            notes: reservationData.notes || ''
           }
         ])
         .select()
       
       if (insertError) {
-        console.error('❌ Error inserting into teahc-pre-reservations:', insertError)
+        console.error('❌ Error inserting into reservations:', insertError)
       } else {
-        console.log('✅ Successfully inserted into teahc-pre-reservations:', insertData)
+        console.log('✅ Successfully inserted into reservations:', insertData)
         return { success: true, data: insertData }
       }
-    } catch (preReservationError) {
-      console.error('❌ Exception with teahc-pre-reservations table:', preReservationError)
-      // Continue with the fallback subscribers table approach
+    } catch (reservationError) {
+      console.error('❌ Exception with reservations table:', reservationError)
+      // Continue with the fallback approach
     }
 
-    // Fallback to subscribers table if the teahc-pre-reservations approach failed
+    // Fallback to subscribers table if the reservations approach failed
     // Check if the subscribers table exists
     const { error: tableCheck } = await supabase
       .from('subscribers')

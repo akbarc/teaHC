@@ -3,7 +3,7 @@
 import { z } from "zod"
 import nodemailer from "nodemailer"
 import { updateSubscriberReservation } from "@/lib/subscriber-service"
-import { ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
+import { addReservationToSupabase, ReservationData as SupabaseReservationData } from "@/lib/supabase-service"
 
 // Define the form schema with Zod for validation
 const reservationSchema = z.object({
@@ -140,46 +140,62 @@ Notes: ${reservationRecord.notes}
     console.log("RESERVATION_DATA:", formattedReservation)
     console.log("RESERVATION_JSON:", JSON.stringify(reservationRecord))
 
-    // Add the reservation to Supabase using subscriber service
+    // Add the reservation to both Supabase tables for maximum reliability
     let supabaseUpdated = false
     let supabaseError: any = null
+    
     try {
-      console.log("⏳ Saving reservation to Supabase database...")
-      // Convert to the format needed by updateSubscriberReservation
-      const subscriberReservation = {
-        email: reservationRecord.email,
-        products: {
-          moveQuantity: reservationRecord.moveQuantity,
-          repairQuantity: reservationRecord.repairQuantity,
-          rapidQuantity: reservationRecord.rapidQuantity,
-          bundleQuantity: reservationRecord.bundleQuantity,
-        },
-        shipping: {
-          fullName: reservationRecord.fullName,
-          phone: reservationRecord.phone,
-          address: reservationRecord.address,
-        },
-        totalCost: reservationRecord.totalCost,
-        reservedAt: reservationRecord.timestamp,
-        notes: reservationRecord.notes,
-      }
+      console.log("⏳ Saving reservation to Supabase databases...")
       
-      const supabaseResult = await updateSubscriberReservation(
-        reservationRecord.email, 
-        subscriberReservation
-      )
+      // Method 1: Try adding to the reservations table directly
+      console.log("Method 1: Using addReservationToSupabase...")
+      const directResult = await addReservationToSupabase(reservationRecord)
       
-      supabaseUpdated = supabaseResult.success
-      
-      if (supabaseUpdated) {
-        console.log("✅ Supabase updated successfully")
+      if (directResult.success) {
+        console.log("✅ Direct reservations table update successful")
+        supabaseUpdated = true
       } else {
-        // Only try to access error if success is false
-        supabaseError = 'Error saving to Supabase'
-        if ('error' in supabaseResult) {
-          supabaseError = supabaseResult.error
+        // Check if error exists in the result
+        const errorMessage = 'error' in directResult 
+          ? directResult.error 
+          : 'Unknown error with reservations table';
+        console.error("❌ Direct reservations table update failed:", errorMessage)
+        
+        // Method 2: Try using the subscriber service as backup
+        console.log("Method 2: Using updateSubscriberReservation as backup...")
+        
+        // Convert to the format needed by updateSubscriberReservation
+        const subscriberReservation = {
+          email: reservationRecord.email,
+          products: {
+            moveQuantity: reservationRecord.moveQuantity,
+            repairQuantity: reservationRecord.repairQuantity,
+            rapidQuantity: reservationRecord.rapidQuantity,
+            bundleQuantity: reservationRecord.bundleQuantity,
+          },
+          shipping: {
+            fullName: reservationRecord.fullName,
+            phone: reservationRecord.phone,
+            address: reservationRecord.address,
+          },
+          totalCost: reservationRecord.totalCost,
+          reservedAt: reservationRecord.timestamp,
+          notes: reservationRecord.notes,
         }
-        console.error("❌ Error updating Supabase:", supabaseError)
+        
+        const backupResult = await updateSubscriberReservation(
+          reservationRecord.email, 
+          subscriberReservation
+        )
+        
+        supabaseUpdated = backupResult.success
+        
+        if (supabaseUpdated) {
+          console.log("✅ Backup method successful")
+        } else {
+          supabaseError = 'Both direct and backup methods failed'
+          console.error("❌ Backup method also failed")
+        }
       }
     } catch (dbError) {
       supabaseError = dbError
