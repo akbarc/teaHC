@@ -16,6 +16,7 @@ interface EmailCaptureProps {
   placeholder?: string
   privacyText?: string
   source?: string
+  onSubmit?: () => void
 }
 
 export function EmailCapture({
@@ -26,6 +27,7 @@ export function EmailCapture({
   placeholder = "Enter your email",
   privacyText,
   source = "homepage",
+  onSubmit,
 }: EmailCaptureProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -36,6 +38,11 @@ export function EmailCapture({
     setIsSubmitting(true)
 
     try {
+      // Call the onSubmit callback if provided
+      if (onSubmit) {
+        onSubmit()
+      }
+
       // First check if email already exists
       const existsCheck = await checkSubscriberExists(email)
       

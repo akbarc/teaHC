@@ -1,11 +1,31 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { PreOrderBar } from "@/components/pre-order-bar"
 import { EmailCapture } from "@/components/email-capture"
+import { track } from '@vercel/analytics'
 
 export default function Home() {
+  useEffect(() => {
+    // Track page view when component mounts
+    track('homepage_view', { 
+      source: 'direct',
+      timestamp: new Date().toISOString()
+    })
+  }, [])
+
+  // Function to track button clicks
+  const trackButtonClick = (action: string) => {
+    track(action, {
+      page: 'homepage',
+      timestamp: new Date().toISOString()
+    })
+  }
+
   return (
     <main className="flex flex-col min-h-screen">
       <PreOrderBar />
@@ -30,6 +50,7 @@ export default function Home() {
                   buttonText="RESERVE YOUR 50% DISCOUNT"
                   privacyText="We respect your privacy. No spam."
                   source="homepage_hero"
+                  onSubmit={() => trackButtonClick('homepage_email_submit')}
                 />
                 <p className="text-sm text-gray-500 mt-2 text-center">
                   Limited Pre-Launch Offer • No Payment Today • Ships June 2025
