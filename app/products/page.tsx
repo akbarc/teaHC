@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { Suspense } from "react"
 
 // Analytics tracking function
 const trackPageView = (page: string, source?: string) => {
@@ -31,7 +32,7 @@ const trackPageView = (page: string, source?: string) => {
   }
 }
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const searchParams = useSearchParams()
   const source = searchParams.get('source')
   
@@ -180,5 +181,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ProductsPageContent />
+    </Suspense>
   )
 }
