@@ -23,21 +23,21 @@ function BundlePageContent() {
       name: 'MOVE Formula',
       description: 'Enhanced mobility and flexibility support with rapid-absorption nano-cannabinoids.',
       image: '/product-images/move-formula.png',
-      color: 'amber'
+      bgColorClass: 'bg-amber-100'
     },
     {
       id: 'repair',
       name: 'REPAIR Formula',
       description: 'Advanced recovery support for muscles and joints with breakthrough nano-technology.',
       image: '/product-images/repair-formula.png',
-      color: 'blue'
+      bgColorClass: 'bg-blue-100'
     },
     {
       id: 'rapid',
       name: 'RAPID Formula',
       description: 'Fast-acting relief when you need it most. 17× better absorption than traditional products.',
       image: '/product-images/rapid-formula.png',
-      color: 'green'
+      bgColorClass: 'bg-amber-100'
     }
   ]
   
@@ -162,7 +162,7 @@ function BundlePageContent() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="bg-white rounded-xl shadow-md overflow-hidden"
               >
-                <div className={`h-48 flex items-center justify-center bg-${product.color}-100 p-4`}>
+                <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4`}>
                   <Image
                     src={product.image}
                     alt={product.name}

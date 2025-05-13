@@ -36,7 +36,8 @@ function ProductsPageContent() {
       name: 'MOVE Formula',
       image: '/product-images/move-formula.png',
       description: 'Enhanced mobility and flexibility support with rapid-absorption nano-cannabinoids.',
-      color: 'amber',
+      bgColorClass: 'bg-amber-100',
+      textColorClass: 'text-amber-600',
       price: 19.99,
       link: '/products/move'
     },
@@ -45,7 +46,8 @@ function ProductsPageContent() {
       name: 'REPAIR Formula',
       image: '/product-images/repair-formula.png',
       description: 'Advanced recovery support for muscles and joints with breakthrough nano-technology.',
-      color: 'blue',
+      bgColorClass: 'bg-blue-100',
+      textColorClass: 'text-blue-600',
       price: 19.99,
       link: '/products/repair'
     },
@@ -54,7 +56,8 @@ function ProductsPageContent() {
       name: 'RAPID Formula',
       image: '/product-images/rapid-formula.png',
       description: 'Fast-acting relief when you need it most. 17× better absorption than traditional products.',
-      color: 'green',
+      bgColorClass: 'bg-amber-100',
+      textColorClass: 'text-amber-600',
       price: 19.99,
       link: '/products/rapid'
     },
@@ -63,7 +66,8 @@ function ProductsPageContent() {
       name: 'Complete Bundle',
       image: '/product-images/product-trio.png',
       description: 'Get all three formulas and save 20%. The complete solution for your wellness needs.',
-      color: 'orange',
+      bgColorClass: 'bg-orange-100',
+      textColorClass: 'text-orange-600',
       price: 47.98,
       link: '/products/bundle',
       isBest: true
@@ -111,12 +115,12 @@ function ProductsPageContent() {
               className={`bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 relative ${product.isBest ? 'border-2 border-orange-400' : ''}`}
             >
               {product.isBest && (
-                <div className="absolute top-0 right-0 bg-orange-500 text-white px-3 py-1 text-sm font-medium rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-orange-500 text-white px-3 py-1 text-sm font-medium rounded-bl-lg z-10">
                   Best Value
                 </div>
               )}
               
-              <div className={`h-48 flex items-center justify-center bg-${product.color}-100 p-4`}>
+              <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4`}>
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -128,9 +132,9 @@ function ProductsPageContent() {
               
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4 h-24">{product.description}</p>
+                <p className="text-gray-600 mb-4 min-h-[6rem]">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-orange-600">${product.price}</span>
+                  <span className={`text-xl font-bold ${product.textColorClass}`}>${product.price}</span>
                   <Link 
                     href={`${product.link}?source=products_overview`}
                     onClick={() => trackPageView(`products_to_${product.id}`, 'products_overview')}
