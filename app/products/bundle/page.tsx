@@ -7,8 +7,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { trackPageView } from '@/components/product-detail-template'
+import { Suspense } from 'react'
 
-export default function BundlePage() {
+function BundlePageContent() {
   const searchParams = useSearchParams()
   const source = searchParams.get('source')
   
@@ -212,5 +213,13 @@ export default function BundlePage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function BundlePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <BundlePageContent />
+    </Suspense>
   )
 } 

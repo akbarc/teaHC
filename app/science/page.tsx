@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { trackPageView } from '@/components/product-detail-template'
+import { Suspense } from 'react'
 
-export default function SciencePage() {
+function SciencePageContent() {
   const searchParams = useSearchParams()
   const source = searchParams.get('source')
   
@@ -372,5 +373,13 @@ export default function SciencePage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function SciencePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <SciencePageContent />
+    </Suspense>
   )
 }

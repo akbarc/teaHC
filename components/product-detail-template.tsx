@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { motion } from 'framer-motion'
+import { Suspense } from 'react'
 
 // Analytics tracking function
 export const trackPageView = (page: string, source?: string) => {
@@ -58,7 +59,7 @@ export interface ProductDetailProps {
   scienceDescription: string[]
 }
 
-export default function ProductDetailTemplate({ 
+function ProductDetailContent({ 
   id,
   name, 
   tagline,
@@ -316,5 +317,13 @@ export default function ProductDetailTemplate({
         </div>
       </div>
     </main>
+  )
+}
+
+export default function ProductDetailTemplate(props: ProductDetailProps) {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ProductDetailContent {...props} />
+    </Suspense>
   )
 } 
