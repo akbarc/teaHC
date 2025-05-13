@@ -8,95 +8,102 @@ import { Button } from '@/components/ui/button'
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { track } from '@vercel/analytics'
-import { IngredientType } from "@/components/product-detail-template"
+import ProductDetailTemplate, { IngredientType } from "@/components/product-detail-template"
+import EmailSignup from '@/app/components/email-signup'
 
 // RAPID product active ingredients
 const activeIngredients: IngredientType[] = [
   {
-    name: "Curcumin Phytosome (Meriva®)",
-    dose: "200 mg",
+    name: "Curcumin Phytosome",
+    dose: "400 mg",
     function: "Fast-acting anti-inflammatory for acute joint or muscle flare-ups"
   },
   {
-    name: "CBD (nano)",
-    dose: "15 mg",
+    name: "Nano-cannabinoid emulsion (40nm droplet)",
+    dose: "CBD 30mg • THCV 10mg • CBG 10mg • Δ9-THC 1mg",
     function: "Rapid absorption; targets inflammatory cytokines and pain pathways"
   },
   {
-    name: "THCV (nano)",
-    dose: "10 mg",
-    function: "Energizing, non-sedating relief agent"
+    name: "Devil's-claw extract",
+    dose: "≥50mg harpagoside",
+    function: "Natural anti-inflammatory and pain relief"
   },
   {
-    name: "Gingerol Complex",
-    dose: "50 mg",
+    name: "Gingerols",
+    dose: "45mg (std. extract)",
     function: "Activates circulation, desensitizes TRPV1 pain receptors"
   },
   {
-    name: "Piperine (Black Pepper Extract)",
-    dose: "5 mg",
+    name: "Piperine",
+    dose: "5mg",
     function: "Enhances curcumin and cannabinoid absorption via inhibition of liver metabolism"
-  },
-  {
-    name: "Electrolyte Blend (Mg, K, Na)",
-    dose: "50 mg",
-    function: "Replenishes minerals lost during inflammation, exercise, or stress"
   }
 ]
 
 // RAPID product other ingredients
 const otherIngredients: IngredientType[] = [
   {
-    name: "Purified Water",
-    function: "Liquid base"
+    name: "Purified water",
+    function: "Base liquid (qs to 60mL)"
   },
   {
-    name: "Chai Natural Flavor",
-    function: "Premium spiced flavor profile (cinnamon, cardamom, clove)"
+    name: "Black-tea solids (decaf)",
+    function: "Provides 15mg caffeine, natural base"
   },
   {
-    name: "Lemon Juice Concentrate",
-    function: "Natural acidity and flavor"
+    name: "Cinnamon bark extract",
+    function: "Anti-inflammatory spice, flavor component"
   },
   {
-    name: "Monk Fruit Sweetener",
-    function: "Sugar-free sweetness (natural, low-calorie)"
+    name: "Ginger juice concentrate",
+    function: "Natural anti-inflammatory, flavor enhancer"
   },
   {
-    name: "Coconut MCT Oil",
-    function: "Carrier for nano cannabinoids; enhances absorption"
+    name: "Cardamom CO₂ extract",
+    function: "Digestive support, flavor component"
   },
   {
-    name: "Citric Acid",
-    function: "Preservative and pH control"
+    name: "Clove oil (natural, 10% emulsion)",
+    function: "Anti-inflammatory, flavor component"
   },
   {
-    name: "Xanthan Gum",
-    function: "Natural thickener and stabilizer"
+    name: "Black-pepper oleoresin",
+    function: "Enhances absorption, flavor component"
   },
   {
-    name: "Potassium Sorbate",
-    function: "Shelf-life stabilizer (minimal, FDA-safe levels)"
+    name: "Madagascar vanilla extract",
+    function: "Natural flavor harmonizer"
   },
   {
-    name: "Beta-Carotene",
-    function: "Natural colorant (vitamin A precursor)"
+    name: "Date-syrup solids",
+    function: "Natural sweetener"
+  },
+  {
+    name: "Oat-milk powder",
+    function: "Provides smooth mouthfeel"
+  },
+  {
+    name: "Natural chai flavor harmonizer",
+    function: "Flavor enhancement"
+  },
+  {
+    name: "Potassium sorbate / citric acid",
+    function: "Preservative system (pH 3.8)"
   }
 ]
 
 // RAPID product science description paragraphs
 const scienceDescription = [
-  "TeaHC RAPID utilizes our most advanced nano-emulsification technology to create ultra-small particles (15-25 nanometers) that are absorbed directly through the oral mucosa and digestive tract for immediate action.",
-  "The liquid format allows for maximum surface area contact and rapid absorption. We've included piperine (black pepper extract) which has been shown in clinical studies to enhance the bioavailability of curcumin by up to 2000%. The addition of gingerol from ginger extract provides complementary anti-inflammatory action through COX-2 inhibition."
+  "TeaHC RAPID is our fastest-acting formula, designed for immediate relief when you need it most. The combination of nano-emulsified cannabinoids (40nm droplets) and curcumin phytosomes creates a powerful anti-inflammatory effect that can be felt in as little as 10 minutes.",
+  "Our proprietary nano-emulsification technology breaks down the active compounds into ultra-small particles that are rapidly absorbed through the tissues. The addition of piperine and gingerols enhances this absorption while providing complementary anti-inflammatory benefits. The chai-spice flavor profile not only masks the natural bitterness of some ingredients but also contributes additional therapeutic compounds."
 ]
 
 // RAPID product benefits
 const benefits = [
-  "Ultra-fast relief in just 15 minutes",
-  "Target pain with precision nano-technology",
-  "17× better absorption than traditional supplements",
-  "No drowsiness or mental fog - stay sharp",
-  "Pocket-sized convenience for on-the-go relief"
+  "Ultra-fast acting (onset in ~10 minutes)",
+  "Targeted relief for acute discomfort",
+  "Maintains mental clarity and focus",
+  "Portable, on-the-go format"
 ]
 
 // Specific use cases for RAPID
@@ -140,6 +147,26 @@ function RapidContentPage() {
   
   return (
     <main className="min-h-screen">
+      {/* Announcement bar with email signup */}
+      <section className="bg-amber-900 text-white py-3">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <p className="font-medium">
+                🔥 Be the first to know when RAPID launches. <span className="hidden md:inline">Get exclusive early access!</span>
+              </p>
+            </div>
+            <div className="w-full md:w-auto">
+              <EmailSignup 
+                source="rapid_product_page" 
+                buttonText="Get Early Access" 
+                className="max-w-md mx-auto md:mx-0"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-amber-50 to-white">
         <div className="container mx-auto px-4 py-8 md:py-12">
@@ -217,15 +244,17 @@ function RapidContentPage() {
                 className="relative"
               >
                 <div className="absolute -inset-4 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full blur-2xl opacity-50"></div>
-                <Image
-                  src="/product-images/rapid-formula.png"
-                  alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
-                  width={400}
-                  height={400}
-                  className="relative z-10 drop-shadow-xl"
-                />
-                <div className="absolute top-0 right-0 bg-amber-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
-                  15 MIN
+                <div className="relative z-10">
+                  <Image
+                    src="/product-images/rapid-formula.png"
+                    alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
+                    width={300}
+                    height={300}
+                    className="mx-auto drop-shadow-xl"
+                  />
+                  <div className="absolute top-0 right-0 bg-amber-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
+                    15 MIN
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -295,8 +324,8 @@ function RapidContentPage() {
           
           <div className="mt-20 max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-amber-100 to-amber-50 rounded-2xl overflow-hidden">
-              <div className="grid md:grid-cols-5 items-center">
-                <div className="md:col-span-2 p-6 md:p-10">
+              <div className="grid md:grid-cols-2 items-center">
+                <div className="p-6 md:p-10">
                   <h3 className="text-2xl font-bold mb-4">The Chai Experience</h3>
                   <p className="text-gray-700 mb-6">
                     We've crafted RAPID with a premium chai flavor profile that transforms relief into an enjoyable experience. The warm notes of cinnamon, cardamom, and clove complement the formula's potent ingredients.
@@ -328,15 +357,10 @@ function RapidContentPage() {
                     </div>
                   </div>
                 </div>
-                <div className="md:col-span-3 relative h-full">
-                  <div className="h-60 md:h-full relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-100 flex items-center justify-center">
-                      <div className="p-6 text-center">
-                        <h4 className="text-xl font-bold text-amber-800 mb-2">Premium Chai Spices</h4>
-                        <p className="text-amber-700">Cinnamon, Cardamom, and Clove</p>
-                      </div>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-amber-100/80 to-transparent"></div>
+                <div className="bg-gradient-to-br from-amber-200 to-amber-100 p-10 flex items-center justify-center">
+                  <div className="text-center">
+                    <h4 className="text-xl font-bold text-amber-800 mb-2">Premium Chai Flavor</h4>
+                    <p className="text-amber-700">Expertly blended for taste and function</p>
                   </div>
                 </div>
               </div>
@@ -546,7 +570,7 @@ function RapidContentPage() {
                     TeaHC RAPID utilizes our most advanced nano-emulsification technology to create ultra-small particles (15-25 nanometers) that are absorbed directly through the oral mucosa and digestive tract for immediate action.
                   </p>
                   <p className="text-gray-700">
-                    The liquid format allows for maximum surface area contact and rapid absorption. We've included piperine (black pepper extract) which has been shown in clinical studies to enhance the bioavailability of curcumin by up to 2000%. The addition of gingerol from ginger extract provides complementary anti-inflammatory action through COX-2 inhibition.
+                    The liquid format allows for maximum surface area contact and rapid absorption. We've included piperine (black pepper extract) which has been shown in clinical studies to enhance the bioavailability of curcumin by up to 2000%. The addition of gingerols from ginger extract provides complementary anti-inflammatory action through COX-2 inhibition.
                   </p>
                 </div>
                 <div>
@@ -581,6 +605,97 @@ function RapidContentPage() {
                 </Link>
               </div>
             </div>
+            
+            {/* Complete Formula Section */}
+            <div className="mt-16 bg-white rounded-xl p-6 md:p-8 border border-amber-200">
+              <h3 className="text-2xl font-bold mb-6 text-amber-800">Complete Formula Breakdown</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-amber-100">
+                      <th className="px-4 py-2 text-amber-800">Component</th>
+                      <th className="px-4 py-2 text-amber-800">wt. (mg) / vol.</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-amber-100">
+                    <tr>
+                      <td className="px-4 py-2">Purified water</td>
+                      <td className="px-4 py-2">qs to 60 mL</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Black‑tea solids (decaf, provides 15 mg caffeine)</td>
+                      <td className="px-4 py-2">250</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Cinnamon bark extract</td>
+                      <td className="px-4 py-2">120</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Ginger juice concentrate</td>
+                      <td className="px-4 py-2">100</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Cardamom CO₂ extract</td>
+                      <td className="px-4 py-2">50</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Clove oil (natural, 10 % emulsion)</td>
+                      <td className="px-4 py-2">20</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Black‑pepper oleoresin</td>
+                      <td className="px-4 py-2">10</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Madagascar vanilla extract</td>
+                      <td className="px-4 py-2">10</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Date‑syrup solids (sweetener)</td>
+                      <td className="px-4 py-2">2,000</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Oat‑milk powder (mouthfeel)</td>
+                      <td className="px-4 py-2">1,000</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Curcumin Phytosome</td>
+                      <td className="px-4 py-2">400</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Nano‑cannabinoid emulsion (40 nm droplet): CBD 30 mg • THCV 10 mg • CBG 10 mg • Δ9‑THC 1 mg</td>
+                      <td className="px-4 py-2">180</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Devil's‑claw extract (≥50 mg harpagoside)</td>
+                      <td className="px-4 py-2">100</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Gingerols 45 mg (std. extract)</td>
+                      <td className="px-4 py-2">45</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Piperine</td>
+                      <td className="px-4 py-2">5</td>
+                    </tr>
+                    <tr className="bg-amber-50/50">
+                      <td className="px-4 py-2">Natural chai flavor harmonizer</td>
+                      <td className="px-4 py-2">120</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Potassium sorbate / citric acid (pH 3.8)</td>
+                      <td className="px-4 py-2">60</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                <p className="text-gray-700 italic">
+                  <span className="font-medium">Usage:</span> Shake, shoot; onset in ~10 min thanks to nano‑delivery + piperine. Warm, sweet‑spicy chai lights up the curcumin and masks devil's‑claw bitterness.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -602,11 +717,12 @@ function RapidContentPage() {
                 <p className="text-white/80">Morning Support</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4">
+                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
                   <Image
                     src="/product-images/move-formula.png"
                     alt="TeaHC MOVE"
-                    fill
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -633,11 +749,12 @@ function RapidContentPage() {
                 <p className="text-white/80">On-Demand Relief</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4">
+                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
                   <Image
                     src="/product-images/rapid-formula.png"
                     alt="TeaHC RAPID"
-                    fill
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -656,11 +773,12 @@ function RapidContentPage() {
                 <p className="text-white/80">Nighttime Recovery</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4">
+                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
                   <Image
                     src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR"
-                    fill
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -732,8 +850,24 @@ function RapidContentPage() {
 
 export default function RapidProductPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-      <RapidContentPage />
-    </Suspense>
+    <ProductDetailTemplate
+      id="rapid"
+      name="RAPID"
+      tagline="Instant Relief Formula"
+      description="Our fastest-acting formula designed for immediate relief when you need it most. Combines nano-emulsified cannabinoids with curcumin phytosomes in a convenient 60mL shot format."
+      image="/product-images/rapid-formula.png"
+      format="Chai-Spice Liquid Shot"
+      quantity="60mL PET mini bottle"
+      usage="As needed for fast relief"
+      colorClass="text-amber-600"
+      colorBgClass="bg-amber-50"
+      colorTextClass="text-amber-800"
+      price={19.99}
+      badges={["Sugar-Free", "Gluten-Free", "Vegan", "Non-GMO", "Lab Tested"]}
+      activeIngredients={activeIngredients}
+      otherIngredients={otherIngredients}
+      benefits={benefits}
+      scienceDescription={scienceDescription}
+    />
   )
 } 
