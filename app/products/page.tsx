@@ -7,29 +7,18 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Suspense } from "react"
+import { track } from '@vercel/analytics'
 
 // Analytics tracking function
 const trackPageView = (page: string, source?: string) => {
-  // This could connect to your analytics system
-  console.log(`Page view: ${page}, Source: ${source || 'direct'}`)
+  // Use Vercel Analytics for tracking
+  track(page, { 
+    source: source || 'direct',
+    timestamp: new Date().toISOString()
+  })
   
-  // Example analytics tracking - this would be replaced with your actual analytics code
-  if (typeof window !== 'undefined') {
-    try {
-      // Save to localStorage for demo purposes
-      const viewData = {
-        page,
-        source: source || 'direct',
-        timestamp: new Date().toISOString()
-      }
-      localStorage.setItem(`teahc_view_${Date.now()}`, JSON.stringify(viewData))
-      
-      // This is where you'd add your actual analytics tracking
-      // window.gtag?.('event', 'page_view', { page_title: page, page_path: window.location.pathname })
-    } catch (e) {
-      console.error('Error tracking page view:', e)
-    }
-  }
+  // Log to console for development
+  console.log(`Page view: ${page}, Source: ${source || 'direct'}`)
 }
 
 function ProductsPageContent() {
