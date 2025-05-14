@@ -111,6 +111,15 @@ export default function RapidLandingPage() {
                 </div>
               </div>
               
+              <div className="mb-6">
+                <p className="text-lg text-gray-700 font-medium mb-3">Join our newsletter for special offers:</p>
+                <EmailSignup 
+                  source="rapid_hero_section" 
+                  buttonText="Get 10% Off"
+                  className="max-w-md"
+                />
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/reserve?product=rapid&source=rapid_landing" passHref>
                   <Button 
