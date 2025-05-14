@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Step2Products from "../components/step2-products"
 import { track } from '@vercel/analytics'
 import * as fbq from '@/lib/facebook-pixel'
 
-export default function ProductsPage() {
+function ProductsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const email = searchParams.get('email') || ""
@@ -188,5 +188,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ProductsContent />
+    </Suspense>
   )
 } 

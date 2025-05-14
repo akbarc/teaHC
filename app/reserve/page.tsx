@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Step1Email from "./components/step1-email"
 import Step2Products from "./components/step2-products"
@@ -10,7 +10,8 @@ import type { ShippingDetails } from "./components/step3-shipping"
 import { track } from '@vercel/analytics'
 import * as fbq from '@/lib/facebook-pixel'
 
-export default function ReservePage() {
+// Create a client component that wraps the search params usage
+function ReserveContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [step, setStep] = useState(1)
@@ -212,5 +213,14 @@ export default function ReservePage() {
         )}
       </div>
     </main>
+  )
+}
+
+// Main component with Suspense
+export default function ReservePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ReserveContent />
+    </Suspense>
   )
 }

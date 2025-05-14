@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { track } from '@vercel/analytics'
 import * as fbq from '@/lib/facebook-pixel'
@@ -8,7 +8,7 @@ import { updateSubscriberReservation } from "@/lib/subscriber-service"
 import ModifiedStep3Shipping from "./ModifiedStep3Shipping"
 import SuccessMessage from "./SuccessMessage"
 
-export default function ShippingPage() {
+function ShippingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const email = searchParams.get('email') || ""
@@ -366,5 +366,13 @@ export default function ShippingPage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function ShippingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ShippingContent />
+    </Suspense>
   )
 } 
