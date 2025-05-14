@@ -111,13 +111,20 @@ export default function RapidLandingPage() {
                 </div>
               </div>
               
-              <div className="mb-6">
-                <p className="text-lg text-gray-700 font-medium mb-3">Join our newsletter for special offers:</p>
+              <div className="mb-6 bg-amber-50 p-5 rounded-lg border border-amber-200 shadow-sm">
+                <div className="flex items-center mb-3">
+                  <svg className="h-6 w-6 text-amber-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                  </svg>
+                  <h3 className="text-lg font-bold text-gray-800">EXCLUSIVE PRE-LAUNCH OFFER</h3>
+                </div>
+                <p className="text-gray-700 font-medium mb-3">Sign up now to unlock <span className="text-amber-600 font-bold">15% OFF</span> your first order + receive a <span className="text-amber-600 font-bold">FREE bonus shot</span> with purchase!</p>
                 <EmailSignup 
                   source="rapid_hero_section" 
-                  buttonText="Get 10% Off"
+                  buttonText="CLAIM MY OFFER"
                   className="max-w-md"
                 />
+                <p className="text-xs text-gray-500 mt-2">*Limited to first 100 subscribers. No spam, unsubscribe anytime.</p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
