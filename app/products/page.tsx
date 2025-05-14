@@ -77,16 +77,16 @@ function ProductsPageContent() {
   return (
     <main className="min-h-screen py-12 bg-gradient-to-b from-amber-50 to-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">TeaHC Products</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-800">TeaHC Products</h1>
+          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-8">
             Revolutionary nano-cannabinoid formulas with 17× better absorption
           </p>
           
-          <div className="flex justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Link href="/reserve" passHref>
               <Button 
-                className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-xl"
+                className="px-8 py-4 text-lg bg-orange-500 hover:bg-orange-600 rounded-xl shadow-md hover:shadow-lg"
                 onClick={() => trackPageView('products_to_reserve', 'products_overview')}
               >
                 Reserve Now
@@ -95,14 +95,14 @@ function ProductsPageContent() {
             <Link href="/science" passHref>
               <Button 
                 variant="outline" 
-                className="px-6 py-3 text-orange-600 border-orange-300 hover:bg-orange-50 rounded-xl"
+                className="px-8 py-4 text-lg text-orange-600 border-orange-300 hover:bg-orange-50 rounded-xl"
                 onClick={() => trackPageView('products_to_science', 'products_overview')}
               >
                 Learn the Science
-                </Button>
+              </Button>
             </Link>
-              </div>
-            </div>
+          </div>
+        </div>
 
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -120,24 +120,26 @@ function ProductsPageContent() {
                 </div>
               )}
 
-              <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4 relative`}>
-                <div className="relative w-32 h-32">
+              <div className={`h-72 md:h-80 flex items-center justify-center ${product.bgColorClass} p-6 md:p-8 relative`}>
+                <div className="relative w-56 h-56 md:w-64 md:h-64">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 70vw, (max-width: 1200px) 30vw, 250px"
                     className="object-contain"
                     style={{ objectFit: 'contain' }}
+                    quality={95}
+                    priority={index < 2}
                   />
                 </div>
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4 min-h-[6rem]">{product.description}</p>
+              <div className="p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-bold mb-3">{product.name}</h3>
+                <p className="text-gray-600 mb-5 min-h-[5rem]">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className={`text-xl font-bold ${product.textColorClass}`}>${product.price}</span>
+                  <span className={`text-xl md:text-2xl font-bold ${product.textColorClass}`}>${product.price}</span>
                   <Link 
                     href={`${product.link}?source=products_overview`}
                     onClick={() => trackPageView(`products_to_${product.id}`, 'products_overview')}
@@ -145,23 +147,23 @@ function ProductsPageContent() {
                   >
                     <Button 
                       size="sm"
-                      className="bg-gray-800 hover:bg-gray-700"
+                      className="bg-gray-800 hover:bg-gray-700 px-4 py-2"
                     >
                       Learn More
-                </Button>
+                    </Button>
                   </Link>
                 </div>
               </div>
             </motion.div>
           ))}
-            </div>
+        </div>
 
         {/* CTA Section */}
-        <div className="bg-orange-50 rounded-2xl p-8 md:p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to experience the difference?</h2>
-          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+        <div className="bg-orange-50 rounded-2xl p-8 md:p-12 text-center border border-orange-100 shadow-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to experience the difference?</h2>
+          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
             Reserve your TeaHC products today at exclusive pre-launch pricing. No payment required until your order ships.
-                </p>
+          </p>
           <Link 
             href="/reserve" 
             passHref
@@ -169,11 +171,14 @@ function ProductsPageContent() {
           >
             <Button 
               size="lg" 
-              className="px-8 py-4 text-xl bg-orange-500 hover:bg-orange-600 rounded-xl"
+              className="px-12 py-6 text-xl bg-orange-500 hover:bg-orange-600 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105"
             >
               Reserve Your TeaHC Products
-              </Button>
+            </Button>
           </Link>
+          <p className="mt-6 text-gray-600">
+            Limited time offer • Satisfaction guaranteed
+          </p>
         </div>
       </div>
     </main>
