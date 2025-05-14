@@ -295,7 +295,9 @@ export default function Step4Confirm({
                           src="/product-images/move-formula.png"
                           alt="TeaHC MOVE"
                           fill
+                          sizes="(max-width: 768px) 40px, 40px"
                           className="object-contain p-1"
+                          quality={85}
                         />
                       </div>
                       <div>
@@ -315,7 +317,9 @@ export default function Step4Confirm({
                           src="/product-images/repair-formula.png"
                           alt="TeaHC REPAIR"
                           fill
+                          sizes="(max-width: 768px) 40px, 40px"
                           className="object-contain p-1"
+                          quality={85}
                         />
                       </div>
                       <div>
@@ -335,7 +339,9 @@ export default function Step4Confirm({
                           src="/product-images/rapid_new_image.png"
                           alt="TeaHC RAPID"
                           fill
+                          sizes="(max-width: 768px) 40px, 40px"
                           className="object-contain p-1"
+                          quality={85}
                         />
                       </div>
                       <div>
@@ -355,7 +361,9 @@ export default function Step4Confirm({
                           src="/product-images/product-trio.png"
                           alt="TeaHC Bundle"
                           fill
+                          sizes="(max-width: 768px) 40px, 40px" 
                           className="object-contain p-1"
+                          quality={85}
                         />
                       </div>
                       <div>

@@ -248,9 +248,11 @@ function RapidContentPage() {
                   <Image
                     src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
-                    width={300}
-                    height={300}
+                    width={450}
+                    height={450}
                     className="mx-auto drop-shadow-xl"
+                    sizes="(max-width: 768px) 80vw, (max-width: 1200px) 45vw, 450px"
+                    quality={95}
                   />
                   <div className="absolute top-0 right-0 bg-amber-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
                     15 MIN
@@ -717,13 +719,14 @@ function RapidContentPage() {
                 <p className="text-white/80">Morning Support</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-48 h-48 relative mb-4">
                   <Image
                     src="/product-images/move-formula.png"
                     alt="TeaHC MOVE"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 192px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">
@@ -749,13 +752,14 @@ function RapidContentPage() {
                 <p className="text-white/80">On-Demand Relief</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-48 h-48 relative mb-4">
                   <Image
                     src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 192px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">
@@ -773,13 +777,14 @@ function RapidContentPage() {
                 <p className="text-white/80">Nighttime Recovery</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-48 h-48 relative mb-4">
                   <Image
                     src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 192px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">

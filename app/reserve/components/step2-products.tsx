@@ -149,7 +149,9 @@ export default function Step2Products({ email, onProductsSubmit }: Step2Products
                     src={product.image}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 250px"
                     className="object-contain p-2"
+                    quality={90}
                   />
                 </div>
                 <div className="flex justify-between items-center mb-2">
@@ -215,7 +217,9 @@ export default function Step2Products({ email, onProductsSubmit }: Step2Products
                   src="/product-images/product-trio.png"
                   alt="TeaHC Bundle"
                   fill
+                  sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 250px"
                   className="object-contain p-2"
+                  quality={90}
                 />
               </div>
               <div className="flex justify-between items-center mb-2">
