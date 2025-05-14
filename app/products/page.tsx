@@ -121,13 +121,16 @@ function ProductsPageContent() {
               )}
 
               <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4 relative`}>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={120}
-                  height={120}
-                  className="object-contain max-h-40 max-w-full"
-                />
+                <div className="relative w-32 h-32">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-contain"
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
               </div>
               
               <div className="p-6">

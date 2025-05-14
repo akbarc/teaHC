@@ -66,13 +66,16 @@ function BundlePageContent() {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="bg-orange-50 p-8 rounded-xl">
-                <Image
-                  src="/product-images/product-trio.png"
-                  alt="TeaHC Complete Bundle - All Three Products"
-                  width={400}
-                  height={400}
-                  className="mx-auto object-contain"
-                />
+                <div className="relative h-80">
+                  <Image
+                    src="/product-images/product-trio.png"
+                    alt="TeaHC Complete Bundle - All Three Products"
+                    fill
+                    sizes="(max-width: 768px) 90vw, 45vw"
+                    className="object-contain"
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
               </div>
               <div className="space-y-6">
                 <div className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
@@ -163,13 +166,16 @@ function BundlePageContent() {
                 className="bg-white rounded-xl shadow-md overflow-hidden"
               >
                 <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4`}>
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={150}
-                    height={150}
-                    className="object-contain"
-                  />
+                  <div className="relative w-36 h-36">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain"
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">{product.name}</h3>
