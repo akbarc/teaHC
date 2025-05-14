@@ -1,13 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Step1Email from "./components/step1-email"
 import Step2Products from "./components/step2-products"
 import Step3Shipping from "./components/step3-shipping"
 import Step4Confirm from "./components/step4-confirm"
 import type { ShippingDetails } from "./components/step3-shipping"
+import { track } from '@vercel/analytics'
+import * as fbq from '@/lib/facebook-pixel'
 
 export default function ReservePage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [step, setStep] = useState(1)
   const [email, setEmail] = useState("")
   const [productSelections, setProductSelections] = useState({
@@ -31,9 +36,38 @@ export default function ReservePage() {
   })
   const [reservationComplete, setReservationComplete] = useState(false)
   
+  // Track page view
+  useEffect(() => {
+    const source = searchParams.get('source') || 'direct'
+    const product = searchParams.get('product') || 'unknown'
+    
+    // Vercel Analytics
+    track('reserve_start', { 
+      source,
+      product,
+      step: 'email',
+      timestamp: new Date().toISOString()
+    })
+    
+    // Facebook Pixel
+    fbq.trackEvent('InitiateCheckout', {
+      content_type: 'product',
+      value: 0, // No value yet
+      currency: 'USD'
+    })
+  }, [searchParams])
+  
   const handleEmailSubmit = (email: string) => {
     setEmail(email)
-    setStep(2)
+    
+    // Track step completion
+    track('reserve_email_complete', {
+      step: 'email',
+      timestamp: new Date().toISOString()
+    })
+    
+    // Redirect to products page with email in query params
+    router.push(`/reserve/products?email=${encodeURIComponent(email)}`)
   }
   
   const handleProductsSubmit = (products: typeof productSelections) => {

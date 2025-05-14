@@ -66,14 +66,15 @@ function BundlePageContent() {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="bg-orange-50 p-8 rounded-xl">
-                <div className="relative h-80">
+                <div className="relative h-96 md:h-[400px]">
                   <Image
                     src="/product-images/product-trio.png"
                     alt="TeaHC Complete Bundle - All Three Products"
                     fill
-                    sizes="(max-width: 768px) 90vw, 45vw"
+                    sizes="(max-width: 768px) 90vw, 50vw"
                     className="object-contain"
                     style={{ objectFit: 'contain' }}
+                    quality={95}
                   />
                 </div>
               </div>
@@ -165,15 +166,16 @@ function BundlePageContent() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="bg-white rounded-xl shadow-md overflow-hidden"
               >
-                <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4`}>
-                  <div className="relative w-36 h-36">
+                <div className={`h-60 flex items-center justify-center ${product.bgColorClass} p-4`}>
+                  <div className="relative w-48 h-48">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 60vw, (max-width: 1200px) 30vw, 200px"
                       className="object-contain"
                       style={{ objectFit: 'contain' }}
+                      quality={90}
                     />
                   </div>
                 </div>

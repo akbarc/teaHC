@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   description: 'TeaHC\'s fast-acting formulas work in 15-45 minutes, helping you enjoy your favorite activities again.',
 }
 
+// Facebook Pixel ID
+const FB_PIXEL_ID = '1022859733312316';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Meta Pixel Code */}
+        {/* Meta Pixel Code - Properly named events to avoid Meta warnings */}
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -39,7 +42,7 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1022859733312316');
+            fbq('init', '${FB_PIXEL_ID}');
             fbq('track', 'PageView');
           `}
         </Script>
@@ -48,7 +51,7 @@ export default function RootLayout({
             height="1" 
             width="1" 
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1022859733312316&ev=PageView&noscript=1"
+            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
             alt=""
           />
         </noscript>

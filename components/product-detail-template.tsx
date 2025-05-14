@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { motion } from 'framer-motion'
 import { Suspense } from 'react'
 import { track } from '@vercel/analytics'
+import * as fbq from '@/lib/facebook-pixel'
 
 // Analytics tracking function
 export const trackPageView = (page: string, source?: string) => {
@@ -73,7 +74,28 @@ function ProductDetailContent({
   useEffect(() => {
     // Track page view when component mounts
     trackPageView(`product_${id}`, source || undefined)
-  }, [id, source])
+    
+    // Track Facebook Pixel ViewContent event
+    fbq.trackProductView({
+      id,
+      name: `TeaHC ${name} - ${tagline}`,
+      price,
+      category: 'Products'
+    })
+  }, [id, source, name, tagline, price])
+
+  // Track user clicking the Reserve Now button (Add to Cart equivalent)
+  const handleReserveClick = () => {
+    trackPageView(`${id}_to_reserve`, `product_${id}`)
+    
+    // Track Add to Cart event in Facebook Pixel
+    fbq.trackAddToCart({
+      id,
+      name: `TeaHC ${name}`,
+      price,
+      quantity: 1
+    })
+  }
   
   return (
     <main className="min-h-screen py-12 bg-gradient-to-b from-amber-50 to-white">
@@ -157,7 +179,7 @@ function ProductDetailContent({
 
               <Link 
                 href={`/reserve?product=${id}&source=product_${id}`}
-                onClick={() => trackPageView(`${id}_to_reserve`, `product_${id}`)}
+                onClick={handleReserveClick}
                 passHref
               >
                 <Button 
@@ -292,7 +314,7 @@ function ProductDetailContent({
             </p>
             <Link 
               href={`/reserve?product=${id}&source=product_${id}_footer`}
-              onClick={() => trackPageView(`${id}_footer_to_reserve`, `product_${id}`)}
+              onClick={handleReserveClick}
               passHref
             >
               <Button 
