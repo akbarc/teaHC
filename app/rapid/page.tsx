@@ -144,7 +144,7 @@ export default function RapidLandingPage() {
               <div className="absolute -inset-10 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full blur-3xl opacity-50"></div>
               <div className="relative z-10">
                 <Image
-                  src="/product-images/rapid-formula.png"
+                  src="/product-images/rapid_new_image.png"
                   alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
                   width={300}
                   height={500}
@@ -452,7 +452,7 @@ export default function RapidLandingPage() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/product-images/rapid-formula.png"
+                  src="/product-images/rapid_new_image.png"
                   alt="TeaHC RAPID Formula"
                   width={350}
                   height={350}
@@ -766,7 +766,7 @@ export default function RapidLandingPage() {
               <div className="p-6 flex flex-col items-center">
                 <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
                   <Image
-                    src="/product-images/rapid-formula.png"
+                    src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID"
                     width={100}
                     height={100}

@@ -67,7 +67,7 @@ export default function Step2Products({ email, onProductsSubmit }: Step2Products
       price: 19.99,
       regularPrice: 39.99,
       discount: 50,
-      image: "/product-images/rapid-formula.png",
+      image: "/product-images/rapid_new_image.png",
       color: "from-amber-700 to-amber-600",
       benefits: ["Fast-acting formula", "Portable on-the-go shots"],
       unit: "10 shots per pack"

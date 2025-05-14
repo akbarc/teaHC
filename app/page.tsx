@@ -568,7 +568,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="aspect-square relative mb-4 bg-white rounded-lg">
                   <Image
-                    src="/product-images/rapid-formula.png"
+                    src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID - Fast-Acting Anti-Inflammatory Nano Shot"
                     fill
                     className="object-contain p-4"
@@ -1387,7 +1387,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="relative h-48 mb-6">
                   <Image
-                    src="/product-images/rapid-formula.png"
+                    src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID Formula"
                     fill
                     className="object-contain"

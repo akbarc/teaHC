@@ -332,7 +332,7 @@ export default function Step4Confirm({
                     <div className="flex items-center">
                       <div className="w-10 h-10 relative mr-3 bg-amber-100 rounded-md overflow-hidden">
                         <Image
-                          src="/product-images/rapid-formula.png"
+                          src="/product-images/rapid_new_image.png"
                           alt="TeaHC RAPID"
                           fill
                           className="object-contain p-1"

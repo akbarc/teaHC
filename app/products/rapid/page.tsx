@@ -246,7 +246,7 @@ function RapidContentPage() {
                 <div className="absolute -inset-4 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full blur-2xl opacity-50"></div>
                 <div className="relative z-10">
                   <Image
-                    src="/product-images/rapid-formula.png"
+                    src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
                     width={300}
                     height={300}
@@ -751,7 +751,7 @@ function RapidContentPage() {
               <div className="p-6 flex flex-col items-center">
                 <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
                   <Image
-                    src="/product-images/rapid-formula.png"
+                    src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID"
                     width={100}
                     height={100}
@@ -855,7 +855,7 @@ export default function RapidProductPage() {
       name="RAPID"
       tagline="Instant Relief Formula"
       description="Our fastest-acting formula designed for immediate relief when you need it most. Combines nano-emulsified cannabinoids with curcumin phytosomes in a convenient 60mL shot format."
-      image="/product-images/rapid-formula.png"
+      image="/product-images/rapid_new_image.png"
       format="Chai-Spice Liquid Shot"
       quantity="60mL PET mini bottle"
       usage="As needed for fast relief"
