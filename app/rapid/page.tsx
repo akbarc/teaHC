@@ -162,10 +162,12 @@ export default function RapidLandingPage() {
                 <Image
                   src="/product-images/rapid_new_image.png"
                   alt="TeaHC RAPID - Fast-Acting Relief Nano Shot"
-                  width={300}
-                  height={500}
-                  className="mx-auto object-contain drop-shadow-2xl"
+                  width={450}
+                  height={600}
+                  className="mx-auto object-contain drop-shadow-2xl max-h-[70vh] w-auto"
                   priority
+                  sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 450px"
+                  quality={95}
                 />
                 <div className="absolute top-5 right-5 bg-amber-600 text-white px-4 py-2 rounded-full font-bold shadow-lg transform rotate-6">
                   15 MIN
@@ -466,14 +468,18 @@ export default function RapidLandingPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
+                className="flex justify-center items-center"
               >
-                <Image
-                  src="/product-images/rapid_new_image.png"
-                  alt="TeaHC RAPID Formula"
-                  width={350}
-                  height={350}
-                  className="mx-auto drop-shadow-xl"
-                />
+                <div className="relative w-full max-w-[400px] aspect-square">
+                  <Image
+                    src="/product-images/rapid_new_image.png"
+                    alt="TeaHC RAPID Formula"
+                    fill
+                    sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 400px"
+                    className="object-contain drop-shadow-xl"
+                    quality={90}
+                  />
+                </div>
               </motion.div>
               
               <motion.div
@@ -742,13 +748,14 @@ export default function RapidLandingPage() {
                 <p className="text-white/80">Morning Support</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-full h-48 md:h-56 relative mb-4">
                   <Image
                     src="/product-images/move-formula.png"
                     alt="TeaHC MOVE"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 60vw, 200px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">
@@ -780,13 +787,14 @@ export default function RapidLandingPage() {
                 <p className="text-white/80">On-Demand Relief</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-full h-48 md:h-56 relative mb-4">
                   <Image
                     src="/product-images/rapid_new_image.png"
                     alt="TeaHC RAPID"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 60vw, 200px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">
@@ -810,13 +818,14 @@ export default function RapidLandingPage() {
                 <p className="text-white/80">Nighttime Recovery</p>
               </div>
               <div className="p-6 flex flex-col items-center">
-                <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
+                <div className="w-full h-48 md:h-56 relative mb-4">
                   <Image
                     src="/product-images/repair-formula.png"
                     alt="TeaHC REPAIR"
-                    width={100}
-                    height={100}
+                    fill
+                    sizes="(max-width: 768px) 60vw, 200px"
                     className="object-contain"
+                    quality={85}
                   />
                 </div>
                 <p className="text-gray-600 text-center mb-4">
