@@ -36,7 +36,7 @@ function BundlePageContent() {
       id: 'rapid',
       name: 'RAPID Formula',
       description: 'Fast-acting relief when you need it most. 17× better absorption than traditional products.',
-      image: '/product-images/rapid-formula.png',
+      image: '/product-images/rapid_new_image.png',
       bgColorClass: 'bg-amber-100'
     }
   ]

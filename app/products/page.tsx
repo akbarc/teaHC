@@ -54,7 +54,7 @@ function ProductsPageContent() {
     {
       id: 'rapid',
       name: 'RAPID Formula',
-      image: '/product-images/rapid-formula.png',
+      image: '/product-images/rapid_new_image.png',
       description: 'Fast-acting relief when you need it most. 17× better absorption than traditional products.',
       bgColorClass: 'bg-amber-100',
       textColorClass: 'text-amber-600',
@@ -99,11 +99,11 @@ function ProductsPageContent() {
                 onClick={() => trackPageView('products_to_science', 'products_overview')}
               >
                 Learn the Science
-              </Button>
+                </Button>
             </Link>
-          </div>
-        </div>
-        
+              </div>
+            </div>
+
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {products.map((product, index) => (
@@ -119,14 +119,14 @@ function ProductsPageContent() {
                   Best Value
                 </div>
               )}
-              
-              <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4`}>
+
+              <div className={`h-48 flex items-center justify-center ${product.bgColorClass} p-4 relative`}>
                 <Image
                   src={product.image}
                   alt={product.name}
-                  width={150}
-                  height={150}
-                  className="object-contain"
+                  width={120}
+                  height={120}
+                  className="object-contain max-h-40 max-w-full"
                 />
               </div>
               
@@ -145,20 +145,20 @@ function ProductsPageContent() {
                       className="bg-gray-800 hover:bg-gray-700"
                     >
                       Learn More
-                    </Button>
+                </Button>
                   </Link>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-        
+            </div>
+
         {/* CTA Section */}
         <div className="bg-orange-50 rounded-2xl p-8 md:p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to experience the difference?</h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
             Reserve your TeaHC products today at exclusive pre-launch pricing. No payment required until your order ships.
-          </p>
+                </p>
           <Link 
             href="/reserve" 
             passHref
@@ -169,7 +169,7 @@ function ProductsPageContent() {
               className="px-8 py-4 text-xl bg-orange-500 hover:bg-orange-600 rounded-xl"
             >
               Reserve Your TeaHC Products
-            </Button>
+              </Button>
           </Link>
         </div>
       </div>
