@@ -1,81 +1,257 @@
-import Link from 'next/link'
+"use client"
 
-export default function AdminDashboardPage() {
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
+import { createClient } from "@supabase/supabase-js"
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+interface Reservation {
+  id: string
+  created_at: string
+  timestamp: string
+  fullName: string
+  email: string
+  phone: string
+  address: string
+  moveQuantity: number
+  repairQuantity: number
+  rapidQuantity: number
+  bundleQuantity: number
+  totalCost: number
+  notes: string
+}
+
+interface Stats {
+  lastHour: number
+  last6Hours: number
+  last24Hours: number
+  totalSubscribers: number
+  totalReservations: number
+  recentReservations: Reservation[]
+}
+
+export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [stats, setStats] = useState<Stats>({
+    lastHour: 0,
+    last6Hours: 0,
+    last24Hours: 0,
+    totalSubscribers: 0,
+    totalReservations: 0,
+    recentReservations: []
+  })
+  const router = useRouter()
+  const { toast } = useToast()
+
+  useEffect(() => {
+    // Check if already authenticated
+    const auth = localStorage.getItem("adminAuth")
+    if (auth === "true") {
+      setIsAuthenticated(true)
+      fetchStats()
+    }
+  }, [])
+
+  const fetchStats = async () => {
+    try {
+      // Get current timestamp and calculate time ranges
+      const now = new Date()
+      const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000)
+      const sixHoursAgo = new Date(now.getTime() - 6 * 60 * 60 * 1000)
+      const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000)
+
+      // Fetch subscribers stats
+      const { data: subscribers, error: subError } = await supabase
+        .from("subscribers")
+        .select("*")
+
+      if (subError) throw subError
+
+      // Fetch reservations stats
+      const { data: reservations, error: resError } = await supabase
+        .from("reservations")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(10)
+
+      if (resError) throw resError
+
+      // Calculate stats
+      const stats = {
+        lastHour: subscribers.filter(s => new Date(s.created_at) > oneHourAgo).length,
+        last6Hours: subscribers.filter(s => new Date(s.created_at) > sixHoursAgo).length,
+        last24Hours: subscribers.filter(s => new Date(s.created_at) > twentyFourHoursAgo).length,
+        totalSubscribers: subscribers.length,
+        totalReservations: reservations.length,
+        recentReservations: reservations
+      }
+
+      setStats(stats)
+    } catch (error) {
+      console.error("Error fetching stats:", error)
+      toast({
+        title: "Error fetching stats",
+        description: "Please try again later",
+        variant: "destructive"
+      })
+    }
+  }
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    if (password === "2000Akbar!") {
+      localStorage.setItem("adminAuth", "true")
+      setIsAuthenticated(true)
+      fetchStats()
+      toast({
+        title: "Welcome to Admin Dashboard",
+        description: "You have successfully logged in"
+      })
+    } else {
+      toast({
+        title: "Invalid password",
+        description: "Please try again",
+        variant: "destructive"
+      })
+    }
+
+    setIsLoading(false)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminAuth")
+    setIsAuthenticated(false)
+    router.push("/admin")
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Card className="w-full max-w-md p-8">
+          <h1 className="text-2xl font-bold text-center mb-6">Admin Login</h1>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <Input
+                type="password"
+                placeholder="Enter admin password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full"
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-amber-600 hover:bg-amber-700"
+              disabled={isLoading}
+            >
+              {isLoading ? "Logging in..." : "Login"}
+            </Button>
+          </form>
+        </Card>
+      </div>
+    )
+  }
+
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
-      
-      <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg mb-8">
-        <h2 className="text-xl font-semibold mb-2">Database Setup Required</h2>
-        <p className="mb-4">
-          The connection to Supabase is working, but the reservations table needs to be created.
-        </p>
-        <Link 
-          href="/admin/setup-database"
-          className="inline-block px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-        >
-          Setup Database Now
-        </Link>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        <Link 
-          href="/admin/setup-database"
-          className="block p-6 bg-orange-50 border border-orange-200 rounded-lg hover:bg-orange-100 transition"
-        >
-          <h2 className="text-xl font-semibold mb-2">Setup Database</h2>
-          <p className="text-gray-600">
-            Create the required Supabase tables and configure permissions
-          </p>
-        </Link>
-        
-        <Link 
-          href="/admin/reservations"
-          className="block p-6 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition"
-        >
-          <h2 className="text-xl font-semibold mb-2">View Reservations</h2>
-          <p className="text-gray-600">
-            Access and manage all customer reservations stored in Supabase
-          </p>
-        </Link>
-        
-        <Link 
-          href="/api/supabase-health"
-          className="block p-6 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition"
-          target="_blank"
-        >
-          <h2 className="text-xl font-semibold mb-2">Check Supabase Connection</h2>
-          <p className="text-gray-600">
-            Verify that the basic Supabase connection is working
-          </p>
-        </Link>
-        
-        <Link 
-          href="/api/test-supabase"
-          className="block p-6 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition"
-          target="_blank"
-        >
-          <h2 className="text-xl font-semibold mb-2">Test Reservations Table</h2>
-          <p className="text-gray-600">
-            Test the Supabase reservations table by attempting to create a test record
-          </p>
-        </Link>
-      </div>
-      
-      <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Admin Information</h2>
-        <p className="mb-4">
-          This admin dashboard is connected to Supabase for data storage. All reservations are now being stored in the Supabase database instead of Google Sheets.
-        </p>
-        <p className="mb-4">
-          If you encounter connection issues, please try the following steps:
-        </p>
-        <ol className="list-decimal list-inside space-y-2 ml-4">
-          <li>Use the "Check Supabase Connection" link to verify basic connectivity</li>
-          <li>Follow the database setup instructions to create the required tables</li>
-          <li>Verify that the table has the correct schema with all required fields</li>
-          <li>Ensure the Supabase API key has the necessary permissions</li>
-        </ol>
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="text-red-600 hover:text-red-700"
+          >
+            Logout
+          </Button>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-2">New Subscribers</h3>
+            <div className="space-y-2">
+              <p>Last Hour: {stats.lastHour}</p>
+              <p>Last 6 Hours: {stats.last6Hours}</p>
+              <p>Last 24 Hours: {stats.last24Hours}</p>
+              <p className="font-bold">Total: {stats.totalSubscribers}</p>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-2">Reservations</h3>
+            <div className="space-y-2">
+              <p>Total Reservations: {stats.totalReservations}</p>
+              <p>Recent Orders: {stats.recentReservations.length}</p>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
+            <div className="space-y-2">
+              <Button
+                onClick={() => router.push("/admin/subscribers")}
+                className="w-full bg-amber-600 hover:bg-amber-700"
+              >
+                View Subscribers
+              </Button>
+              <Button
+                onClick={() => router.push("/admin/reservations")}
+                className="w-full bg-amber-600 hover:bg-amber-700"
+              >
+                View Reservations
+              </Button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Recent Reservations */}
+        <Card className="p-6">
+          <h2 className="text-xl font-bold mb-4">Recent Reservations</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-2">Date</th>
+                  <th className="text-left py-2">Name</th>
+                  <th className="text-left py-2">Email</th>
+                  <th className="text-left py-2">Products</th>
+                  <th className="text-left py-2">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recentReservations.map((reservation: any) => (
+                  <tr key={reservation.id} className="border-b">
+                    <td className="py-2">{new Date(reservation.created_at).toLocaleDateString()}</td>
+                    <td className="py-2">{reservation.fullName}</td>
+                    <td className="py-2">{reservation.email}</td>
+                    <td className="py-2">
+                      {[
+                        reservation.rapidQuantity > 0 && `${reservation.rapidQuantity} RAPID`,
+                        reservation.moveQuantity > 0 && `${reservation.moveQuantity} MOVE`,
+                        reservation.repairQuantity > 0 && `${reservation.repairQuantity} REPAIR`,
+                        reservation.bundleQuantity > 0 && `${reservation.bundleQuantity} BUNDLE`
+                      ].filter(Boolean).join(", ")}
+                    </td>
+                    <td className="py-2">${reservation.totalCost}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
       </div>
     </div>
   )
