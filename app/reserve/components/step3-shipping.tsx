@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import { track } from '@vercel/analytics'
 
 // Define interfaces for our data structures
 export interface ShippingDetails {
@@ -22,13 +23,28 @@ export interface ShippingDetails {
   emailUpdates: boolean
 }
 
+interface ProductSelection {
+  moveQuantity: number
+  repairQuantity: number
+  rapidQuantity: number
+  bundleQuantity: number
+}
+
 interface Step3ShippingProps {
   email: string
   totalCost: number
   onShippingSubmit: (shippingDetails: ShippingDetails) => void
+  productSelections: ProductSelection
+  onEditProducts: () => void
 }
 
-export default function Step3Shipping({ email, totalCost, onShippingSubmit }: Step3ShippingProps) {
+export default function Step3Shipping({ 
+  email, 
+  totalCost, 
+  onShippingSubmit,
+  productSelections,
+  onEditProducts 
+}: Step3ShippingProps) {
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>({
     firstName: "",
     lastName: "",
@@ -86,23 +102,13 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof ShippingDetails, string>> = {}
     
-    // Required fields
-    const requiredFields: (keyof ShippingDetails)[] = ['firstName', 'lastName', 'address', 'city', 'state', 'zipCode', 'phone']
-    
-    requiredFields.forEach(field => {
-      if (!shippingDetails[field]) {
-        newErrors[field] = 'This field is required'
-      }
-    })
-    
-    // ZIP code validation (basic)
-    if (shippingDetails.zipCode && !/^\d{5}(-\d{4})?$/.test(shippingDetails.zipCode)) {
-      newErrors.zipCode = 'Please enter a valid ZIP code'
-    }
-    
-    // Phone validation (basic)
+    // Only validate phone and ZIP if they are provided
     if (shippingDetails.phone && !/^\d{10}$/.test(shippingDetails.phone.replace(/\D/g, ''))) {
       newErrors.phone = 'Please enter a valid 10-digit phone number'
+    }
+    
+    if (shippingDetails.zipCode && !/^\d{5}(-\d{4})?$/.test(shippingDetails.zipCode)) {
+      newErrors.zipCode = 'Please enter a valid ZIP code'
     }
     
     setErrors(newErrors)
@@ -113,15 +119,39 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
     e.preventDefault()
     
     if (validateForm()) {
+      // Track completion
+      track('reserve_shipping_complete', {
+        hasPhone: !!shippingDetails.phone,
+        hasAddress: !!(shippingDetails.address && shippingDetails.city && shippingDetails.state),
+        timestamp: new Date().toISOString()
+      })
+      
       onShippingSubmit(shippingDetails)
     }
+  }
+
+  const formatProductSummary = () => {
+    const items = []
+    if (productSelections.rapidQuantity > 0) {
+      items.push(`${productSelections.rapidQuantity} RAPID`)
+    }
+    if (productSelections.moveQuantity > 0) {
+      items.push(`${productSelections.moveQuantity} MOVE`)
+    }
+    if (productSelections.repairQuantity > 0) {
+      items.push(`${productSelections.repairQuantity} REPAIR`)
+    }
+    if (productSelections.bundleQuantity > 0) {
+      items.push(`${productSelections.bundleQuantity} BUNDLE`)
+    }
+    return items.join(", ")
   }
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
         <h2 className="text-2xl font-bold">Shipping Details</h2>
-        <p className="opacity-90">Step 3: Where should we ship your products?</p>
+        <p className="opacity-90">Step 2: Where should we ship your products?</p>
       </div>
 
       <form onSubmit={handleSubmit} className="p-6">
@@ -130,49 +160,62 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
             <p className="text-gray-600">
               Reserving for: <span className="font-medium text-gray-800">{email}</span>
             </p>
-            <p className="font-medium">
-              Total: <span className="text-orange-600">${totalCost.toFixed(2)}</span>
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="font-medium">
+                Total: <span className="text-orange-600">${totalCost.toFixed(2)}</span>
+              </p>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={onEditProducts}
+                className="text-orange-600 hover:text-orange-700"
+              >
+                Edit Products
+              </Button>
+            </div>
           </div>
+          
           <div className="mt-2 bg-amber-50 p-4 rounded-lg border border-amber-100">
             <p className="text-sm text-amber-800">
               <span className="font-medium">Remember:</span> No payment is required today. You'll only be charged when your order ships.
             </p>
           </div>
+
+          <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Selected Products:</span> {formatProductSummary()}
+            </p>
+          </div>
         </div>
-        
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+
+        <div className="space-y-6">
           {/* Personal Information */}
           <div>
             <h3 className="text-lg font-medium mb-4 text-gray-800">Personal Information</h3>
             
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
+                <Label htmlFor="firstName">First Name (optional)</Label>
                 <Input
                   id="firstName"
                   name="firstName"
                   value={shippingDetails.firstName}
                   onChange={handleChange}
-                  className={errors.firstName ? "border-red-500" : ""}
                 />
-                {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
               </div>
               
               <div>
-                <Label htmlFor="lastName">Last Name <span className="text-red-500">*</span></Label>
+                <Label htmlFor="lastName">Last Name (optional)</Label>
                 <Input
                   id="lastName"
                   name="lastName"
                   value={shippingDetails.lastName}
                   onChange={handleChange}
-                  className={errors.lastName ? "border-red-500" : ""}
                 />
-                {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
               </div>
               
-              <div>
-                <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+              <div className="md:col-span-2">
+                <Label htmlFor="phone">Phone Number (optional)</Label>
                 <Input
                   id="phone"
                   name="phone"
@@ -183,30 +226,27 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
                   className={errors.phone ? "border-red-500" : ""}
                 />
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                <p className="text-sm text-gray-500 mt-1">For shipping updates only</p>
               </div>
             </div>
           </div>
           
           {/* Shipping Address */}
           <div>
-            <h3 className="text-lg font-medium mb-4 text-gray-800">Shipping Address</h3>
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Shipping Address (optional)</h3>
             
             <div className="space-y-4">
               <div>
-                <Label htmlFor="address">Address <span className="text-red-500">*</span></Label>
+                <Label htmlFor="address">Address</Label>
                 <Input
                   id="address"
                   name="address"
                   value={shippingDetails.address}
                   onChange={handleChange}
-                  className={errors.address ? "border-red-500" : ""}
                 />
-                {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
               </div>
               
               <div>
-                <Label htmlFor="address2">Apartment, suite, etc. (optional)</Label>
+                <Label htmlFor="address2">Apartment, suite, etc.</Label>
                 <Input
                   id="address2"
                   name="address2"
@@ -216,28 +256,23 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
               </div>
               
               <div>
-                <Label htmlFor="city">City <span className="text-red-500">*</span></Label>
+                <Label htmlFor="city">City</Label>
                 <Input
                   id="city"
                   name="city"
                   value={shippingDetails.city}
                   onChange={handleChange}
-                  className={errors.city ? "border-red-500" : ""}
                 />
-                {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="state">State <span className="text-red-500">*</span></Label>
+                  <Label htmlFor="state">State</Label>
                   <Select
                     value={shippingDetails.state}
                     onValueChange={(value) => handleSelectChange('state', value)}
                   >
-                    <SelectTrigger 
-                      id="state" 
-                      className={errors.state ? "border-red-500" : ""}
-                    >
+                    <SelectTrigger id="state">
                       <SelectValue placeholder="Select state" />
                     </SelectTrigger>
                     <SelectContent>
@@ -291,17 +326,17 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
                       <SelectItem value="WV">West Virginia</SelectItem>
                       <SelectItem value="WI">Wisconsin</SelectItem>
                       <SelectItem value="WY">Wyoming</SelectItem>
-                      <SelectItem value="DC">District of Columbia</SelectItem>
                     </SelectContent>
                   </Select>
-                  {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
                 </div>
                 
                 <div>
-                  <Label htmlFor="zipCode">ZIP Code <span className="text-red-500">*</span></Label>
+                  <Label htmlFor="zipCode">ZIP Code</Label>
                   <Input
                     id="zipCode"
                     name="zipCode"
+                    type="tel"
+                    placeholder="12345"
                     value={shippingDetails.zipCode}
                     onChange={handleChange}
                     className={errors.zipCode ? "border-red-500" : ""}
@@ -309,68 +344,41 @@ export default function Step3Shipping({ email, totalCost, onShippingSubmit }: St
                   {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>}
                 </div>
               </div>
-              
-              <div>
-                <Label htmlFor="country">Country</Label>
-                <Select
-                  value={shippingDetails.country}
-                  onValueChange={(value) => handleSelectChange('country', value)}
-                >
-                  <SelectTrigger id="country">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="US">United States</SelectItem>
-                    <SelectItem value="CA">Canada</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
           </div>
-        </div>
-        
-        {/* Preferences */}
-        <div className="border-t border-gray-200 pt-6 mb-8">
-          <h3 className="text-lg font-medium mb-4 text-gray-800">Preferences</h3>
           
+          {/* Preferences */}
           <div className="space-y-4">
-            <div className="flex items-start space-x-2">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="saveInfo"
                 checked={shippingDetails.saveInfo}
                 onCheckedChange={() => handleCheckboxChange('saveInfo')}
               />
-              <div className="grid gap-1.5 leading-none">
-                <Label htmlFor="saveInfo" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Save my information for future orders
-                </Label>
-                <p className="text-sm text-gray-500">We'll securely store your shipping details</p>
-              </div>
+              <Label htmlFor="saveInfo" className="text-sm text-gray-600">
+                Save my information for faster checkout
+              </Label>
             </div>
             
-            <div className="flex items-start space-x-2">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="emailUpdates"
                 checked={shippingDetails.emailUpdates}
                 onCheckedChange={() => handleCheckboxChange('emailUpdates')}
               />
-              <div className="grid gap-1.5 leading-none">
-                <Label htmlFor="emailUpdates" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Email me about new products and special offers
-                </Label>
-                <p className="text-sm text-gray-500">You can unsubscribe any time</p>
-              </div>
+              <Label htmlFor="emailUpdates" className="text-sm text-gray-600">
+                Keep me updated about TeaHC products and offers
+              </Label>
             </div>
           </div>
         </div>
         
-        {/* Submit Button */}
-        <div className="text-center">
+        <div className="mt-8 text-center">
           <Button
             type="submit"
             className="px-8 py-4 text-xl rounded-xl shadow-lg transition-transform bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 hover:scale-105"
           >
-            Review & Confirm
+            Complete Reservation
           </Button>
           
           <p className="text-gray-600 mt-4 text-sm">

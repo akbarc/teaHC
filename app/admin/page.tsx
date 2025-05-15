@@ -36,6 +36,7 @@ interface Stats {
   totalSubscribers: number
   totalReservations: number
   recentReservations: Reservation[]
+  recentSubscribers: { email: string; created_at: string; source: string }[]
 }
 
 export default function AdminPage() {
@@ -48,7 +49,8 @@ export default function AdminPage() {
     last24Hours: 0,
     totalSubscribers: 0,
     totalReservations: 0,
-    recentReservations: []
+    recentReservations: [],
+    recentSubscribers: []
   })
   const router = useRouter()
   const { toast } = useToast()
@@ -74,6 +76,8 @@ export default function AdminPage() {
       const { data: subscribers, error: subError } = await supabase
         .from("subscribers")
         .select("*")
+        .order("created_at", { ascending: false })
+        .limit(5)
 
       if (subError) throw subError
 
@@ -82,7 +86,7 @@ export default function AdminPage() {
         .from("reservations")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(10)
+        .limit(5)
 
       if (resError) throw resError
 
@@ -93,7 +97,12 @@ export default function AdminPage() {
         last24Hours: subscribers.filter(s => new Date(s.created_at) > twentyFourHoursAgo).length,
         totalSubscribers: subscribers.length,
         totalReservations: reservations.length,
-        recentReservations: reservations
+        recentReservations: reservations,
+        recentSubscribers: subscribers.map(s => ({
+          email: s.email,
+          created_at: s.created_at,
+          source: s.source
+        }))
       }
 
       setStats(stats)
@@ -217,41 +226,78 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        {/* Recent Reservations */}
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4">Recent Reservations</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-2">Date</th>
-                  <th className="text-left py-2">Name</th>
-                  <th className="text-left py-2">Email</th>
-                  <th className="text-left py-2">Products</th>
-                  <th className="text-left py-2">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.recentReservations.map((reservation: any) => (
-                  <tr key={reservation.id} className="border-b">
-                    <td className="py-2">{new Date(reservation.created_at).toLocaleDateString()}</td>
-                    <td className="py-2">{reservation.fullName}</td>
-                    <td className="py-2">{reservation.email}</td>
-                    <td className="py-2">
-                      {[
-                        reservation.rapidQuantity > 0 && `${reservation.rapidQuantity} RAPID`,
-                        reservation.moveQuantity > 0 && `${reservation.moveQuantity} MOVE`,
-                        reservation.repairQuantity > 0 && `${reservation.repairQuantity} REPAIR`,
-                        reservation.bundleQuantity > 0 && `${reservation.bundleQuantity} BUNDLE`
-                      ].filter(Boolean).join(", ")}
-                    </td>
-                    <td className="py-2">${reservation.totalCost}</td>
+        {/* Recent Activity */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Recent Subscribers */}
+          <Card className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Recent Subscribers</h2>
+              <Button
+                onClick={() => router.push("/admin/subscribers")}
+                variant="ghost"
+                className="text-amber-600 hover:text-amber-700"
+              >
+                View All
+              </Button>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2">Email</th>
+                    <th className="text-left py-2">Source</th>
+                    <th className="text-left py-2">Date</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+                </thead>
+                <tbody>
+                  {stats.recentSubscribers.map((subscriber) => (
+                    <tr key={subscriber.email} className="border-b">
+                      <td className="py-2">{subscriber.email}</td>
+                      <td className="py-2">{subscriber.source}</td>
+                      <td className="py-2">{new Date(subscriber.created_at).toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          {/* Recent Reservations */}
+          <Card className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Recent Reservations</h2>
+              <Button
+                onClick={() => router.push("/admin/reservations")}
+                variant="ghost"
+                className="text-amber-600 hover:text-amber-700"
+              >
+                View All
+              </Button>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2">Date</th>
+                    <th className="text-left py-2">Name</th>
+                    <th className="text-left py-2">Email</th>
+                    <th className="text-left py-2">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stats.recentReservations.map((reservation) => (
+                    <tr key={reservation.id} className="border-b">
+                      <td className="py-2">{new Date(reservation.created_at).toLocaleString()}</td>
+                      <td className="py-2">{reservation.fullName}</td>
+                      <td className="py-2">{reservation.email}</td>
+                      <td className="py-2">${reservation.totalCost.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   )

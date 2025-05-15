@@ -37,6 +37,14 @@ export default function AdminLayout({
               </li>
               <li>
                 <Link 
+                  href="/admin/subscribers" 
+                  className="block p-2 hover:bg-gray-200 rounded"
+                >
+                  Subscribers
+                </Link>
+              </li>
+              <li>
+                <Link 
                   href="/admin/reservations" 
                   className="block p-2 hover:bg-gray-200 rounded"
                 >

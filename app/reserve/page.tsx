@@ -3,12 +3,12 @@
 import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Step1Email from "./components/step1-email"
-import Step2Products from "./components/step2-products"
 import Step3Shipping from "./components/step3-shipping"
-import Step4Confirm from "./components/step4-confirm"
+import SuccessMessage from "./components/success-message"
 import type { ShippingDetails } from "./components/step3-shipping"
 import { track } from '@vercel/analytics'
 import * as fbq from '@/lib/facebook-pixel'
+import Image from "next/image"
 
 // Create a client component that wraps the search params usage
 function ReserveContent() {
@@ -53,13 +53,14 @@ function ReserveContent() {
     // Facebook Pixel
     fbq.trackEvent('InitiateCheckout', {
       content_type: 'product',
-      value: 0, // No value yet
+      value: 0,
       currency: 'USD'
     })
   }, [searchParams])
   
   const handleEmailSubmit = (email: string) => {
     setEmail(email)
+    setStep(2)
     
     // Track step completion
     track('reserve_email_complete', {
@@ -69,43 +70,25 @@ function ReserveContent() {
     
     const product = searchParams.get('product')
     if (product === 'rapid') {
-      // For Rapid product, skip product selection and go straight to shipping
-      const rapidSelections = {
+      // For Rapid product, pre-select it
+      setProductSelections({
         moveQuantity: 0,
         repairQuantity: 0,
         rapidQuantity: 1,
         bundleQuantity: 0
-      }
-      setProductSelections(rapidSelections)
-      
-      // Redirect to shipping page with Rapid product pre-selected
-      const params = new URLSearchParams({
-        email: email,
-        moveQty: '0',
-        repairQty: '0',
-        rapidQty: '1',
-        bundleQty: '0',
-        source: searchParams.get('source') || 'rapid_direct'
       })
-      router.push(`/reserve/shipping?${params.toString()}`)
-    } else {
-      // For other products, go to product selection
-      router.push(`/reserve/products?email=${encodeURIComponent(email)}`)
     }
-  }
-  
-  const handleProductsSubmit = (products: typeof productSelections) => {
-    setProductSelections(products)
-    setStep(3)
   }
   
   const handleShippingSubmit = (shipping: ShippingDetails) => {
     setShippingDetails(shipping)
-    setStep(4)
-  }
-  
-  const handleConfirmation = () => {
     setReservationComplete(true)
+    
+    // Track completion
+    track('reserve_complete', {
+      step: 'shipping',
+      timestamp: new Date().toISOString()
+    })
   }
   
   const calculateTotal = () => {
@@ -118,7 +101,7 @@ function ReserveContent() {
     
     return parseFloat((itemTotal + bundleTotal).toFixed(2))
   }
-  
+
   return (
     <main className="min-h-screen py-12 bg-gradient-to-b from-amber-50 to-white">
       <div className="container mx-auto px-4">
@@ -132,38 +115,39 @@ function ReserveContent() {
               Be among the first to experience our revolutionary nano-cannabinoid products at exclusive pre-launch pricing
             </p>
             
-            {/* Step Indicator */}
+            {/* Progress Indicator */}
             <div className="max-w-md mx-auto mb-8">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
-                </div>
-                <div className="relative flex justify-between">
-                  <div className={`flex flex-col items-center ${step >= 1 ? "text-amber-600" : "text-gray-400"}`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? "bg-amber-100 text-amber-600" : "bg-gray-100 text-gray-400"}`}>
-                      <span className="text-lg font-bold">1</span>
-                    </div>
-                    <span className="mt-2 text-sm">Register</span>
-                  </div>
-                  <div className={`flex flex-col items-center ${step >= 2 ? "text-amber-600" : "text-gray-400"}`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? "bg-amber-100 text-amber-600" : "bg-gray-100 text-gray-400"}`}>
-                      <span className="text-lg font-bold">2</span>
-                    </div>
-                    <span className="mt-2 text-sm">Products</span>
-                  </div>
-                  <div className={`flex flex-col items-center ${step >= 3 ? "text-amber-600" : "text-gray-400"}`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? "bg-amber-100 text-amber-600" : "bg-gray-100 text-gray-400"}`}>
-                      <span className="text-lg font-bold">3</span>
-                    </div>
-                    <span className="mt-2 text-sm">Shipping</span>
-                  </div>
-                  <div className={`flex flex-col items-center ${step >= 4 ? "text-amber-600" : "text-gray-400"}`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 4 ? "bg-amber-100 text-amber-600" : "bg-gray-100 text-gray-400"}`}>
-                      <span className="text-lg font-bold">4</span>
-                    </div>
-                    <span className="mt-2 text-sm">Confirm</span>
-                  </div>
-                </div>
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span className="font-medium text-amber-600">Step {step} of 2</span>
+                <span>{step === 1 ? "Your Email → Shipping Details" : "Shipping Details → Confirm & Reserve"}</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div 
+                  className="bg-amber-600 h-1.5 rounded-full transition-all duration-300" 
+                  style={{ width: `${(step / 2) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="flex items-center text-sm text-gray-600">
+                <svg className="h-5 w-5 text-amber-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>No Payment Required Today</span>
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <svg className="h-5 w-5 text-amber-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Pre-Launch Pricing Locked In</span>
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <svg className="h-5 w-5 text-amber-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span>30-Day Money-Back Guarantee</span>
               </div>
             </div>
           </div>
@@ -175,61 +159,47 @@ function ReserveContent() {
             <Step1Email onEmailSubmit={handleEmailSubmit} />
           )}
           
-          {step === 2 && (
-            <Step2Products 
-              email={email} 
-              onProductsSubmit={handleProductsSubmit} 
-            />
-          )}
-          
-          {step === 3 && (
+          {step === 2 && !reservationComplete && (
             <Step3Shipping 
               email={email}
               totalCost={calculateTotal()}
               onShippingSubmit={handleShippingSubmit}
+              productSelections={productSelections}
+              onEditProducts={() => setStep(1)}
             />
           )}
           
-          {step === 4 && (
-            <Step4Confirm
-              email={email}
-              productSelections={productSelections}
-              shippingDetails={shippingDetails}
-              totalCost={calculateTotal()}
-              onConfirmation={handleConfirmation}
-              onEditShipping={() => setStep(3)}
-              onEditProducts={() => setStep(2)}
-            />
+          {reservationComplete && (
+            <SuccessMessage email={email} />
           )}
         </div>
         
-        {/* Info Box (only show when not on confirmation or completed state) */}
-        {step < 4 && !reservationComplete && (
-          <div className="max-w-4xl mx-auto mt-8 bg-blue-50 p-6 rounded-xl border border-blue-100 shadow-sm">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Reservation Information</h3>
-            <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+        {/* Info Box (only show when not completed) */}
+        {!reservationComplete && (
+          <div className="max-w-4xl mx-auto mt-8 space-y-6">
+            {/* Billing Reassurance */}
+            <div className="bg-amber-50 border border-amber-100 rounded-lg p-4 text-sm text-amber-800">
               <div className="flex items-start">
-                <div className="bg-white p-2 rounded-full shadow-sm mr-3">
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">No Payment Today</h4>
-                  <p className="text-sm text-gray-600">You'll only pay when your products are ready to ship</p>
-                </div>
+                <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p>You're NOT billed today—your card is saved and charged only when TeaHC ships (est. July).</p>
               </div>
-              
-              <div className="flex items-start">
-                <div className="bg-white p-2 rounded-full shadow-sm mr-3">
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">Lock In Your Pricing</h4>
-                  <p className="text-sm text-gray-600">Pre-launch pricing guaranteed when you reserve now</p>
-                </div>
+            </div>
+
+            {/* Trust Footer */}
+            <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
+              <Image
+                src="/teahc-logo.png"
+                alt="TeaHC Logo"
+                width={80}
+                height={24}
+                className="opacity-75"
+              />
+              <div className="flex items-center">
+                <span className="text-amber-600 font-medium">★4.9</span>
+                <span className="mx-1">•</span>
+                <span>30-Day Money-Back Guarantee</span>
               </div>
             </div>
           </div>
