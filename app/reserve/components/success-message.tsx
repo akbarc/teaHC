@@ -42,18 +42,20 @@ export default function SuccessMessage({ email }: SuccessMessageProps) {
           </ol>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="space-y-4">
           <Button
-            onClick={() => router.push('/')}
-            className="bg-amber-600 hover:bg-amber-700"
+            onClick={() => router.push("/")}
+            className="w-full bg-amber-600 hover:bg-amber-700"
           >
             Return to Homepage
           </Button>
+          
           <Button
-            onClick={() => router.push('/products/rapid')}
+            onClick={() => router.push("/products/bundle")}
             variant="outline"
+            className="w-full"
           >
-            Learn More About TeaHC
+            Learn More About Our Products
           </Button>
         </div>
       </div>

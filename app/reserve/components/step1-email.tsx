@@ -1,23 +1,44 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { useRouter, useSearchParams } from "next/navigation"
 import { track } from "@/lib/analytics"
+import { createClient } from "@supabase/supabase-js"
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 interface Step1EmailProps {
   onEmailSubmit: (email: string) => void
+  onQuickCheckout: (email: string, product: 'rapid' | 'bundle') => void
 }
 
-export default function Step1Email({ onEmailSubmit }: Step1EmailProps) {
+export default function Step1Email({ onEmailSubmit, onQuickCheckout }: Step1EmailProps) {
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  // Check for existing email in localStorage and URL params
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('teahc_email')
+    const urlEmail = searchParams.get('email')
+    if (urlEmail) {
+      setEmail(urlEmail)
+      setIsSubmitted(true)
+    } else if (storedEmail) {
+      setEmail(storedEmail)
+      setIsSubmitted(true)
+    }
+  }, [searchParams])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -42,14 +63,104 @@ export default function Step1Email({ onEmailSubmit }: Step1EmailProps) {
         source: searchParams.get('source') || 'direct',
         timestamp: new Date().toISOString()
       })
+
+      // Store email in localStorage
+      localStorage.setItem('teahc_email', email)
       
-      onEmailSubmit(email)
+      // Check if email exists in subscribers table
+      const { data: subscriber } = await supabase
+        .from('subscribers')
+        .select('*')
+        .eq('email', email)
+        .single()
+
+      setIsSubmitted(true)
+      
+      if (subscriber) {
+        // If subscriber exists, show quick checkout options
+        track('reserve_returning_user', {
+          email: email,
+          timestamp: new Date().toISOString()
+        })
+      }
     } catch (err) {
       setError("Something went wrong. Please try again.")
       console.error("Error submitting email:", err)
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (isSubmitted) {
+    return (
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
+          <h2 className="text-2xl font-bold">Welcome Back!</h2>
+          <p className="opacity-90">Ready to reserve your TeaHC products?</p>
+        </div>
+
+        <div className="p-6">
+          <div className="bg-amber-50 p-4 rounded-lg border border-amber-100 mb-6">
+            <div className="flex items-start">
+              <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-amber-800 font-medium mb-1">Quick Checkout Options</p>
+                <p className="text-amber-700 text-sm">
+                  Choose a product to reserve or customize your order
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <Button
+              onClick={() => onQuickCheckout(email, 'rapid')}
+              className="h-auto p-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            >
+              <div className="text-left">
+                <p className="font-bold">Quick Reserve RAPID</p>
+                <p className="text-sm opacity-90">$19.99 • Free Shipping</p>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => onQuickCheckout(email, 'bundle')}
+              className="h-auto p-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            >
+              <div className="text-left">
+                <p className="font-bold">Quick Reserve BUNDLE</p>
+                <p className="text-sm opacity-90">$47.98 • Free Shipping</p>
+              </div>
+            </Button>
+          </div>
+
+          <div className="text-center">
+            <Button
+              onClick={() => onEmailSubmit(email)}
+              variant="outline"
+              className="w-full"
+            >
+              Customize My Order
+            </Button>
+          </div>
+
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => {
+                setEmail("")
+                setIsSubmitted(false)
+                localStorage.removeItem('teahc_email')
+              }}
+              className="text-sm text-gray-500 hover:text-gray-700"
+            >
+              Use a different email
+            </button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
