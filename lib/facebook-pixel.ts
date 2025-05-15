@@ -105,12 +105,15 @@ export const trackProductView = (product: {
   price?: number;
   category?: string;
 }) => {
+  // Ensure price is always a number and greater than 0
+  const value = typeof product.price === 'number' && product.price > 0 ? product.price : 19.99; // Default price if not provided
+  
   trackEvent('ViewContent', {
     content_type: 'product',
     content_ids: [product.id],
     content_name: product.name,
-    content_category: product.category,
-    value: product.price,
+    content_category: product.category || 'Products',
+    value: value,
     currency: 'USD'
   });
 };

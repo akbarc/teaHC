@@ -10,6 +10,7 @@ import { Suspense } from 'react'
 import { track } from '@vercel/analytics'
 import ProductDetailTemplate, { IngredientType } from "@/components/product-detail-template"
 import EmailSignup from '@/app/components/email-signup'
+import * as fbq from '@/lib/facebook-pixel'
 
 // RAPID product active ingredients
 const activeIngredients: IngredientType[] = [
@@ -134,6 +135,14 @@ function RapidContentPage() {
     track('product_rapid_view', { 
       source: source || 'direct',
       timestamp: new Date().toISOString()
+    })
+    
+    // Track Facebook Pixel ViewContent event
+    fbq.trackProductView({
+      id: 'rapid',
+      name: 'TeaHC RAPID Formula',
+      price: 19.99,
+      category: 'Products'
     })
   }, [source])
 

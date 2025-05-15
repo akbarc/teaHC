@@ -57,13 +57,13 @@ function SciencePageContent() {
               <TabsTrigger value="technology" className="text-base py-3 data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg">Nano Technology</TabsTrigger>
               <TabsTrigger value="ingredients" className="text-base py-3 data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg">Key Ingredients</TabsTrigger>
               <TabsTrigger value="research" className="text-base py-3 data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg">Research & Testing</TabsTrigger>
-            </TabsList>
+          </TabsList>
 
             <TabsContent value="technology" className="mt-8">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
                 <div className="p-8 md:p-10">
                   <div className="grid md:grid-cols-2 gap-10 items-center mb-12">
-                    <div>
+              <div>
                       <div className="flex items-center mb-4">
                         <div className="h-8 w-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mr-3 shadow-md">
                           <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,9 +92,9 @@ function SciencePageContent() {
                     </div>
                     <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl border border-amber-200 shadow-inner">
                       <div className="relative h-80 w-full">
-                        <Image
-                          src="/nano-absorption.png"
-                          alt="Nano-Emulsion Technology Absorption Comparison"
+                      <Image
+                        src="/nano-absorption.png"
+                        alt="Nano-Emulsion Technology Absorption Comparison"
                           fill
                           className="object-contain p-4"
                           sizes="(max-width: 768px) 100vw, 50vw"
@@ -617,9 +617,9 @@ function SciencePageContent() {
                           </li>
                         </ul>
                       </div>
-                    </div>
+                      </div>
                     
-                    <div>
+                      <div>
                       <div className="flex items-center mb-5">
                         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
                           <svg className="h-5 w-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -633,13 +633,13 @@ function SciencePageContent() {
                         <h4 className="font-bold mb-4 text-green-800 text-lg">Clinical Evidence:</h4>
                         <div className="space-y-4">
                           <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border border-green-200">
-                            <div className="flex items-start">
+                        <div className="flex items-start">
                               <div className="bg-green-100 p-1 rounded-full mr-3 mt-0.5 flex-shrink-0">
                                 <svg className="h-4 w-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                              </div>
-                              <div>
+                            </svg>
+                          </div>
+                          <div>
                                 <p className="text-gray-700">
                                   In a clinical trial with 139 knee osteoarthritis patients, curcumin was <span className="font-bold text-green-700">as effective as the NSAID diclofenac</span> for pain relief with significantly fewer side effects (Trials Journal, 2019)
                                 </p>
@@ -648,13 +648,13 @@ function SciencePageContent() {
                           </div>
                           
                           <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border border-green-200">
-                            <div className="flex items-start">
+                        <div className="flex items-start">
                               <div className="bg-green-100 p-1 rounded-full mr-3 mt-0.5 flex-shrink-0">
                                 <svg className="h-4 w-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                              </div>
-                              <div>
+                            </svg>
+                          </div>
+                          <div>
                                 <p className="text-gray-700">
                                   Curcumin phytosomes show <span className="font-bold text-green-700">29× higher absorption rates</span> than standard curcumin powder and significantly reduce inflammatory markers in patients (Bioavailability study, 2020)
                                 </p>
@@ -674,26 +674,26 @@ function SciencePageContent() {
                                   Meta-analysis of 5 trials found ginger extract <span className="font-bold text-green-700">yielded superior pain reduction</span> and mobility improvements versus placebo in osteoarthritis patients (Osteoarthritis Research Society)
                                 </p>
                               </div>
-                            </div>
                           </div>
+                        </div>
                           
                           <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border border-green-200">
-                            <div className="flex items-start">
+                        <div className="flex items-start">
                               <div className="bg-green-100 p-1 rounded-full mr-3 mt-0.5 flex-shrink-0">
                                 <svg className="h-4 w-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                              </div>
-                              <div>
+                            </svg>
+                      </div>
+                          <div>
                                 <p className="text-gray-700">
                                   Green tea polyphenols (EGCG) <span className="font-bold text-green-700">selectively inhibit IL-6</span> and other inflammatory signals in arthritic joints, blocking cartilage breakdown (Journal of Inflammation)
                                 </p>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                      
+                  </div>
+                </div>
+              </div>
+
                       <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                         <div className="flex items-center mb-4">
                           <div className="h-8 w-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mr-3 shadow-sm">
@@ -791,9 +791,9 @@ function SciencePageContent() {
                       <div>
                         <div className="bg-white p-4 rounded-xl shadow-md">
                           <div className="relative h-64 w-full">
-                            <Image
-                              src="/wasted-supplements.png"
-                              alt="Comparison of absorption rates"
+                        <Image
+                          src="/wasted-supplements.png"
+                          alt="Comparison of absorption rates"
                               fill
                               className="object-contain rounded-lg"
                               sizes="(max-width: 768px) 100vw, 50vw"
@@ -816,12 +816,12 @@ function SciencePageContent() {
                           </div>
                         </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>
-            </TabsContent>
-          </Tabs>
+            </div>
+          </TabsContent>
+        </Tabs>
         </motion.div>
         
         {/* CTA Section */}
@@ -855,7 +855,7 @@ function SciencePageContent() {
                 className="px-12 py-4 text-lg bg-orange-500 hover:bg-orange-600 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105"
               >
                 Reserve Now at 50% Off
-              </Button>
+          </Button>
             </Link>
           </div>
           <p className="text-gray-600">Developed with leading cannabinoid researchers • Manufactured in FDA-registered facility • 30-day satisfaction guarantee</p>

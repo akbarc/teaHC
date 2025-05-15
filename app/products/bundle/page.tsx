@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { trackPageView } from '@/components/product-detail-template'
 import { Suspense } from 'react'
+import * as fbq from '@/lib/facebook-pixel'
 
 function BundlePageContent() {
   const searchParams = useSearchParams()
@@ -15,6 +16,14 @@ function BundlePageContent() {
   
   useEffect(() => {
     trackPageView('product_bundle', source || undefined)
+    
+    // Track Facebook Pixel ViewContent event
+    fbq.trackProductView({
+      id: 'bundle',
+      name: 'TeaHC Complete Bundle',
+      price: 47.98,
+      category: 'Products'
+    })
   }, [source])
   
   const products = [
