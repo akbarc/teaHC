@@ -62,15 +62,6 @@ export default function AdminLayout({
                   Supabase Health Check
                 </Link>
               </li>
-              <li>
-                <Link 
-                  href="/api/test-supabase" 
-                  className="block p-2 hover:bg-gray-200 rounded"
-                  target="_blank"
-                >
-                  Test Supabase Table
-                </Link>
-              </li>
             </ul>
           </nav>
         </aside>

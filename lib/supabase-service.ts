@@ -115,8 +115,13 @@ export async function getReservations() {
       return { success: false, error }
     }
     
-    console.log(`📋 Retrieved ${data?.length || 0} reservations from Supabase`)
-    return { success: true, data }
+    // Filter out test data (emails containing 'test')
+    const filteredData = (data || []).filter(
+      (row) => !row.email?.toLowerCase().includes('test')
+    )
+    
+    console.log(`📋 Retrieved ${filteredData.length} reservations from Supabase (filtered)`)
+    return { success: true, data: filteredData }
   } catch (error) {
     console.error('❌❌ Exception fetching reservations from Supabase:', error)
     return { success: false, error }
@@ -142,44 +147,10 @@ export async function testSupabaseConnection() {
       }
     }
     
-    console.log('✅ Table exists, attempting test insertion...')
-    
-    // If we get here, the table exists, so let's try a test insertion
-    const testReservation: ReservationData = {
-      timestamp: new Date().toISOString(),
-      fullName: 'Test User',
-      email: 'test@example.com',
-      phone: '555-1234',
-      address: '123 Test St, Test City, TS 12345',
-      moveQuantity: 1,
-      repairQuantity: 1,
-      rapidQuantity: 1,
-      bundleQuantity: 1,
-      totalCost: 123.96,
-      notes: 'This is a test entry'
-    }
-    
-    console.log('📦 Test data being sent to Supabase:', JSON.stringify(testReservation, null, 2))
-    
-    const { data, error } = await supabase
-      .from('reservations')
-      .insert([testReservation])
-      .select()
-    
-    if (error) {
-      console.error('❌ Error inserting test reservation:', error)
-      return {
-        success: false,
-        message: 'Failed to connect to Supabase: Insert test failed',
-        error
-      }
-    }
-    
-    console.log('✅ Successfully inserted test reservation:', data)
+    console.log('✅ Table exists and connection is working')
     return {
       success: true,
-      message: 'Successfully connected to Supabase and added a test reservation',
-      data
+      message: 'Successfully connected to Supabase and verified table exists'
     }
   } catch (error) {
     console.error('❌❌ Exception testing Supabase connection:', error)
