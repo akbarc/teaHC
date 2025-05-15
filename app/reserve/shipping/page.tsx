@@ -7,6 +7,7 @@ import * as fbq from '@/lib/facebook-pixel'
 import { updateSubscriberReservation } from "@/lib/subscriber-service"
 import ModifiedStep3Shipping from "./ModifiedStep3Shipping"
 import SuccessMessage from "./SuccessMessage"
+import Image from "next/image"
 
 function ShippingContent() {
   const router = useRouter()
@@ -34,19 +35,21 @@ function ShippingContent() {
       return
     }
     
-    if (moveQuantity === 0 && repairQuantity === 0 && rapidQuantity === 0 && bundleQuantity === 0) {
+    const source = searchParams.get('source') || 'products_form'
+    const isRapidDirect = source.includes('rapid')
+    
+    // Only redirect to products if not coming from Rapid direct flow
+    if (!isRapidDirect && moveQuantity === 0 && repairQuantity === 0 && rapidQuantity === 0 && bundleQuantity === 0) {
       router.push(`/reserve/products?email=${encodeURIComponent(email)}`)
       return
     }
     
-    // Track page view
-    const source = searchParams.get('source') || 'products_form'
-    
-    // Vercel Analytics - only include safe parameters
+    // Track page view with appropriate source
     track('reserve_shipping', { 
       source,
       email: email,
       step: 'shipping',
+      isRapidDirect,
       timestamp: new Date().toISOString()
     })
     
@@ -289,30 +292,52 @@ function ShippingContent() {
               Be among the first to experience our revolutionary nano-cannabinoid products at exclusive pre-launch pricing
             </p>
             
-            {/* Step Indicator */}
+            {/* Progress Indicator */}
             <div className="max-w-md mx-auto mb-8">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
-                </div>
-                <div className="relative flex justify-between">
-                  <div className="flex flex-col items-center text-amber-600">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-amber-100 text-amber-600">
-                      <span className="text-lg font-bold">1</span>
-                    </div>
-                    <span className="mt-2 text-sm">Register</span>
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span className="font-medium text-amber-600">Step 2 of 2</span>
+                <span>Your Details → Confirm & Reserve</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div className="bg-amber-600 h-1.5 rounded-full" style={{ width: '100%' }}></div>
+              </div>
+            </div>
+
+            {/* Order Summary */}
+            <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm border border-gray-100 p-4 mb-8">
+              <h3 className="font-medium text-gray-900 mb-3">Your Order</h3>
+              <div className="space-y-2">
+                {rapidQuantity > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>TeaHC RAPID × {rapidQuantity}</span>
+                    <span>${(rapidQuantity * 19.99).toFixed(2)}</span>
                   </div>
-                  <div className="flex flex-col items-center text-amber-600">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-amber-100 text-amber-600">
-                      <span className="text-lg font-bold">2</span>
-                    </div>
-                    <span className="mt-2 text-sm">Products</span>
+                )}
+                {moveQuantity > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>TeaHC MOVE × {moveQuantity}</span>
+                    <span>${(moveQuantity * 19.99).toFixed(2)}</span>
                   </div>
-                  <div className="flex flex-col items-center text-amber-600">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-amber-100 text-amber-600">
-                      <span className="text-lg font-bold">3</span>
-                    </div>
-                    <span className="mt-2 text-sm">Shipping</span>
+                )}
+                {repairQuantity > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>TeaHC REPAIR × {repairQuantity}</span>
+                    <span>${(repairQuantity * 19.99).toFixed(2)}</span>
+                  </div>
+                )}
+                {bundleQuantity > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>TeaHC Bundle × {bundleQuantity}</span>
+                    <span>${(bundleQuantity * 47.98).toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="border-t border-gray-100 pt-2 mt-2">
+                  <div className="flex justify-between font-medium">
+                    <span>Total</span>
+                    <span>${calculateTotal().toFixed(2)}</span>
+                  </div>
+                  <div className="text-xs text-amber-600 mt-1">
+                    You save ${((rapidQuantity + moveQuantity + repairQuantity) * 20 + bundleQuantity * 32).toFixed(2)} with pre-launch pricing
                   </div>
                 </div>
               </div>
@@ -335,30 +360,33 @@ function ShippingContent() {
         
         {/* Info Box (only show when not completed) */}
         {!reservationComplete && (
-          <div className="max-w-4xl mx-auto mt-8 bg-blue-50 p-6 rounded-xl border border-blue-100 shadow-sm">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Reservation Information</h3>
-            <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+          <div className="max-w-4xl mx-auto mt-8 space-y-6">
+            {/* Billing Reassurance */}
+            <div className="bg-amber-50 border border-amber-100 rounded-lg p-4 text-sm text-amber-800">
               <div className="flex items-start">
-                <div className="bg-white p-2 rounded-full shadow-sm mr-3">
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">No Payment Today</h4>
-                  <p className="text-sm text-gray-600">You'll only pay when your products are ready to ship</p>
-                </div>
+                <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p>You're NOT billed today—your card is saved and charged only when TeaHC ships (est. July).</p>
               </div>
-              
-              <div className="flex items-start">
-                <div className="bg-white p-2 rounded-full shadow-sm mr-3">
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="bg-white rounded-lg border border-gray-100 p-4">
+              <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <Image src="/teahc-logo.png" alt="TeaHC" width={24} height={24} className="mr-2" />
+                  <span>Trusted Brand</span>
                 </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">Lock In Your Pricing</h4>
-                  <p className="text-sm text-gray-600">Pre-launch pricing guaranteed when you reserve now</p>
+                <div className="flex items-center">
+                  <span className="text-amber-600">★4.9</span>
+                  <span className="ml-1">Rating</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-amber-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <span>30-Day Guarantee</span>
                 </div>
               </div>
             </div>

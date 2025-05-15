@@ -34,7 +34,7 @@ export default function ModifiedStep3Shipping({
   totalCost, 
   onShippingComplete 
 }: ModifiedStep3ShippingProps) {
-  const [shippingDetails, setShippingDetails] = useState<ShippingDetails>({
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     address: "",
@@ -48,355 +48,317 @@ export default function ModifiedStep3Shipping({
     emailUpdates: true
   })
 
-  const [errors, setErrors] = useState<Partial<Record<keyof ShippingDetails, string>>>({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setShippingDetails(prev => ({
-      ...prev,
-      [name]: value
-    }))
-    
-    // Clear error when field is edited
-    if (errors[name as keyof ShippingDetails]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: undefined
-      }))
+  // Inline validation
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'zipCode':
+        return /^\d{5}(-\d{4})?$/.test(value) ? '' : 'Please enter a valid ZIP code'
+      case 'phone':
+        return value ? /^\+?[\d\s-()]{10,}$/.test(value) ? '' : 'Please enter a valid phone number' : ''
+      case 'email':
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : 'Please enter a valid email address'
+      default:
+        return ''
     }
   }
 
-  const handleCheckboxChange = (name: keyof ShippingDetails) => {
-    setShippingDetails(prev => ({
-      ...prev,
-      [name]: !prev[name]
-    }))
-  }
-
-  const handleSelectChange = (name: keyof ShippingDetails, value: string) => {
-    setShippingDetails(prev => ({
-      ...prev,
-      [name]: value
-    }))
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target
+    const newValue = type === 'checkbox' ? checked : value
     
-    // Clear error when field is edited
+    setFormData(prev => ({
+      ...prev,
+      [name]: newValue
+    }))
+
+    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: undefined
+        [name]: ''
       }))
     }
-  }
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof ShippingDetails, string>> = {}
-    
-    // Required fields
-    const requiredFields: (keyof ShippingDetails)[] = ['firstName', 'lastName', 'address', 'city', 'state', 'zipCode', 'phone']
-    
-    requiredFields.forEach(field => {
-      if (!shippingDetails[field]) {
-        newErrors[field] = 'This field is required'
+    // Validate on change for specific fields
+    if (['zipCode', 'phone'].includes(name)) {
+      const error = validateField(name, value)
+      if (error) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: error
+        }))
       }
-    })
-    
-    // ZIP code validation (basic)
-    if (shippingDetails.zipCode && !/^\d{5}(-\d{4})?$/.test(shippingDetails.zipCode)) {
-      newErrors.zipCode = 'Please enter a valid ZIP code'
     }
-    
-    // Phone validation (basic)
-    if (shippingDetails.phone && !/^\d{10}$/.test(shippingDetails.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number'
-    }
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (validateForm()) {
-      setIsSubmitting(true)
-      
-      // Track step completion
-      track('reserve_shipping_complete', {
-        step: 'shipping',
-        email: email,
-        timestamp: new Date().toISOString()
-      })
-      
-      // Complete the reservation directly
-      await onShippingComplete(shippingDetails)
-      
+    setIsSubmitting(true)
+
+    // Validate required fields
+    const newErrors: Record<string, string> = {}
+    if (!formData.address) {
+      newErrors.address = 'Please enter your shipping address'
+    }
+    if (!formData.city) {
+      newErrors.city = 'Please enter your city'
+    }
+    if (!formData.state) {
+      newErrors.state = 'Please enter your state'
+    }
+    if (!formData.zipCode) {
+      newErrors.zipCode = 'Please enter your ZIP code'
+    } else {
+      const zipError = validateField('zipCode', formData.zipCode)
+      if (zipError) newErrors.zipCode = zipError
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      await onShippingComplete(formData)
+    } catch (error) {
+      console.error('Error submitting shipping details:', error)
+      setErrors(prev => ({
+        ...prev,
+        submit: 'Something went wrong. Please try again.'
+      }))
       setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
-        <h2 className="text-2xl font-bold">Shipping Details</h2>
-        <p className="opacity-90">Step 3: Where should we ship your products?</p>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
+        
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="block w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+              placeholder="First name"
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="block w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+              placeholder="Last name"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+              Address <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              className={`block w-full px-4 py-2 rounded-lg border ${
+                errors.address ? 'border-red-300' : 'border-gray-300'
+              } focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20`}
+              placeholder="Street address"
+              required
+            />
+            {errors.address && (
+              <p className="mt-1 text-sm text-red-600">{errors.address}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="address2" className="block text-sm font-medium text-gray-700 mb-1">
+              Apartment, suite, etc. (optional)
+            </label>
+            <input
+              type="text"
+              id="address2"
+              name="address2"
+              value={formData.address2}
+              onChange={handleChange}
+              className="block w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+              placeholder="Apt, suite, unit, etc."
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                City <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className={`block w-full px-4 py-2 rounded-lg border ${
+                  errors.city ? 'border-red-300' : 'border-gray-300'
+                } focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20`}
+                placeholder="City"
+                required
+              />
+              {errors.city && (
+                <p className="mt-1 text-sm text-red-600">{errors.city}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
+                State <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                className={`block w-full px-4 py-2 rounded-lg border ${
+                  errors.state ? 'border-red-300' : 'border-gray-300'
+                } focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20`}
+                placeholder="State"
+                required
+              />
+              {errors.state && (
+                <p className="mt-1 text-sm text-red-600">{errors.state}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
+                ZIP Code <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                id="zipCode"
+                name="zipCode"
+                value={formData.zipCode}
+                onChange={handleChange}
+                className={`block w-full px-4 py-2 rounded-lg border ${
+                  errors.zipCode ? 'border-red-300' : 'border-gray-300'
+                } focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20`}
+                placeholder="ZIP code"
+                required
+                pattern="[0-9]{5}(-[0-9]{4})?"
+                inputMode="numeric"
+              />
+              {errors.zipCode && (
+                <p className="mt-1 text-sm text-red-600">{errors.zipCode}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                Phone (optional)
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={`block w-full px-4 py-2 rounded-lg border ${
+                  errors.phone ? 'border-red-300' : 'border-gray-300'
+                } focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20`}
+                placeholder="Phone number"
+                inputMode="tel"
+              />
+              {errors.phone && (
+                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-6">
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <p className="text-gray-600">
-              Reserving for: <span className="font-medium text-gray-800">{email}</span>
-            </p>
-            <p className="font-medium">
-              Total: <span className="text-orange-600">${totalCost.toFixed(2)}</span>
-            </p>
-          </div>
-          <div className="mt-2 bg-amber-50 p-4 rounded-lg border border-amber-100">
-            <p className="text-sm text-amber-800">
-              <span className="font-medium">Remember:</span> No payment is required today. You'll only be charged when your order ships.
-            </p>
-          </div>
+      {/* Preferences */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+        <div className="space-y-4">
+          <label className="flex items-start">
+            <input
+              type="checkbox"
+              name="saveInfo"
+              checked={formData.saveInfo}
+              onChange={handleChange}
+              className="mt-1 h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+            />
+            <span className="ml-2 text-sm text-gray-600">
+              Save my information for faster checkout
+            </span>
+          </label>
+
+          <label className="flex items-start">
+            <input
+              type="checkbox"
+              name="emailUpdates"
+              checked={formData.emailUpdates}
+              onChange={handleChange}
+              className="mt-1 h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+            />
+            <span className="ml-2 text-sm text-gray-600">
+              Keep me updated with exclusive offers and product news
+            </span>
+          </label>
         </div>
-        
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {/* Personal Information */}
-          <div>
-            <h3 className="text-lg font-medium mb-4 text-gray-800">Personal Information</h3>
-            
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  value={shippingDetails.firstName}
-                  onChange={handleChange}
-                  className={errors.firstName ? "border-red-500" : ""}
-                />
-                {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-              </div>
-              
-              <div>
-                <Label htmlFor="lastName">Last Name <span className="text-red-500">*</span></Label>
-                <Input
-                  id="lastName"
-                  name="lastName"
-                  value={shippingDetails.lastName}
-                  onChange={handleChange}
-                  className={errors.lastName ? "border-red-500" : ""}
-                />
-                {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
-              </div>
-              
-              <div>
-                <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="(555) 555-5555"
-                  value={shippingDetails.phone}
-                  onChange={handleChange}
-                  className={errors.phone ? "border-red-500" : ""}
-                />
-                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                <p className="text-sm text-gray-500 mt-1">For shipping updates only</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Shipping Address */}
-          <div>
-            <h3 className="text-lg font-medium mb-4 text-gray-800">Shipping Address</h3>
-            
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="address">Address <span className="text-red-500">*</span></Label>
-                <Input
-                  id="address"
-                  name="address"
-                  value={shippingDetails.address}
-                  onChange={handleChange}
-                  className={errors.address ? "border-red-500" : ""}
-                />
-                {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
-              </div>
-              
-              <div>
-                <Label htmlFor="address2">Apartment, suite, etc. (optional)</Label>
-                <Input
-                  id="address2"
-                  name="address2"
-                  value={shippingDetails.address2}
-                  onChange={handleChange}
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="city">City <span className="text-red-500">*</span></Label>
-                <Input
-                  id="city"
-                  name="city"
-                  value={shippingDetails.city}
-                  onChange={handleChange}
-                  className={errors.city ? "border-red-500" : ""}
-                />
-                {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="state">State <span className="text-red-500">*</span></Label>
-                  <Select
-                    value={shippingDetails.state}
-                    onValueChange={(value) => handleSelectChange('state', value)}
-                  >
-                    <SelectTrigger 
-                      id="state" 
-                      className={errors.state ? "border-red-500" : ""}
-                    >
-                      <SelectValue placeholder="Select state" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="AL">Alabama</SelectItem>
-                      <SelectItem value="AK">Alaska</SelectItem>
-                      <SelectItem value="AZ">Arizona</SelectItem>
-                      <SelectItem value="AR">Arkansas</SelectItem>
-                      <SelectItem value="CA">California</SelectItem>
-                      <SelectItem value="CO">Colorado</SelectItem>
-                      <SelectItem value="CT">Connecticut</SelectItem>
-                      <SelectItem value="DE">Delaware</SelectItem>
-                      <SelectItem value="FL">Florida</SelectItem>
-                      <SelectItem value="GA">Georgia</SelectItem>
-                      <SelectItem value="HI">Hawaii</SelectItem>
-                      <SelectItem value="ID">Idaho</SelectItem>
-                      <SelectItem value="IL">Illinois</SelectItem>
-                      <SelectItem value="IN">Indiana</SelectItem>
-                      <SelectItem value="IA">Iowa</SelectItem>
-                      <SelectItem value="KS">Kansas</SelectItem>
-                      <SelectItem value="KY">Kentucky</SelectItem>
-                      <SelectItem value="LA">Louisiana</SelectItem>
-                      <SelectItem value="ME">Maine</SelectItem>
-                      <SelectItem value="MD">Maryland</SelectItem>
-                      <SelectItem value="MA">Massachusetts</SelectItem>
-                      <SelectItem value="MI">Michigan</SelectItem>
-                      <SelectItem value="MN">Minnesota</SelectItem>
-                      <SelectItem value="MS">Mississippi</SelectItem>
-                      <SelectItem value="MO">Missouri</SelectItem>
-                      <SelectItem value="MT">Montana</SelectItem>
-                      <SelectItem value="NE">Nebraska</SelectItem>
-                      <SelectItem value="NV">Nevada</SelectItem>
-                      <SelectItem value="NH">New Hampshire</SelectItem>
-                      <SelectItem value="NJ">New Jersey</SelectItem>
-                      <SelectItem value="NM">New Mexico</SelectItem>
-                      <SelectItem value="NY">New York</SelectItem>
-                      <SelectItem value="NC">North Carolina</SelectItem>
-                      <SelectItem value="ND">North Dakota</SelectItem>
-                      <SelectItem value="OH">Ohio</SelectItem>
-                      <SelectItem value="OK">Oklahoma</SelectItem>
-                      <SelectItem value="OR">Oregon</SelectItem>
-                      <SelectItem value="PA">Pennsylvania</SelectItem>
-                      <SelectItem value="RI">Rhode Island</SelectItem>
-                      <SelectItem value="SC">South Carolina</SelectItem>
-                      <SelectItem value="SD">South Dakota</SelectItem>
-                      <SelectItem value="TN">Tennessee</SelectItem>
-                      <SelectItem value="TX">Texas</SelectItem>
-                      <SelectItem value="UT">Utah</SelectItem>
-                      <SelectItem value="VT">Vermont</SelectItem>
-                      <SelectItem value="VA">Virginia</SelectItem>
-                      <SelectItem value="WA">Washington</SelectItem>
-                      <SelectItem value="WV">West Virginia</SelectItem>
-                      <SelectItem value="WI">Wisconsin</SelectItem>
-                      <SelectItem value="WY">Wyoming</SelectItem>
-                      <SelectItem value="DC">District of Columbia</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
-                </div>
-                
-                <div>
-                  <Label htmlFor="zipCode">ZIP Code <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="zipCode"
-                    name="zipCode"
-                    value={shippingDetails.zipCode}
-                    onChange={handleChange}
-                    className={errors.zipCode ? "border-red-500" : ""}
-                  />
-                  {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>}
-                </div>
-              </div>
-              
-              <div>
-                <Label htmlFor="country">Country</Label>
-                <Select
-                  value={shippingDetails.country}
-                  onValueChange={(value) => handleSelectChange('country', value)}
-                >
-                  <SelectTrigger id="country">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="US">United States</SelectItem>
-                    <SelectItem value="CA">Canada</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Preferences */}
-        <div className="border-t border-gray-200 pt-6 mb-8">
-          <h3 className="text-lg font-medium mb-4 text-gray-800">Preferences</h3>
-          
-          <div className="space-y-4">
-            <div className="flex items-start space-x-2">
-              <Checkbox
-                id="saveInfo"
-                checked={shippingDetails.saveInfo}
-                onCheckedChange={() => handleCheckboxChange('saveInfo')}
-              />
-              <div className="grid gap-1.5 leading-none">
-                <Label htmlFor="saveInfo" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Save my information for future orders
-                </Label>
-                <p className="text-sm text-gray-500">We'll securely store your shipping details</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-2">
-              <Checkbox
-                id="emailUpdates"
-                checked={shippingDetails.emailUpdates}
-                onCheckedChange={() => handleCheckboxChange('emailUpdates')}
-              />
-              <div className="grid gap-1.5 leading-none">
-                <Label htmlFor="emailUpdates" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Email me about new products and special offers
-                </Label>
-                <p className="text-sm text-gray-500">You can unsubscribe any time</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Submit Button */}
-        <div className="text-center">
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="px-8 py-4 text-xl rounded-xl shadow-lg transition-transform bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 hover:scale-105"
-          >
-            {isSubmitting ? "Processing..." : "Complete Reservation"}
-          </Button>
-          
-          <p className="text-gray-600 mt-4 text-sm">
-            By proceeding, you agree to our <a href="/terms" className="text-orange-600 hover:underline">Terms of Service</a> and <a href="/privacy" className="text-orange-600 hover:underline">Privacy Policy</a>
-          </p>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="space-y-4">
+        <button
+          type="submit"
+          className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 px-6 rounded-lg text-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <span className="flex items-center justify-center">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Processing...
+            </span>
+          ) : (
+            "Lock My 50% Off"
+          )}
+        </button>
+
+        {errors.submit && (
+          <p className="text-sm text-red-600 text-center">{errors.submit}</p>
+        )}
+
+        <p className="text-xs text-gray-500 text-center">
+          By clicking "Lock My 50% Off", you agree to our Terms of Service and Privacy Policy
+        </p>
+      </div>
+    </form>
   )
 } 

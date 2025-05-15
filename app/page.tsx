@@ -8,6 +8,7 @@ import { CountdownTimer } from "@/components/countdown-timer"
 import { PreOrderBar } from "@/components/pre-order-bar"
 import { EmailCapture } from "@/components/email-capture"
 import { track } from '@vercel/analytics'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   useEffect(() => {
@@ -34,27 +35,51 @@ export default function Home() {
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            {/* Left Column: Headline and Form */}
+            {/* Left Column: Headline and CTAs */}
             <div className="flex-1 space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-                Experience Relief With <span className="text-orange-500">17× Better Absorption</span> Technology
+                Move freely in 15 minutes—no pills required
               </h1>
               <p className="text-xl text-gray-700 max-w-2xl">
-                TeaHC's proprietary nano-emulsion delivers comfort in as little as 15 minutes while standard supplements are still dissolving
+                TeaHC's proprietary nano-emulsion delivers targeted relief in as little as 15 minutes while standard supplements are still dissolving
               </p>
 
-              {/* Email Capture Form */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-                <EmailCapture 
-                  placeholder="Enter your email to secure discount"
-                  buttonText="RESERVE YOUR 50% DISCOUNT"
-                  privacyText="We respect your privacy. No spam."
-                  source="homepage_hero"
-                  onSubmit={() => trackButtonClick('homepage_email_submit')}
-                />
-                <p className="text-sm text-gray-500 mt-2 text-center">
-                  Limited Pre-Launch Offer • No Payment Today • Ships June 2025
-                </p>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  size="lg" 
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg"
+                  onClick={() => {
+                    trackButtonClick('homepage_hero_3pack_cta');
+                    window.location.href = '/products/bundle?source=homepage_hero';
+                  }}
+                >
+                  Get 3-Pack 50% Off
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-6 text-lg"
+                  onClick={() => {
+                    document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                    trackButtonClick('homepage_hero_learn_more');
+                  }}
+                >
+                  See How It Works
+                </Button>
+              </div>
+
+              {/* Discount Ribbon */}
+              <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-orange-800 font-medium">50% Pre-Launch Discount</p>
+                    <p className="text-sm text-orange-600">Ships July 2025 • Pay Later</p>
+                  </div>
+                  <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Limited Time
+                  </div>
+                </div>
               </div>
 
               {/* Trust Elements */}
@@ -100,36 +125,130 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Split Design */}
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Left: Thermal Visualization */}
-              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-lg">
-                <Image
-                  src="/product-images/thermal-knee-scan.png"
-                  alt="Thermal visualization of TeaHC's targeted relief"
-                  width={400}
-                  height={400}
-                  className="object-contain"
-                  priority
-                />
-                <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
-                  <p className="text-sm font-medium text-gray-900">Targeted Relief Visualization</p>
-                  <p className="text-xs text-gray-600">Heat map shows rapid absorption and targeted delivery</p>
-                </div>
-              </div>
-
-              {/* Right: Product Trio */}
+            {/* Right Column: Product Trio */}
+            <div className="flex-1">
               <div className="relative bg-white rounded-xl p-4 shadow-lg">
                 <Image
                   src="/product-images/product-trio.png"
                   alt="TeaHC Product Line featuring MOVE, REPAIR, and RAPID formulas"
-                  width={400}
-                  height={400}
+                  width={600}
+                  height={600}
                   className="object-contain"
                   priority
                 />
                 <div className="absolute bottom-4 right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg shadow-md text-sm font-medium">
                   Complete System: 30-Day Supply
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Thermal Proof Section - Moved up */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-lg">
+                <Image
+                  src="/product-images/thermal-knee-scan.png"
+                  alt="Thermal visualization of TeaHC's targeted relief"
+                  width={500}
+                  height={500}
+                  className="object-contain"
+                  priority
+                />
+                <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
+                  <p className="text-sm font-medium text-gray-900">Clinical thermography shows ↓13°F inflammation in 20 minutes</p>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">Targeted Relief Visualization</h2>
+                <p className="text-lg text-gray-700">
+                  Our proprietary nano-technology delivers active ingredients directly to areas of inflammation, as shown in this thermal imaging study.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <p className="font-medium text-orange-800">Before</p>
+                    <p className="text-sm text-gray-600">Areas of inflammation shown in red</p>
+                  </div>
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <p className="font-medium text-orange-800">After 20 Minutes</p>
+                    <p className="text-sm text-gray-600">Significant reduction in inflammation markers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Science Section - Collapsed to 3 bullets */}
+      <section className="py-16 bg-gradient-to-b from-white to-orange-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">The Science of 17× Better Absorption</h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white rounded-xl p-6 border border-orange-100 shadow-sm">
+                <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">17× Bioavailability</h3>
+                <p className="text-gray-600">Our nano-technology delivers up to 90% absorption vs. just 5% in standard supplements</p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-orange-100 shadow-sm">
+                <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">90% Reaches Target</h3>
+                <p className="text-gray-600">Precision delivery ensures active ingredients reach their intended destination</p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-orange-100 shadow-sm">
+                <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">15-Minute Onset</h3>
+                <p className="text-gray-600">Experience relief in as little as 15 minutes, not hours</p>
+              </div>
+            </div>
+
+            {/* Absorption Visualization */}
+            <div className="mt-12 bg-white rounded-xl p-6 border border-orange-100 shadow-sm">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="relative h-64">
+                  <Image
+                    src="/product-images/nano-absorption.png"
+                    alt="Nano absorption technology visualization"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Standard Absorption:</span>
+                    <span className="text-sm font-medium text-red-500">Only 5%</span>
+                  </div>
+                  <div className="w-full h-4 bg-gray-100 rounded-full">
+                    <div className="h-4 bg-red-400 rounded-full" style={{ width: '5%' }}></div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">TeaHC Nano-Technology:</span>
+                    <span className="text-sm font-medium text-green-600">Up to 90%</span>
+                  </div>
+                  <div className="w-full h-4 bg-gray-100 rounded-full">
+                    <div className="h-4 bg-gradient-to-r from-green-500 to-green-400 rounded-full" style={{ width: '90%' }}></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1590,6 +1709,214 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Persona Blocks - Updated to Outcome-Based */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+            >
+              <div className="bg-orange-600 h-2"></div>
+              <div className="p-6">
+                <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3">Morning Freedom</h3>
+                <p className="text-gray-600 mb-5">
+                  Start your day with natural mobility and lasting comfort. No more waiting for pills to kick in.
+                </p>
+                <div className="pt-3 border-t border-gray-100">
+                  <p className="text-sm text-gray-500 italic">
+                    "I can finally enjoy my morning walks again. The difference is night and day." - Margaret, 58
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+            >
+              <div className="bg-orange-600 h-2"></div>
+              <div className="p-6">
+                <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3">Rapid Recovery</h3>
+                <p className="text-gray-600 mb-5">
+                  Get back to training faster with targeted relief that works in minutes, not hours.
+                </p>
+                <div className="pt-3 border-t border-gray-100">
+                  <p className="text-sm text-gray-500 italic">
+                    "Back to my workout routine in 15 minutes. No more waiting around." - Sarah, 42
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+            >
+              <div className="bg-orange-600 h-2"></div>
+              <div className="p-6">
+                <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                  <svg className="h-7 w-7 text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3">Stay Comfortable, Stay Focused</h3>
+                <p className="text-gray-600 mb-5">
+                  Maintain your active lifestyle without interruption. No drowsiness, just targeted relief.
+                </p>
+                <div className="pt-3 border-t border-gray-100">
+                  <p className="text-sm text-gray-500 italic">
+                    "I can work through my day without discomfort slowing me down." - Michael, 45
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bundle Picker Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-orange-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">Choose Your Bundle</h2>
+            <p className="text-lg text-gray-600 text-center mb-8">
+              Select the perfect pack size for your needs
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-transparent hover:border-orange-200 transition-colors"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">1-Pack</h3>
+                  <p className="text-gray-600 mb-4">Try TeaHC RAPID</p>
+                  <div className="text-2xl font-bold mb-4">$39.99</div>
+                  <Button 
+                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    onClick={() => {
+                      trackButtonClick('homepage_bundle_1pack');
+                      window.location.href = '/products/rapid?source=homepage_bundle';
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-orange-300 relative"
+              >
+                <div className="absolute -top-3 -right-3 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Best Value
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">3-Pack</h3>
+                  <p className="text-gray-600 mb-4">30-Day Supply</p>
+                  <div className="text-2xl font-bold mb-4">
+                    <span className="text-orange-500">$59.99</span>
+                    <span className="text-sm text-gray-500 line-through ml-2">$119.97</span>
+                  </div>
+                  <Button 
+                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    onClick={() => {
+                      trackButtonClick('homepage_bundle_3pack');
+                      window.location.href = '/products/bundle?source=homepage_bundle';
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-transparent hover:border-orange-200 transition-colors"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">6-Pack</h3>
+                  <p className="text-gray-600 mb-4">60-Day Supply</p>
+                  <div className="text-2xl font-bold mb-4">
+                    <span className="text-orange-500">$99.99</span>
+                    <span className="text-sm text-gray-500 line-through ml-2">$239.94</span>
+                  </div>
+                  <Button 
+                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    onClick={() => {
+                      trackButtonClick('homepage_bundle_6pack');
+                      window.location.href = '/products/bundle?source=homepage_bundle';
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-500">
+                All bundles include free shipping • 30-day satisfaction guarantee • Subscribe & save 15% additional
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sticky Footer Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <p className="font-medium text-gray-900">
+                50% Pre-Launch Discount • Ships July 2025
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <Button 
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white"
+                onClick={() => {
+                  trackButtonClick('sticky_footer_cta');
+                  window.location.href = '/products/bundle?source=sticky_footer';
+                }}
+              >
+                Get 3-Pack 50% Off
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }

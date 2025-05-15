@@ -67,8 +67,31 @@ function ReserveContent() {
       timestamp: new Date().toISOString()
     })
     
-    // Redirect to products page with email in query params
-    router.push(`/reserve/products?email=${encodeURIComponent(email)}`)
+    const product = searchParams.get('product')
+    if (product === 'rapid') {
+      // For Rapid product, skip product selection and go straight to shipping
+      const rapidSelections = {
+        moveQuantity: 0,
+        repairQuantity: 0,
+        rapidQuantity: 1,
+        bundleQuantity: 0
+      }
+      setProductSelections(rapidSelections)
+      
+      // Redirect to shipping page with Rapid product pre-selected
+      const params = new URLSearchParams({
+        email: email,
+        moveQty: '0',
+        repairQty: '0',
+        rapidQty: '1',
+        bundleQty: '0',
+        source: searchParams.get('source') || 'rapid_direct'
+      })
+      router.push(`/reserve/shipping?${params.toString()}`)
+    } else {
+      // For other products, go to product selection
+      router.push(`/reserve/products?email=${encodeURIComponent(email)}`)
+    }
   }
   
   const handleProductsSubmit = (products: typeof productSelections) => {
