@@ -5,23 +5,28 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
 import { addSubscriberToSupabase } from "@/lib/subscriber-service"
+import { useRouter } from "next/navigation"
 
 interface EmailSignupProps {
   source: string
   buttonText?: string
   className?: string
   onSuccess?: (email: string) => void
+  showConfirmation?: boolean
 }
 
 export default function EmailSignup({ 
   source, 
   buttonText = "Subscribe", 
   className = "",
-  onSuccess 
+  onSuccess,
+  showConfirmation = true
 }: EmailSignupProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -71,7 +76,16 @@ export default function EmailSignup({
       })
 
       setEmail("")
+      setIsSubmitted(true)
       if (onSuccess) onSuccess(email)
+
+      // If showConfirmation is true, show the success state
+      if (showConfirmation) {
+        // Wait a moment before redirecting to give user time to see the success message
+        setTimeout(() => {
+          router.push(`/reserve?email=${encodeURIComponent(email)}&source=${source}`)
+        }, 1500)
+      }
     } catch (error) {
       console.error("Exception in email capture:", error)
       toast({
@@ -82,6 +96,24 @@ export default function EmailSignup({
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  if (isSubmitted && showConfirmation) {
+    return (
+      <div className="bg-white rounded-lg p-6 shadow-sm border border-green-100">
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+            <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </div>
+        <h3 className="text-lg font-semibold text-center text-gray-900 mb-2">You're In! 🎉</h3>
+        <p className="text-sm text-gray-600 text-center mb-4">
+          Redirecting you to reserve your TeaHC products...
+        </p>
+      </div>
+    )
   }
 
   return (
