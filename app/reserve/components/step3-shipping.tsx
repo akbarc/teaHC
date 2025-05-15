@@ -177,7 +177,7 @@ export default function Step3Shipping({
           
           <div className="mt-2 bg-amber-50 p-4 rounded-lg border border-amber-100">
             <p className="text-sm text-amber-800">
-              <span className="font-medium">Remember:</span> No payment is required today. You'll only be charged when your order ships.
+              <span className="font-medium">Remember:</span> No payment is required today. We'll send you a payment link when your products are ready to ship.
             </p>
           </div>
 

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { useRouter, useSearchParams } from "next/navigation"
-import { track } from "@/lib/analytics"
+import { track } from '@vercel/analytics'
 import { createClient } from "@supabase/supabase-js"
 
 // Initialize Supabase client
@@ -95,8 +95,8 @@ export default function Step1Email({ onEmailSubmit, onQuickCheckout }: Step1Emai
     return (
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
-          <h2 className="text-2xl font-bold">Welcome Back!</h2>
-          <p className="opacity-90">Ready to reserve your TeaHC products?</p>
+          <h2 className="text-2xl font-bold">Welcome to TeaHC!</h2>
+          <p className="opacity-90">Let's get your reservation started</p>
         </div>
 
         <div className="p-6">
@@ -106,9 +106,9 @@ export default function Step1Email({ onEmailSubmit, onQuickCheckout }: Step1Emai
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <p className="text-amber-800 font-medium mb-1">Quick Checkout Options</p>
+                <p className="text-amber-800 font-medium mb-1">Choose Your Next Step</p>
                 <p className="text-amber-700 text-sm">
-                  Choose a product to reserve or customize your order
+                  Select a product to reserve or customize your order
                 </p>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Step1Email({ onEmailSubmit, onQuickCheckout }: Step1Emai
             </Button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-4">
             <Button
               onClick={() => onEmailSubmit(email)}
               variant="outline"
@@ -144,19 +144,25 @@ export default function Step1Email({ onEmailSubmit, onQuickCheckout }: Step1Emai
             >
               Customize My Order
             </Button>
+
+            <div className="text-sm text-gray-500">
+              <button
+                onClick={() => {
+                  setEmail("")
+                  setIsSubmitted(false)
+                  localStorage.removeItem('teahc_email')
+                }}
+                className="text-orange-600 hover:text-orange-700"
+              >
+                Use a different email
+              </button>
+            </div>
           </div>
 
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => {
-                setEmail("")
-                setIsSubmitted(false)
-                localStorage.removeItem('teahc_email')
-              }}
-              className="text-sm text-gray-500 hover:text-gray-700"
-            >
-              Use a different email
-            </button>
+          <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Remember:</span> No payment is required today. We'll send you a payment link when your products are ready to ship.
+            </p>
           </div>
         </div>
       </div>

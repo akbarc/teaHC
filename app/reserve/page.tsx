@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import Step1Email from "./components/step1-email"
 import Step2Products from "./components/step2-products"
 import Step3Shipping from "./components/step3-shipping"
-import SuccessMessage from "./components/success-message"
+import SuccessMessage from "@/app/reserve/components/success-message"
 import type { ShippingDetails } from "./components/step3-shipping"
 import { track } from '@vercel/analytics'
 import * as fbq from '@/lib/facebook-pixel'
@@ -116,20 +116,115 @@ function ReserveContent() {
     // Track step completion
     track('reserve_products_complete', {
       step: 'products',
-      products,
+      products: JSON.stringify(products),
       timestamp: new Date().toISOString()
     })
   }
   
-  const handleShippingSubmit = (shipping: ShippingDetails) => {
-    setShippingDetails(shipping)
-    setReservationComplete(true)
-    
-    // Track completion
-    track('reserve_complete', {
-      step: 'shipping',
-      timestamp: new Date().toISOString()
-    })
+  const handleShippingSubmit = async (shipping: ShippingDetails) => {
+    try {
+      // Format address
+      const formatAddress = () => {
+        const addr = [shipping.address]
+        if (shipping.address2) {
+          addr.push(shipping.address2)
+        }
+        addr.push(`${shipping.city}, ${shipping.state} ${shipping.zipCode}`)
+        if (shipping.country === "CA") {
+          addr.push("Canada")
+        }
+        return addr.join(", ")
+      }
+
+      // Prepare reservation data
+      const reservationData = {
+        email,
+        timestamp: new Date().toISOString(),
+        fullName: `${shipping.firstName} ${shipping.lastName}`,
+        phone: shipping.phone,
+        address: formatAddress(),
+        moveQuantity: productSelections.moveQuantity,
+        repairQuantity: productSelections.repairQuantity,
+        rapidQuantity: productSelections.rapidQuantity,
+        bundleQuantity: productSelections.bundleQuantity,
+        totalCost: calculateTotal(),
+        notes: ""
+      }
+
+      // Save to Supabase via API
+      const baseUrl = window.location.origin
+      const response = await fetch(`${baseUrl}/api/fix-reservation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reservationData)
+      })
+
+      const result = await response.json()
+      console.log('Reservation save result:', result)
+
+      if (!result.success) {
+        // If API save fails, save to localStorage as backup
+        localStorage.setItem(
+          `teahc_reservation_${email}`,
+          JSON.stringify({
+            email,
+            products: productSelections,
+            shipping,
+            totalCost: calculateTotal(),
+            reservedAt: new Date().toISOString()
+          })
+        )
+        console.log('Reservation data saved to localStorage as backup')
+      }
+
+      // Update state and track completion
+      setShippingDetails(shipping)
+      setReservationComplete(true)
+      
+      track('reserve_complete', {
+        step: 'shipping',
+        timestamp: new Date().toISOString()
+      })
+
+      // Also notify about the reservation
+      try {
+        await fetch(`${baseUrl}/api/notify-reservation`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(reservationData)
+        })
+      } catch (notifyError) {
+        console.error('Failed to send notification:', notifyError)
+      }
+
+    } catch (err) {
+      console.error("Error saving reservation:", err)
+      
+      // Save to localStorage as fallback
+      try {
+        localStorage.setItem(
+          `teahc_reservation_${email}`,
+          JSON.stringify({
+            email,
+            products: productSelections,
+            shipping,
+            totalCost: calculateTotal(),
+            reservedAt: new Date().toISOString()
+          })
+        )
+        console.log('Reservation data saved to localStorage as fallback')
+      } catch (e) {
+        console.error('Failed to save fallback to localStorage:', e)
+      }
+      
+      // Still mark as complete for better UX
+      setShippingDetails(shipping)
+      setReservationComplete(true)
+    }
   }
   
   const calculateTotal = () => {
@@ -230,7 +325,7 @@ function ReserveContent() {
                 <svg className="h-5 w-5 text-amber-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p>You're NOT billed today—your card is saved and charged only when TeaHC ships (est. July).</p>
+                <p>No payment required today—we'll send you a payment link when your products are ready to ship.</p>
               </div>
             </div>
 
