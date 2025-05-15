@@ -48,6 +48,20 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1 text-sm font-medium">
           <Link
+            href="/"
+            className="px-3 py-2 rounded-md transition-colors hover:bg-amber-50 hover:text-amber-700"
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/rapid"
+            className="px-3 py-2 rounded-md transition-colors hover:bg-amber-50 hover:text-amber-700"
+          >
+            Rapid
+          </Link>
+
+          <Link
             href="/products"
             className="px-3 py-2 rounded-md transition-colors hover:bg-amber-50 hover:text-amber-700"
           >
@@ -166,6 +180,20 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t">
           <div className="container py-4 space-y-1">
+            <Link
+              href="/"
+              className="block px-3 py-2 rounded-md transition-colors hover:bg-amber-50"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/rapid"
+              className="block px-3 py-2 rounded-md transition-colors hover:bg-amber-50"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Rapid
+            </Link>
             <Link
               href="/products"
               className="block px-3 py-2 rounded-md transition-colors hover:bg-amber-50"
