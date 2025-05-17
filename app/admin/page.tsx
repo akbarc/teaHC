@@ -35,8 +35,33 @@ export default function AdminPage() {
   const router = useRouter()
 
   useEffect(() => {
-    fetchStats()
-  }, [])
+    // Check if user is authenticated and has admin role
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        router.push('/login?redirect=/admin')
+        return
+      }
+
+      // Check if user has admin role
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single()
+
+      if (profile?.role !== 'admin') {
+        await supabase.auth.signOut()
+        router.push('/login?redirect=/admin')
+        return
+      }
+
+      // If authenticated and admin, fetch stats
+      fetchStats()
+    }
+
+    checkAuth()
+  }, [router])
 
   const fetchStats = async () => {
     try {
@@ -109,6 +134,16 @@ export default function AdminPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading dashboard...</h1>
+        </div>
+      </main>
+    )
   }
 
   return (
