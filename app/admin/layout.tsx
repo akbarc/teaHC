@@ -1,3 +1,8 @@
+"use client"
+
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { supabase } from "@/lib/supabase"
 import Link from 'next/link'
 
 export default function AdminLayout({
@@ -5,6 +10,33 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (!session) {
+        router.push('/login?redirect=/admin/contact')
+        return
+      }
+
+      // Check if user has admin role
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single()
+
+      if (!profile || profile.role !== 'admin') {
+        router.push('/')
+        return
+      }
+    }
+
+    checkAuth()
+  }, [router])
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-black text-white p-4">

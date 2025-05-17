@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { submitContactForm } from "@/lib/contact-service"
+import { toast } from "sonner"
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -28,20 +30,27 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const result = await submitContactForm(formState)
 
-    // In a real implementation, you would send the form data to your backend
-    console.log("Form submitted:", formState)
-
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormState({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
+      if (result.success) {
+        setIsSubmitted(true)
+        setFormState({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+        toast.success("Message sent successfully! We'll get back to you soon.")
+      } else {
+        toast.error(result.error || "Failed to send message. Please try again.")
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error)
+      toast.error("An unexpected error occurred. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
