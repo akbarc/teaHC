@@ -8,6 +8,13 @@ import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 
 const ADMIN_PASSWORD = '2000Akbar!' // This should be moved to an environment variable in production
+const ADMIN_EMAIL = 'admin@tryteahc.com'
+
+// Create a single Supabase client instance
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('')
@@ -26,14 +33,19 @@ export default function AdminLogin() {
       return
     }
 
-    try {
-      // Initialize Supabase client
-      const supabase = createBrowserClient(supabaseUrl, supabaseKey)
-      setSupabaseInitialized(true)
-    } catch (error) {
-      console.error('Failed to initialize Supabase client:', error)
-      toast.error('Failed to initialize authentication. Please try again.')
+    // Verify Supabase connection
+    const checkConnection = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession()
+        if (error) throw error
+        setSupabaseInitialized(true)
+      } catch (error) {
+        console.error('Failed to initialize Supabase client:', error)
+        toast.error('Failed to initialize authentication. Please try again.')
+      }
     }
+
+    checkConnection()
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -54,21 +66,42 @@ export default function AdminLogin() {
 
       console.log('Password verified, attempting Supabase authentication...')
       
-      // Create a session using Supabase
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
-
-      // Sign in with the admin account
+      // Sign in with the admin account using the single client instance
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: 'admin@tryteahc.com',
+        email: ADMIN_EMAIL,
         password: ADMIN_PASSWORD
       })
 
       if (error) {
         console.error('Supabase auth error:', error)
-        throw error
+        // If the user doesn't exist, try to create them
+        if (error.message.includes('Invalid login credentials')) {
+          const { error: createError } = await supabase.auth.signUp({
+            email: ADMIN_EMAIL,
+            password: ADMIN_PASSWORD,
+            options: {
+              data: {
+                role: 'admin'
+              }
+            }
+          })
+          
+          if (createError) {
+            throw createError
+          }
+          
+          // Try signing in again after creating the user
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email: ADMIN_EMAIL,
+            password: ADMIN_PASSWORD
+          })
+          
+          if (signInError) {
+            throw signInError
+          }
+        } else {
+          throw error
+        }
       }
 
       if (!data?.user) {
