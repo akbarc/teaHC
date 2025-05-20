@@ -1,303 +1,308 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { createClient } from "@supabase/supabase-js"
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createBrowserClient } from '@supabase/ssr'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Input } from '@/components/ui/input'
+import { toast } from 'sonner'
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-interface Reservation {
+// Types
+type Subscriber = {
   id: string
-  created_at: string
-  timestamp: string
-  fullName: string
   email: string
-  phone: string
-  address: string
-  moveQuantity: number
-  repairQuantity: number
-  rapidQuantity: number
-  bundleQuantity: number
-  totalCost: number
+  created_at: string
+  source: string
+  product: string
+  status: 'pending' | 'approved' | 'rejected'
+}
+
+type Reservation = {
+  id: string
+  email: string
+  created_at: string
+  product: string
+  quantity: number
+  status: 'pending' | 'approved' | 'rejected'
+  shipping_address: string
   notes: string
 }
 
-interface Stats {
-  lastHour: number
-  last6Hours: number
-  last24Hours: number
-  totalSubscribers: number
-  totalReservations: number
-  recentReservations: Reservation[]
-  recentSubscribers: { email: string; created_at: string; source: string }[]
-}
-
-export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [password, setPassword] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [stats, setStats] = useState<Stats>({
-    lastHour: 0,
-    last6Hours: 0,
-    last24Hours: 0,
-    totalSubscribers: 0,
-    totalReservations: 0,
-    recentReservations: [],
-    recentSubscribers: []
-  })
+export default function AdminDashboard() {
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([])
+  const [reservations, setReservations] = useState<Reservation[]>([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const { toast } = useToast()
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
 
   useEffect(() => {
-    // Check if already authenticated
-    const auth = localStorage.getItem("adminAuth")
-    if (auth === "true") {
-      setIsAuthenticated(true)
-      fetchStats()
-    }
-  }, [])
-
-  const fetchStats = async () => {
-    try {
-      // Get current timestamp and calculate time ranges
-      const now = new Date()
-      const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000)
-      const sixHoursAgo = new Date(now.getTime() - 6 * 60 * 60 * 1000)
-      const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000)
-
-      // Fetch subscribers stats
-      const { data: subscribers, error: subError } = await supabase
-        .from("subscribers")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(5)
-
-      if (subError) throw subError
-
-      // Fetch reservations stats
-      const { data: reservations, error: resError } = await supabase
-        .from("reservations")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(5)
-
-      if (resError) throw resError
-
-      // Calculate stats
-      const stats = {
-        lastHour: subscribers.filter(s => new Date(s.created_at) > oneHourAgo).length,
-        last6Hours: subscribers.filter(s => new Date(s.created_at) > sixHoursAgo).length,
-        last24Hours: subscribers.filter(s => new Date(s.created_at) > twentyFourHoursAgo).length,
-        totalSubscribers: subscribers.length,
-        totalReservations: reservations.length,
-        recentReservations: reservations,
-        recentSubscribers: subscribers.map(s => ({
-          email: s.email,
-          created_at: s.created_at,
-          source: s.source
-        }))
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        router.push('/admin/login')
+        return
       }
+      fetchData()
+    }
 
-      setStats(stats)
-    } catch (error) {
-      console.error("Error fetching stats:", error)
-      toast({
-        title: "Error fetching stats",
-        description: "Please try again later",
-        variant: "destructive"
-      })
+    checkAuth()
+  }, [router])
+
+  const fetchData = async () => {
+    try {
+      const [subscribersResponse, reservationsResponse] = await Promise.all([
+        supabase
+          .from('subscribers')
+          .select('*')
+          .order('created_at', { ascending: false }),
+        supabase
+          .from('reservations')
+          .select('*')
+          .order('created_at', { ascending: false }),
+      ])
+
+      if (subscribersResponse.error) throw subscribersResponse.error
+      if (reservationsResponse.error) throw reservationsResponse.error
+
+      setSubscribers(subscribersResponse.data)
+      setReservations(reservationsResponse.data)
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to fetch data')
+    } finally {
+      setLoading(false)
     }
   }
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+  const updateSubscriberStatus = async (id: string, status: Subscriber['status']) => {
+    try {
+      const { error } = await supabase
+        .from('subscribers')
+        .update({ status })
+        .eq('id', id)
 
-    if (password === "2000Akbar!") {
-      localStorage.setItem("adminAuth", "true")
-      setIsAuthenticated(true)
-      fetchStats()
-      toast({
-        title: "Welcome to Admin Dashboard",
-        description: "You have successfully logged in"
-      })
-    } else {
-      toast({
-        title: "Invalid password",
-        description: "Please try again",
-        variant: "destructive"
-      })
+      if (error) throw error
+
+      setSubscribers(subscribers.map(sub => 
+        sub.id === id ? { ...sub, status } : sub
+      ))
+      toast.success('Subscriber status updated')
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to update status')
     }
-
-    setIsLoading(false)
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuth")
-    setIsAuthenticated(false)
-    router.push("/admin")
+  const updateReservationStatus = async (id: string, status: Reservation['status']) => {
+    try {
+      const { error } = await supabase
+        .from('reservations')
+        .update({ status })
+        .eq('id', id)
+
+      if (error) throw error
+
+      setReservations(reservations.map(res => 
+        res.id === id ? { ...res, status } : res
+      ))
+      toast.success('Reservation status updated')
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to update status')
+    }
   }
 
-  if (!isAuthenticated) {
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      if (error) throw error
+      router.push('/admin/login')
+      router.refresh()
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to logout')
+    }
+  }
+
+  const filteredSubscribers = subscribers.filter(sub =>
+    sub.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    sub.product.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const filteredReservations = reservations.filter(res =>
+    res.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    res.product.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Card className="w-full max-w-md p-8">
-          <h1 className="text-2xl font-bold text-center mb-6">Admin Login</h1>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <Input
-                type="password"
-                placeholder="Enter admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-amber-600 hover:bg-amber-700"
-              disabled={isLoading}
-            >
-              {isLoading ? "Logging in..." : "Login"}
-            </Button>
-          </form>
-        </Card>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
           <Button
             onClick={handleLogout}
             variant="outline"
-            className="text-red-600 hover:text-red-700"
           >
             Logout
           </Button>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-2">New Subscribers</h3>
-            <div className="space-y-2">
-              <p>Last Hour: {stats.lastHour}</p>
-              <p>Last 6 Hours: {stats.last6Hours}</p>
-              <p>Last 24 Hours: {stats.last24Hours}</p>
-              <p className="font-bold">Total: {stats.totalSubscribers}</p>
-            </div>
-          </Card>
+        <Card className="p-6">
+          <div className="mb-6">
+            <Input
+              type="text"
+              placeholder="Search by email or product..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="max-w-md"
+            />
+          </div>
 
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-2">Reservations</h3>
-            <div className="space-y-2">
-              <p>Total Reservations: {stats.totalReservations}</p>
-              <p>Recent Orders: {stats.recentReservations.length}</p>
-            </div>
-          </Card>
+          <Tabs defaultValue="subscribers" className="w-full">
+            <TabsList>
+              <TabsTrigger value="subscribers">
+                Subscribers ({filteredSubscribers.length})
+              </TabsTrigger>
+              <TabsTrigger value="reservations">
+                Reservations ({filteredReservations.length})
+              </TabsTrigger>
+            </TabsList>
 
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
-            <div className="space-y-2">
-              <Button
-                onClick={() => router.push("/admin/subscribers")}
-                className="w-full bg-amber-600 hover:bg-amber-700"
-              >
-                View Subscribers
-              </Button>
-              <Button
-                onClick={() => router.push("/admin/reservations")}
-                className="w-full bg-amber-600 hover:bg-amber-700"
-              >
-                View Reservations
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Recent Subscribers */}
-          <Card className="p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Recent Subscribers</h2>
-              <Button
-                onClick={() => router.push("/admin/subscribers")}
-                variant="ghost"
-                className="text-amber-600 hover:text-amber-700"
-              >
-                View All
-              </Button>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-2">Email</th>
-                    <th className="text-left py-2">Source</th>
-                    <th className="text-left py-2">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stats.recentSubscribers.map((subscriber) => (
-                    <tr key={subscriber.email} className="border-b">
-                      <td className="py-2">{subscriber.email}</td>
-                      <td className="py-2">{subscriber.source}</td>
-                      <td className="py-2">{new Date(subscriber.created_at).toLocaleString()}</td>
+            <TabsContent value="subscribers">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-4">Email</th>
+                      <th className="text-left py-3 px-4">Product</th>
+                      <th className="text-left py-3 px-4">Source</th>
+                      <th className="text-left py-3 px-4">Date</th>
+                      <th className="text-left py-3 px-4">Status</th>
+                      <th className="text-left py-3 px-4">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+                  </thead>
+                  <tbody>
+                    {filteredSubscribers.map((subscriber) => (
+                      <tr key={subscriber.id} className="border-b">
+                        <td className="py-3 px-4">{subscriber.email}</td>
+                        <td className="py-3 px-4">{subscriber.product}</td>
+                        <td className="py-3 px-4">{subscriber.source}</td>
+                        <td className="py-3 px-4">
+                          {new Date(subscriber.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="py-3 px-4">
+                          <span className={`px-2 py-1 rounded-full text-sm ${
+                            subscriber.status === 'approved' ? 'bg-green-100 text-green-800' :
+                            subscriber.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                            'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {subscriber.status}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateSubscriberStatus(subscriber.id, 'approved')}
+                              disabled={subscriber.status === 'approved'}
+                            >
+                              Approve
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateSubscriberStatus(subscriber.id, 'rejected')}
+                              disabled={subscriber.status === 'rejected'}
+                            >
+                              Reject
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </TabsContent>
 
-          {/* Recent Reservations */}
-          <Card className="p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Recent Reservations</h2>
-              <Button
-                onClick={() => router.push("/admin/reservations")}
-                variant="ghost"
-                className="text-amber-600 hover:text-amber-700"
-              >
-                View All
-              </Button>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-2">Date</th>
-                    <th className="text-left py-2">Name</th>
-                    <th className="text-left py-2">Email</th>
-                    <th className="text-left py-2">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stats.recentReservations.map((reservation) => (
-                    <tr key={reservation.id} className="border-b">
-                      <td className="py-2">{new Date(reservation.created_at).toLocaleString()}</td>
-                      <td className="py-2">{reservation.fullName}</td>
-                      <td className="py-2">{reservation.email}</td>
-                      <td className="py-2">${reservation.totalCost.toFixed(2)}</td>
+            <TabsContent value="reservations">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-4">Email</th>
+                      <th className="text-left py-3 px-4">Product</th>
+                      <th className="text-left py-3 px-4">Quantity</th>
+                      <th className="text-left py-3 px-4">Shipping Address</th>
+                      <th className="text-left py-3 px-4">Notes</th>
+                      <th className="text-left py-3 px-4">Date</th>
+                      <th className="text-left py-3 px-4">Status</th>
+                      <th className="text-left py-3 px-4">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
-        </div>
+                  </thead>
+                  <tbody>
+                    {filteredReservations.map((reservation) => (
+                      <tr key={reservation.id} className="border-b">
+                        <td className="py-3 px-4">{reservation.email}</td>
+                        <td className="py-3 px-4">{reservation.product}</td>
+                        <td className="py-3 px-4">{reservation.quantity}</td>
+                        <td className="py-3 px-4">{reservation.shipping_address}</td>
+                        <td className="py-3 px-4">{reservation.notes}</td>
+                        <td className="py-3 px-4">
+                          {new Date(reservation.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="py-3 px-4">
+                          <span className={`px-2 py-1 rounded-full text-sm ${
+                            reservation.status === 'approved' ? 'bg-green-100 text-green-800' :
+                            reservation.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                            'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {reservation.status}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateReservationStatus(reservation.id, 'approved')}
+                              disabled={reservation.status === 'approved'}
+                            >
+                              Approve
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateReservationStatus(reservation.id, 'rejected')}
+                              disabled={reservation.status === 'rejected'}
+                            >
+                              Reject
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </Card>
       </div>
     </div>
   )
