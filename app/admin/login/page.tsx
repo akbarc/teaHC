@@ -4,12 +4,10 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -24,16 +22,17 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
+      // Sign in with magic link (password only)
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: 'admin@tryteahc.com', // Hardcoded admin email
+        password: password
       })
 
       if (error) {
         throw error
       }
 
-      toast.success('Logged in successfully')
+      toast.success('Login successful')
       router.push('/admin')
       router.refresh()
     } catch (error: any) {
@@ -45,29 +44,17 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="max-w-md w-full space-y-8 p-8">
+      <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Admin Login
+            Admin Access
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Enter password to access admin dashboard
+          </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
-              />
-            </div>
+          <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
@@ -76,11 +63,11 @@ export default function AdminLogin() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                placeholder="Enter password"
               />
             </div>
           </div>
@@ -88,14 +75,14 @@ export default function AdminLogin() {
           <div>
             <Button
               type="submit"
-              className="w-full"
               disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </Button>
           </div>
         </form>
-      </Card>
+      </div>
     </div>
   )
 } 

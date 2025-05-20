@@ -49,6 +49,11 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
+  // Add cache control headers for admin routes
+  if (isAdminPath) {
+    res.headers.set('Cache-Control', 'no-store, must-revalidate')
+  }
+
   return res
 }
 
