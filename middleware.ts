@@ -34,19 +34,18 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
-  // If the user is not signed in and the current path is /admin
-  // redirect the user to /admin/login
-  if (!session && req.nextUrl.pathname.startsWith('/admin')) {
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/admin/login'
+  const isAdminPath = req.nextUrl.pathname.startsWith('/admin')
+  const isLoginPath = req.nextUrl.pathname === '/admin/login'
+
+  // If the user is not signed in and trying to access admin pages (except login)
+  if (!session && isAdminPath && !isLoginPath) {
+    const redirectUrl = new URL('/admin/login', req.url)
     return NextResponse.redirect(redirectUrl)
   }
 
-  // If the user is signed in and the current path is /admin/login
-  // redirect the user to /admin
-  if (session && req.nextUrl.pathname === '/admin/login') {
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/admin'
+  // If the user is signed in and trying to access login page
+  if (session && isLoginPath) {
+    const redirectUrl = new URL('/admin', req.url)
     return NextResponse.redirect(redirectUrl)
   }
 
