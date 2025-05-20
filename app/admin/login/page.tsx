@@ -7,36 +7,51 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 
+const ADMIN_PASSWORD = '2000Akbar!' // This should be moved to an environment variable in production
+
 export default function AdminLogin() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      // Sign in with magic link (password only)
-      const { error } = await supabase.auth.signInWithPassword({
-        email: 'admin@tryteahc.com', // Hardcoded admin email
-        password: password
-      })
+      console.log('Attempting login...')
+      
+      // Simple password check
+      if (password === ADMIN_PASSWORD) {
+        // Create a session using Supabase
+        const supabase = createBrowserClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+        )
 
-      if (error) {
-        throw error
+        // Sign in with the admin account
+        const { error } = await supabase.auth.signInWithPassword({
+          email: 'admin@tryteahc.com', // This is just for Supabase auth, not shown to user
+          password: ADMIN_PASSWORD
+        })
+
+        if (error) {
+          console.error('Auth error:', error)
+          throw error
+        }
+
+        console.log('Login successful')
+        toast.success('Login successful')
+        
+        // Navigate to admin dashboard
+        await router.push('/admin')
+        router.refresh()
+      } else {
+        throw new Error('Invalid password')
       }
-
-      toast.success('Login successful')
-      router.push('/admin')
-      router.refresh()
     } catch (error: any) {
-      toast.error(error.message || 'Failed to login')
+      console.error('Login failed:', error)
+      toast.error('Invalid password')
     } finally {
       setLoading(false)
     }
@@ -50,7 +65,7 @@ export default function AdminLogin() {
             Admin Access
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Enter password to access admin dashboard
+            Enter admin password to continue
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
@@ -67,7 +82,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
-                placeholder="Enter password"
+                placeholder="Enter admin password"
               />
             </div>
           </div>
@@ -78,7 +93,7 @@ export default function AdminLogin() {
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Verifying...' : 'Access Dashboard'}
             </Button>
           </div>
         </form>
