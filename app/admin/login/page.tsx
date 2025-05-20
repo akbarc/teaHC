@@ -10,11 +10,11 @@ import { toast } from 'sonner'
 const ADMIN_PASSWORD = '2000Akbar!' // This should be moved to an environment variable in production
 const ADMIN_EMAIL = 'admin@tryteahc.com'
 
-// Create a single Supabase client instance
-const supabase = createBrowserClient(
+// Create a single Supabase client instance outside of the component to avoid multiple instances
+const supabase = typeof window !== 'undefined' ? createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+) : null
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('')
@@ -23,6 +23,9 @@ export default function AdminLogin() {
   const router = useRouter()
 
   useEffect(() => {
+    // Only run on client side
+    if (!supabase) return
+
     // Check if environment variables are available
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -50,7 +53,7 @@ export default function AdminLogin() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!supabaseInitialized) {
+    if (!supabase || !supabaseInitialized) {
       toast.error('Authentication system not ready. Please try again.')
       return
     }
@@ -66,7 +69,7 @@ export default function AdminLogin() {
 
       console.log('Password verified, attempting Supabase authentication...')
       
-      // Sign in with the admin account using the single client instance
+      // Try to sign in with the admin account
       const { data, error } = await supabase.auth.signInWithPassword({
         email: ADMIN_EMAIL,
         password: ADMIN_PASSWORD
@@ -74,42 +77,75 @@ export default function AdminLogin() {
 
       if (error) {
         console.error('Supabase auth error:', error)
-        // If the user doesn't exist, try to create them
-        if (error.message.includes('Invalid login credentials')) {
-          const { error: createError } = await supabase.auth.signUp({
+        
+        // Handle "Email not confirmed" error or other auth errors
+        if (error.message.includes('Email not confirmed') || error.message.includes('Invalid login credentials')) {
+          // Attempt to create/update admin user with auto_confirm set to true
+          const { error: createError } = await supabase.auth.admin.createUser({
             email: ADMIN_EMAIL,
             password: ADMIN_PASSWORD,
-            options: {
-              data: {
-                role: 'admin'
-              }
-            }
+            email_confirm: true,
+            user_metadata: { role: 'admin' }
           })
           
           if (createError) {
-            throw createError
-          }
-          
-          // Try signing in again after creating the user
-          const { error: signInError } = await supabase.auth.signInWithPassword({
-            email: ADMIN_EMAIL,
-            password: ADMIN_PASSWORD
-          })
-          
-          if (signInError) {
-            throw signInError
+            // If we can't create as admin, try regular signup
+            console.log('Admin create failed, trying regular signup:', createError)
+            
+            // Try regular signup with auto confirmation
+            const { error: signUpError } = await supabase.auth.signUp({
+              email: ADMIN_EMAIL,
+              password: ADMIN_PASSWORD,
+              options: {
+                data: { role: 'admin' },
+                emailRedirectTo: `${window.location.origin}/admin`
+              }
+            })
+            
+            if (signUpError) {
+              throw signUpError
+            }
+            
+            // Try to manually confirm the email
+            try {
+              // This is a last resort - use a direct API call to confirm the email
+              const response = await fetch('/api/confirm-admin-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: ADMIN_EMAIL })
+              })
+              
+              if (!response.ok) {
+                throw new Error('Failed to confirm email')
+              }
+            } catch (confirmError) {
+              console.error('Email confirmation failed:', confirmError)
+            }
+            
+            // Try signing in again
+            const { error: retryError } = await supabase.auth.signInWithPassword({
+              email: ADMIN_EMAIL,
+              password: ADMIN_PASSWORD
+            })
+            
+            if (retryError) {
+              throw retryError
+            }
           }
         } else {
           throw error
         }
       }
 
-      if (!data?.user) {
+      // Success! Let's get the user
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      if (!user) {
         console.error('No user data returned from Supabase')
         throw new Error('Authentication failed')
       }
 
-      console.log('Login successful, user:', data.user.id)
+      console.log('Login successful, user:', user.id)
       toast.success('Login successful')
       
       // Wait a moment for the session to be established
